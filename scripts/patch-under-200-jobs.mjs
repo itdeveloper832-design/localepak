@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getFirestore, doc, updateDoc } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCR9gjxmjYsO_kmHOp_qX4tfoPyJU5tQmg",
-  authDomain: "branches-app-7669d.firebaseapp.com",
-  projectId: "branches-app-7669d",
-  storageBucket: "branches-app-7669d.firebasestorage.app",
-  messagingSenderId: "507847972478",
-  appId: "1:507847972478:web:b9d8c79d50a85a253cea2f"
+  apiKey: process.env.FIREBASE_API_KEY || "AIzaSyDummyKeyForDevelopment123456789",
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN || "app-local.firebaseapp.com",
+  projectId: process.env.FIREBASE_PROJECT_ID || "app-local",
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET || "app-local.firebasestorage.app",
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID || "000000000000",
+  appId: process.env.FIREBASE_APP_ID || "1:000000000000:web:dummy000000000000"
 };
 
 const app = initializeApp(firebaseConfig);

@@ -1,13 +1,12 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
-import { Inter } from 'next/font/google'
+import { Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import ClientProviders from '@/components/client-providers'
 
-const inter = Inter({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-inter',
+  variable: '--font-plus-jakarta',
   weight: ['400', '500', '600', '700', '800'],
 })
 
@@ -44,14 +43,6 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
-  },
-  verification: {
-    google: 'L_LW7Dtxekn-M81A11zjxYVWGI7LGGoI-bJw02chIc8',
-    other: {
-      'msvalidate.01': '32107703ABE97F472472231CBA07F2E5',
-      'google-adsense-account': 'ca-pub-3836871693569517',
-      'monetag': '1a911321e9436a56f5358362c3fdb901',
-    },
   },
 }
 
@@ -95,89 +86,16 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={plusJakartaSans.variable}>
       <head>
-        <meta name="monetag" content="1a911321e9436a56f5358362c3fdb901" />
-        <meta name="google-adsense-account" content="ca-pub-3836871693569517" />
-        <meta name="msvalidate.01" content="32107703ABE97F472472231CBA07F2E5" />
         <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
-        <link rel="preconnect" href="https://firebasestorage.googleapis.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
-        <link rel="dns-prefetch" href="https://5gvci.com" />
-        <link rel="preconnect" href="https://5gvci.com" crossOrigin="anonymous" />
         <link rel="help" href="/llms.txt" type="text/plain" title="LLM Context" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationSchema, websiteSchema]) }}
         />
       </head>
-      <body className="font-sans antialiased bg-[#F8FAFC] text-[#0F172A] pb-16 md:pb-0 min-h-screen selection:bg-blue-500 selection:text-white">
-        {/* Google Tag Manager (noscript fallback) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-KNK59XWQ"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          />
-        </noscript>
-
-        {/* Deferred Non-Blocking Scripts via Next/Script */}
-        <Script
-          id="monetag-wise-tag"
-          strategy="lazyOnload"
-          src="https://5gvci.com/act/files/tag.min.js?z=12043479"
-          data-cfasync="false"
-        />
-        <Script
-          id="google-adsense"
-          strategy="lazyOnload"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3836871693569517"
-          crossOrigin="anonymous"
-        />
-        <Script
-          id="clarity-script"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(c,l,a,r,i,t,y){
-                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-              })(window, document, "clarity", "script", "yowgk7mfbf");
-            `,
-          }}
-        />
-        <Script
-          id="gtm-script"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KNK59XWQ');`,
-          }}
-        />
-        <Script
-          id="gtag-js"
-          strategy="lazyOnload"
-          src="https://www.googletagmanager.com/gtag/js?id=G-N09JN0NJ2R"
-        />
-        <Script
-          id="gtag-init"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-N09JN0NJ2R');
-            `,
-          }}
-        />
-
+      <body className="font-sans antialiased bg-[#FAFAFA] text-[#09090B] pb-16 md:pb-0 min-h-screen selection:bg-red-600 selection:text-white">
         {children}
         <ClientProviders />
       </body>

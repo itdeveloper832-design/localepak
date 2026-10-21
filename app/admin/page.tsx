@@ -71,7 +71,10 @@ export default function AdminPage() {
 
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        if (user.email?.toLowerCase() === 'contact@listpak.com') {
+        const allowedEmails = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || 'admin@example.com')
+          .split(',')
+          .map(e => e.trim().toLowerCase())
+        if (user.email && allowedEmails.includes(user.email.toLowerCase())) {
           setAdminUid(user.uid)
           setIsAuthenticated(true)
           sessionStorage.setItem('listpak_admin_auth', 'true')
@@ -327,20 +330,19 @@ export default function AdminPage() {
     e.preventDefault()
     setLoginError('')
 
-    const AUTHORIZED_ADMIN_EMAIL = 'contact@listpak.com'
+    const allowedAdminEmails = (process.env.NEXT_PUBLIC_ADMIN_EMAILS || 'admin@example.com')
+      .split(',')
+      .map(e => e.trim().toLowerCase())
     const inputEmail = (adminEmail || '').trim().toLowerCase()
     const cleanPass = (adminPass || '').trim()
 
     const MASTER_PASSWORDS = [
-      'con^&^%ta54^Kct@listpak.com',
-      'Imran@6230$%',
-      'listpak2026',
-      'admin123',
-      'listpakadmin'
-    ]
+      process.env.NEXT_PUBLIC_ADMIN_PASSWORD,
+      'admin123'
+    ].filter(Boolean) as string[]
 
-    // Master access bypass when email is contact@listpak.com or blank with authorized password
-    if ((inputEmail === AUTHORIZED_ADMIN_EMAIL || !inputEmail) && MASTER_PASSWORDS.includes(cleanPass)) {
+    // Master access bypass when authorized password is provided
+    if ((allowedAdminEmails.includes(inputEmail) || !inputEmail) && MASTER_PASSWORDS.includes(cleanPass)) {
       setIsAuthenticated(true)
       sessionStorage.setItem('listpak_admin_auth', 'true')
       toast.success('Admin authenticated successfully.')
@@ -348,25 +350,25 @@ export default function AdminPage() {
       return
     }
 
-    if (inputEmail !== AUTHORIZED_ADMIN_EMAIL) {
-      setLoginError('Access Denied: Only the authorized administrator (contact@listpak.com) can log into the Admin Portal.')
-      toast.error('Access Denied: Only contact@listpak.com can access the admin portal.')
+    if (!allowedAdminEmails.includes(inputEmail)) {
+      setLoginError(`Access Denied: Only authorized administrators can log into the Admin Portal.`)
+      toast.error('Access Denied: Unauthorized admin user.')
       return
     }
 
     if (adminEmail && cleanPass) {
       try {
         const userCredential = await signInWithEmailAndPassword(auth, adminEmail.trim(), cleanPass)
-        if (userCredential.user.email?.toLowerCase() !== AUTHORIZED_ADMIN_EMAIL) {
+        if (!allowedAdminEmails.includes(userCredential.user.email?.toLowerCase() || '')) {
           await signOut(auth)
-          setLoginError('Access Denied: Only contact@listpak.com is authorized to access the Admin Portal.')
+          setLoginError('Access Denied: Unauthorized admin user.')
           toast.error('Access Denied: Unauthorized admin user.')
           return
         }
         setAdminUid(userCredential.user.uid)
         setIsAuthenticated(true)
         sessionStorage.setItem('listpak_admin_auth', 'true')
-        toast.success('Firebase Admin authenticated successfully.')
+        toast.success('Admin authenticated successfully.')
         fetchAdminData()
       } catch (err: any) {
         if (MASTER_PASSWORDS.includes(cleanPass)) {
@@ -376,10 +378,10 @@ export default function AdminPage() {
           fetchAdminData()
           return
         }
-        setLoginError('Authentication failed: Invalid credentials for contact@listpak.com.')
+        setLoginError('Authentication failed: Invalid admin credentials.')
       }
     } else {
-      setLoginError('Please enter admin email (contact@listpak.com) and password.')
+      setLoginError('Please enter admin email and password.')
     }
   }
 

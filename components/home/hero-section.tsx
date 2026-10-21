@@ -4,18 +4,18 @@ import HeroSearchForm from './hero-search-form'
 export default function HeroSection() {
   return (
     <section
-      className="relative bg-[#0f2b3d] overflow-hidden py-16 md:py-28"
+      className="relative bg-[#09090b] overflow-hidden py-16 md:py-28"
       aria-labelledby="hero-heading"
     >
       {/* Decorative circles */}
-      <div aria-hidden="true" className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#60a5fa]/10" />
-      <div aria-hidden="true" className="absolute -bottom-32 -left-32 w-[32rem] h-[32rem] rounded-full bg-[#0ea5e9]/8" />
+      <div aria-hidden="true" className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-red-600/15 blur-2xl" />
+      <div aria-hidden="true" className="absolute -bottom-32 -left-32 w-[32rem] h-[32rem] rounded-full bg-rose-600/10 blur-3xl" />
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <p className="inline-flex items-center gap-2 text-[#60a5fa] font-semibold text-sm mb-2 tracking-wide uppercase">
-          <span className="w-4 h-px bg-[#60a5fa]" />
+        <p className="inline-flex items-center gap-2 text-red-500 font-semibold text-sm mb-2 tracking-wide uppercase">
+          <span className="w-4 h-px bg-red-500" />
           Pakistan&apos;s #1 Business Directory
-          <span className="w-4 h-px bg-[#60a5fa]" />
+          <span className="w-4 h-px bg-red-500" />
         </p>
 
         <h1
@@ -24,7 +24,7 @@ export default function HeroSection() {
         >
           Pakistan Free Business Directory – Submit Your Business
         </h1>
-        <p className="text-[#60a5fa] font-semibold text-sm sm:text-base mb-6 tracking-wide uppercase">
+        <p className="text-red-400 font-semibold text-sm sm:text-base mb-6 tracking-wide uppercase">
           Register your company profile and connect with customers nationwide.
         </p>
 
@@ -36,7 +36,7 @@ export default function HeroSection() {
           <Link
             id="hero-list-business-btn"
             href="/add-business"
-            className="bg-[#60a5fa] hover:bg-blue-600 text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl transition-colors duration-200 text-sm sm:text-base shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 cursor-pointer text-center"
+            className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl transition-all duration-200 text-sm sm:text-base shadow-lg shadow-red-600/30 hover:shadow-xl hover:shadow-red-600/40 transform hover:-translate-y-0.5 cursor-pointer text-center"
           >
             List Your Business for Free
           </Link>

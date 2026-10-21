@@ -2,12 +2,12 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyA1phCIqp4oq5jhOkjoaizLtNfdrHDa51w',
-  authDomain: 'biznestussa.firebaseapp.com',
-  projectId: 'biznestussa',
-  storageBucket: 'biznestussa.firebasestorage.app',
-  messagingSenderId: '787556817064',
-  appId: '1:787556817064:web:e08dacdb75f3362a0b4a9d'
+  apiKey: process.env.FIREBASE_API_KEY || "AIzaSyDummyKeyForDevelopment123456789",
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN || "app-local.firebaseapp.com",
+  projectId: process.env.FIREBASE_PROJECT_ID || "app-local",
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET || "app-local.firebasestorage.app",
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID || "000000000000",
+  appId: process.env.FIREBASE_APP_ID || "1:000000000000:web:dummy000000000000"
 };
 
 const app = initializeApp(firebaseConfig);

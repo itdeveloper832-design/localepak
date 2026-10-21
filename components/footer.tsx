@@ -7,11 +7,11 @@ export default function Footer() {
   return (
     <>
       <UniversalHelpBanner />
-      <footer className="bg-[#0B132B] text-white pt-16 pb-12 border-t border-slate-800 font-sans">
+      <footer className="bg-[#09090b] text-white pt-16 pb-12 border-t border-zinc-800 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Branding & NAP Bar */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center pb-12 border-b border-slate-800/80 gap-6">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center pb-12 border-b border-zinc-800/80 gap-6">
           <div className="flex flex-col gap-3">
             <Link href="/" aria-label="ListPak Home Page" className="inline-block group">
               <Image
@@ -23,14 +23,14 @@ export default function Footer() {
                 className="h-12 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
               />
             </Link>
-            <p className="text-xs text-slate-400 max-w-md leading-relaxed">
+            <p className="text-xs text-zinc-400 max-w-md leading-relaxed">
               Pakistan-focused business discovery connecting companies, employers, professionals, job seekers, and customers through category and city pages.
             </p>
             
             {/* Official NAP Display */}
-            <div className="pt-2 space-y-1 text-xs text-slate-300">
+            <div className="pt-2 space-y-1 text-xs text-zinc-300">
               <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                <MapPin className="w-3.5 h-3.5 text-red-500 shrink-0" />
                 <span><strong>Official HQ Address:</strong> Office 303, Evacuee Trust Complex, F-5/1, Islamabad 44000, Pakistan</span>
               </div>
               <div className="flex items-center gap-2">
@@ -41,15 +41,15 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center gap-4 flex-wrap">
-            <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-xs font-medium">
+            <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-medium">
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
               <span>Business profiles</span>
             </div>
-            <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-xs font-medium">
-              <MapPin className="w-4 h-4 text-blue-400" />
+            <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-medium">
+              <MapPin className="w-4 h-4 text-red-500" />
               <span>City-based discovery</span>
             </div>
-            <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-xs font-medium">
+            <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-medium">
               <Briefcase className="w-4 h-4 text-amber-400" />
               <span>Active Job Portal</span>
             </div>

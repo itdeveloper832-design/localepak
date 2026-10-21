@@ -47,7 +47,7 @@ export default function AdSlot({
   }
 
   // Publisher ID from environment or verified account
-  const publisherId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || 'ca-pub-3836871693569517'
+  const publisherId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || ''
 
   // Determine reserved minimum height to guarantee zero Cumulative Layout Shift (CLS)
   let defaultHeight = 100

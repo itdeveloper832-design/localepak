@@ -101,10 +101,10 @@ export default function AdminLogin({ onLoginSuccess }: { onLoginSuccess: () => v
       const configuredEmails = process.env.NEXT_PUBLIC_ADMIN_EMAILS
         ? process.env.NEXT_PUBLIC_ADMIN_EMAILS.split(',').map(e => e.trim().toLowerCase())
         : []
-      const validAdminEmails = Array.from(new Set([...configuredEmails, 'contact@listpak.com', 'pakbizbrances@gmail.com']))
+      const validAdminEmails = Array.from(new Set([...configuredEmails, 'admin@example.com']))
       const configuredPassword = process.env.NEXT_PUBLIC_ADMIN_PASSWORD
       const cleanInputPassword = (password || '').trim()
-      const validPasswords = [configuredPassword, 'con^&^%ta54^Kct@listpak.com', 'Imran@6230$%', 'listpak2026', 'admin123'].filter(Boolean)
+      const validPasswords = [configuredPassword, 'admin123'].filter(Boolean)
       
       // Check if credentials match
       if (validAdminEmails.includes(email.trim().toLowerCase()) && (validPasswords.includes(password) || validPasswords.includes(cleanInputPassword))) {

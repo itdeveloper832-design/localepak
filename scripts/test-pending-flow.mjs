@@ -3,11 +3,11 @@ import { getFirestore, doc, setDoc, getDocs, collection, deleteDoc, updateDoc } 
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || 'AIzaSyA8892_sample_key',
-  authDomain: 'branches-pk.firebaseapp.com',
-  projectId: 'branches-pk',
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN || "app-local.firebaseapp.com",
+  projectId: process.env.FIREBASE_PROJECT_ID || "app-local",
   storageBucket: 'branches-pk.appspot.com',
-  messagingSenderId: '573981829402',
-  appId: '1:573981829402:web:68c85779c4613b5bf998a6'
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID || "000000000000",
+  appId: process.env.FIREBASE_APP_ID || "1:000000000000:web:dummy000000000000"
 };
 
 const app = initializeApp(firebaseConfig);

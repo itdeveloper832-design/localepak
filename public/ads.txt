@@ -1,5 +1,2 @@
-# ListPak Authorized Digital Sellers (ads.txt)
-# Website: https://www.listpak.com
-# Google AdSense Publisher Record
-google.com, pub-3836871693569517, DIRECT, f08c47fec0942fa0
-
+# Authorized Digital Sellers (ads.txt)
+# Add your verified advertising network records below
