@@ -5,10 +5,10 @@ import Footer from '@/components/footer'
 import { ShieldAlert } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Report Abuse | ListPak Safety & Compliance',
-  description: 'Report spam, harassment, counterfeit listings, copyright violations, or abusive behavior on ListPak.',
+  title: 'Report Abuse | LocalePak Safety & Compliance',
+  description: 'Report spam, harassment, counterfeit listings, copyright violations, or abusive behavior on LocalePak.',
   alternates: {
-    canonical: 'https://www.listpak.com/report-abuse/',
+    canonical: 'https://www.localepak.com/report-abuse/',
   },
 }
 

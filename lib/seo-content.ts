@@ -4,105 +4,105 @@
 export const CITY_INFO: Record<string, { province: string; description: string; industries: string[]; districts?: string[] }> = {
   Karachi: {
     province: 'Sindh',
-    description: "Pakistan's largest city and financial capital",
+    description: "the biggest city in Pakistan and the country's commercial and financial heart",
     industries: ['finance', 'retail', 'logistics', 'technology', 'manufacturing'],
     districts: ['Clifton', 'DHA', 'Shahrah-e-Faisal', 'Saddar', 'Gulshan-e-Iqbal', 'North Nazimabad'],
   },
   Lahore: {
     province: 'Punjab',
-    description: "Pakistan's cultural capital and second-largest city",
+    description: "the country's cultural heart and its second-biggest city",
     industries: ['education', 'retail', 'real-estate', 'food', 'technology'],
     districts: ['Gulberg', 'DHA', 'Johar Town', 'Model Town', 'Mall Road', 'Bahria Town'],
   },
   Islamabad: {
     province: 'ICT',
-    description: "Pakistan's modern capital city",
+    description: "the country's planned, modern capital city",
     industries: ['government', 'technology', 'education', 'real-estate', 'healthcare'],
     districts: ['Blue Area', 'F-7 Markaz', 'F-10 Markaz', 'DHA', 'Bahria Town', 'G-11'],
   },
   Rawalpindi: {
     province: 'Punjab',
-    description: 'a twin city of Islamabad with a rich commercial heritage',
+    description: "Islamabad's twin city, with a long history as a trading and commercial centre",
     industries: ['retail', 'automotive', 'construction', 'food', 'finance'],
   },
   Faisalabad: {
     province: 'Punjab',
-    description: "Pakistan's textile and industrial hub",
+    description: "the centre of Pakistan's textile industry and a major manufacturing city",
     industries: ['textile', 'manufacturing', 'retail', 'logistics', 'agriculture'],
   },
   Multan: {
     province: 'Punjab',
-    description: 'the City of Saints with a rich history and growing commercial base',
+    description: 'the historic City of Saints, where a centuries-old trading culture meets a fast-growing economy',
     industries: ['agriculture', 'education', 'retail', 'healthcare', 'food'],
   },
   Peshawar: {
     province: 'Khyber Pakhtunkhwa',
-    description: 'the historic gateway to Central Asia and a major trading hub',
+    description: "one of the region's oldest trading cities and the historic gateway toward Central Asia",
     industries: ['trade', 'retail', 'food', 'automotive', 'real-estate'],
   },
   Quetta: {
     province: 'Balochistan',
-    description: "the capital of Balochistan and an important regional trade centre",
+    description: "Balochistan's capital and the main commercial centre for trade across the province",
     industries: ['trade', 'agriculture', 'retail', 'construction', 'food'],
   },
   Sialkot: {
     province: 'Punjab',
-    description: "Pakistan's premier export city known for sports goods and surgical instruments",
+    description: 'an export powerhouse world-famous for its sports goods and surgical instruments',
     industries: ['manufacturing', 'retail', 'logistics', 'finance', 'technology'],
   },
   Hyderabad: {
     province: 'Sindh',
-    description: "Sindh's second-largest city with a vibrant commercial scene",
+    description: "the second-biggest city in Sindh, with busy bazaars and a lively trading scene",
     industries: ['retail', 'education', 'healthcare', 'food', 'real-estate'],
   },
   Gujranwala: {
     province: 'Punjab',
-    description: "Pakistan's industrial powerhouse often called the 'City of Wrestlers'",
+    description: "one of Pakistan's leading industrial cities, popularly known as the 'City of Wrestlers'",
     industries: ['manufacturing', 'retail', 'automotive', 'food', 'logistics'],
   },
   Bahawalpur: {
     province: 'Punjab',
-    description: 'a royal city with a growing commercial and agricultural economy',
+    description: 'a former princely state capital whose commerce and agriculture keep expanding',
     industries: ['agriculture', 'retail', 'education', 'healthcare', 'food'],
   },
   Sargodha: {
     province: 'Punjab',
-    description: 'the Citrus Capital of Pakistan with a strong agricultural base',
+    description: "Pakistan's citrus capital, built on a thriving agricultural economy",
     industries: ['agriculture', 'retail', 'food', 'education', 'automotive'],
   },
   Sukkur: {
     province: 'Sindh',
-    description: 'a major city on the Indus River with growing trade activity',
+    description: 'an important city on the Indus River where trade keeps expanding',
     industries: ['trade', 'retail', 'agriculture', 'food', 'construction'],
   },
   Larkana: {
     province: 'Sindh',
-    description: 'a prominent city in Sindh with strong historical and commercial significance',
+    description: 'a well-known Sindhi city with deep historical roots and an active commercial life',
     industries: ['agriculture', 'retail', 'healthcare', 'education', 'food'],
   },
   Sheikhupura: {
     province: 'Punjab',
-    description: 'an industrial city near Lahore with a rapidly growing economy',
+    description: "an industrial neighbour of Lahore whose economy is expanding fast",
     industries: ['manufacturing', 'retail', 'food', 'logistics', 'construction'],
   },
   'Rahim Yar Khan': {
     province: 'Punjab',
-    description: 'a southern Punjab city with a strong agricultural and commercial economy',
+    description: 'a south Punjab city powered by strong farming and trade',
     industries: ['agriculture', 'retail', 'food', 'healthcare', 'education'],
   },
   Mardan: {
     province: 'Khyber Pakhtunkhwa',
-    description: "the second-largest city in KPK with a growing business community",
+    description: "KPK's second-biggest city, home to a steadily expanding business scene",
     industries: ['agriculture', 'retail', 'food', 'education', 'healthcare'],
   },
   Gujrat: {
     province: 'Punjab',
-    description: 'known for its electronics and furniture industries',
+    description: 'a manufacturing city celebrated for its electronics and furniture trades',
     industries: ['manufacturing', 'retail', 'electronics', 'food', 'automotive'],
   },
   Kasur: {
     province: 'Punjab',
-    description: 'a historic city near Lahore known for its leather goods and agriculture',
+    description: 'a historic city close to Lahore, recognised for leather production and farming',
     industries: ['manufacturing', 'agriculture', 'retail', 'food', 'education'],
   },
 }
@@ -110,192 +110,192 @@ export const CITY_INFO: Record<string, { province: string; description: string; 
 const CATEGORY_INFO: Record<string, { label: string; description: string; examples: string[] }> = {
   restaurants: {
     label: 'Restaurant & Food',
-    description: 'restaurants, cafes, fast food outlets, bakeries, and catering services',
-    examples: ['fast food chains', 'family restaurants', 'cafes', 'bakeries', 'catering services', 'food trucks'],
+    description: 'eateries of every kind, from restaurants and cafes to fast-food outlets, bakeries and caterers',
+    examples: ['fast-food outlets', 'family dining restaurants', 'cafes and coffee shops', 'bakeries', 'catering companies', 'food trucks'],
   },
   'real-estate': {
     label: 'Real Estate',
-    description: 'property dealers, housing societies, rental agencies, and construction firms',
-    examples: ['residential projects', 'commercial properties', 'rental agencies', 'housing societies', 'property dealers'],
+    description: 'property dealers and agents, housing societies, rental agencies and construction companies',
+    examples: ['residential developments', 'commercial properties', 'rental agencies', 'housing societies', 'estate agents'],
   },
   technology: {
     label: 'Technology & IT',
-    description: 'software houses, web development agencies, IT support services, and digital marketing firms',
-    examples: ['software development', 'web design', 'mobile apps', 'digital marketing', 'IT support', 'cloud services'],
+    description: 'software houses, web and app development studios, IT support providers and digital marketing agencies',
+    examples: ['software development', 'website design', 'mobile app development', 'digital marketing', 'IT support', 'cloud services'],
   },
   healthcare: {
     label: 'Healthcare & Medical',
-    description: 'hospitals, clinics, pharmacies, laboratories, and medical equipment suppliers',
-    examples: ['hospitals', 'clinics', 'dental practices', 'pharmacies', 'laboratories', 'specialist doctors'],
+    description: 'hospitals and clinics, pharmacies, diagnostic laboratories and suppliers of medical equipment',
+    examples: ['hospitals', 'private clinics', 'dental practices', 'pharmacies', 'diagnostic laboratories', 'specialist doctors'],
   },
   education: {
     label: 'Education & Training',
-    description: 'schools, colleges, universities, academies, and training institutes',
-    examples: ['schools', 'colleges', 'universities', 'training institutes', 'online courses', 'tutoring centres'],
+    description: 'schools, colleges and universities, plus academies and vocational training institutes',
+    examples: ['schools', 'colleges', 'universities', 'training institutes', 'online learning providers', 'tutoring centres'],
   },
   retail: {
     label: 'Retail & Shopping',
-    description: 'clothing stores, electronics shops, grocery outlets, and specialty retailers',
-    examples: ['clothing stores', 'electronics shops', 'grocery stores', 'furniture shops', 'bookstores', 'sports goods'],
+    description: 'clothing and electronics stores, grocery outlets and specialist retailers of every kind',
+    examples: ['fashion and clothing stores', 'electronics shops', 'grocery outlets', 'furniture shops', 'bookstores', 'sports equipment stores'],
   },
   construction: {
     label: 'Construction',
-    description: 'builders, contractors, interior designers, architects, and material suppliers',
-    examples: ['building contractors', 'interior designers', 'architects', 'renovation services', 'material suppliers'],
+    description: 'building contractors and construction firms, architects, interior designers and building-material suppliers',
+    examples: ['building contractors', 'interior design studios', 'architectural firms', 'renovation specialists', 'building material suppliers'],
   },
   automotive: {
     label: 'Automotive',
-    description: 'car dealerships, auto repair workshops, car wash services, and spare parts shops',
-    examples: ['car dealerships', 'auto repair', 'car wash', 'spare parts', 'motorcycles', 'car rental'],
+    description: 'car dealers, repair workshops, car-wash services and spare-parts retailers',
+    examples: ['car dealerships', 'auto repair workshops', 'car wash services', 'spare parts shops', 'motorcycle dealers', 'car rental services'],
   },
   finance: {
     label: 'Finance & Banking',
-    description: 'banks, insurance companies, investment firms, and accounting services',
-    examples: ['banks', 'insurance companies', 'investment firms', 'accounting firms', 'tax consultants', 'microfinance'],
+    description: 'banks and insurers, investment firms and providers of accounting and advisory services',
+    examples: ['commercial banks', 'insurance providers', 'investment firms', 'accounting practices', 'tax consultants', 'microfinance institutions'],
   },
   travel: {
     label: 'Travel & Tourism',
-    description: 'travel agencies, hotels, tour operators, and tourism-related services',
-    examples: ['travel agencies', 'hotels', 'tour operators', 'guest houses', 'car rental', 'adventure tourism'],
+    description: 'travel agents, hotels and guest houses, tour operators and other tourism services',
+    examples: ['travel agencies', 'hotels and resorts', 'tour operators', 'guest houses', 'car hire', 'adventure tourism operators'],
   },
   beauty: {
     label: 'Beauty & Wellness',
-    description: 'salons, spas, fitness centres, yoga studios, and cosmetic retailers',
-    examples: ['beauty salons', 'spas', 'fitness centres', 'yoga studios', 'cosmetic shops', 'barbershops'],
+    description: 'beauty salons and spas, gyms and fitness centres, yoga studios and cosmetics retailers',
+    examples: ['hair and beauty salons', 'spas', 'gyms and fitness centres', 'yoga studios', 'cosmetics shops', 'barbershops'],
   },
   logistics: {
     label: 'Logistics & Transport',
-    description: 'courier services, shipping companies, warehousing, and transportation providers',
-    examples: ['courier services', 'shipping companies', 'warehouses', 'freight forwarders', 'moving services', 'trucking'],
+    description: 'courier and shipping companies, warehousing operators and transport providers',
+    examples: ['courier companies', 'freight and shipping firms', 'warehousing', 'freight forwarders', 'house-moving services', 'trucking companies'],
   },
 }
 
 export function generateCityContent(city: string): string {
   const info = CITY_INFO[city] || {
     province: 'Pakistan',
-    description: 'a growing commercial hub',
+    description: 'a fast-growing centre of commerce',
     industries: ['retail', 'food', 'healthcare', 'education', 'technology'],
   }
 
   const districtsText = info.districts 
-    ? `Some of the most active commercial areas include ${info.districts.join(', ')}.` 
-    : `The city features numerous commercial markets and business centers that serve as the backbone of its local economy.`
+    ? `Among its liveliest commercial areas are ${info.districts.join(', ')}.` 
+    : `Across the city, busy bazaars, markets and commercial centres form the backbone of everyday trade.`
 
-  return `## Businesses in ${city}: Your Complete Local Directory
+  return `## Businesses in ${city} — A Complete Local Directory Guide
 
-${city} is ${info.description}, located in the ${info.province} province. With a diverse and dynamic economy, this urban center is home to thousands of local businesses ranging from small family-run shops to large corporate enterprises. Whether you are a resident looking for reliable services or an entrepreneur wanting to establish a presence, the area offers vast opportunities across every sector.
+Located in ${info.province}, ${city} is ${info.description}. Its economy is broad and energetic: thousands of enterprises operate here, from neighbourhood family shops to national corporations. If you live in the city and need a dependable service, or you run a company and want a foothold in this market, ${city} offers openings in practically every trade.
 
-### Why Discover Businesses in ${city}?
+### Why Look Up Businesses in ${city}?
 
-Finding the right service provider can save you time, money, and effort. With ListPak, you get access to a verified and up-to-date directory covering every major category, including restaurants, retail stores, healthcare providers, and technology companies. Get local phone numbers and instant WhatsApp connect options without any registration. Our listings include complete contact details, addresses, and digital presence links so you can connect instantly.
+Tracking down the right service provider should not eat up your afternoon. LocalePak gives you a checked, regularly refreshed directory spanning every major trade in ${city} — restaurants, retail stores, healthcare providers, technology companies and much more. Listings carry phone numbers, addresses and links to each business's online presence, and many let you connect on WhatsApp instantly, with no sign-up needed.
 
-### Top Business Sectors in ${city}
+### Leading Business Sectors in ${city}
 
-The local economy thrives across several key industries including ${info.industries.slice(0, 3).join(', ')}, and more. Its strategic location and large consumer base make it an ideal place for companies of all sizes. Business owners here benefit from access to a skilled workforce, established supply chains, and a growing digital infrastructure.
+Several industries power the local economy, above all ${info.industries.slice(0, 3).join(', ')}, alongside many others. A deep consumer market and a prime location make ${city} attractive to companies of every size, and owners here draw on a trained workforce, dependable supply networks and fast-improving digital connectivity.
 
-The ${info.province} government has also invested significantly in supporting commerce, creating an environment where startups and established brands can both thrive. Many of the country's leading organizations have major operations or headquarters here.
+Public investment in commerce by the ${info.province} government has strengthened that picture further, so startups and household brands alike can grow side by side. A number of the country's biggest organisations run major operations — in some cases their head offices — from ${city}.
 
-### How to Find Businesses in ${city}
+### How to Find a Business in ${city}
 
-Use ListPak to browse businesses in ${city} by category. Whether you need a restaurant for a family dinner, a plumber for an urgent repair, or an IT consultancy for your digital transformation, you'll find it here. Simply browse the listings below, call directly, or send a WhatsApp message, all in one click.
+Start with the category you need and work through the ${city} listings on LocalePak. Planning a family dinner, facing an urgent repair at home, or hiring consultants for a digital project — the right provider is a few taps away: open a listing, call the number shown, or send a WhatsApp message straight from the page.
 
-### Commercial Hubs and Business Districts in ${city}
+### Business Districts and Commercial Areas in ${city}
 
-${city} is divided into several prominent business districts, each known for specific types of commerce. ${districtsText} 
+Commerce in ${city} clusters in well-known districts, and each one has its own specialities. ${districtsText} 
 
-When searching for businesses in ${city}, knowing these districts can help you find services closer to your home or office. Whether you are looking for a law firm in the financial district or a retail shop in the central market, our directory makes it easy to filter and find businesses by their specific location.
+Knowing the districts pays off when you search. Our listings show where each business is based, so you can favour a provider near your home or office instead of crossing the city, and compare your options area by area.
 
-### List Your Business in ${city}: Free!
+### Add Your Business in ${city} — It's Free
 
-Are you a business owner in ${city}? Get your business listed on ListPak for free. Our directory helps local businesses in ${city} reach thousands of potential customers every month. Add your business name, address, contact details, and a description, and you'll appear in search results for customers in ${city} looking for your services.
+Own a business in ${city}? Put it in front of the customers already searching here — listing on LocalePak costs nothing. Submit your business name, address, contact details and a short description, and your profile starts appearing for ${city} searches in your category, reaching thousands of potential customers every month.
 
-To build trust, business owners can include official registration indicators. If your business is registered with the Federal Board of Revenue, you can add your FBR NTN. If you are incorporated, you can reference your Securities and Exchange Commission of Pakistan registration details. Adding affiliation signals from local business chambers like the Karachi Chamber of Commerce and Industry or the Lahore Chamber of Commerce and Industry helps verify your company profile.
+Want customers to trust your profile faster? Add the official identifiers you already hold: your FBR NTN if you are tax-registered with the Federal Board of Revenue, your Securities and Exchange Commission of Pakistan incorporation details if you run a registered company, or membership of a local chamber such as the Karachi Chamber of Commerce and Industry or the Lahore Chamber of Commerce and Industry.
 
-ListPak is committed to helping the business community grow in ${city}. Join hundreds of businesses already listed and start receiving customer enquiries today. No subscription fees, no hidden charges, just a free, high quality business listing on Pakistan's leading directory.
+LocalePak backs the growth of ${city}'s business community. Join the hundreds of companies already listed, start receiving customer enquiries, and pay nothing for the privilege — no subscription, no hidden charges, just a free, high-quality listing on Pakistan's leading business directory.
 
-### Browse ${city} Businesses by Category
+### Explore ${city} Businesses by Category
 
-Explore all business categories available in ${city} below. Click any category to see a focused list of businesses offering those specific services in ${city}.`
+Work through the categories below to see every type of business trading in ${city}. Open any category for a focused list of the providers offering exactly those services in ${city}.`
 }
 
 export function generateCategoryContent(categorySlug: string): string {
   const info = CATEGORY_INFO[categorySlug] || {
     label: categorySlug ? categorySlug.replace(/-/g, ' ') : 'Category',
-    description: 'businesses providing essential services',
-    examples: ['local service providers', 'companies', 'shops', 'agencies'],
+    description: 'businesses supplying everyday services people rely on',
+    examples: ['independent service providers', 'local firms', 'shops', 'specialist agencies'],
   }
 
-  return `## ${info.label} Businesses in Pakistan: Complete Directory
+  return `## ${info.label} Businesses in Pakistan — The Full Directory
 
-Pakistan has a thriving ${info.label.toLowerCase()} sector with thousands of businesses serving customers across all major cities. ListPak brings you the most comprehensive directory of ${info.description} across Pakistan, updated regularly with new listings.
+Pakistan's ${info.label.toLowerCase()} sector is thriving, with thousands of providers serving customers in every major city. On LocalePak you will find one of the most comprehensive directories of ${info.description} anywhere in Pakistan, refreshed regularly as fresh listings arrive.
 
-### Find the Best ${info.label} Businesses
+### Finding the Best ${info.label} Providers
 
-Whether you are in Karachi, Lahore, Islamabad, or any other region, finding quality ${info.label.toLowerCase()} services has never been easier. Locate the top companies in this sector with complete contact details and verified local citations. Our directory features verified listings with WhatsApp numbers, addresses, and online presence links so you can make informed decisions quickly.
+Wherever you are — Karachi, Lahore, Islamabad or a smaller town — tracking down quality ${info.label.toLowerCase()} services takes minutes here. Every profile carries contact details and verified local citations, typically including a WhatsApp number, a street address and links to the business's website or social profiles, so you can judge your options on facts rather than guesswork.
 
-### What You'll Find in Our ${info.label} Directory
+### What's Inside the ${info.label} Directory
 
-This category includes ${info.examples.slice(0, 5).join(', ')}, and much more. Each listing provides the business name, phone number, and a detailed description, everything you need to choose the right partner for your needs.
+Inside this category you will find ${info.examples.slice(0, 5).join(', ')} — and plenty beyond that list. Each profile shows the company's name and phone number alongside a fuller description, which makes shortlisting the right partner straightforward.
 
-### Why Use ListPak for ${info.label}?
+### Why Search ${info.label} on LocalePak?
 
-ListPak is a leading free business directory with listings from over one hundred and fifty cities. These ${info.label} listings are user-submitted and verified, ensuring you get accurate and helpful information. We cover providers of all sizes, from individual freelancers to large established companies.
+LocalePak is a free directory spanning more than one hundred and fifty Pakistani cities, and every ${info.label.toLowerCase()} listing here was submitted by the business itself and then verified, so the details you act on are accurate and genuinely useful. Small freelancers sit alongside large, long-established companies; size is no barrier to being listed.
 
-Our platform makes it easy to compare different options side by side, contact them directly, and even visit their websites or social media pages. No registration required, just browse and connect.
+Place profiles side by side, weigh them up, then reach out directly or continue to the provider's own website and social pages. There is nothing to register for — simply browse and make contact.
 
-### ${info.label} Across Pakistani Cities
+### ${info.label} in Cities Across Pakistan
 
-This sector is distributed across the country, with major concentrations in Karachi, Lahore, and Islamabad. However, you will also find excellent providers in cities like Faisalabad, Multan, Peshawar, Quetta, and Sialkot. Use our city filter below to narrow down your search.
+Providers cluster most densely in Karachi, Lahore and Islamabad, but strong options exist well beyond the big three — Faisalabad, Multan, Peshawar, Quetta and Sialkot among them. Narrow the field with the city filter below.
 
-### Add Your ${info.label} Business: Free!
+### List Your ${info.label} Business — Free
 
-If you operate a ${info.label.toLowerCase()} business anywhere in Pakistan, you can list it on ListPak for free. Thousands of potential customers search for ${info.label.toLowerCase()} services every day. Get discovered by adding your complete business profile with no cost, no credit card, and no subscription required.
+Run a ${info.label.toLowerCase()} business anywhere in Pakistan? Listing it on LocalePak is free, and thousands of people search for ${info.label.toLowerCase()} services every day. Build your complete profile today — no charge, no card details, no subscription — and let those searches find you.
 
-Browse the ${info.label} businesses listed below and connect with the right provider for your needs today.`
+Scroll through the ${info.label} businesses below and get in touch with the provider that fits your needs.`
 }
 
 export function generateCityCategoryContent(city: string, categorySlug: string): string {
   const cityInfo = CITY_INFO[city] || {
     province: 'Pakistan',
-    description: 'a prominent Pakistani city',
+    description: "one of Pakistan's well-known urban centres",
     industries: ['retail', 'food', 'services'],
   }
   const catInfo = CATEGORY_INFO[categorySlug] || {
     label: categorySlug ? categorySlug.replace(/-/g, ' ') : 'Category',
-    description: 'businesses providing local services',
-    examples: ['service providers', 'companies', 'shops'],
+    description: 'businesses serving the local community',
+    examples: ['local providers', 'firms', 'shops'],
   }
 
-  return `## ${catInfo.label} Businesses in ${city}: Local Directory
+  return `## ${catInfo.label} Businesses in ${city} — Your Local Directory
 
-Looking for reliable ${catInfo.label.toLowerCase()} services in ${city}? You have come to the right place. ListPak features a comprehensive, up-to-date directory of ${catInfo.description} specifically in ${city}, ${cityInfo.province}.
+Hunting for dependable ${catInfo.label.toLowerCase()} services in ${city}? Start here. LocalePak maintains a current, comprehensive directory of ${catInfo.description} operating in ${city}, ${cityInfo.province}.
 
-### Why ${city} for ${catInfo.label}?
+### Why ${city} Stands Out for ${catInfo.label}
 
-${city} is ${cityInfo.description} and has developed a strong ecosystem of ${catInfo.label.toLowerCase()} businesses catering to local and regional customers. As the city continues to grow, the number and quality of ${catInfo.label.toLowerCase()} providers has expanded significantly, giving consumers more choice than ever before.
+Because ${city} is ${cityInfo.description}, it has built a deep bench of ${catInfo.label.toLowerCase()} businesses serving both local customers and the wider region. The city keeps growing, and its ${catInfo.label.toLowerCase()} providers have grown with it — in number and in quality — so customers today enjoy more choice than at any point in the past.
 
-### What to Expect from ${catInfo.label} Businesses in ${city}
+### What ${city}'s ${catInfo.label} Businesses Offer
 
-The ${catInfo.label.toLowerCase()} sector in ${city} includes ${catInfo.examples.slice(0, 4).join(', ')}. Whether you need a quick solution or a long-term service relationship, ${city}'s ${catInfo.label.toLowerCase()} businesses offer a wide range of options to suit different budgets and requirements.
+Expect variety: the ${catInfo.label.toLowerCase()} sector in ${city} spans ${catInfo.examples.slice(0, 4).join(', ')}. Quick one-off jobs and long-term arrangements are both easy to arrange, with price points and service levels for nearly every budget and requirement.
 
-Many ${catInfo.label.toLowerCase()} businesses in ${city} now offer online booking, WhatsApp consultations, and home delivery or on-site services, making them more accessible than ever. Get verified ${catInfo.label.toLowerCase()} services near me in ${city} with direct WhatsApp numbers and local addresses. Our directory includes these details so you can get in touch instantly.
+Modern ${catInfo.label.toLowerCase()} businesses in ${city} increasingly take bookings online, consult over WhatsApp and deliver at home or on site, which makes them easier to reach than ever. Looking for verified ${catInfo.label.toLowerCase()} services near me in ${city}? Each LocalePak profile includes direct WhatsApp numbers and full addresses, so getting in touch takes seconds.
 
-### How to Choose the Right ${catInfo.label} in ${city}
+### Choosing the Right ${catInfo.label} Provider in ${city}
 
-When selecting a ${catInfo.label.toLowerCase()} business in ${city}, consider the following:
+Before you commit to a ${catInfo.label.toLowerCase()} business in ${city}, weigh these four checks:
 
-1. Location: Choose a business that is conveniently located in your area of ${city} to minimize travel time.
-2. Contact Options: Look for businesses that offer multiple contact channels, including phone, WhatsApp, and email.
-3. Digital Presence: Businesses with active websites and social media pages tend to be more transparent and accountable.
-4. Description: Read the business description carefully to ensure they offer the specific service you need.
+1. Location — favour a provider based near you in ${city}; shorter distances mean faster visits and lower travel costs.
+2. Contact options — pick businesses you can reach several ways: phone, WhatsApp and email.
+3. Online presence — an active website and social profiles usually signal a transparent, accountable operation.
+4. Service fit — read the description closely and confirm the exact service you need is actually offered.
 
-To build trust, verify their legal registration. Many businesses list their FBR NTN or reference their Securities and Exchange Commission of Pakistan registration. You can check if they are registered with the local chamber of commerce like the Lahore Chamber of Commerce and Industry or the Karachi Chamber of Commerce and Industry.
+For extra confidence, check legal registration: many businesses publish their FBR NTN or cite their Securities and Exchange Commission of Pakistan registration, and membership of a chamber of commerce — the Lahore Chamber of Commerce and Industry or the Karachi Chamber of Commerce and Industry, for example — is another good sign.
 
-ListPak makes it easy to compare multiple ${catInfo.label.toLowerCase()} businesses in ${city} at a glance.
+On LocalePak you can line up several ${catInfo.label.toLowerCase()} businesses in ${city} and compare them at a glance before you decide.
 
-### List Your ${catInfo.label} Business in ${city}: Free!
+### Own a ${catInfo.label} Business in ${city}? List It Free
 
-Are you a ${catInfo.label.toLowerCase()} business owner in ${city}? Get your business in front of thousands of local customers by listing it on ListPak, completely free. Add your contact details, address, description, and website to get started today.
+Run a ${catInfo.label.toLowerCase()} business in ${city}? Put it where thousands of local customers are already looking. A LocalePak listing is completely free — add your contact details, address, description and website, and you can be live today.
 
-Browse all ${catInfo.label} businesses in ${city} below.`
+See every ${catInfo.label} business in ${city} in the listings below.`
 }

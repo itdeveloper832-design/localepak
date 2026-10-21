@@ -218,7 +218,7 @@ export default function AddProfessionalClient() {
 
       let sessionName = ''
       let sessionEmail = ''
-      const savedSession = sessionStorage.getItem('listpak_user_session') || localStorage.getItem('listpak_user_session')
+      const savedSession = sessionStorage.getItem('localepak_user_session') || localStorage.getItem('localepak_user_session')
       if (savedSession) {
         const parsed = JSON.parse(savedSession)
         sessionName = parsed.name || ''
@@ -432,8 +432,8 @@ export default function AddProfessionalClient() {
         userId: activeUserId
       }
       try {
-        sessionStorage.setItem('listpak_user_session', JSON.stringify(sessionData))
-        localStorage.setItem('listpak_user_session', JSON.stringify(sessionData))
+        sessionStorage.setItem('localepak_user_session', JSON.stringify(sessionData))
+        localStorage.setItem('localepak_user_session', JSON.stringify(sessionData))
       } catch (e) {}
 
       toast.success('Your professional profile has been submitted successfully!')
@@ -497,7 +497,7 @@ export default function AddProfessionalClient() {
                 Your professional profile is now live across Pakistan!
               </h2>
               <p className="text-slate-600 text-sm max-w-lg mx-auto leading-relaxed">
-                Your profile has been automatically approved and published. Anyone can now view your public portfolio, credentials, and skills on ListPak.
+                Your profile has been automatically approved and published. Anyone can now view your public portfolio, credentials, and skills on LocalePak.
               </p>
             </div>
 
@@ -623,7 +623,7 @@ export default function AddProfessionalClient() {
                 <div className="space-y-6 animate-in fade-in-50">
                   <div>
                     <h2 className="text-xl font-extrabold text-slate-900">Personal & Professional Identity</h2>
-                    <p className="text-xs text-slate-500 mt-1">This information identifies you to employers and clients searching ListPak.</p>
+                    <p className="text-xs text-slate-500 mt-1">This information identifies you to employers and clients searching LocalePak.</p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

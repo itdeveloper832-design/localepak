@@ -23,10 +23,10 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 sm:h-20">
           
           {/* Brand Logo */}
-          <Link href="/" aria-label="ListPak Home Page" className="flex items-center group py-1">
+          <Link href="/" aria-label="LocalePak Home Page" className="flex items-center group py-1">
             <Image
               src="/logo.png"
-              alt="ListPak - Pakistan Business Directory"
+              alt="LocalePak - Pakistan Business Directory"
               width={160}
               height={48}
               priority

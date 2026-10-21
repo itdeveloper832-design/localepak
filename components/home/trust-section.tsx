@@ -8,7 +8,7 @@ const features = [
   },
   {
     title: "Nationwide Reach",
-    description: "Explore businesses, verified professionals, and job opportunities across 150+ Pakistani cities on ListPak.",
+    description: "Explore businesses, verified professionals, and job opportunities across 150+ Pakistani cities on LocalePak.",
     icon: <Users className="w-8 h-8 text-blue-500" />
   },
   {
@@ -28,7 +28,7 @@ export default function TrustSection() {
     <section className="py-20 bg-[#f8fafc]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-bold text-[#0f2b3d] mb-4">Why Trust ListPak?</h2>
+          <h2 className="text-3xl font-bold text-[#0f2b3d] mb-4">Why Trust LocalePak?</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             We are dedicated to building a transparent and verified Pakistan business directory, 
             connecting customers with verified local services and job opportunities every day.

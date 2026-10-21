@@ -225,7 +225,7 @@ export function ProfessionalReviewsSection({ proName, initialReviews }: Professi
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h2 className="text-lg font-extrabold text-slate-900">Ratings & Client Reviews</h2>
-            <p className="text-xs text-slate-500">Feedback from clients and colleagues on ListPak.</p>
+            <p className="text-xs text-slate-500">Feedback from clients and colleagues on LocalePak.</p>
           </div>
 
           <button

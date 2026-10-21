@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { CATEGORIES, CITIES, TOP_CITIES, BusinessItem, ProfessionalItem, CompanyItem, JobItem } from '@/lib/data'
+import { CATEGORIES, CITIES, BusinessItem, ProfessionalItem, CompanyItem, JobItem } from '@/lib/data'
 import { getAllBusinesses } from '@/lib/db-service'
 import { getAllProfessionals } from '@/lib/professional-service'
 import { getAllCompanies } from '@/lib/company-service'
@@ -20,7 +20,7 @@ function safeDate(input?: string | null, fallback: Date = new Date()): Date {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://www.listpak.com'
+  const baseUrl = 'https://www.localepak.com'
   const currentDate = new Date()
   const canonicalUrl = (path: string) => path === '/' ? `${baseUrl}/` : `${baseUrl}/${path.replace(/^\/+|\/+$/g, '')}/`
 
@@ -214,9 +214,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
-  // 12. City Prayer Times Pages for Top Pakistani Cities
-  const prayerCityRoutes = TOP_CITIES.map((city) => ({
-    url: canonicalUrl(`/prayer-times-${city.toLowerCase().replace(/\s+/g, '-')}-today`),
+  // 12. City Prayer Times Pages — only the proven high-demand cities stay indexable
+  // (Phase 4 rule: the long tail of prayer pages earned impressions but ~0 clicks and
+  // dilutes the directory's topical focus, so all other cities are noindex,follow.)
+  const INDEXABLE_PRAYER_CITY_SLUGS = [
+    'islamabad', 'kallar-syedan', 'lahore', 'shujabad', 'sohawa', 'timergara',
+    'rawalpindi', 'sarai-alamgir', 'samundri', 'hassan-abdal', 'batkhela',
+    'peshawar', 'karachi',
+  ]
+  const prayerCityRoutes = INDEXABLE_PRAYER_CITY_SLUGS.map((citySlug) => ({
+    url: canonicalUrl(`/prayer-times-${citySlug}-today`),
     lastModified: currentDate,
     changeFrequency: 'daily' as const,
     priority: 0.7,

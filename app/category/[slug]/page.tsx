@@ -31,12 +31,12 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
   const cat = CATEGORIES.find(c => c.id === params.slug)
   if (!cat) {
     return {
-      title: 'Category not found | ListPak',
+      title: 'Category not found | LocalePak',
       robots: { index: false, follow: false },
     }
   }
-  const title = `${cat.name} in Pakistan | ListPak`
-  const description = `Find ${cat.name} in Pakistan by city. Browse local businesses, services and listings on ListPak.`
+  const title = `${cat.name} in Pakistan | LocalePak`
+  const description = `Find ${cat.name} in Pakistan by city. Browse local businesses, services and listings on LocalePak.`
   const canonicalUrl = toCanonicalUrl(`category/${cat.id}`)
 
   return {
@@ -46,7 +46,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
       title,
       description,
       url: canonicalUrl,
-      siteName: 'ListPak',
+      siteName: 'LocalePak',
       locale: 'en_PK',
       type: 'website',
     },
@@ -81,9 +81,9 @@ export default async function CategoryDetailPage(props: { params: Promise<{ slug
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: `${cat.name} in Pakistan`,
-    description: `Find ${cat.name} in Pakistan by city. Browse local businesses, services and listings on ListPak.`,
+    description: `Find ${cat.name} in Pakistan by city. Browse local businesses, services and listings on LocalePak.`,
     url: canonicalUrl,
-    isPartOf: { '@type': 'WebSite', name: 'ListPak', url: 'https://www.listpak.com/' },
+    isPartOf: { '@type': 'WebSite', name: 'LocalePak', url: 'https://www.localepak.com/' },
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: businesses.map((biz, idx) => ({
@@ -103,13 +103,13 @@ export default async function CategoryDetailPage(props: { params: Promise<{ slug
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://listpak.com/'
+        item: 'https://www.localepak.com/'
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Categories',
-        item: 'https://listpak.com/categories/'
+        item: 'https://www.localepak.com/categories/'
       },
       {
         '@type': 'ListItem',
@@ -194,7 +194,7 @@ export default async function CategoryDetailPage(props: { params: Promise<{ slug
           <section className="bg-white rounded-2xl border border-slate-200 p-6 space-y-4">
             <p className="text-sm text-slate-700 leading-relaxed">{seoCopy.intro}</p>
             <p className="text-xs text-slate-600 leading-relaxed">{seoCopy.guidance}</p>
-            <nav aria-label="Related ListPak guides" className="flex flex-wrap gap-2">
+            <nav aria-label="Related LocalePak guides" className="flex flex-wrap gap-2">
               {seoCopy.links.map((link) => (
                 <Link key={link.href} href={link.href} className="rounded-lg bg-blue-50 px-3 py-2 text-xs font-bold text-blue-700 hover:bg-blue-100">
                   {link.label}

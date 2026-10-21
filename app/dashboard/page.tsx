@@ -100,7 +100,7 @@ function DashboardContent() {
   useEffect(() => {
     // 1. Immediately read session from storage so Ctrl+R refresh is instant
     let sessionFound = false
-    const rawSession = sessionStorage.getItem('listpak_user_session') || localStorage.getItem('listpak_user_session')
+    const rawSession = sessionStorage.getItem('localepak_user_session') || localStorage.getItem('localepak_user_session')
     if (rawSession) {
       try {
         const parsed = JSON.parse(rawSession)
@@ -115,20 +115,20 @@ function DashboardContent() {
     // Fallback: If no explicit session but custom businesses exist in localStorage, hydrate automatically
     if (!sessionFound) {
       try {
-        const custom = localStorage.getItem('listpak_custom_businesses')
+        const custom = localStorage.getItem('localepak_custom_businesses')
         if (custom) {
           const parsedCustom = JSON.parse(custom)
           if (Array.isArray(parsedCustom) && parsedCustom.length > 0) {
             const latest = parsedCustom[0]
             const autoUser = {
               name: latest.ownerName || latest.name || 'Business Owner',
-              email: latest.email || 'business@listpak.pk',
+              email: latest.email || 'business@localepak.pk',
               uid: latest.userId || 'local-biz-owner',
               role: 'business'
             }
             setCurrentUser(autoUser)
-            sessionStorage.setItem('listpak_user_session', JSON.stringify(autoUser))
-            localStorage.setItem('listpak_user_session', JSON.stringify(autoUser))
+            sessionStorage.setItem('localepak_user_session', JSON.stringify(autoUser))
+            localStorage.setItem('localepak_user_session', JSON.stringify(autoUser))
             setUserBusinesses(parsedCustom)
             sessionFound = true
           }
@@ -146,8 +146,8 @@ function DashboardContent() {
         }
         setCurrentUser(userObj)
         fetchBusinesses(userObj.email, userObj.uid)
-        sessionStorage.setItem('listpak_user_session', JSON.stringify(userObj))
-        localStorage.setItem('listpak_user_session', JSON.stringify(userObj))
+        sessionStorage.setItem('localepak_user_session', JSON.stringify(userObj))
+        localStorage.setItem('localepak_user_session', JSON.stringify(userObj))
       }
       setLoading(false)
     })
@@ -233,7 +233,7 @@ function DashboardContent() {
           }
         }
       } catch (authErr: any) {
-        const existingSession = localStorage.getItem('listpak_user_session')
+        const existingSession = localStorage.getItem('localepak_user_session')
         if (existingSession) {
           const parsed = JSON.parse(existingSession)
           if (parsed.email?.toLowerCase() === loginEmail.trim().toLowerCase()) {
@@ -247,8 +247,8 @@ function DashboardContent() {
       }
 
       setCurrentUser(loggedUser)
-      sessionStorage.setItem('listpak_user_session', JSON.stringify({ ...loggedUser, role: 'business' }))
-      localStorage.setItem('listpak_user_session', JSON.stringify({ ...loggedUser, role: 'business' }))
+      sessionStorage.setItem('localepak_user_session', JSON.stringify({ ...loggedUser, role: 'business' }))
+      localStorage.setItem('localepak_user_session', JSON.stringify({ ...loggedUser, role: 'business' }))
       fetchBusinesses(loggedUser.email, loggedUser.uid)
       toast.success(`Welcome back, ${loggedUser.name}!`)
     } catch (err: any) {
@@ -291,9 +291,9 @@ function DashboardContent() {
       }
 
       setCurrentUser(newUser)
-      sessionStorage.setItem('listpak_user_session', JSON.stringify({ ...newUser, role: 'business' }))
-      localStorage.setItem('listpak_user_session', JSON.stringify({ ...newUser, role: 'business' }))
-      toast.success('Your ListPak business account has been created!')
+      sessionStorage.setItem('localepak_user_session', JSON.stringify({ ...newUser, role: 'business' }))
+      localStorage.setItem('localepak_user_session', JSON.stringify({ ...newUser, role: 'business' }))
+      toast.success('Your LocalePak business account has been created!')
     } catch (err: any) {
       setLoginError(err.message || 'Signup failed. Please try again.')
     } finally {
@@ -305,8 +305,8 @@ function DashboardContent() {
     try {
       await signOut(auth)
     } catch (_) {}
-    sessionStorage.removeItem('listpak_user_session')
-    localStorage.removeItem('listpak_user_session')
+    sessionStorage.removeItem('localepak_user_session')
+    localStorage.removeItem('localepak_user_session')
     setCurrentUser(null)
     setUserBusinesses([])
     toast.success('Signed out successfully.')

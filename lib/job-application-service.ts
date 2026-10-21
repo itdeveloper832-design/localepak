@@ -6,7 +6,7 @@ import { getAllProfessionals } from './professional-service'
 let memoryJobApplicationsCache: JobApplication[] = []
 
 /**
- * Check if an email belongs to a registered Professional profile in ListPak database
+ * Check if an email belongs to a registered Professional profile in LocalePak database
  */
 export async function checkProfessionalByEmail(email: string): Promise<{
   found: boolean
@@ -92,7 +92,7 @@ export async function submitJobApplication(params: {
       success: false,
       code: 'PROFILE_UNVERIFIED',
       professional: checkResult.professional,
-      message: 'Your profile has been found, but it is not verified yet. Please verify your profile to apply for jobs on ListPak.'
+      message: 'Your profile has been found, but it is not verified yet. Please verify your profile to apply for jobs on LocalePak.'
     }
   }
 

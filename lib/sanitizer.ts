@@ -1,5 +1,5 @@
 /**
- * ListPak Input Sanitization & Security Helper
+ * LocalePak Input Sanitization & Security Helper
  * Guards user-submitted content (businesses, jobs, professionals, contacts)
  * against XSS, script injection, and protocol manipulation.
  */

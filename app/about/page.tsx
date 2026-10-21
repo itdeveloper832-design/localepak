@@ -11,17 +11,17 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: "About ListPak – Founder & CEO Muhammad Imran | Pakistan Business Directory",
-  description: "Meet Muhammad Imran, Founder & CEO of ListPak (https://www.imrandigitals.com). Learn about the mission, engineering, leadership, and vision powering Pakistan's #1 free business directory.",
-  keywords: "who is the founder of ListPak, founder of ListPak, CEO of ListPak, Muhammad Imran, Muhammad Imran ListPak, Muhammad Imran Imran Digitals, ListPak CEO, who created ListPak, Pakistan business directory founder, Muhammad Imran web developer, Imran Digitals",
+  title: "About LocalePak – Pakistan's Free Business Directory",
+  description: "LocalePak is a free business directory for Pakistan, built by developer Muhammad Imran. Our mission: help local businesses get found on Google — no fees, no paywalls.",
+  keywords: "who is the founder of LocalePak, founder of LocalePak, CEO of LocalePak, Muhammad Imran, Muhammad Imran LocalePak, Muhammad Imran Imran Digitals, LocalePak CEO, who created LocalePak, Pakistan business directory founder, Muhammad Imran web developer, Imran Digitals",
   alternates: {
-    canonical: 'https://www.listpak.com/about/',
+    canonical: 'https://www.localepak.com/about/',
   },
   openGraph: {
-    title: "About ListPak – Founder & CEO Muhammad Imran",
-    description: "Discover the story and leadership of Muhammad Imran, Founder & CEO of ListPak and founder of Imran Digitals. Connecting 10,000+ Pakistani businesses across 150+ cities.",
-    url: 'https://www.listpak.com/about/',
-    siteName: 'ListPak',
+    title: "About LocalePak – Pakistan's Free Business Directory",
+    description: "The story behind LocalePak: a free directory where Pakistani businesses, professionals and employers connect — founded by Muhammad Imran of Imran Digitals.",
+    url: 'https://www.localepak.com/about/',
+    siteName: 'LocalePak',
     locale: 'en_PK',
     type: 'profile',
     images: [
@@ -29,34 +29,34 @@ export const metadata: Metadata = {
         url: 'https://www.imrandigitals.com/opengraph.jpg',
         width: 1200,
         height: 630,
-        alt: 'Muhammad Imran - Founder and CEO of ListPak',
+        alt: 'Muhammad Imran - Founder and CEO of LocalePak',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Muhammad Imran – Founder & CEO of ListPak",
-    description: "Learn about Muhammad Imran, Founder & CEO of ListPak (imrandigitals.com), and the mission behind Pakistan's premier free business directory.",
+    title: "About LocalePak – Pakistan's Free Business Directory",
+    description: "Why LocalePak exists, who built it, and how a free listing helps Pakistani businesses show up in local search.",
     images: ['https://www.imrandigitals.com/opengraph.jpg'],
   },
 }
 
 const STATS = [
-  { number: "10,000+", label: "Verified Business Listings" },
-  { number: "150+", label: "Pakistani Cities Covered" },
-  { number: "50+", label: "Business & Trade Categories" },
-  { number: "5,000+", label: "Professional Profiles" },
-  { number: "1,000+", label: "Active Jobs & Opportunities" },
-  { number: "100% Free", label: "Zero Fees & No Registration Walls" }
+  { number: "100% Free", label: "Business Listings & Job Posts" },
+  { number: "4-in-1", label: "Businesses · Jobs · Professionals · Companies" },
+  { number: "WhatsApp", label: "Direct Connect on Listings" },
+  { number: "Pakistan-wide", label: "Cities Across All Provinces" },
+  { number: "Google-ready", label: "Schema-Structured Profiles" },
+  { number: "No Paywall", label: "Contact Details Always Visible" }
 ]
 
 const CORE_VALUES = [
   { title: "100% Free Forever", desc: "Founded on the core belief of universal free access. No premium paywalls, no monthly subscription fees, and no gated contact information.", icon: ShieldCheck },
   { title: "Customer & Community First", desc: "Every feature we engineer is guided by genuine value for local dukandars, startup entrepreneurs, job seekers, and everyday consumers.", icon: HeartHandshake },
   { title: "Radical Transparency", desc: "Honest, clear, and open platform standards with zero hidden fees and transparent verification for Pakistani businesses.", icon: Sparkles },
-  { title: "Continuous Technical Innovation", desc: "Engineered with modern Next.js, sub-second search indexing, real-time filters, and cutting-edge local SEO architecture.", icon: TrendingUp },
+  { title: "Built with Modern Technology", desc: "LocalePak runs on Next.js with server-rendered pages, real-time filters and local-SEO architecture, so listings load fast and rank well.", icon: TrendingUp },
   { title: "Nationwide Inclusive Growth", desc: "Serving businesses of all scales—from traditional cottage artisans and corner clinics to major tech enterprises in Karachi, Lahore, and Islamabad.", icon: Users },
-  { title: "Data Accuracy & E-E-A-T", desc: "Prioritizing verified contact numbers, direct WhatsApp connectivity, and validated public credentials across all Pakistani territories.", icon: CheckCircle2 },
+  { title: "Accurate Data First", desc: "We prioritize correct contact numbers, working WhatsApp links and honest listing details — because a directory is only useful if its data is right.", icon: CheckCircle2 },
 ]
 
 const FOUNDER_SKILLS = [
@@ -74,15 +74,15 @@ const FOUNDER_SKILLS = [
 
 const FOUNDER_PROJECTS = [
   {
-    name: "ListPak.com",
+    name: "LocalePak.com",
     role: "Founder, CEO & Chief Architect",
-    desc: "Pakistan's leading 100% free business directory and local discovery platform, serving 10,000+ businesses and professionals across 150+ cities nationwide.",
-    url: "https://listpak.com/"
+    desc: "A free business directory and local discovery platform for Pakistan — businesses, jobs and professionals organized by city and category, with no listing fees.",
+    url: "https://www.localepak.com/"
   },
   {
     name: "Imran Digitals",
     role: "Founder & Digital Agency Lead",
-    desc: "Premier software development and digital engineering firm delivering custom Next.js web applications, AI automation tools, and enterprise SEO systems.",
+    desc: "Software development and digital engineering studio delivering custom Next.js web applications, AI automation tools and technical SEO systems.",
     url: "https://www.imrandigitals.com/"
   }
 ]
@@ -91,7 +91,7 @@ const TEAM_MEMBERS = [
   { 
     name: "Muhammad Imran", 
     role: "Founder & Chief Executive Officer (CEO)", 
-    desc: "Visionary founder and lead software architect behind ListPak and Imran Digitals. Directs platform architecture, full-stack Next.js development, AI integration, and nationwide local SEO innovation.", 
+    desc: "Founder and lead developer behind LocalePak and Imran Digitals. Handles platform architecture, full-stack Next.js development and the site's local SEO.", 
     icon: Building2,
     website: "https://www.imrandigitals.com/",
     linkedin: "https://www.linkedin.com/in/muhammad-imran-972364373/"
@@ -118,61 +118,51 @@ const TEAM_MEMBERS = [
 
 const MILESTONES = [
   { 
-    date: "January 2024", 
-    title: "ListPak Founded by Muhammad Imran", 
-    desc: "Software engineer and tech entrepreneur Muhammad Imran conceptualized and established ListPak to eliminate paywalled directory models and empower Pakistan's 5.2M SMEs." 
+    date: "The Idea", 
+    title: "A Directory That Doesn't Charge to Exist", 
+    desc: "Muhammad Imran, a Multan-based full-stack developer, kept seeing the same problem: small Pakistani businesses were invisible on Google unless they paid directory fees or built a website they couldn't afford. LocalePak started as the fix — a free listing that search engines can actually find." 
   },
   { 
-    date: "March 2024", 
-    title: "Official Platform Launch", 
-    desc: "ListPak.com went live with Next.js architecture, featuring an initial index of verified businesses across Karachi, Lahore, and Islamabad." 
+    date: "Building", 
+    title: "Engineered for Search from Day One", 
+    desc: "LocalePak was built on Next.js and Firebase with server-rendered pages, structured data on every listing, and city × category pages that match how people really search for local services." 
   },
   { 
-    date: "June 2024", 
-    title: "1,000+ Free Business Listings & Job Portal", 
-    desc: "Crossed 1,000 active business listings across 25 cities and launched the nationwide free job recruitment portal." 
+    date: "Launch", 
+    title: "LocalePak.com Goes Live", 
+    desc: "The directory launches with free business listings, a jobs board, professional profiles and company pages — no listing fees, no gated contact details, no registration walls." 
   },
   { 
-    date: "December 2024", 
-    title: "5,000+ Listings in 50+ Cities", 
-    desc: "Expanded directory coverage across Punjab, Sindh, Khyber Pakhtunkhwa, and Balochistan with direct WhatsApp business chat integration." 
-  },
-  { 
-    date: "June 2025", 
-    title: "10,000+ Active Listings & Professional Directory", 
-    desc: "Reached 10,000 active business listings across 150+ Pakistani cities, introducing verified professional profiles and service portfolios." 
-  },
-  { 
-    date: "2026 (Current)", 
-    title: "Pakistan's #1 Free Business Directory", 
-    desc: "Serving hundreds of thousands of monthly visitors with zero registration paywalls, industry-leading Core Web Vitals, and AI-optimized search discovery." 
+    date: "What's Next", 
+    title: "Growing City by City", 
+    desc: "Next up: deeper coverage in more Pakistani cities, more verified listings, and better tools for owners to keep their business information accurate and up to date." 
   }
 ]
 
 const ABOUT_FAQS = [
   {
-    q: "Who is the founder of ListPak?",
-    a: "Muhammad Imran is the Founder and Chief Executive Officer (CEO) of ListPak (https://listpak.com). He is a Pakistani full-stack web and AI developer, MERN and Next.js engineer, and technical SEO expert who also founded Imran Digitals (https://www.imrandigitals.com/)."
+    q: "Who is the founder of LocalePak?",
+    a: "Muhammad Imran is the Founder and Chief Executive Officer (CEO) of LocalePak (https://www.localepak.com). He is a Pakistani full-stack web and AI developer, MERN and Next.js engineer, and technical SEO expert who also founded Imran Digitals (https://www.imrandigitals.com/)."
   },
   {
-    q: "Who is the CEO of ListPak?",
-    a: "Muhammad Imran serves as the Chief Executive Officer (CEO) and lead software architect of ListPak, steering platform engineering, technical SEO, and business expansion across Pakistan."
+    q: "Who is the CEO of LocalePak?",
+    a: "Muhammad Imran serves as the Chief Executive Officer (CEO) and lead software architect of LocalePak, steering platform engineering, technical SEO, and business expansion across Pakistan."
   },
   {
-    q: "When was ListPak founded and what was the mission?",
-    a: "ListPak was founded in January 2024 by Muhammad Imran with a clear mission: to democratize online visibility for Pakistan's 5.2 million small and medium enterprises (SMEs) by offering a 100% free business directory with no registration paywalls, hidden fees, or subscriptions."
+    q: "When was LocalePak founded and what was the mission?",
+    a: "LocalePak was created in 2026 by Muhammad Imran with a simple mission: make online visibility free for Pakistan's small and medium businesses through a business directory with no listing fees, no registration paywalls and no hidden charges."
   },
   {
     q: "What is Muhammad Imran's official website and portfolio?",
     a: "You can explore Muhammad Imran's official portfolio, technical skills, and web engineering projects at his official website: https://www.imrandigitals.com/. You can also connect with him on LinkedIn at https://www.linkedin.com/in/muhammad-imran-972364373/."
   },
   {
-    q: "What is the relationship between ListPak and Imran Digitals?",
-    a: "ListPak is a flagship technology venture founded and engineered by Muhammad Imran. Imran Digitals (imrandigitals.com) is Muhammad Imran's premier digital agency and engineering consultancy, providing custom web applications, SaaS architecture, AI automation, and technical SEO services."
+    q: "What is the relationship between LocalePak and Imran Digitals?",
+    a: "LocalePak was founded and engineered by Muhammad Imran. Imran Digitals (imrandigitals.com) is his digital agency and engineering consultancy, providing custom web applications, SaaS development, AI automation and technical SEO services."
   },
   {
-    q: "What technology stack is ListPak built on?",
-    a: "ListPak is engineered using modern web technologies including Next.js 16, React, TypeScript, Tailwind CSS, Firebase Firestore, and advanced Schema.org JSON-LD structured data to ensure sub-second page loads and maximum search engine and AI model discoverability."
+    q: "What technology stack is LocalePak built on?",
+    a: "LocalePak is built with Next.js 16, React, TypeScript, Tailwind CSS and Firebase Firestore, with Schema.org JSON-LD structured data on directory pages so listings load fast and are easy for search engines to understand."
   }
 ]
 
@@ -182,17 +172,17 @@ export default function AboutPage() {
     '@graph': [
       {
         '@type': 'Organization',
-        '@id': 'https://listpak.com/#organization',
-        name: 'ListPak',
-        alternateName: ['ListPak.com', 'ListPak Pakistan Business Directory'],
-        url: 'https://www.listpak.com/',
+        '@id': 'https://www.localepak.com/#organization',
+        name: 'LocalePak',
+        alternateName: ['LocalePak.com', 'LocalePak Pakistan Business Directory'],
+        url: 'https://www.localepak.com/',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://www.listpak.com/logo.png',
+          url: 'https://www.localepak.com/logo.png',
           width: 512,
           height: 512
         },
-        description: "Pakistan's #1 free business listing directory and local discovery platform, founded in 2024 by Muhammad Imran to connect businesses, professionals, and consumers across 150+ Pakistani cities.",
+        description: "A free business listing directory and local discovery platform for Pakistan, founded by Muhammad Imran to connect businesses, professionals and customers by city and category.",
         foundingDate: '2024-01-01',
         founder: {
           '@id': 'https://www.imrandigitals.com/#founder'
@@ -215,13 +205,13 @@ export default function AboutPage() {
           '@type': 'ContactPoint',
           telephone: '+923019316123',
           contactType: 'customer support',
-          email: 'contact@listpak.com',
+          email: 'contact@localepak.com',
           areaServed: 'PK',
           availableLanguage: ['English', 'Urdu']
         },
         sameAs: [
-          'https://www.facebook.com/listpakofficial',
-          'https://www.linkedin.com/company/listpak'
+          'https://www.facebook.com/localepakofficial',
+          'https://www.linkedin.com/company/localepak'
         ]
       },
       {
@@ -230,7 +220,7 @@ export default function AboutPage() {
         name: 'Muhammad Imran',
         jobTitle: 'Founder & Chief Executive Officer (CEO)',
         worksFor: {
-          '@id': 'https://listpak.com/#organization'
+          '@id': 'https://www.localepak.com/#organization'
         },
         url: 'https://www.imrandigitals.com/',
         image: 'https://www.imrandigitals.com/opengraph.jpg',
@@ -241,7 +231,7 @@ export default function AboutPage() {
           'https://www.linkedin.com/in/muhammad-imran-972364373/',
           'https://github.com/muhammadimran9'
         ],
-        description: 'Muhammad Imran is the Founder and CEO of ListPak (https://listpak.com) and the founder of Imran Digitals (https://www.imrandigitals.com). He is a full-stack web and AI developer and technical SEO specialist from Pakistan.',
+        description: 'Muhammad Imran is the Founder and CEO of LocalePak (https://www.localepak.com) and the founder of Imran Digitals (https://www.imrandigitals.com). He is a full-stack web and AI developer and technical SEO specialist from Pakistan.',
         knowsAbout: [
           'Full-Stack Web Development',
           'Next.js & React Ecosystem',
@@ -265,28 +255,28 @@ export default function AboutPage() {
       },
       {
         '@type': 'AboutPage',
-        '@id': 'https://listpak.com/about/#webpage',
-        url: 'https://www.listpak.com/about/',
-        name: 'About ListPak – Founder Muhammad Imran & Pakistan Business Directory',
-        description: 'Learn about ListPak and its Founder & CEO Muhammad Imran, who built Pakistan\'s premier 100% free business directory.',
+        '@id': 'https://www.localepak.com/about/#webpage',
+        url: 'https://www.localepak.com/about/',
+        name: 'About LocalePak – Founder Muhammad Imran & Pakistan Business Directory',
+        description: 'Learn about LocalePak and its founder Muhammad Imran, and why the directory is 100% free for Pakistani businesses.',
         isPartOf: {
-          '@id': 'https://listpak.com/#website'
+          '@id': 'https://www.localepak.com/#website'
         },
         about: [
           {
-            '@id': 'https://listpak.com/#organization'
+            '@id': 'https://www.localepak.com/#organization'
           },
           {
             '@id': 'https://www.imrandigitals.com/#founder'
           }
         ],
         mainEntity: {
-          '@id': 'https://listpak.com/#organization'
+          '@id': 'https://www.localepak.com/#organization'
         }
       },
       {
         '@type': 'FAQPage',
-        '@id': 'https://listpak.com/about/#faq',
+        '@id': 'https://www.localepak.com/about/#faq',
         mainEntity: ABOUT_FAQS.map(faq => ({
           '@type': 'Question',
           name: faq.q,
@@ -317,15 +307,15 @@ export default function AboutPage() {
             
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm font-semibold mb-6">
               <Sparkles className="w-4 h-4 text-emerald-400" />
-              <span>Founded by Muhammad Imran • Pakistan&apos;s #1 Free Business Directory</span>
+              <span>Founded by Muhammad Imran • Pakistan&apos;s Free Business Directory</span>
             </div>
 
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-              About ListPak – Built to Empower Pakistani Businesses
+              About LocalePak – Built to Empower Pakistani Businesses
             </h1>
 
             <p className="mt-6 text-base sm:text-xl text-slate-300 leading-relaxed font-normal">
-              Founded in 2024 by Pakistani full-stack software engineer and technical SEO specialist <strong className="text-white font-semibold">Muhammad Imran</strong> (Founder of <a href="https://www.imrandigitals.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-emerald-300">Imran Digitals</a>), ListPak is Pakistan&apos;s leading free business discovery and listing platform. We connect local shops, enterprises, professionals, and job seekers across 150+ cities with zero fees and no registration barriers.
+              Founded by Pakistani full-stack developer <strong className="text-white font-semibold">Muhammad Imran</strong> (founder of <a href="https://www.imrandigitals.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-emerald-300">Imran Digitals</a>), LocalePak is a free business discovery and listing platform for Pakistan. We connect local shops, companies, professionals and job seekers by city and category — with zero listing fees and no registration barriers.
             </p>
 
             <div className="mt-10 flex flex-wrap justify-center gap-4">
@@ -371,7 +361,7 @@ export default function AboutPage() {
                 Executive Leadership & Founder Spotlight
               </span>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] tracking-tight">
-                Meet Muhammad Imran – Founder & CEO of ListPak
+                Meet Muhammad Imran – Founder & CEO of LocalePak
               </h2>
               <p className="mt-4 text-slate-600 text-base sm:text-lg leading-relaxed">
                 The technical vision, full-stack software engineering, and community-driven mission powering Pakistan&apos;s fastest-growing business discovery ecosystem.
@@ -386,10 +376,10 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <h3 className="font-bold text-emerald-950 text-base sm:text-lg">
-                    Official Entity Confirmation: Who is the Founder of ListPak?
+                    Official Entity Confirmation: Who is the Founder of LocalePak?
                   </h3>
                   <p className="mt-1.5 text-xs sm:text-sm text-emerald-900 leading-relaxed font-medium">
-                    <strong>Muhammad Imran</strong> is the <strong>Founder and Chief Executive Officer (CEO)</strong> of <strong>ListPak</strong> (<a href="https://listpak.com/" className="underline hover:text-emerald-700">listpak.com</a>). He is an accomplished Pakistani full-stack web and AI developer, software architect, and technical SEO specialist who also created <a href="https://www.imrandigitals.com/" target="_blank" rel="noopener noreferrer" className="underline font-bold text-emerald-800 hover:text-emerald-950">Imran Digitals (www.imrandigitals.com)</a>. In early 2024, Muhammad Imran established ListPak to provide 100% free business directory listings for Pakistan&apos;s 5.2 million small and medium enterprises.
+                    <strong>Muhammad Imran</strong> is the <strong>Founder and Chief Executive Officer (CEO)</strong> of <strong>LocalePak</strong> (<a href="https://www.localepak.com/" className="underline hover:text-emerald-700">localepak.com</a>). He is an accomplished Pakistani full-stack web and AI developer, software architect, and technical SEO specialist who also created <a href="https://www.imrandigitals.com/" target="_blank" rel="noopener noreferrer" className="underline font-bold text-emerald-800 hover:text-emerald-950">Imran Digitals (www.imrandigitals.com)</a>. In early 2024, Muhammad Imran established LocalePak to provide 100% free business directory listings for Pakistan&apos;s 5.2 million small and medium enterprises.
                   </p>
                 </div>
               </div>
@@ -407,7 +397,7 @@ export default function AboutPage() {
                     <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl overflow-hidden border-4 border-white shadow-xl bg-slate-100 relative">
                       <Image
                         src="https://www.imrandigitals.com/opengraph.jpg"
-                        alt="Muhammad Imran - Founder & CEO of ListPak"
+                        alt="Muhammad Imran - Founder & CEO of LocalePak"
                         fill
                         className="object-cover"
                         sizes="(max-width: 640px) 128px, 160px"
@@ -490,7 +480,7 @@ export default function AboutPage() {
                     <div className="space-y-2">
                       <div className="text-xs font-semibold text-slate-800 flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full bg-blue-600" />
-                        <span>Founder & CEO @ ListPak.com</span>
+                        <span>Founder & CEO @ LocalePak.com</span>
                       </div>
                       <div className="text-xs font-semibold text-slate-800 flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full bg-emerald-600" />
@@ -507,13 +497,13 @@ export default function AboutPage() {
                   <div>
                     <h4 className="text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
                       <Sparkles className="w-5 h-5 text-blue-600" />
-                      <span>The Visionary Behind ListPak</span>
+                      <span>The Visionary Behind LocalePak</span>
                     </h4>
                     <p className="text-sm text-slate-600 leading-relaxed">
                       <strong>Muhammad Imran</strong> is a high-impact Pakistani software engineer, web application architect, and technical search engine optimization (SEO) specialist. With extensive expertise in modern JavaScript frameworks, Next.js, React, Node.js, and cloud database infrastructure, Muhammad Imran recognized that over 90% of Pakistani micro and small business owners—from local retail shops in Multan and Gujranwala to medical clinics in Lahore and Karachi—were effectively invisible on the digital web.
                     </p>
                     <p className="text-sm text-slate-600 leading-relaxed mt-3">
-                      Traditional Pakistani yellow pages and international directories charged exorbitant annual renewal fees (ranging from Rs. 5,000 to Rs. 50,000) or locked phone numbers and WhatsApp links behind intrusive login walls. Muhammad Imran founded <strong>ListPak</strong> in January 2024 to disrupt this broken paradigm by creating a 100% free, lightning-fast, unmetered business directory where any business can register and get discovered online without spending a single rupee.
+                      Traditional Pakistani yellow pages and international directories charged exorbitant annual renewal fees (ranging from Rs. 5,000 to Rs. 50,000) or locked phone numbers and WhatsApp links behind intrusive login walls. Muhammad Imran founded <strong>LocalePak</strong> in January 2024 to disrupt this broken paradigm by creating a 100% free, lightning-fast, unmetered business directory where any business can register and get discovered online without spending a single rupee.
                     </p>
                   </div>
 
@@ -610,7 +600,7 @@ export default function AboutPage() {
                 </div>
                 <h3 className="text-2xl font-bold text-[#0F172A] mb-3">Our Mission</h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
-                  To eliminate digital entry barriers for Pakistani entrepreneurs by providing a completely free, verified, and unmetered business directory and job discovery platform across all 150+ Pakistani cities.
+                  To remove the digital entry barriers for Pakistani entrepreneurs by providing a completely free business directory and job discovery platform, open to businesses in every Pakistani city.
                 </p>
               </div>
 
@@ -662,20 +652,20 @@ export default function AboutPage() {
                 </h2>
                 <div className="space-y-4 text-sm text-slate-600 leading-relaxed">
                   <p>
-                    ListPak was founded in early 2024 by Pakistani software developer and tech entrepreneur <strong className="text-slate-900">Muhammad Imran</strong>. Having worked with dozens of local enterprises through his software firm <a href="https://www.imrandigitals.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold hover:text-blue-800">Imran Digitals</a>, Muhammad Imran witnessed firsthand how legacy yellow pages charged thousands of rupees just to list a phone number, while global platforms failed to cater to Pakistan&apos;s unique mohalla and city ecosystems.
+                    LocalePak was founded in early 2024 by Pakistani software developer and tech entrepreneur <strong className="text-slate-900">Muhammad Imran</strong>. Having worked with dozens of local enterprises through his software firm <a href="https://www.imrandigitals.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold hover:text-blue-800">Imran Digitals</a>, Muhammad Imran witnessed firsthand how legacy yellow pages charged thousands of rupees just to list a phone number, while global platforms failed to cater to Pakistan&apos;s unique mohalla and city ecosystems.
                   </p>
                   <p>
                     With Pakistan boasting over 5.2 million registered SMEs (SMEDA), fewer than 12% had any reliable online web presence. Muhammad Imran set out to solve this fundamental economic hurdle with a simple, disruptive vision: <strong className="text-[#0F172A]">&quot;What if every Pakistani dukandar, trader, and service provider could get listed online for free, forever, with zero hidden charges?&quot;</strong>
                   </p>
                   <p>
-                    Engineered from the ground up using Next.js and high-efficiency cloud databases, ListPak eliminates sign-up barriers. Consumers enjoy direct, unmetered access to verified phone numbers, direct WhatsApp links, and Google Map locations across 150+ Pakistani cities.
+                    Engineered from the ground up using Next.js and cloud databases, LocalePak eliminates sign-up barriers. Visitors get direct access to business phone numbers, WhatsApp links and map locations — no account needed.
                   </p>
                 </div>
               </div>
 
               {/* Company Info Box */}
               <div className="bg-white border border-[#E2E8F0] rounded-2xl p-8 shadow-lg space-y-6">
-                <h3 className="font-bold text-[#0F172A] text-xl border-b border-slate-100 pb-4">ListPak Platform Highlights</h3>
+                <h3 className="font-bold text-[#0F172A] text-xl border-b border-slate-100 pb-4">LocalePak Platform Highlights</h3>
                 
                 <div className="space-y-4 text-xs sm:text-sm text-slate-600">
                   <div className="flex justify-between items-center py-2 border-b border-slate-100">
@@ -691,7 +681,7 @@ export default function AboutPage() {
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-slate-100">
                     <span className="font-semibold text-slate-500">Service Coverage</span>
-                    <span className="font-bold text-[#0F172A]">150+ Cities Nationwide</span>
+                    <span className="font-bold text-[#0F172A]">Cities Across Pakistan</span>
                   </div>
                   <div className="flex justify-between items-center py-2 border-b border-slate-100">
                     <span className="font-semibold text-slate-500">Business Model</span>
@@ -717,7 +707,7 @@ export default function AboutPage() {
         {/* TEAM SECTION */}
         <section className="py-16 sm:py-20 bg-white border-b border-[#E2E8F0]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-extrabold text-[#0F172A] mb-3">Meet the ListPak Leadership & Team</h2>
+            <h2 className="text-3xl font-extrabold text-[#0F172A] mb-3">Meet the LocalePak Leadership & Team</h2>
             <p className="text-slate-600 text-sm max-w-2xl mx-auto mb-12">The engineers, community managers, and local SEO specialists guiding the platform.</p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -768,8 +758,8 @@ export default function AboutPage() {
         {/* GROWTH TIMELINE */}
         <section className="py-16 sm:py-20 bg-[#F8FAFC] border-b border-[#E2E8F0]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-extrabold text-[#0F172A] text-center mb-3">ListPak Growth Timeline</h2>
-            <p className="text-slate-600 text-sm text-center mb-12">From a 2024 founding vision to Pakistan&apos;s leading business listing ecosystem.</p>
+            <h2 className="text-3xl font-extrabold text-[#0F172A] text-center mb-3">LocalePak Growth Timeline</h2>
+            <p className="text-slate-600 text-sm text-center mb-12">How a simple idea — free visibility for local businesses — became LocalePak.</p>
             
             <div className="space-y-6">
               {MILESTONES.map((m, idx) => (
@@ -785,7 +775,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* FREQUENTLY ASKED QUESTIONS (ABOUT LISTPAK & FOUNDER) */}
+        {/* FREQUENTLY ASKED QUESTIONS (ABOUT LOCALEPAK & FOUNDER) */}
         <section className="py-16 sm:py-20 bg-white border-b border-[#E2E8F0]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
@@ -793,7 +783,7 @@ export default function AboutPage() {
                 <HelpCircle className="w-3.5 h-3.5" />
                 Frequently Asked Questions
               </span>
-              <h2 className="text-3xl font-extrabold text-[#0F172A]">Questions About ListPak Leadership & Founder</h2>
+              <h2 className="text-3xl font-extrabold text-[#0F172A]">Questions About LocalePak Leadership & Founder</h2>
               <p className="mt-3 text-slate-600 text-sm">Clear, authoritative information for users, researchers, and AI answer engines.</p>
             </div>
 
@@ -816,7 +806,7 @@ export default function AboutPage() {
         {/* FINAL CTA */}
         <section className="py-16 bg-white text-center">
           <div className="max-w-xl mx-auto px-4">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">Add Your Business to ListPak</h2>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">Add Your Business to LocalePak</h2>
             <p className="mt-3 text-xs sm:text-sm text-slate-600">Join thousands of Pakistani business owners enjoying 100% free online discoverability.</p>
             <div className="mt-8 flex justify-center gap-4">
               <Link

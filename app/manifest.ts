@@ -2,8 +2,8 @@ import { MetadataRoute } from 'next'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "ListPak — Pakistan's Digital Business & Enterprise Ecosystem",
-    short_name: 'ListPak',
+    name: "LocalePak — Pakistan's Digital Business & Enterprise Ecosystem",
+    short_name: 'LocalePak',
     description: "Discover, connect, and grow with Pakistan's largest digital business platform. Verified businesses, job portal, and professional talent.",
     start_url: '/',
     display: 'standalone',

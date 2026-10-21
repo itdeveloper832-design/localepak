@@ -92,7 +92,7 @@ export default function ProfessionalDashboardPage() {
 
       let targetUsername = ''
       let targetEmail = ''
-      const session = sessionStorage.getItem('listpak_user_session') || localStorage.getItem('listpak_user_session')
+      const session = sessionStorage.getItem('localepak_user_session') || localStorage.getItem('localepak_user_session')
       if (session) {
         try {
           const parsed = JSON.parse(session)
@@ -166,8 +166,8 @@ export default function ProfessionalDashboardPage() {
         userId: matched?.userId || auth.currentUser?.uid || ''
       }
 
-      sessionStorage.setItem('listpak_user_session', JSON.stringify(sessionObj))
-      localStorage.setItem('listpak_user_session', JSON.stringify(sessionObj))
+      sessionStorage.setItem('localepak_user_session', JSON.stringify(sessionObj))
+      localStorage.setItem('localepak_user_session', JSON.stringify(sessionObj))
       setUserSession(sessionObj)
 
       if (matched) {
@@ -189,8 +189,8 @@ export default function ProfessionalDashboardPage() {
     try {
       await signOut(auth)
     } catch (_) { }
-    sessionStorage.removeItem('listpak_user_session')
-    localStorage.removeItem('listpak_user_session')
+    sessionStorage.removeItem('localepak_user_session')
+    localStorage.removeItem('localepak_user_session')
     setUserSession(null)
     setProfile(null)
     toast.success('Logged out successfully.')
@@ -204,7 +204,7 @@ export default function ProfessionalDashboardPage() {
 
   const handleCopyUrl = () => {
     if (!profile) return
-    const url = `https://listpak.com/professionals/${profile.username}/`
+    const url = `https://www.localepak.com/professionals/${profile.username}/`
     navigator.clipboard.writeText(url)
     setCopiedLink(true)
     toast.success('Public profile URL copied to clipboard!')
@@ -472,7 +472,7 @@ export default function ProfessionalDashboardPage() {
                     Profile Status: Approved &amp; Live
                   </span>
                   <h3 className="text-sm font-extrabold text-emerald-950 mt-0.5">
-                    Your Profile is Live on ListPak!
+                    Your Profile is Live on LocalePak!
                   </h3>
                   <p className="text-xs text-emerald-800">
                     Your profile is published and indexed for employers, clients, and patients across Pakistan.
@@ -588,7 +588,7 @@ export default function ProfessionalDashboardPage() {
                 </span>
               </div>
               <p className="text-[11px] text-slate-500">
-                {isApproved ? 'Visible in ListPak public professional directory' : 'Awaiting administrative verification'}
+                {isApproved ? 'Visible in LocalePak public professional directory' : 'Awaiting administrative verification'}
               </p>
             </div>
 
@@ -717,7 +717,7 @@ export default function ProfessionalDashboardPage() {
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="px-2.5 py-1 rounded-xl bg-blue-500/30 text-blue-200 border border-blue-400/40 text-[11px] font-extrabold uppercase tracking-wider flex items-center gap-1.5 shadow-xs">
                   <Globe className="w-3.5 h-3.5 text-blue-300" />
-                  <span>ListPak Career Booster</span>
+                  <span>LocalePak Career Booster</span>
                 </span>
                 <span className="px-2.5 py-1 rounded-xl bg-emerald-500/30 text-emerald-300 border border-emerald-400/40 text-[11px] font-extrabold uppercase tracking-wider shadow-xs">
                   100% Free Website
@@ -729,7 +729,7 @@ export default function ProfessionalDashboardPage() {
               </h3>
 
               <p className="text-xs text-slate-300 leading-relaxed">
-                A personal portfolio website gives you <strong className="text-blue-300">10x higher credibility</strong> with corporate clients, HR recruiters, and international gigs. ListPak is providing free modern portfolio websites for registered professionals.
+                A personal portfolio website gives you <strong className="text-blue-300">10x higher credibility</strong> with corporate clients, HR recruiters, and international gigs. LocalePak is providing free modern portfolio websites for registered professionals.
               </p>
 
               <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-300 pt-1">
@@ -1041,7 +1041,7 @@ export default function ProfessionalDashboardPage() {
                   <Globe className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                   <div>
                     <strong className="block text-slate-900 font-extrabold">Need a free personal portfolio website?</strong>
-                    <span className="text-slate-600">Our design &amp; tech team creates free custom portfolio sites for ListPak registered professionals.</span>
+                    <span className="text-slate-600">Our design &amp; tech team creates free custom portfolio sites for LocalePak registered professionals.</span>
                   </div>
                 </div>
                 <a
@@ -1182,7 +1182,7 @@ export default function ProfessionalDashboardPage() {
 
                         <div className="flex items-center gap-2">
                           <a
-                            href={`mailto:${inq.senderEmail}?subject=Re: Project Inquiry on ListPak - ${encodeURIComponent(pro.name)}&body=Hi ${encodeURIComponent(inq.senderName)},%0D%0A%0D%0AThank you for reaching out regarding your project inquiry on ListPak.`}
+                            href={`mailto:${inq.senderEmail}?subject=Re: Project Inquiry on LocalePak - ${encodeURIComponent(pro.name)}&body=Hi ${encodeURIComponent(inq.senderName)},%0D%0A%0D%0AThank you for reaching out regarding your project inquiry on LocalePak.`}
                             className="px-3.5 py-2 bg-white hover:bg-slate-100 text-slate-700 font-bold text-xs rounded-xl border border-slate-200 flex items-center gap-1.5 transition-colors cursor-pointer"
                           >
                             <Mail className="w-3.5 h-3.5 text-slate-500" />

@@ -5,10 +5,10 @@ import Footer from '@/components/footer'
 import { AlertTriangle, ShieldCheck } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Report a Listing | ListPak Business Directory Integrity',
-  description: 'Report inaccurate, closed, copyright infringing, or fraudulent business listings on ListPak for rapid admin review.',
+  title: 'Report a Listing | LocalePak Business Directory Integrity',
+  description: 'Report inaccurate, closed, copyright infringing, or fraudulent business listings on LocalePak for rapid admin review.',
   alternates: {
-    canonical: 'https://www.listpak.com/report-listing/',
+    canonical: 'https://www.localepak.com/report-listing/',
   },
 }
 

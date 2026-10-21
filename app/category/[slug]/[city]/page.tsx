@@ -55,7 +55,7 @@ export async function generateMetadata(props: {
 
   if (matchingBusinesses.length === 0) {
     return {
-      title: 'Directory Page Not Found | ListPak',
+      title: 'Directory Page Not Found | LocalePak',
       robots: { index: false, follow: false }
     }
   }
@@ -63,8 +63,8 @@ export async function generateMetadata(props: {
   const categoryName = getCategoryDisplayName(catSlug)
   const cityName = getCityDisplayName(citySlug)
 
-  const title = `${categoryName} in ${cityName}, Pakistan | ListPak`
-  const description = `Find ${categoryName.toLowerCase()} in ${cityName}, Pakistan. Browse local listings, contact details and useful business information on ListPak.`
+  const title = `${categoryName} in ${cityName}, Pakistan | LocalePak`
+  const description = `Find ${categoryName.toLowerCase()} in ${cityName}, Pakistan. Browse local listings, contact details and useful business information on LocalePak.`
   const canonicalUrl = toCanonicalUrl(`category/${catSlug}/${citySlug}`)
 
   return {
@@ -77,7 +77,7 @@ export async function generateMetadata(props: {
       title,
       description,
       url: canonicalUrl,
-      siteName: 'ListPak',
+      siteName: 'LocalePak',
       locale: 'en_PK',
       type: 'website'
     },
@@ -87,7 +87,7 @@ export async function generateMetadata(props: {
       description
     },
     robots: {
-      index: true,
+      index: matchingBusinesses.length >= 3,
       follow: true
     }
   }
@@ -123,12 +123,12 @@ export default async function CategoryCityLandingPage(props: {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: `${categoryName} in ${cityName}, Pakistan`,
-    description: `Find ${categoryName.toLowerCase()} in ${cityName}, Pakistan. Browse local business listings, contact details and verified directory information on ListPak.`,
+    description: `Find ${categoryName.toLowerCase()} in ${cityName}, Pakistan. Browse local business listings, contact details and verified directory information on LocalePak.`,
     url: canonicalUrl,
     isPartOf: {
       '@type': 'WebSite',
-      name: 'ListPak',
-      url: 'https://www.listpak.com/'
+      name: 'LocalePak',
+      url: 'https://www.localepak.com/'
     },
     mainEntity: {
       '@type': 'ItemList',
@@ -149,13 +149,13 @@ export default async function CategoryCityLandingPage(props: {
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://listpak.com/'
+        item: 'https://www.localepak.com/'
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Categories',
-        item: 'https://listpak.com/categories/'
+        item: 'https://www.localepak.com/categories/'
       },
       {
         '@type': 'ListItem',
@@ -210,7 +210,7 @@ export default async function CategoryCityLandingPage(props: {
                 {categoryName} in {cityName}
               </h1>
               <p className="text-slate-400 text-sm max-w-3xl mt-2 leading-relaxed">
-                Find {categoryName.toLowerCase()} in {cityName}, Pakistan. Browse verified local business profiles, services, phone numbers, addresses, and official locations on ListPak.
+                Find {categoryName.toLowerCase()} in {cityName}, Pakistan. Browse verified local business profiles, services, phone numbers, addresses, and official locations on LocalePak.
               </p>
             </div>
 

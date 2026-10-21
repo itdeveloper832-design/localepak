@@ -13,10 +13,10 @@ export default function Footer() {
         {/* Top Branding & NAP Bar */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center pb-12 border-b border-zinc-800/80 gap-6">
           <div className="flex flex-col gap-3">
-            <Link href="/" aria-label="ListPak Home Page" className="inline-block group">
+            <Link href="/" aria-label="LocalePak Home Page" className="inline-block group">
               <Image
                 src="/logo.png"
-                alt="ListPak - Pakistan Business Directory"
+                alt="LocalePak - Pakistan Business Directory"
                 width={160}
                 height={48}
                 loading="lazy"
@@ -150,7 +150,7 @@ export default function Footer() {
         {/* Footer Bottom */}
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
           <p className="text-center md:text-left">
-            © 2026 ListPak Enterprise Ecosystem. All rights reserved. Office 303, Evacuee Trust Complex, F-5/1, Islamabad 44000, Pakistan.
+            © 2026 LocalePak Enterprise Ecosystem. All rights reserved. Office 303, Evacuee Trust Complex, F-5/1, Islamabad 44000, Pakistan.
           </p>
           <div className="flex items-center gap-3 text-slate-400 flex-wrap justify-center">
             <Link href="/privacy" className="hover:text-white">Privacy</Link>

@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { Phone, Mail, MapPin, MessageCircle, Building2, ShieldCheck, Star, Clock, Globe, Share2, Bookmark, CheckCircle2, MessageSquare, ArrowUpDown } from 'lucide-react'
 import Navbar from '@/components/navbar'
@@ -72,7 +73,7 @@ export default function BusinessDetailClient({ slug }: { slug: string }) {
         reviewCount: updatedReviews.length,
         reviews: updatedReviews
       })
-      toast.success('Thank you! Your review has been added to ListPak.')
+      toast.success('Thank you! Your review has been added to LocalePak.')
     }
   }
 
@@ -90,7 +91,7 @@ export default function BusinessDetailClient({ slug }: { slug: string }) {
       {/* Hero Cover Banner */}
       <section className="relative bg-slate-900 text-white overflow-hidden">
         <div className="h-64 sm:h-80 w-full relative">
-          <img src={biz.coverImage} alt={biz.name} className="w-full h-full object-cover opacity-40" />
+          <Image src={biz.coverImage} alt={biz.name} fill priority sizes="100vw" className="object-cover opacity-40" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/60 to-transparent"></div>
         </div>
 

@@ -23,7 +23,7 @@ const items = notRejected.map((b, idx) => {
   };
 });
 
-fs.writeFileSync('d:/listpak/branches/scripts/108-businesses-list.json', JSON.stringify(items, null, 2));
+fs.writeFileSync('d:/localepak/branches/scripts/108-businesses-list.json', JSON.stringify(items, null, 2));
 
 console.log('Saved to 108-businesses-list.json');
 

@@ -33,8 +33,8 @@ export async function generateMetadata(props: { params: Promise<{ username: stri
   const name = pro ? pro.name : username.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
   const profession = pro?.profession || pro?.title || 'Professional'
   const city = pro?.city || 'Pakistan'
-  const title = `${name} – ${profession} in ${city} | ListPak`
-  const description = pro ? `${pro.bio.slice(0, 160)}... Review verified credentials, portfolio, and contact details for ${name} on ListPak.` : `View the profile, skills, credentials, and contact details for ${name} on the ListPak professional directory.`
+  const title = `${name} – ${profession} in ${city} | LocalePak`
+  const description = pro ? `${pro.bio.slice(0, 160)}... Review verified credentials, portfolio, and contact details for ${name} on LocalePak.` : `View the profile, skills, credentials, and contact details for ${name} on the LocalePak professional directory.`
   const canonicalUrl = toCanonicalUrl(`professionals/${username}`)
 
   return {
@@ -46,7 +46,7 @@ export async function generateMetadata(props: { params: Promise<{ username: stri
     openGraph: {
       title,
       description,
-      siteName: 'ListPak',
+      siteName: 'LocalePak',
       url: canonicalUrl,
       locale: 'en_PK',
       type: 'profile',
@@ -122,8 +122,8 @@ export default async function ProfessionalDetailPage(props: { params: Promise<{ 
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://listpak.com/' },
-      { '@type': 'ListItem', position: 2, name: 'Professionals', item: 'https://listpak.com/professionals/' },
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.localepak.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Professionals', item: 'https://www.localepak.com/professionals/' },
       { '@type': 'ListItem', position: 3, name: pro.city, item: toCanonicalUrl(`city/${citySlug}`) },
       { '@type': 'ListItem', position: 4, name: pro.name, item: canonicalUrl }
     ]
@@ -189,7 +189,7 @@ export default async function ProfessionalDetailPage(props: { params: Promise<{ 
                   ) : (
                     <span
                       className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold border border-slate-200 shadow-2xs"
-                      title="This profile has not completed ListPak verification."
+                      title="This profile has not completed LocalePak verification."
                     >
                       <span>Public Listing</span>
                     </span>

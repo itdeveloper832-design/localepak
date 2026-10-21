@@ -17,9 +17,9 @@ const internshipJob = {
   id: "job-remote-seo-internship",
   slug: "remote-seo-internship",
   title: "Remote SEO Internship (On-Page & Off-Page)",
-  company: "ListPak Digital",
+  company: "LocalePak Digital",
   companyId: "company",
-  companySlug: "listpak",
+  companySlug: "localepak",
   companyLogo: "https://images.unsplash.com/photo-1572021335469-31706a17aaef?auto=format&fit=crop&w=200&q=80",
   city: "Remote",
   cities: [
@@ -49,7 +49,7 @@ const internshipJob = {
   shiftType: "Flexible Timing (Remote)",
   vacancies: 10,
   genderPreference: "Any",
-  description: `ListPak is urgently hiring for **10 open positions for our 2-Month Remote SEO Internship** specializing in On-Page and Off-Page Search Engine Optimization. This is a 2-month unpaid internship designed as an intensive hands-on practical training and evaluation period.
+  description: `LocalePak is urgently hiring for **10 open positions for our 2-Month Remote SEO Internship** specializing in On-Page and Off-Page Search Engine Optimization. This is a 2-month unpaid internship designed as an intensive hands-on practical training and evaluation period.
 
 ### 10 Open Positions Available Nationwide
 We have 10 dedicated internship slots open for ambitious candidates across Pakistan. Each selected intern will receive dedicated practical training, live website assignments, and direct feedback.
@@ -112,9 +112,9 @@ There is absolutely no requirement for a university degree or graduation. Candid
   isFeatured: true,
   verified: true,
   applicationMethod: "both",
-  applicationEmail: "careers@listpak.com",
+  applicationEmail: "careers@localepak.com",
   applicationWhatsapp: "+923345636230",
-  applicationWebsite: "https://www.listpak.com/jobs/remote-seo-internship"
+  applicationWebsite: "https://www.localepak.com/jobs/remote-seo-internship"
 };
 
 async function syncToFirestore() {

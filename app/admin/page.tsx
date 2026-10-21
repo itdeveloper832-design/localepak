@@ -63,7 +63,7 @@ export default function AdminPage() {
   const [proVerifyFilter, setProVerifyFilter] = useState<'all' | 'verified' | 'unverified'>('all')
 
   useEffect(() => {
-    const authSession = sessionStorage.getItem('listpak_admin_auth')
+    const authSession = sessionStorage.getItem('localepak_admin_auth')
     if (authSession === 'true') {
       setIsAuthenticated(true)
       fetchAdminData()
@@ -77,11 +77,11 @@ export default function AdminPage() {
         if (user.email && allowedEmails.includes(user.email.toLowerCase())) {
           setAdminUid(user.uid)
           setIsAuthenticated(true)
-          sessionStorage.setItem('listpak_admin_auth', 'true')
+          sessionStorage.setItem('localepak_admin_auth', 'true')
           fetchAdminData()
         } else {
           // If a non-admin regular user is logged in, do not grant admin access
-          sessionStorage.removeItem('listpak_admin_auth')
+          sessionStorage.removeItem('localepak_admin_auth')
           setIsAuthenticated(false)
         }
       }
@@ -344,7 +344,7 @@ export default function AdminPage() {
     // Master access bypass when authorized password is provided
     if ((allowedAdminEmails.includes(inputEmail) || !inputEmail) && MASTER_PASSWORDS.includes(cleanPass)) {
       setIsAuthenticated(true)
-      sessionStorage.setItem('listpak_admin_auth', 'true')
+      sessionStorage.setItem('localepak_admin_auth', 'true')
       toast.success('Admin authenticated successfully.')
       fetchAdminData()
       return
@@ -367,13 +367,13 @@ export default function AdminPage() {
         }
         setAdminUid(userCredential.user.uid)
         setIsAuthenticated(true)
-        sessionStorage.setItem('listpak_admin_auth', 'true')
+        sessionStorage.setItem('localepak_admin_auth', 'true')
         toast.success('Admin authenticated successfully.')
         fetchAdminData()
       } catch (err: any) {
         if (MASTER_PASSWORDS.includes(cleanPass)) {
           setIsAuthenticated(true)
-          sessionStorage.setItem('listpak_admin_auth', 'true')
+          sessionStorage.setItem('localepak_admin_auth', 'true')
           toast.success('Admin authenticated successfully.')
           fetchAdminData()
           return
@@ -390,7 +390,7 @@ export default function AdminPage() {
       await signOut(auth)
     } catch (e) {}
     setIsAuthenticated(false)
-    sessionStorage.removeItem('listpak_admin_auth')
+    sessionStorage.removeItem('localepak_admin_auth')
     toast.info('Logged out of Admin Panel.')
   }
 
@@ -415,7 +415,7 @@ export default function AdminPage() {
           approvedBy: adminUid
         })
       }
-      toast.success(`"${name}" is officially approved and live on ListPak!`)
+      toast.success(`"${name}" is officially approved and live on LocalePak!`)
     } catch (err) {
       toast.error('Failed to approve business listing.')
     } finally {
@@ -593,7 +593,7 @@ export default function AdminPage() {
               <Lock className="w-7 h-7 text-[#2563EB]" />
             </div>
 
-            <h1 className="text-2xl font-extrabold text-[#0F172A] text-center mb-2">ListPak Secure Admin Portal</h1>
+            <h1 className="text-2xl font-extrabold text-[#0F172A] text-center mb-2">LocalePak Secure Admin Portal</h1>
             <p className="text-xs text-[#64748B] text-center mb-8">Firebase Authentication & Administrative Verification Required.</p>
 
             <form onSubmit={handleLogin} className="space-y-4">
@@ -603,7 +603,7 @@ export default function AdminPage() {
                   type="email"
                   value={adminEmail}
                   onChange={(e) => setAdminEmail(e.target.value)}
-                  placeholder="admin@listpak.com"
+                  placeholder="admin@localepak.com"
                   className="w-full px-4 py-3 bg-[#F4F7FC] border border-[#D9E2F1] rounded-xl text-sm focus:outline-none focus:border-[#2563EB] text-[#0F172A]"
                 />
               </div>
@@ -615,7 +615,7 @@ export default function AdminPage() {
                     type={showAdminPass ? 'text' : 'password'}
                     value={adminPass}
                     onChange={(e) => setAdminPass(e.target.value)}
-                    placeholder="Enter password or listpak2026"
+                    placeholder="Enter password or localepak2026"
                     className="w-full pl-4 pr-11 py-3 bg-[#F4F7FC] border border-[#D9E2F1] rounded-xl text-sm focus:outline-none focus:border-[#2563EB] font-mono text-[#0F172A]"
                     required
                   />
@@ -644,7 +644,7 @@ export default function AdminPage() {
               </button>
 
               <p className="text-[11px] text-slate-400 text-center pt-2">
-                Passcode shortcut for review: <code className="text-blue-600 font-bold">listpak2026</code>
+                Passcode shortcut for review: <code className="text-blue-600 font-bold">localepak2026</code>
               </p>
             </form>
           </div>
@@ -665,7 +665,7 @@ export default function AdminPage() {
             <div>
               <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white flex items-center gap-3">
                 <ShieldCheck className="w-8 h-8 text-emerald-400" />
-                ListPak Administration Panel
+                LocalePak Administration Panel
               </h1>
               <p className="text-xs sm:text-sm text-slate-300 mt-1">
                 Moderation queues for businesses, professional approvals, Rs. 50 verification requests, and hiring companies.
@@ -932,7 +932,7 @@ export default function AdminPage() {
 
               {/* Policy Explanation Note */}
               <div className="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-sm space-y-3">
-                <h2 className="text-lg font-extrabold text-slate-900">ListPak Professional Approval & Verification Architecture</h2>
+                <h2 className="text-lg font-extrabold text-slate-900">LocalePak Professional Approval & Verification Architecture</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-600 leading-relaxed">
                   <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200">
                     <strong className="text-slate-900 block mb-1">1. Approval (Permission to be Public):</strong>
@@ -1862,7 +1862,7 @@ export default function AdminPage() {
                   <FileText className="w-12 h-12 text-slate-300 mx-auto" />
                   <h3 className="font-extrabold text-slate-900 text-base">No Applications Received Yet</h3>
                   <p className="text-xs text-slate-500 max-w-md mx-auto">
-                    When registered professionals apply for jobs through ListPak, their verified profiles and submissions will appear here.
+                    When registered professionals apply for jobs through LocalePak, their verified profiles and submissions will appear here.
                   </p>
                 </div>
               ) : (

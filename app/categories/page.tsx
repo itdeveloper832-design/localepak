@@ -6,13 +6,13 @@ import { Sparkles, ArrowRight, Building2 } from 'lucide-react'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Business Categories in Pakistan | ListPak Directory Hub',
+  title: 'Business Categories in Pakistan | LocalePak Directory Hub',
   description: 'Explore business categories in Pakistan including restaurants, technology, healthcare, real estate, construction, education, retail, and local services.',
-  alternates: { canonical: 'https://www.listpak.com/categories/' },
+  alternates: { canonical: 'https://www.localepak.com/categories/' },
   openGraph: {
-    title: 'Business Categories in Pakistan | ListPak Directory Hub',
+    title: 'Business Categories in Pakistan | LocalePak Directory Hub',
     description: 'Explore business categories in Pakistan including restaurants, technology, healthcare, real estate, construction, education, retail, and local services.',
-    url: 'https://www.listpak.com/categories/',
+    url: 'https://www.localepak.com/categories/',
     type: 'website',
   },
 }

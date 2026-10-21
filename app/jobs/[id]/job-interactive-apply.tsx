@@ -70,7 +70,7 @@ export default function JobInteractiveApply({
     return () => unsubscribe()
   }, [])
 
-  // Check if email belongs to a registered ListPak Professional
+  // Check if email belongs to a registered LocalePak Professional
   const checkProfile = async (emailToCheck: string) => {
     const cleanEmail = emailToCheck.trim().toLowerCase()
     if (!cleanEmail || !cleanEmail.includes('@')) return
@@ -110,7 +110,7 @@ export default function JobInteractiveApply({
     }
   }
 
-  // Handle ListPak Application Submission
+  // Handle LocalePak Application Submission
   const handleApplySubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setProfileNotFound(false)
@@ -148,7 +148,7 @@ export default function JobInteractiveApply({
           setProfileNotFound(true)
           setProfileUnverified(false)
           setProfessionalProfile(null)
-          toast.error('Account Not Found: You are not registered on ListPak. Please create your free profile first to apply.', { duration: 5000 })
+          toast.error('Account Not Found: You are not registered on LocalePak. Please create your free profile first to apply.', { duration: 5000 })
         } else if (data.code === 'PROFILE_UNVERIFIED') {
           setProfileUnverified(true)
           setProfileNotFound(false)
@@ -185,7 +185,7 @@ export default function JobInteractiveApply({
         className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl shadow-lg hover:shadow-emerald-600/30 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-98"
       >
         <ShieldCheck className="w-4 h-4 text-emerald-100" />
-        <span>Apply on ListPak <span className="text-emerald-200 font-medium">(Recommended)</span></span>
+        <span>Apply on LocalePak <span className="text-emerald-200 font-medium">(Recommended)</span></span>
       </button>
 
       {/* Application Modal */}
@@ -198,7 +198,7 @@ export default function JobInteractiveApply({
               <div className="space-y-1">
                 <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md inline-flex items-center gap-1">
                   <ShieldCheck className="w-3 h-3" />
-                  ListPak Verified Application
+                  LocalePak Verified Application
                 </span>
                 <h3 className="font-extrabold text-slate-900 text-lg sm:text-xl">{jobTitle}</h3>
                 <p className="text-xs text-slate-500 font-medium">{companyName} • {city}</p>
@@ -238,7 +238,7 @@ export default function JobInteractiveApply({
               </div>
             )}
 
-            {/* OPTION 2: APPLY VIA VERIFIED LISTPAK PROFESSIONAL PROFILE (RECOMMENDED) */}
+            {/* OPTION 2: APPLY VIA VERIFIED LOCALEPAK PROFESSIONAL PROFILE (RECOMMENDED) */}
             <div className="p-5 bg-gradient-to-br from-emerald-50/80 via-white to-teal-50/80 rounded-2xl border border-emerald-200 shadow-xs space-y-4">
               
               <div className="flex items-start gap-3">
@@ -247,7 +247,7 @@ export default function JobInteractiveApply({
                 </div>
                 <div className="flex-1">
                   <h4 className="font-extrabold text-slate-900 text-xs sm:text-sm flex items-center gap-1.5 flex-wrap">
-                    <span>Apply with ListPak Professional Profile</span>
+                    <span>Apply with LocalePak Professional Profile</span>
                     <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-600 text-white shadow-2xs">
                       Recommended
                     </span>
@@ -267,7 +267,7 @@ export default function JobInteractiveApply({
                   <div>
                     <h5 className="font-extrabold text-emerald-950 text-base">Application Sent Successfully!</h5>
                     <p className="text-xs text-emerald-800 leading-relaxed mt-1">
-                      Thank you, <strong>{submittedCandidateName}</strong>. Your verified ListPak professional profile and CV have been securely dispatched to <strong>{companyName}</strong> recruitment team and listed in your applications dashboard.
+                      Thank you, <strong>{submittedCandidateName}</strong>. Your verified LocalePak professional profile and CV have been securely dispatched to <strong>{companyName}</strong> recruitment team and listed in your applications dashboard.
                     </p>
                   </div>
                   <button
@@ -373,15 +373,15 @@ export default function JobInteractiveApply({
                     </div>
                   )}
 
-                  {/* CASE 1: NOT REGISTERED ON LISTPAK */}
+                  {/* CASE 1: NOT REGISTERED ON LOCALEPAK */}
                   {profileNotFound && (
                     <div className="p-4 bg-amber-50 rounded-2xl border border-amber-200 text-xs space-y-3 animate-in fade-in-50">
                       <div className="flex items-start gap-2.5 text-amber-900">
                         <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                         <div>
-                          <strong className="block font-bold">You are not registered on ListPak</strong>
+                          <strong className="block font-bold">You are not registered on LocalePak</strong>
                           <p className="text-[11px] text-amber-800 mt-0.5 leading-relaxed">
-                            No professional profile was found for <code className="font-bold text-amber-900 bg-amber-100 px-1 py-0.5 rounded">{applicantEmail}</code>. Please create your free professional profile first to apply for jobs on ListPak.
+                            No professional profile was found for <code className="font-bold text-amber-900 bg-amber-100 px-1 py-0.5 rounded">{applicantEmail}</code>. Please create your free professional profile first to apply for jobs on LocalePak.
                           </p>
                         </div>
                       </div>
@@ -448,7 +448,7 @@ export default function JobInteractiveApply({
                     <span>
                       {isSubmitting 
                         ? 'Verifying Profile & Submitting...' 
-                        : (isVerifiedPro ? 'Submit Verified Application' : 'Submit Application via ListPak')}
+                        : (isVerifiedPro ? 'Submit Verified Application' : 'Submit Application via LocalePak')}
                     </span>
                   </button>
                 </form>

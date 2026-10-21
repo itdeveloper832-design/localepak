@@ -9,6 +9,7 @@ import {
   CheckCircle2, X, ArrowRight, UserPlus, Clock, DollarSign, Award
 } from 'lucide-react'
 import { JobItem } from '@/lib/data'
+import { getPublicJobPath } from '@/lib/job-url'
 import { toast } from 'sonner'
 
 interface JobCardExpandableProps {
@@ -19,7 +20,7 @@ export default function JobCardExpandable({ job }: JobCardExpandableProps) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [showApplyModal, setShowApplyModal] = useState(false)
 
-  // ListPak Application Form State
+  // LocalePak Application Form State
   const [applicantEmail, setApplicantEmail] = useState('')
   const [coverNote, setCoverNote] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -30,7 +31,7 @@ export default function JobCardExpandable({ job }: JobCardExpandableProps) {
 
   const careerSiteUrl = job.applicationWebsite || job.applicationUrl || ''
 
-  const handleListpakApply = async (e: React.FormEvent) => {
+  const handleLocalepakApply = async (e: React.FormEvent) => {
     e.preventDefault()
     setProfileNotFound(false)
     setProfileUnverified(false)
@@ -66,7 +67,7 @@ export default function JobCardExpandable({ job }: JobCardExpandableProps) {
         if (data.code === 'PROFILE_NOT_FOUND') {
           setProfileNotFound(true)
           setProfileUnverified(false)
-          toast.error('Account Not Found: You are not registered on ListPak. Please create your free profile first to apply.', { duration: 5000 })
+          toast.error('Account Not Found: You are not registered on LocalePak. Please create your free profile first to apply.', { duration: 5000 })
         } else if (data.code === 'PROFILE_UNVERIFIED') {
           setProfileUnverified(true)
           setProfileNotFound(false)
@@ -120,7 +121,9 @@ export default function JobCardExpandable({ job }: JobCardExpandableProps) {
             </div>
 
             <h3 className="font-extrabold text-slate-900 text-base sm:text-lg group-hover:text-blue-600 transition-colors leading-snug">
-              {job.title}
+              <Link href={getPublicJobPath(job)} className="hover:text-blue-600">
+                {job.title}
+              </Link>
             </h3>
 
             <div className="flex items-center gap-2 text-xs text-slate-500 flex-wrap">
@@ -251,7 +254,7 @@ export default function JobCardExpandable({ job }: JobCardExpandableProps) {
               </div>
               <div>
                 <span className="text-slate-400 block font-medium">Application Route</span>
-                <span className="font-bold text-emerald-700">Careers Site / ListPak (Recommended)</span>
+                <span className="font-bold text-emerald-700">Careers Site / LocalePak (Recommended)</span>
               </div>
             </div>
 
@@ -340,7 +343,7 @@ export default function JobCardExpandable({ job }: JobCardExpandableProps) {
               </div>
             )}
 
-            {/* OPTION 2: APPLY ON LISTPAK (PROFESSIONAL EMAIL VERIFICATION) - RECOMMENDED */}
+            {/* OPTION 2: APPLY ON LOCALEPAK (PROFESSIONAL EMAIL VERIFICATION) - RECOMMENDED */}
             <div className="p-5 bg-gradient-to-br from-emerald-50/70 via-white to-teal-50/70 rounded-2xl border border-emerald-200 shadow-xs space-y-4">
               
               <div className="flex items-start gap-3">
@@ -349,7 +352,7 @@ export default function JobCardExpandable({ job }: JobCardExpandableProps) {
                 </div>
                 <div className="flex-1">
                   <h4 className="font-extrabold text-slate-900 text-xs sm:text-sm flex items-center gap-1.5 flex-wrap">
-                    <span>Apply via Verified ListPak Profile</span>
+                    <span>Apply via Verified LocalePak Profile</span>
                     <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-600 text-white shadow-2xs">
                       Recommended
                     </span>
@@ -376,7 +379,7 @@ export default function JobCardExpandable({ job }: JobCardExpandableProps) {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleListpakApply} className="space-y-3">
+                <form onSubmit={handleLocalepakApply} className="space-y-3">
                   <div>
                     <label className="block text-xs font-bold text-slate-800 mb-1">
                       Your Professional Email Address <span className="text-emerald-600">*</span>
@@ -411,13 +414,13 @@ export default function JobCardExpandable({ job }: JobCardExpandableProps) {
                     />
                   </div>
 
-                  {/* CASE 1: NOT REGISTERED ON LISTPAK */}
+                  {/* CASE 1: NOT REGISTERED ON LOCALEPAK */}
                   {profileNotFound && (
                     <div className="p-4 bg-amber-50 rounded-2xl border border-amber-200 text-xs space-y-3 animate-in fade-in-50">
                       <div className="flex items-start gap-2.5 text-amber-900">
                         <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                         <div>
-                          <strong className="block font-bold">You are not registered on ListPak</strong>
+                          <strong className="block font-bold">You are not registered on LocalePak</strong>
                           <p className="text-[11px] text-amber-800 mt-0.5 leading-relaxed">
                             No professional profile was found for <code className="font-bold text-amber-900 bg-amber-100 px-1 py-0.5 rounded">{applicantEmail}</code>. Please create your free professional profile first to apply for jobs.
                           </p>
@@ -468,7 +471,7 @@ export default function JobCardExpandable({ job }: JobCardExpandableProps) {
                     className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                   >
                     <CheckCircle2 className="w-4 h-4" />
-                    <span>{isSubmitting ? 'Verifying & Submitting...' : 'Submit Application via ListPak'}</span>
+                    <span>{isSubmitting ? 'Verifying & Submitting...' : 'Submit Application via LocalePak'}</span>
                   </button>
                 </form>
               )}

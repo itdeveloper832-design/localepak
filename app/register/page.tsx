@@ -23,7 +23,7 @@ export default function RegisterPage() {
     setIsLoading(true)
     setTimeout(() => {
       setIsLoading(false)
-      toast.success('ListPak Business Account registered successfully!')
+      toast.success('LocalePak Business Account registered successfully!')
       router.push('/add-business')
     }, 900)
   }
@@ -37,7 +37,7 @@ export default function RegisterPage() {
             <div className="inline-flex p-3 rounded-2xl bg-emerald-50 text-emerald-600 mb-3">
               <UserPlus className="w-8 h-8" />
             </div>
-            <h1 className="text-2xl font-bold text-slate-900">Register ListPak Account</h1>
+            <h1 className="text-2xl font-bold text-slate-900">Register LocalePak Account</h1>
             <p className="text-xs text-slate-500 mt-1">List your business and connect with customers across Pakistan</p>
           </div>
 

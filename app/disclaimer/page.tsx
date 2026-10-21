@@ -3,10 +3,10 @@ import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 
 export const metadata: Metadata = {
-  title: 'Disclaimer | ListPak - Pakistan Business Ecosystem',
-  description: 'Legal disclaimer for ListPak business directory listings, professional talent profiles, job postings, and third-party content accuracy.',
+  title: 'Disclaimer | LocalePak - Pakistan Business Ecosystem',
+  description: 'Legal disclaimer for LocalePak business directory listings, professional talent profiles, job postings, and third-party content accuracy.',
   alternates: {
-    canonical: 'https://www.listpak.com/disclaimer/',
+    canonical: 'https://www.localepak.com/disclaimer/',
   },
 }
 
@@ -20,17 +20,17 @@ export default function DisclaimerPage() {
             Disclaimer
           </h1>
           <p className="text-sm text-slate-500 mb-8 border-b border-slate-100 pb-4">
-            Last Updated: August 2026 • ListPak Enterprise Ecosystem
+            Last Updated: August 2026 • LocalePak Enterprise Ecosystem
           </p>
 
           <div className="space-y-6 text-sm text-slate-600 leading-relaxed">
             <p>
-              The information provided by <strong>ListPak</strong> (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) on <a href="https://listpak.com/" className="text-blue-600 underline">https://listpak.com/</a> is for general informational and commercial directory purposes only.
+              The information provided by <strong>LocalePak</strong> (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) on <a href="https://www.localepak.com/" className="text-blue-600 underline">https://www.localepak.com/</a> is for general informational and commercial directory purposes only.
             </p>
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">1. Information Accuracy</h2>
             <p>
-              While we strive to keep business details, addresses, contacts, and job openings accurate and up-to-date, ListPak makes no representation or warranty of any kind, express or implied, regarding the completeness or accuracy of third-party user listings.
+              While we strive to keep business details, addresses, contacts, and job openings accurate and up-to-date, LocalePak makes no representation or warranty of any kind, express or implied, regarding the completeness or accuracy of third-party user listings.
             </p>
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">2. Professional Advice Disclaimer</h2>
@@ -40,12 +40,12 @@ export default function DisclaimerPage() {
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">3. External Links Disclaimer</h2>
             <p>
-              ListPak may contain links to external third-party websites. We do not monitor, endorse, or guarantee the content or privacy practices of these external sites.
+              LocalePak may contain links to external third-party websites. We do not monitor, endorse, or guarantee the content or privacy practices of these external sites.
             </p>
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">4. Limitation of Liability</h2>
             <p>
-              In no event shall ListPak be liable for any special, direct, indirect, or consequential damages arising out of or in connection with the use of our website or services.
+              In no event shall LocalePak be liable for any special, direct, indirect, or consequential damages arising out of or in connection with the use of our website or services.
             </p>
           </div>
         </div>

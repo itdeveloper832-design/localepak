@@ -32,7 +32,7 @@ export default function ReviewModal({ businessName, isOpen, onClose, onAddReview
       comment
     })
 
-    toast.success('Thank you! Your review has been added to ListPak.')
+    toast.success('Thank you! Your review has been added to LocalePak.')
     onClose()
   }
 

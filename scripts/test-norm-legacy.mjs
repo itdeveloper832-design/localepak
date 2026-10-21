@@ -3,7 +3,7 @@ import fs from 'fs';
 const d = JSON.parse(fs.readFileSync('d:/usa-dollar-pr/backups/legacy-pakistan-firestore-backup.json', 'utf8'));
 const bizList = d.businesses;
 
-// Run ListPak db-service normalizeBusinessDoc logic:
+// Run LocalePak db-service normalizeBusinessDoc logic:
 function normalizeBusinessDoc(docId, data) {
   const bName = data.businessName || data.name || 'Verified Business';
   const rawStatus = (data.status || '').toString().toLowerCase().trim();
@@ -63,13 +63,13 @@ function normalizeBusinessDoc(docId, data) {
 }
 
 const normalized = bizList.map(b => normalizeBusinessDoc(b.id, b));
-const pendingListpak = normalized.filter(b => {
+const pendingLocalepak = normalized.filter(b => {
   const s = (b.status || '').toLowerCase().trim();
   const ps = (b.paymentStatus || '').toUpperCase().trim();
   return s === 'pending' || s === 'pending_approval' || (ps === 'PENDING' && s !== 'rejected');
 });
 
-console.log('ListPak normalization pending count:', pendingListpak.length);
+console.log('LocalePak normalization pending count:', pendingLocalepak.length);
 
 // What about BizNestUSA db-service normalizeBusinessDoc logic?
 // In BizNestUSA:

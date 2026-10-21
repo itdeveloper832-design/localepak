@@ -3,10 +3,10 @@ import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 
 export const metadata: Metadata = {
-  title: 'Refund Policy | ListPak Commercial & Premium Services',
+  title: 'Refund Policy | LocalePak Commercial & Premium Services',
   description: 'Terms and conditions governing refunds for premium business verification, advertising banners, and promoted job posts.',
   alternates: {
-    canonical: 'https://www.listpak.com/refund-policy/',
+    canonical: 'https://www.localepak.com/refund-policy/',
   },
 }
 
@@ -20,12 +20,12 @@ export default function RefundPolicyPage() {
             Refund & Cancellation Policy
           </h1>
           <p className="text-sm text-slate-500 mb-8 border-b border-slate-100 pb-4">
-            Last Updated: August 2026 • ListPak Enterprise Ecosystem
+            Last Updated: August 2026 • LocalePak Enterprise Ecosystem
           </p>
 
           <div className="space-y-6 text-sm text-slate-600 leading-relaxed">
             <p>
-              Standard business listings on ListPak are 100% free forever. For paid promotional services (such as featured banner placements, boosted job posts, or express NTN verification badges), this policy outlines eligible refund scenarios.
+              Standard business listings on LocalePak are 100% free forever. For paid promotional services (such as featured banner placements, boosted job posts, or express NTN verification badges), this policy outlines eligible refund scenarios.
             </p>
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">1. Eligibility for Refund</h2>

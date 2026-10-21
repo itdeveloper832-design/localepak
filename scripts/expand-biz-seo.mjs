@@ -32,7 +32,7 @@ async function checkAndExpandAll() {
       const category = d.category || 'Business Services';
       const city = d.city || 'Pakistan';
       
-      const expandedAddon = `\n\n### Verified Customer Service & Contact Information\n${name} provides prompt customer service, verified booking channels, and transparent pricing policies for clients across ${city} and all major cities in Pakistan. Customers can reach out via official phone helplines, WhatsApp support, or physical branch visits during scheduled business operating hours. With hundreds of satisfied customer reviews and verified credentials on the ListPak business directory, ${name} remains one of the most reliable and recommended service providers in the ${category} sector.`;
+      const expandedAddon = `\n\n### Verified Customer Service & Contact Information\n${name} provides prompt customer service, verified booking channels, and transparent pricing policies for clients across ${city} and all major cities in Pakistan. Customers can reach out via official phone helplines, WhatsApp support, or physical branch visits during scheduled business operating hours. With hundreds of satisfied customer reviews and verified credentials on the LocalePak business directory, ${name} remains one of the most reliable and recommended service providers in the ${category} sector.`;
       
       const newDesc = desc + expandedAddon;
       const newWords = newDesc.trim().split(/\s+/).filter(Boolean).length;

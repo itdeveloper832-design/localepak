@@ -153,7 +153,7 @@ export function normalizeBusinessDoc(docId: string, data: any): BusinessItem {
     phone: data.phone || '+92 300 0000000',
     whatsapp: data.whatsapp || '923000000000',
     email: data.email || 'contact@business.pk',
-    website: data.website || data.websiteUrl || 'https://listpak.com',
+    website: data.website || data.websiteUrl || 'https://www.localepak.com',
     address: primaryLoc.address || data.address || 'Commercial Center, Pakistan',
     locations: docLocations,
     coverImage: (() => {
@@ -186,7 +186,7 @@ export function normalizeBusinessDoc(docId: string, data: any): BusinessItem {
       }
       return 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80'
     })(),
-    description: data.description || data.aboutText || 'Verified business listing on ListPak.',
+    description: data.description || data.aboutText || 'Verified business listing on LocalePak.',
     metaTitle: data.metaTitle,
     metaDescription: data.metaDescription,
     canonical: data.canonical,
@@ -207,8 +207,8 @@ export function normalizeBusinessDoc(docId: string, data: any): BusinessItem {
 }
 
 // Local storage keys for browser client persistence
-const LOCAL_CUSTOM_BIZ_KEY = 'listpak_custom_businesses'
-const LOCAL_USER_BIZ_IDS_KEY = 'listpak_user_business_ids'
+const LOCAL_CUSTOM_BIZ_KEY = 'localepak_custom_businesses'
+const LOCAL_USER_BIZ_IDS_KEY = 'localepak_user_business_ids'
 
 function getStoredCustomBusinesses(): BusinessItem[] {
   if (typeof window === 'undefined') return []
@@ -256,7 +256,7 @@ function updateStoredCustomBusiness(idOrSlug: string, updates: Partial<BusinessI
   } catch (_) {}
 }
 
-const LOCAL_REJECTED_NOTICES_KEY = 'listpak_rejected_business_notices'
+const LOCAL_REJECTED_NOTICES_KEY = 'localepak_rejected_business_notices'
 
 export function removeStoredCustomBusiness(idOrSlug: string, altSlug?: string) {
   if (typeof window === 'undefined') return
@@ -754,11 +754,11 @@ export async function saveBusinessToDatabase(businessData: Partial<BusinessItem>
     phone: sanitizePhone(businessData.phone || '+92 300 0000000'),
     whatsapp: sanitizePhone(businessData.whatsapp || '923000000000'),
     email: sanitizeText(businessData.email || 'contact@business.pk', 120),
-    website: sanitizeUrl(businessData.website || 'https://listpak.com'),
+    website: sanitizeUrl(businessData.website || 'https://www.localepak.com'),
     address: summaryAddress,
     coverImage: sanitizeImageUrl(businessData.coverImage || 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80'),
     logo: sanitizeImageUrl(businessData.logo || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=200&q=80'),
-    description: sanitizeText(businessData.description || 'Newly registered business on ListPak.', 5000),
+    description: sanitizeText(businessData.description || 'Newly registered business on LocalePak.', 5000),
     services: Array.isArray(businessData.services) ? businessData.services.map(s => sanitizeText(s, 60)) : ['Professional Services'],
     operatingHours: businessData.operatingHours || { 'Monday - Saturday': '09:00 AM - 07:00 PM' },
     features: [],

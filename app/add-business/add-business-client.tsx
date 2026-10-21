@@ -66,7 +66,7 @@ const FAQS = [
   },
   {
     q: 'How long does it take for my business to be approved after payment?',
-    a: 'Once your payment proof is uploaded, our administrative team verifies and approves your listing within 1 to 2 hours. Once approved, your business profile goes live immediately on ListPak and is queued for Google indexing.'
+    a: 'Once your payment proof is uploaded, our administrative team verifies and approves your listing within 1 to 2 hours. Once approved, your business profile goes live immediately on LocalePak and is queued for Google indexing.'
   },
   {
     q: 'What happens if I do not pay the PKR 50 fee?',
@@ -173,7 +173,7 @@ export default function AddBusinessClient() {
   useEffect(() => {
     // 1. Check Session Storage first
     try {
-      const stored = sessionStorage.getItem('listpak_user_session') || localStorage.getItem('listpak_user_session')
+      const stored = sessionStorage.getItem('localepak_user_session') || localStorage.getItem('localepak_user_session')
       if (stored) {
         const parsed = JSON.parse(stored)
         if (parsed && (parsed.email || parsed.name)) {
@@ -199,8 +199,8 @@ export default function AddBusinessClient() {
         fetchUserBusinesses(userObj.email || userObj.uid || '')
         
         try {
-          sessionStorage.setItem('listpak_user_session', JSON.stringify(userObj))
-          localStorage.setItem('listpak_user_session', JSON.stringify(userObj))
+          sessionStorage.setItem('localepak_user_session', JSON.stringify(userObj))
+          localStorage.setItem('localepak_user_session', JSON.stringify(userObj))
         } catch (_) {}
       }
       setAuthChecking(false)
@@ -283,7 +283,7 @@ export default function AddBusinessClient() {
           }
         }
       } catch (authErr: any) {
-        const existingSession = localStorage.getItem('listpak_user_session')
+        const existingSession = localStorage.getItem('localepak_user_session')
         if (existingSession) {
           const parsed = JSON.parse(existingSession)
           if (parsed.email?.toLowerCase() === loginEmail.trim().toLowerCase()) {
@@ -297,8 +297,8 @@ export default function AddBusinessClient() {
       }
 
       setCurrentUser(loggedUser)
-      sessionStorage.setItem('listpak_user_session', JSON.stringify(loggedUser))
-      localStorage.setItem('listpak_user_session', JSON.stringify(loggedUser))
+      sessionStorage.setItem('localepak_user_session', JSON.stringify(loggedUser))
+      localStorage.setItem('localepak_user_session', JSON.stringify(loggedUser))
       prefillUserForm(loggedUser)
       fetchUserBusinesses(loggedUser.email || loggedUser.uid || '')
 
@@ -364,11 +364,11 @@ export default function AddBusinessClient() {
       }
 
       setCurrentUser(newUser)
-      sessionStorage.setItem('listpak_user_session', JSON.stringify(newUser))
-      localStorage.setItem('listpak_user_session', JSON.stringify(newUser))
+      sessionStorage.setItem('localepak_user_session', JSON.stringify(newUser))
+      localStorage.setItem('localepak_user_session', JSON.stringify(newUser))
       prefillUserForm(newUser)
 
-      toast.success('Your ListPak account has been created successfully!')
+      toast.success('Your LocalePak account has been created successfully!')
       setActiveView('form')
     } catch (err: any) {
       console.error('Signup error:', err)
@@ -383,8 +383,8 @@ export default function AddBusinessClient() {
     try {
       await signOut(auth)
     } catch (_) {}
-    sessionStorage.removeItem('listpak_user_session')
-    localStorage.removeItem('listpak_user_session')
+    sessionStorage.removeItem('localepak_user_session')
+    localStorage.removeItem('localepak_user_session')
     setCurrentUser(null)
     setUserBusinesses([])
     toast.success('You have been signed out.')
@@ -595,8 +595,8 @@ export default function AddBusinessClient() {
               role: 'business'
             }
             setCurrentUser(sessionUser)
-            sessionStorage.setItem('listpak_user_session', JSON.stringify(sessionUser))
-            localStorage.setItem('listpak_user_session', JSON.stringify(sessionUser))
+            sessionStorage.setItem('localepak_user_session', JSON.stringify(sessionUser))
+            localStorage.setItem('localepak_user_session', JSON.stringify(sessionUser))
           }
         } catch (authErr: any) {
           console.warn('Registration auth notice:', authErr?.message)
@@ -606,8 +606,8 @@ export default function AddBusinessClient() {
             role: 'business'
           }
           setCurrentUser(sessionUser)
-          sessionStorage.setItem('listpak_user_session', JSON.stringify(sessionUser))
-          localStorage.setItem('listpak_user_session', JSON.stringify(sessionUser))
+          sessionStorage.setItem('localepak_user_session', JSON.stringify(sessionUser))
+          localStorage.setItem('localepak_user_session', JSON.stringify(sessionUser))
         }
       }
 
@@ -872,7 +872,7 @@ export default function AddBusinessClient() {
         <div className="max-w-4xl mx-auto relative z-10 space-y-3">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-100/90 text-blue-800 border border-blue-200 text-xs font-bold tracking-wide uppercase shadow-2xs">
             <Sparkles className="w-3.5 h-3.5 text-blue-600" />
-            <span>ListPak Business & Brand Onboarding</span>
+            <span>LocalePak Business & Brand Onboarding</span>
           </span>
 
           <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
@@ -915,7 +915,7 @@ export default function AddBusinessClient() {
               </h2>
               <p className="text-xs text-slate-500 max-w-md mx-auto leading-relaxed">
                 {authTab === 'login'
-                  ? 'Sign in with your ListPak credentials to submit and track your business listings in real-time.'
+                  ? 'Sign in with your LocalePak credentials to submit and track your business listings in real-time.'
                   : 'Register your account in 30 seconds to publish your business, manage locations, and track approval status.'}
               </p>
             </div>
@@ -1741,7 +1741,7 @@ export default function AddBusinessClient() {
                         <div className="flex items-start gap-2">
                           <TrendingUp className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                           <p>
-                            <strong>Rapid Google Indexing:</strong> As soon as approved, your listing will go live publicly on ListPak and will be submitted for fast Google search indexing.
+                            <strong>Rapid Google Indexing:</strong> As soon as approved, your listing will go live publicly on LocalePak and will be submitted for fast Google search indexing.
                           </p>
                         </div>
                         <div className="flex items-start gap-2">
@@ -1812,7 +1812,7 @@ export default function AddBusinessClient() {
                         <div className="space-y-6 animate-in fade-in-50">
                           {/* Category Type Switcher Banner */}
                           <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-2">
-                            <label className="block text-xs font-bold text-slate-700">What profile type are you creating on ListPak?</label>
+                            <label className="block text-xs font-bold text-slate-700">What profile type are you creating on LocalePak?</label>
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                               <div className="p-3 bg-white border-2 border-blue-600 rounded-xl flex items-center gap-3">
                                 <div className="p-2 bg-blue-50 text-blue-600 rounded-lg shrink-0">
@@ -1913,7 +1913,7 @@ export default function AddBusinessClient() {
                                     <span>Business Logo / Brand Icon (Optional)</span>
                                   </label>
                                   <p className="text-[11px] text-slate-500 mt-0.5">
-                                    Upload your official logo or brand mark to make your listing stand out on Google &amp; ListPak.
+                                    Upload your official logo or brand mark to make your listing stand out on Google &amp; LocalePak.
                                   </p>
                                 </div>
                                 {logoPreview && (
@@ -2217,7 +2217,7 @@ export default function AddBusinessClient() {
                                 </span>
                                 <a
                                   href={`https://wa.me/923345636230?text=${encodeURIComponent(
-                                    `Hello ListPak Team, I don't have a website for my business ${formData.businessName ? `"${formData.businessName}"` : ''} and I want to get one built / free website consultation.`
+                                    `Hello LocalePak Team, I don't have a website for my business ${formData.businessName ? `"${formData.businessName}"` : ''} and I want to get one built / free website consultation.`
                                   )}`}
                                   target="_blank"
                                   rel="noopener noreferrer"
@@ -2331,7 +2331,7 @@ export default function AddBusinessClient() {
                         <div className="space-y-6 animate-in fade-in-50">
                           <div>
                             <h2 className="text-xl font-extrabold text-slate-900">Step 4: Final Review & Submission</h2>
-                            <p className="text-xs text-slate-500 mt-1">Review listing details before submitting to the ListPak directory.</p>
+                            <p className="text-xs text-slate-500 mt-1">Review listing details before submitting to the LocalePak directory.</p>
                           </div>
 
                           <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3 text-xs">
@@ -2510,7 +2510,7 @@ export default function AddBusinessClient() {
 
                         <a
                           href={`https://wa.me/923345636230?text=${encodeURIComponent(
-                            `Hello ListPak Team, I am creating my business listing${formData.businessName ? ` for "${formData.businessName}"` : ''} on ListPak and I need a website / free website consultation for my business.`
+                            `Hello LocalePak Team, I am creating my business listing${formData.businessName ? ` for "${formData.businessName}"` : ''} on LocalePak and I need a website / free website consultation for my business.`
                           )}`}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -2696,10 +2696,10 @@ export default function AddBusinessClient() {
           <div className="text-center max-w-3xl mx-auto space-y-2">
             <span className="text-xs font-bold uppercase tracking-wider text-blue-600">Ecosystem Advantages</span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-              Why List Your Business on ListPak?
+              Why List Your Business on LocalePak?
             </h2>
             <p className="text-slate-500 text-xs sm:text-sm">
-              ListPak provides Pakistani businesses with the digital infrastructure needed to grow.
+              LocalePak provides Pakistani businesses with the digital infrastructure needed to grow.
             </p>
           </div>
 

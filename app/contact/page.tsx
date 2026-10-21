@@ -37,7 +37,7 @@ export default function ContactPage() {
       })
       setIsSubmitting(false)
       setSubmitted(true)
-      toast.success('Your message has been submitted successfully to ListPak administration.')
+      toast.success('Your message has been submitted successfully to LocalePak administration.')
     } catch (err) {
       console.error(err)
       setIsSubmitting(false)
@@ -48,9 +48,9 @@ export default function ContactPage() {
   const contactPageSchema = {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
-    name: 'Contact ListPak: Free Business Listing Website Pakistan',
-    description: 'Contact ListPak support for business listing assistance, professional profile help, job-posting questions, directory support, and technical issues.',
-    url: 'https://www.listpak.com/contact/',
+    name: 'Contact LocalePak: Free Business Listing Website Pakistan',
+    description: 'Contact LocalePak support for business listing assistance, professional profile help, job-posting questions, directory support, and technical issues.',
+    url: 'https://www.localepak.com/contact/',
   }
 
   return (
@@ -66,10 +66,10 @@ export default function ContactPage() {
         <section className="bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0F172A] text-white py-16 sm:py-20 border-b border-slate-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white max-w-4xl mx-auto">
-              Contact ListPak: Business Support & Inquiries
+              Contact LocalePak: Business Support & Inquiries
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
-              Need help with a business listing, professional profile, job posting, or directory feature? Contact ListPak support with the relevant details so the team can review your question.
+              Need help with a business listing, professional profile, job posting, or directory feature? Contact LocalePak support with the relevant details so the team can review your question.
             </p>
           </div>
         </section>
@@ -78,7 +78,7 @@ export default function ContactPage() {
         <section className="py-16 bg-white border-b border-[#D9E2F1]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-extrabold text-[#0F172A]">Multiple Ways to Reach ListPak Support Team</h2>
+              <h2 className="text-3xl font-extrabold text-[#0F172A]">Multiple Ways to Reach LocalePak Support Team</h2>
               <p className="mt-2 text-[#475569]">Choose your preferred channel for fast and friendly support.</p>
             </div>
 
@@ -95,9 +95,9 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <ul className="space-y-2 text-xs sm:text-sm text-[#475569] mb-4">
-                  <li><strong>Official Email:</strong> admin@listpak.com</li>
-                  <li><strong>Listing Support:</strong> admin@listpak.com</li>
-                  <li><strong>Job Portal:</strong> admin@listpak.com</li>
+                  <li><strong>Official Email:</strong> admin@localepak.com</li>
+                  <li><strong>Listing Support:</strong> admin@localepak.com</li>
+                  <li><strong>Job Portal:</strong> admin@localepak.com</li>
                 </ul>
                 <p className="text-xs text-[#64748B] leading-relaxed">Include the page URL, listing name, and a clear description of the issue when relevant.</p>
               </div>
@@ -151,7 +151,7 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <div className="space-y-3 text-xs text-[#475569]">
-                  <p><strong>ListPak Enterprise:</strong> Office 303, Evacuee Trust Complex, F-5/1, Islamabad 44000, Pakistan</p>
+                  <p><strong>LocalePak Enterprise:</strong> Office 303, Evacuee Trust Complex, F-5/1, Islamabad 44000, Pakistan</p>
                 </div>
               </div>
             </div>
@@ -255,7 +255,7 @@ export default function ContactPage() {
                     disabled={isSubmitting}
                     className="w-full py-3.5 bg-[#F97316] hover:bg-[#EA580C] text-white font-bold rounded-xl transition-colors shadow-md text-sm cursor-pointer disabled:opacity-50"
                   >
-                    {isSubmitting ? 'Submitting Inquiry...' : 'Send Message to ListPak Support'}
+                    {isSubmitting ? 'Submitting Inquiry...' : 'Send Message to LocalePak Support'}
                   </button>
                 </form>
               )}

@@ -3,10 +3,10 @@ import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 
 export const metadata: Metadata = {
-  title: 'Business Listing Guidelines | ListPak',
-  description: 'Requirements for adding your company, shop, or professional service to ListPak free business directory.',
+  title: 'Business Listing Guidelines | LocalePak',
+  description: 'Requirements for adding your company, shop, or professional service to LocalePak free business directory.',
   alternates: {
-    canonical: 'https://www.listpak.com/business-listing-guidelines/',
+    canonical: 'https://www.localepak.com/business-listing-guidelines/',
   },
 }
 
@@ -20,12 +20,12 @@ export default function BusinessListingGuidelinesPage() {
             Business Listing Guidelines
           </h1>
           <p className="text-sm text-slate-500 mb-8 border-b border-slate-100 pb-4">
-            Last Updated: August 2026 • ListPak Enterprise Ecosystem
+            Last Updated: August 2026 • LocalePak Enterprise Ecosystem
           </p>
 
           <div className="space-y-6 text-sm text-slate-600 leading-relaxed">
             <p>
-              To ensure high search quality and fast indexing for all Pakistani enterprises, business owners must adhere to the following listing criteria when submitting their profile to ListPak.
+              To ensure high search quality and fast indexing for all Pakistani enterprises, business owners must adhere to the following listing criteria when submitting their profile to LocalePak.
             </p>
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">1. Eligible Businesses</h2>

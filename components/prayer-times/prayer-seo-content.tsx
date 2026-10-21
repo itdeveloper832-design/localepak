@@ -77,7 +77,7 @@ export default function PrayerSeoContent() {
         </h3>
 
         <p>
-          Timings presented on ListPak are aligned with the renowned <strong>University of Islamic Sciences, Karachi</strong> convention and the <strong>Hanafi juristic school</strong> for Asr. Whether you are searching for today&apos;s Fajr time, Dhuhr time, Asr time, Maghrib time, or Isha time, our system continuously synchronizes with local astronomical data to provide reliable, authentic, and live countdowns.
+          Timings presented on LocalePak are aligned with the renowned <strong>University of Islamic Sciences, Karachi</strong> convention and the <strong>Hanafi juristic school</strong> for Asr. Whether you are searching for today&apos;s Fajr time, Dhuhr time, Asr time, Maghrib time, or Isha time, our system continuously synchronizes with local astronomical data to provide reliable, authentic, and live countdowns.
         </p>
 
       </div>

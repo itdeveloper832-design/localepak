@@ -17,7 +17,7 @@ export function LocalBusinessSchema({ business }: { business: BusinessData }) {
     '@type': 'LocalBusiness',
     name: business.name,
     description: business.description || `${business.name} - ${business.category} in ${business.city}`,
-    url: business.website || `https://listpak.com/`,
+    url: business.website || `https://www.localepak.com/`,
     telephone: business.phone,
     address: {
       '@type': 'PostalAddress',
@@ -31,7 +31,7 @@ export function LocalBusinessSchema({ business }: { business: BusinessData }) {
       '@type': 'Country',
       name: 'Pakistan'
     },
-    logo: business.logo || 'https://listpak.com/logo.svg',
+    logo: business.logo || 'https://www.localepak.com/logo.svg',
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: business.phone,
@@ -52,13 +52,13 @@ export function DirectorySchema() {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'ListPak',
+    name: 'LocalePak',
     description: 'Pakistan Free Business Directory - Find and list local businesses',
-    url: 'https://listpak.com/',
+    url: 'https://www.localepak.com/',
     mainEntity: {
       '@type': 'Organization',
-      name: 'ListPak',
-      url: 'https://listpak.com/',
+      name: 'LocalePak',
+      url: 'https://www.localepak.com/',
       description: 'Pakistan Free Business Directory',
       areaServed: {
         '@type': 'Country',
@@ -69,7 +69,7 @@ export function DirectorySchema() {
       '@type': 'SearchAction',
       target: {
         '@type': 'EntryPoint',
-        urlTemplate: 'https://listpak.com/categories/?q={search_term_string}'
+        urlTemplate: 'https://www.localepak.com/categories/?q={search_term_string}'
       },
       'query-input': 'required name=search_term_string'
     }

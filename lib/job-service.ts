@@ -53,7 +53,7 @@ export const getAllJobs = cache(async function getAllJobs(includePending: boolea
           shiftType: data.shiftType || 'Day Shift',
           benefits: data.benefits || ['Health Insurance', 'Annual Bonus', 'Paid Leaves'],
           postedDate: data.postedDate || 'Just now',
-          description: data.description || 'Verified job vacancy on ListPak Pakistan.',
+          description: data.description || 'Verified job vacancy on LocalePak Pakistan.',
           responsibilities: data.responsibilities || ['Fulfill daily role responsibilities with quality.'],
           requirements: data.requirements || ['Relevant experience and educational qualifications.'],
           preferredQualifications: data.preferredQualifications || [],

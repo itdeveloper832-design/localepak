@@ -5,10 +5,10 @@ import Footer from '@/components/footer'
 import { Briefcase, Building2, MapPin, Users } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Careers at ListPak | Join Pakistan Digital Business Platform',
-  description: 'Explore career opportunities at ListPak. Help build Pakistan largest digital business and employment ecosystem.',
+  title: 'Careers at LocalePak | Join Pakistan Digital Business Platform',
+  description: 'Explore career opportunities at LocalePak. Help build Pakistan largest digital business and employment ecosystem.',
   alternates: {
-    canonical: 'https://www.listpak.com/careers/',
+    canonical: 'https://www.localepak.com/careers/',
   },
 }
 
@@ -29,7 +29,7 @@ export default function CareersPage() {
         </section>
 
         <section className="max-w-4xl mx-auto px-4 py-12 space-y-6">
-          <h2 className="text-2xl font-bold text-slate-900 border-b border-slate-200 pb-3">Open Positions at ListPak HQ</h2>
+          <h2 className="text-2xl font-bold text-slate-900 border-b border-slate-200 pb-3">Open Positions at LocalePak HQ</h2>
           
           <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
@@ -60,7 +60,7 @@ export default function CareersPage() {
           </div>
 
           <div className="pt-8 text-center text-xs text-slate-500">
-            Don&apos;t see your role? Submit your resume to <a href="mailto:careers@listpak.com" className="text-blue-600 underline font-medium">careers@listpak.com</a> for future consideration.
+            Don&apos;t see your role? Submit your resume to <a href="mailto:careers@localepak.com" className="text-blue-600 underline font-medium">careers@localepak.com</a> for future consideration.
           </div>
         </section>
       </main>

@@ -38,8 +38,8 @@ export async function generateMetadata(props: { params: Promise<{ id: string }> 
   const jobCity = job ? job.city : 'Pakistan'
   const publicSlug = job ? getPublicJobSlug(job) : idOrSlug
   const canonicalUrl = toCanonicalUrl(`jobs/${publicSlug}`)
-  const title = job ? `${job.title} at ${job.company} in ${job.city} | ListPak Jobs` : 'Job Vacancy | ListPak'
-  const description = job ? `${job.description.slice(0, 160)}... Review role details, qualifications, salary, and application routes on ListPak.` : `Review current job opportunities in Pakistan on the ListPak jobs directory.`
+  const title = job ? `${job.title} at ${job.company} in ${job.city} | LocalePak Jobs` : 'Job Vacancy | LocalePak'
+  const description = job ? `${job.description.slice(0, 160)}... Review role details, qualifications, salary, and application routes on LocalePak.` : `Review current job opportunities in Pakistan on the LocalePak jobs directory.`
 
   return {
     title,
@@ -50,7 +50,7 @@ export async function generateMetadata(props: { params: Promise<{ id: string }> 
     openGraph: {
       title,
       description,
-      siteName: 'ListPak',
+      siteName: 'LocalePak',
       url: canonicalUrl,
       locale: 'en_PK',
       type: 'article',
@@ -91,7 +91,7 @@ export default async function JobDetailPage(props: { params: Promise<{ id: strin
     idOrSlug.toLowerCase() === 'remote-seo-internship' || 
     job.id === 'job-remote-seo-internship'
 
-  const whatsappApplicationUrl = `https://wa.me/923345636230?text=${encodeURIComponent("Hello ListPak HR, I am applying for one of the 10 Remote SEO Internship positions (On-Page & Off-Page). I have attached my CV and Cover Letter. Looking forward to your response!")}`
+  const whatsappApplicationUrl = `https://wa.me/923345636230?text=${encodeURIComponent("Hello LocalePak HR, I am applying for one of the 10 Remote SEO Internship positions (On-Page & Off-Page). I have attached my CV and Cover Letter. Looking forward to your response!")}`
 
   const allJobs = await getAllJobs(false)
   const relatedJobs = allJobs
@@ -107,6 +107,34 @@ export default async function JobDetailPage(props: { params: Promise<{ id: strin
   const validThrough = validThroughDate && !Number.isNaN(validThroughDate.getTime())
     ? validThroughDate.toISOString()
     : undefined
+
+  // Phase 3: structured baseSalary parsed from the free-text salary string
+  // (e.g. "PKR 45,000–75,000 / month", "PKR 150K - 220K", "From PKR 100,000 / month").
+  // Emitted only when at least one numeric amount is parseable.
+  const parseSalaryAmount = (raw: string): number | null => {
+    const m = raw.replace(/,/g, '').match(/(\d+(?:\.\d+)?)\s*(k)?/i)
+    if (!m) return null
+    const n = parseFloat(m[1]) * (m[2] ? 1000 : 1)
+    return Number.isFinite(n) && n > 0 ? n : null
+  }
+  const salaryNumbers = (job.salary || '')
+    .split(/[–—-]/)
+    .map(part => parseSalaryAmount(part))
+    .filter((n): n is number => n !== null)
+  const baseSalary = salaryNumbers.length > 0 ? {
+    '@type': 'MonetaryAmount',
+    currency: 'PKR',
+    value: {
+      '@type': 'QuantitativeValue',
+      ...(salaryNumbers.length > 1
+        ? { minValue: Math.min(...salaryNumbers), maxValue: Math.max(...salaryNumbers) }
+        : { value: salaryNumbers[0] }),
+      unitText: 'MONTH',
+    },
+  } : undefined
+
+  // Phase 3: remote jobs need jobLocationType for Google for Jobs eligibility
+  const isRemoteJob = /remote/i.test(job.city || '') || /remote/i.test(job.title || '')
 
   const canonicalUrl = toCanonicalUrl(`jobs/${publicJobSlug}`)
   const citySlug = normalizeCitySlug(job.city)
@@ -141,7 +169,12 @@ export default async function JobDetailPage(props: { params: Promise<{ id: strin
     },
     ...(datePosted ? { datePosted } : {}),
     ...(validThrough ? { validThrough } : {}),
-    employmentType: (job.type || 'FULL_TIME').toUpperCase().replace('-', '_'),
+    ...(baseSalary ? { baseSalary } : {}),
+    ...(isRemoteJob ? {
+      jobLocationType: 'TELECOMMUTE',
+      applicantLocationRequirements: { '@type': 'Country', name: 'Pakistan' },
+    } : {}),
+    employmentType: (job.type || 'FULL_TIME').toUpperCase().replace('-', '_').replace(' ', '_'),
     directApply: true,
     hiringOrganization: {
       '@type': 'Organization',
@@ -161,13 +194,13 @@ export default async function JobDetailPage(props: { params: Promise<{ id: strin
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://listpak.com/',
+        item: 'https://www.localepak.com/',
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Jobs',
-        item: 'https://listpak.com/jobs/',
+        item: 'https://www.localepak.com/jobs/',
       },
       {
         '@type': 'ListItem',

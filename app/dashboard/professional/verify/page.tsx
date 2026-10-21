@@ -84,7 +84,7 @@ function ProfessionalVerificationContent() {
         const urlUsername = searchParams.get('username') || ''
         let userIdentifier = urlUsername
         if (!userIdentifier) {
-          const session = sessionStorage.getItem('listpak_user_session')
+          const session = sessionStorage.getItem('localepak_user_session')
           if (session) {
             const parsed = JSON.parse(session)
             userIdentifier = parsed.username || parsed.email || ''
@@ -200,7 +200,7 @@ function ProfessionalVerificationContent() {
             <div>
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold border border-emerald-500/30 mb-2">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Official ListPak Trust Program</span>
+                <span>Official LocalePak Trust Program</span>
               </span>
               <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
                 Get Your Profile Verified
@@ -290,7 +290,7 @@ function ProfessionalVerificationContent() {
                   <span>Why Pay Rs. 50 for Verification?</span>
                 </h2>
                 <p className="text-xs text-slate-600 mt-1 leading-relaxed">
-                  A verified professional profile helps clients identify professionals who have completed ListPak&apos;s verification process.
+                  A verified professional profile helps clients identify professionals who have completed LocalePak&apos;s verification process.
                 </p>
               </div>
 
@@ -301,7 +301,7 @@ function ProfessionalVerificationContent() {
                     <span>Build More Trust</span>
                   </div>
                   <p className="text-slate-600 leading-relaxed">
-                    Clients are more likely to feel confident contacting professionals whose profiles display a ListPak verification badge.
+                    Clients are more likely to feel confident contacting professionals whose profiles display a LocalePak verification badge.
                   </p>
                 </div>
 
@@ -331,7 +331,7 @@ function ProfessionalVerificationContent() {
                     <span>Improve Your Professional Presence</span>
                   </div>
                   <p className="text-slate-600 leading-relaxed">
-                    A verified ListPak profile provides a stronger professional presentation for people searching for your skills and services.
+                    A verified LocalePak profile provides a stronger professional presentation for people searching for your skills and services.
                   </p>
                 </div>
 
@@ -341,7 +341,7 @@ function ProfessionalVerificationContent() {
                     <span>Better Visibility Opportunities</span>
                   </div>
                   <p className="text-slate-600 leading-relaxed">
-                    Verified professionals can be prioritized for appropriate verification-related discovery features on ListPak, where applicable.
+                    Verified professionals can be prioritized for appropriate verification-related discovery features on LocalePak, where applicable.
                   </p>
                 </div>
 

@@ -3,10 +3,10 @@ import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 
 export const metadata: Metadata = {
-  title: 'Community Guidelines | ListPak - Pakistan Business Hub',
-  description: 'Standards of conduct for business owners, job seekers, employers, and consumers engaging on ListPak.',
+  title: 'Community Guidelines | LocalePak - Pakistan Business Hub',
+  description: 'Standards of conduct for business owners, job seekers, employers, and consumers engaging on LocalePak.',
   alternates: {
-    canonical: 'https://www.listpak.com/community-guidelines/',
+    canonical: 'https://www.localepak.com/community-guidelines/',
   },
 }
 
@@ -20,12 +20,12 @@ export default function CommunityGuidelinesPage() {
             Community Guidelines
           </h1>
           <p className="text-sm text-slate-500 mb-8 border-b border-slate-100 pb-4">
-            Last Updated: August 2026 • ListPak Enterprise Ecosystem
+            Last Updated: August 2026 • LocalePak Enterprise Ecosystem
           </p>
 
           <div className="space-y-6 text-sm text-slate-600 leading-relaxed">
             <p>
-              ListPak is dedicated to fostering a safe, professional, and respectful ecosystem for businesses, job seekers, and consumers across Pakistan.
+              LocalePak is dedicated to fostering a safe, professional, and respectful ecosystem for businesses, job seekers, and consumers across Pakistan.
             </p>
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">1. Authentic Reviews & Feedback</h2>

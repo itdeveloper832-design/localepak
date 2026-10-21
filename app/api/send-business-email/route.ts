@@ -4,9 +4,9 @@ export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY
-const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'ListPak <onboarding@resend.dev>'
+const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'LocalePak <onboarding@resend.dev>'
 const WHATSAPP_NUMBER = (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || process.env.WHATSAPP_BUSINESS_NUMBER || '923001234567').replace(/[^0-9]/g, '')
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://listpak.com'
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.localepak.com'
 
 interface SubmissionEmailPayload {
   to: string
@@ -49,7 +49,7 @@ function buildHtml(data: SubmissionEmailPayload) {
                 Hi there,
               </p>
               <p style="margin:0 0 24px;font-size:16px;line-height:1.6;color:#475569;">
-                Thank you for listing your business with ListPak! Your listing is now live and visible to thousands of potential customers across Pakistan.
+                Thank you for listing your business with LocalePak! Your listing is now live and visible to thousands of potential customers across Pakistan.
               </p>
 
               <h2 style="margin:0 0 12px;font-size:18px;color:#0f2b3d;">Your Submission Summary</h2>
@@ -105,7 +105,7 @@ function buildHtml(data: SubmissionEmailPayload) {
               </p>
               <p style="margin:12px 0 0;font-size:14px;line-height:1.6;color:#64748b;">
                 Best regards,<br />
-                <strong style="color:#0f172a;">The ListPak Team</strong>
+                <strong style="color:#0f172a;">The LocalePak Team</strong>
               </p>
             </td>
           </tr>
@@ -113,7 +113,7 @@ function buildHtml(data: SubmissionEmailPayload) {
           <tr>
             <td style="padding:20px 32px;background:#f8fafc;border-top:1px solid #e2e8f0;text-align:center;">
               <p style="margin:0;font-size:12px;color:#94a3b8;">
-                © ${new Date().getFullYear()} ListPak. Pakistan's leading business directory.
+                © ${new Date().getFullYear()} LocalePak. Pakistan's leading business directory.
               </p>
             </td>
           </tr>
@@ -148,7 +148,7 @@ Want to feature your business for more visibility?
 Contact us on WhatsApp: ${whatsappUrl}
 
 Best regards,
-The ListPak Team`
+The LocalePak Team`
 }
 
 function escapeHtml(str: string) {

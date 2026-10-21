@@ -4,33 +4,33 @@ import Footer from '@/components/footer'
 import { HelpCircle, ChevronDown } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Frequently Asked Questions (FAQs) | ListPak',
-  description: 'Find answers to common questions about listing your business, verifying NTN credentials, posting jobs, and searching companies on ListPak.',
+  title: 'Frequently Asked Questions (FAQs) | LocalePak',
+  description: 'Find answers to common questions about listing your business, verifying NTN credentials, posting jobs, and searching companies on LocalePak.',
   alternates: {
-    canonical: 'https://www.listpak.com/faqs/',
+    canonical: 'https://www.localepak.com/faqs/',
   },
 }
 
 const faqs = [
   {
-    q: "Who is the founder and CEO of ListPak?",
-    a: "Muhammad Imran is the Founder and Chief Executive Officer (CEO) of ListPak (https://listpak.com). He is a Pakistani full-stack web and AI developer, software engineer, and technical SEO specialist who also created Imran Digitals (https://www.imrandigitals.com/). He established ListPak in January 2024 to provide 100% free online discoverability for Pakistani businesses across 150+ cities."
+    q: "Who is the founder and CEO of LocalePak?",
+    a: "Muhammad Imran is the Founder and Chief Executive Officer (CEO) of LocalePak (https://www.localepak.com). He is a Pakistani full-stack web and AI developer, software engineer, and technical SEO specialist who also created Imran Digitals (https://www.imrandigitals.com/). He established LocalePak in January 2024 to provide 100% free online discoverability for Pakistani businesses across 150+ cities."
   },
   {
-    q: "Is listing a business on ListPak free?",
-    a: "Yes! Creating a business listing on ListPak is 100% free forever. It includes your business name, address, contact phone, direct WhatsApp number, business category, and description with zero registration fees or hidden subscription costs."
+    q: "Is listing a business on LocalePak free?",
+    a: "Yes! Creating a business listing on LocalePak is 100% free forever. It includes your business name, address, contact phone, direct WhatsApp number, business category, and description with zero registration fees or hidden subscription costs."
   },
   {
     q: "How long does it take for my business to appear in search results?",
     a: "Once submitted, our team reviews listings within 1 to 24 hours. Approved listings immediately index on city pages, category search, and our XML sitemap."
   },
   {
-    q: "How do I get a Verified Business Badge on ListPak?",
+    q: "How do I get a Verified Business Badge on LocalePak?",
     a: "Verification requires telephone/WhatsApp verification by our support desk. You can request verification via the Add Business form or by contacting our team."
   },
   {
-    q: "Where can I learn more about ListPak's founder and leadership?",
-    a: "You can read about Founder & CEO Muhammad Imran's background, engineering stack, and vision on the official ListPak About page (https://listpak.com/about/) or visit his official website at https://www.imrandigitals.com/."
+    q: "Where can I learn more about LocalePak's founder and leadership?",
+    a: "You can read about Founder & CEO Muhammad Imran's background, engineering stack, and vision on the official LocalePak About page (https://www.localepak.com/about/) or visit his official website at https://www.imrandigitals.com/."
   },
   {
     q: "Can I post job openings for my Pakistani company?",
@@ -38,7 +38,7 @@ const faqs = [
   },
   {
     q: "How can I update or delete my business listing?",
-    a: "You can submit an edit or removal request through our Contact Page or by emailing admin@listpak.com with proof of business ownership."
+    a: "You can submit an edit or removal request through our Contact Page or by emailing admin@localepak.com with proof of business ownership."
   }
 ]
 
@@ -70,7 +70,7 @@ export default function FAQsPage() {
               Frequently Asked Questions
             </h1>
             <p className="mt-4 text-slate-300 text-base sm:text-lg max-w-2xl mx-auto">
-              Everything you need to know about navigating, listing, and hiring on ListPak.
+              Everything you need to know about navigating, listing, and hiring on LocalePak.
             </p>
           </div>
         </section>

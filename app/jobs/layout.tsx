@@ -1,13 +1,13 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Jobs in Pakistan | Find Current Vacancies by City | ListPak',
-  description: 'Find current job openings in Pakistan by role, city, employment type, and company on ListPak.',
-  alternates: { canonical: 'https://www.listpak.com/jobs/' },
+  title: 'Jobs in Pakistan 2026 – Latest Jobs in Karachi, Lahore & Islamabad | LocalePak',
+  description: 'Find the latest jobs in Pakistan — call center, IT, marketing, data entry & remote jobs in Karachi, Lahore, Islamabad. New vacancies added daily. Apply free.',
+  alternates: { canonical: 'https://www.localepak.com/jobs/' },
   openGraph: {
-    title: 'Jobs in Pakistan | Find Current Vacancies by City | ListPak',
-    description: 'Find current job openings in Pakistan by role, city, employment type, and company on ListPak.',
-    url: 'https://www.listpak.com/jobs/',
+    title: 'Jobs in Pakistan 2026 – Latest Jobs in Karachi, Lahore & Islamabad | LocalePak',
+    description: 'Find the latest jobs in Pakistan — call center, IT, marketing, data entry & remote jobs in Karachi, Lahore, Islamabad. New vacancies added daily. Apply free.',
+    url: 'https://www.localepak.com/jobs/',
     type: 'website',
   },
 }

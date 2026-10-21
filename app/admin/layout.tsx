@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'ListPak Administration Portal',
-  description: 'ListPak internal administrative dashboard for moderating business listings, verified professionals, and job submissions.',
+  title: 'LocalePak Administration Portal',
+  description: 'LocalePak internal administrative dashboard for moderating business listings, verified professionals, and job submissions.',
   robots: { index: false, follow: false },
 }
 

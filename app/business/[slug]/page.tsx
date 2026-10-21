@@ -36,8 +36,8 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
 
-  const title = biz?.metaTitle || `${businessName}${biz?.category ? ` – ${biz.category}` : ''}${biz?.city ? ` in ${biz.city}` : ''} | ListPak`
-  const description = biz?.metaDescription || (biz ? `${biz.name} is a verified ${biz.category} listing in ${biz.city}, Pakistan. Find location address, phone number, operating hours, and services on ListPak.` : `View business details, phone number, location, and contact information for ${businessName} on the ListPak business directory.`)
+  const title = biz?.metaTitle || `${businessName}${biz?.category ? ` – ${biz.category}` : ''}${biz?.city ? ` in ${biz.city}` : ''} | LocalePak`
+  const description = biz?.metaDescription || (biz ? `${biz.name} is a verified ${biz.category} listing in ${biz.city}, Pakistan. Find location address, phone number, operating hours, and services on LocalePak.` : `View business details, phone number, location, and contact information for ${businessName} on the LocalePak business directory.`)
   const canonicalUrl = toCanonicalUrl(`business/${slug}`)
 
   return {
@@ -53,7 +53,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
     openGraph: {
       title,
       description,
-      siteName: 'ListPak',
+      siteName: 'LocalePak',
       url: canonicalUrl,
       locale: 'en_PK',
       type: 'website',
@@ -103,7 +103,7 @@ export default async function BusinessPage(props: { params: Promise<{ slug: stri
     name: biz.name,
     description: biz.metaDescription || biz.description,
     url: canonicalUrl,
-    sameAs: biz.website && biz.website !== 'https://listpak.com' && biz.website !== 'https://www.listpak.com' ? [biz.website] : undefined,
+    sameAs: biz.website && biz.website !== 'https://www.localepak.com' && biz.website !== 'https://www.localepak.com' ? [biz.website] : undefined,
     telephone: intlPhone,
     email: biz.email,
     image: biz.coverImage || biz.logo,
@@ -179,13 +179,13 @@ export default async function BusinessPage(props: { params: Promise<{ slug: stri
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://listpak.com/',
+        item: 'https://www.localepak.com/',
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Categories',
-        item: 'https://listpak.com/categories/',
+        item: 'https://www.localepak.com/categories/',
       },
       {
         '@type': 'ListItem',
@@ -305,7 +305,7 @@ export default async function BusinessPage(props: { params: Promise<{ slug: stri
                       <span>0 customer reviews</span>
                     )}
                   </span>
-                  {biz.website && biz.website !== 'https://www.listpak.com' && (
+                  {biz.website && biz.website !== 'https://www.localepak.com' && (
                     <>
                       <span>•</span>
                       <a
@@ -514,7 +514,7 @@ export default async function BusinessPage(props: { params: Promise<{ slug: stri
               <h2 className="font-bold text-slate-900 text-sm uppercase tracking-wider">Contact {biz.name}</h2>
               
               <div className="space-y-2.5">
-                {biz.website && biz.website !== 'https://www.listpak.com' && (
+                {biz.website && biz.website !== 'https://www.localepak.com' && (
                   <a
                     href={biz.website.startsWith('http') ? biz.website : `https://${biz.website}`}
                     target="_blank"

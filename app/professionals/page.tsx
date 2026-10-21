@@ -40,7 +40,7 @@ export default function ProfessionalsPage() {
 
   useEffect(() => {
     try {
-      const sess = sessionStorage.getItem('listpak_user_session')
+      const sess = sessionStorage.getItem('localepak_user_session')
       if (sess) {
         setUserSession(JSON.parse(sess))
       }

@@ -28,7 +28,7 @@ export default function StickyWebsiteBanner({ businessName, className = '' }: St
 
   const defaultBizText = businessName?.trim() ? ` for "${businessName.trim()}"` : ''
   const whatsappUrl = `https://wa.me/923345636230?text=${encodeURIComponent(
-    `Hello ListPak Team, I am creating my business listing${defaultBizText} on ListPak and I need a website / free website consultation for my business.`
+    `Hello LocalePak Team, I am creating my business listing${defaultBizText} on LocalePak and I need a website / free website consultation for my business.`
   )}`
 
   return (

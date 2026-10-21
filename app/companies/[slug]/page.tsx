@@ -30,20 +30,20 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
   const company = await getCompanyBySlug(slug)
 
   const name = company ? company.name : slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
-  const title = `${name}${company?.city ? ` in ${company.city}` : ''} | ListPak Company Directory`
-  const description = company ? `${company.description} Review the employer’s listed location, website, contacts, and current opportunities before applying or engaging.` : `Explore the company profile, location, contacts, and available opportunities for ${name} on the ListPak company directory.`
+  const title = `${name}${company?.city ? ` in ${company.city}` : ''} | LocalePak Company Directory`
+  const description = company ? `${company.description} Review the employer’s listed location, website, contacts, and current opportunities before applying or engaging.` : `Explore the company profile, location, contacts, and available opportunities for ${name} on the LocalePak company directory.`
 
   return {
     title,
     description,
     alternates: {
-      canonical: `https://www.listpak.com/companies/${slug}/`,
+      canonical: `https://www.localepak.com/companies/${slug}/`,
     },
     openGraph: {
       title,
       description,
-      siteName: 'ListPak',
-      url: `https://www.listpak.com/companies/${slug}/`,
+      siteName: 'LocalePak',
+      url: `https://www.localepak.com/companies/${slug}/`,
       locale: 'en_PK',
       type: 'website',
       images: company?.logo ? [{ url: company.logo, alt: name }] : undefined,
@@ -74,7 +74,7 @@ export default async function CompanyDetailPage(props: { params: Promise<{ slug:
     '@type': 'Organization',
     name: company.name,
     description: company.description,
-    url: company.website || `https://listpak.com/companies/${company.slug}/`,
+    url: company.website || `https://www.localepak.com/companies/${company.slug}/`,
     logo: company.logo,
     address: {
       '@type': 'PostalAddress',
@@ -182,7 +182,7 @@ export default async function CompanyDetailPage(props: { params: Promise<{ slug:
             </div>
             <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
               <span className="text-slate-500 font-bold block">HR Contact Email</span>
-              <p className="font-extrabold text-blue-600 mt-0.5">{company.hrEmail || company.companyEmail || 'Contact via ListPak'}</p>
+              <p className="font-extrabold text-blue-600 mt-0.5">{company.hrEmail || company.companyEmail || 'Contact via LocalePak'}</p>
             </div>
             <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
               <span className="text-slate-500 font-bold block">Headquarters Address</span>

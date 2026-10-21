@@ -50,7 +50,7 @@ function LoginForm() {
           (p.username && p.username.toLowerCase().trim() === email.trim().toLowerCase())
         )
 
-        sessionStorage.setItem('listpak_user_session', JSON.stringify({
+        sessionStorage.setItem('localepak_user_session', JSON.stringify({
           name: userPro?.name || userPro?.fullName || email.split('@')[0],
           email: email.trim(),
           role: 'professional',
@@ -71,9 +71,9 @@ function LoginForm() {
           userId: fbUid,
           role: 'business'
         }
-        sessionStorage.setItem('listpak_user_session', JSON.stringify(sessionPayload))
-        localStorage.setItem('listpak_user_session', JSON.stringify(sessionPayload))
-        toast.success('Successfully logged into ListPak Business Portal.')
+        sessionStorage.setItem('localepak_user_session', JSON.stringify(sessionPayload))
+        localStorage.setItem('localepak_user_session', JSON.stringify(sessionPayload))
+        toast.success('Successfully logged into LocalePak Business Portal.')
         setTimeout(() => {
           router.push('/dashboard')
         }, 500)
@@ -91,7 +91,7 @@ function LoginForm() {
         <div className="inline-flex p-3.5 rounded-2xl bg-blue-50 text-blue-600 shadow-inner">
           <LogIn className="w-8 h-8" />
         </div>
-        <h1 className="text-2xl font-extrabold text-slate-900">Sign In to ListPak</h1>
+        <h1 className="text-2xl font-extrabold text-slate-900">Sign In to LocalePak</h1>
         <p className="text-xs text-slate-500 max-w-sm mx-auto">
           Access your business listings, job applications, or professional profile.
         </p>

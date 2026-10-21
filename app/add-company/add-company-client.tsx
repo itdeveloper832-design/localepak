@@ -160,7 +160,7 @@ export default function AddCompanyClient() {
             Register Your Company & Start Hiring Talent
           </h1>
           <p className="text-slate-400 text-xs sm:text-sm max-w-2xl">
-            Build your employer branding profile, publish unlimited job vacancies, and discover matching candidate profiles on ListPak.
+            Build your employer branding profile, publish unlimited job vacancies, and discover matching candidate profiles on LocalePak.
           </p>
 
           <div className="pt-2 flex flex-wrap items-center justify-between p-3 rounded-2xl bg-slate-800/80 border border-slate-700/60 text-xs gap-2">

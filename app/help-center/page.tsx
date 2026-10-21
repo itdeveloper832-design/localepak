@@ -5,10 +5,10 @@ import Footer from '@/components/footer'
 import { LifeBuoy, Search, BookOpen, ShieldCheck, Briefcase, FileText } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Help Center | ListPak Support Knowledgebase',
-  description: 'Search guidebooks, step-by-step tutorials, and documentation for business owners, job seekers, and recruiters on ListPak.',
+  title: 'Help Center | LocalePak Support Knowledgebase',
+  description: 'Search guidebooks, step-by-step tutorials, and documentation for business owners, job seekers, and recruiters on LocalePak.',
   alternates: {
-    canonical: 'https://www.listpak.com/help-center/',
+    canonical: 'https://www.localepak.com/help-center/',
   },
 }
 
@@ -20,7 +20,7 @@ export default function HelpCenterPage() {
         <section className="bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0F172A] text-white py-16 text-center border-b border-slate-800">
           <div className="max-w-4xl mx-auto px-4">
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
-              ListPak Knowledgebase & Help Center
+              LocalePak Knowledgebase & Help Center
             </h1>
             <p className="mt-4 text-slate-300 text-base sm:text-lg max-w-2xl mx-auto">
               How can we help you expand your business or career today?

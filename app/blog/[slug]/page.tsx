@@ -21,23 +21,23 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const post = BLOG_POSTS[slug]
   const cleanTitle = post ? post.metaTitle : slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
-  const description = post ? post.metaDescription : `Read ${cleanTitle} on ListPak Blog.`
+  const description = post ? post.metaDescription : `Read ${cleanTitle} on LocalePak Blog.`
   const publishedDate = post?.date ? new Date(post.date).toISOString() : undefined
   const modifiedDate = post?.dateModified ? new Date(post.dateModified).toISOString() : publishedDate
 
   return {
-    title: `${cleanTitle} | ListPak Business Directory`,
+    title: `${cleanTitle} | LocalePak Business Directory`,
     description,
     keywords: post ? [post.focusKeyword, 'Business Directory Pakistan', 'Pakistan Business Directory', 'Local Business Directory', 'Company Directory Pakistan'] : [],
     alternates: {
-      canonical: `https://www.listpak.com/blog/${slug}/`,
+      canonical: `https://www.localepak.com/blog/${slug}/`,
     },
-    authors: post?.authorName ? [{ name: post.authorName, url: post.authorUrl }] : [{ name: 'ListPak Editorial Team', url: 'https://www.listpak.com/about/' }],
+    authors: post?.authorName ? [{ name: post.authorName, url: post.authorUrl }] : [{ name: 'LocalePak Editorial Team', url: 'https://www.localepak.com/about/' }],
     openGraph: {
-      title: `${cleanTitle} | ListPak`,
+      title: `${cleanTitle} | LocalePak`,
       description,
-      url: `https://www.listpak.com/blog/${slug}/`,
-      siteName: 'ListPak',
+      url: `https://www.localepak.com/blog/${slug}/`,
+      siteName: 'LocalePak',
       locale: 'en_PK',
       type: 'article',
       publishedTime: publishedDate,
@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${cleanTitle} | ListPak`,
+      title: `${cleanTitle} | LocalePak`,
       description,
       images: post?.image ? [post.image] : undefined,
     },
@@ -72,18 +72,18 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     description: post ? post.metaDescription : `Guide on ${title}`,
     author: {
       '@type': post.authorName ? 'Person' : 'Organization',
-      name: post.authorName || 'ListPak Editorial Team',
-      url: post.authorUrl || 'https://listpak.com/about/',
+      name: post.authorName || 'LocalePak Editorial Team',
+      url: post.authorUrl || 'https://www.localepak.com/about/',
     },
     publisher: {
       '@type': 'Organization',
-      name: 'ListPak',
-      logo: 'https://listpak.com/logo.png',
+      name: 'LocalePak',
+      logo: 'https://www.localepak.com/logo.png',
     },
     datePublished: publishedDate,
     dateModified: modifiedDate,
-    image: post.image ? [post.image] : ['https://listpak.com/logo.png'],
-    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://listpak.com/blog/${slug}/` },
+    image: post.image ? [post.image] : ['https://www.localepak.com/logo.png'],
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://www.localepak.com/blog/${slug}/` },
     inLanguage: 'en-PK',
   }
 
@@ -142,7 +142,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </h1>
 
             <div className="flex items-center gap-6 text-xs text-slate-500 font-medium pt-4 border-t border-slate-100 flex-wrap">
-              <span className="flex items-center gap-1.5"><User className="w-4 h-4 text-[#2563EB]" /> ListPak Editorial Team</span>
+              <span className="flex items-center gap-1.5"><User className="w-4 h-4 text-[#2563EB]" /> LocalePak Editorial Team</span>
               <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4 text-slate-400" /> {publishDate}</span>
               <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-slate-400" /> {readTime}</span>
             </div>
@@ -164,7 +164,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   </p>
 
                   <p>
-                    This guide explains how to find <strong>restaurants in Karachi</strong> by cuisine, area, budget and occasion, while also showing how ListPak can make local restaurant discovery easier.
+                    This guide explains how to find <strong>restaurants in Karachi</strong> by cuisine, area, budget and occasion, while also showing how LocalePak can make local restaurant discovery easier.
                   </p>
 
                   <p className="p-4 bg-blue-50 rounded-xl border border-blue-100 text-sm font-semibold text-blue-950">
@@ -250,13 +250,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     </div>
                   </div>
 
-                  {/* Section 4: ListPak Integration */}
+                  {/* Section 4: LocalePak Integration */}
                   <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-8 rounded-3xl space-y-4 border border-slate-800">
                     <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                      Promote Your Karachi Restaurant on ListPak
+                      Promote Your Karachi Restaurant on LocalePak
                     </h2>
                     <p className="text-slate-300 text-sm leading-relaxed">
-                      Do you own a restaurant, café, bakery, or food business in Karachi? List your business on ListPak to show your menu link, location, opening hours, and phone number to thousands of local customers searching by area and cuisine.
+                      Do you own a restaurant, café, bakery, or food business in Karachi? List your business on LocalePak to show your menu link, location, opening hours, and phone number to thousands of local customers searching by area and cuisine.
                     </p>
                     <div className="pt-2 flex flex-wrap gap-3">
                       <Link href="/add-business" className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl shadow-md transition-all">
@@ -287,7 +287,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
                   {/* Internal Linking Navigation Grid */}
                   <div className="pt-8 border-t border-slate-200 space-y-4">
-                    <h3 className="text-xl font-extrabold text-[#0F172A]">Explore ListPak Directory & Guides</h3>
+                    <h3 className="text-xl font-extrabold text-[#0F172A]">Explore LocalePak Directory & Guides</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
                       <Link href="/blog/restaurants-in-pakistan" className="p-3 bg-amber-50 text-amber-700 hover:bg-amber-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-amber-200">Pakistan Restaurants Guide</Link>
                       <Link href="/blog/jobs-in-pakistan" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Jobs in Pakistan</Link>
@@ -314,7 +314,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   </p>
 
                   <p className="p-4 bg-blue-50 rounded-xl border border-blue-100 text-sm font-semibold text-blue-950">
-                    💡 <strong>Explore Directory Features:</strong> ListPak organizes food businesses by city, area, and cuisine. Explore <Link href="/categories" className="text-blue-700 font-extrabold underline">Business Categories</Link> or add your food business on <Link href="/add-business" className="text-blue-700 font-extrabold underline">ListPak Add Business</Link>.
+                    💡 <strong>Explore Directory Features:</strong> LocalePak organizes food businesses by city, area, and cuisine. Explore <Link href="/categories" className="text-blue-700 font-extrabold underline">Business Categories</Link> or add your food business on <Link href="/add-business" className="text-blue-700 font-extrabold underline">LocalePak Add Business</Link>.
                   </p>
 
                   {/* Section 1: Types of Restaurants */}
@@ -405,13 +405,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     </div>
                   </div>
 
-                  {/* Section 5: ListPak Restaurant & Business Listing */}
+                  {/* Section 5: LocalePak Restaurant & Business Listing */}
                   <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-8 rounded-3xl space-y-4 border border-slate-800">
                     <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                      List Your Restaurant or Food Business on ListPak
+                      List Your Restaurant or Food Business on LocalePak
                     </h2>
                     <p className="text-slate-300 text-sm leading-relaxed">
-                      Are you a restaurant owner, café operator, bakery, or food business in Pakistan? Create a free verified listing on ListPak to showcase your menu link, location, phone number, opening hours, and photos to thousands of local customers.
+                      Are you a restaurant owner, café operator, bakery, or food business in Pakistan? Create a free verified listing on LocalePak to showcase your menu link, location, phone number, opening hours, and photos to thousands of local customers.
                     </p>
                     <div className="pt-2 flex flex-wrap gap-3">
                       <Link href="/add-business" className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl shadow-md transition-all">
@@ -442,7 +442,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
                   {/* Internal Linking Navigation Grid */}
                   <div className="pt-8 border-t border-slate-200 space-y-4">
-                    <h3 className="text-xl font-extrabold text-[#0F172A]">Explore ListPak Directory & Guides</h3>
+                    <h3 className="text-xl font-extrabold text-[#0F172A]">Explore LocalePak Directory & Guides</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
                       <Link href="/blog/jobs-in-pakistan" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Jobs in Pakistan</Link>
                       <Link href="/blog/it-jobs-in-pakistan" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">IT Jobs in Pakistan</Link>
@@ -580,13 +580,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     </p>
                   </div>
 
-                  {/* Section 6: ListPak Education & Professional Directory */}
+                  {/* Section 6: LocalePak Education & Professional Directory */}
                   <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-8 rounded-3xl space-y-4 border border-slate-800">
                     <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                      Discover CS Universities & Training Providers on ListPak
+                      Discover CS Universities & Training Providers on LocalePak
                     </h2>
                     <p className="text-slate-300 text-sm leading-relaxed">
-                      ListPak organizes educational institutions, coding academies, and tech training centers across Pakistan by city and category. Explore verified institutes or list your educational organization.
+                      LocalePak organizes educational institutions, coding academies, and tech training centers across Pakistan by city and category. Explore verified institutes or list your educational organization.
                     </p>
                     <div className="pt-2 flex flex-wrap gap-3">
                       <Link href="/categories" className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition-all">
@@ -617,7 +617,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
                   {/* Internal Linking Navigation Grid */}
                   <div className="pt-8 border-t border-slate-200 space-y-4">
-                    <h3 className="text-xl font-extrabold text-[#0F172A]">Explore ListPak Directory & Education Ecosystem</h3>
+                    <h3 className="text-xl font-extrabold text-[#0F172A]">Explore LocalePak Directory & Education Ecosystem</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
                       <Link href="/blog/universities-in-pakistan" className="p-3 bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-indigo-200">Universities Guide</Link>
                       <Link href="/blog/jobs-in-pakistan" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Jobs in Pakistan</Link>
@@ -758,13 +758,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     </div>
                   </div>
 
-                  {/* Section 6: Find Education Providers on ListPak */}
+                  {/* Section 6: Find Education Providers on LocalePak */}
                   <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-8 rounded-3xl space-y-4 border border-slate-800">
                     <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                      Discover Educational Institutes on ListPak
+                      Discover Educational Institutes on LocalePak
                     </h2>
                     <p className="text-slate-300 text-sm leading-relaxed">
-                      ListPak connects students across Pakistan with verified educational institutions, universities, colleges, computer institutes, tuition academies, and skill development centers organized by city and category.
+                      LocalePak connects students across Pakistan with verified educational institutions, universities, colleges, computer institutes, tuition academies, and skill development centers organized by city and category.
                     </p>
                     <div className="pt-2 flex flex-wrap gap-3">
                       <Link href="/categories" className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition-all">
@@ -795,7 +795,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
                   {/* Internal Linking Suggestions Navigation Grid */}
                   <div className="pt-8 border-t border-slate-200 space-y-4">
-                    <h3 className="text-xl font-extrabold text-[#0F172A]">Explore ListPak Directory & Education Ecosystem</h3>
+                    <h3 className="text-xl font-extrabold text-[#0F172A]">Explore LocalePak Directory & Education Ecosystem</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
                       <Link href="/blog/jobs-in-pakistan" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Jobs in Pakistan</Link>
                       <Link href="/blog/it-jobs-in-pakistan" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">IT Jobs in Pakistan</Link>
@@ -953,13 +953,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     </div>
                   </div>
 
-                  {/* Section 7: Build Your IT Profile on ListPak */}
+                  {/* Section 7: Build Your IT Profile on LocalePak */}
                   <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-8 rounded-3xl space-y-4 border border-slate-800">
                     <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                      Make Your IT Skills Discoverable on ListPak
+                      Make Your IT Skills Discoverable on LocalePak
                     </h2>
                     <p className="text-slate-300 text-sm leading-relaxed">
-                      Instead of relying solely on cold job applications, build a verified professional identity on ListPak. Show your technical skills, GitHub repositories, portfolio links, and education to hiring managers across Pakistan.
+                      Instead of relying solely on cold job applications, build a verified professional identity on LocalePak. Show your technical skills, GitHub repositories, portfolio links, and education to hiring managers across Pakistan.
                     </p>
                     <div className="pt-2 flex flex-wrap gap-3">
                       <Link href="/add-professional" className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl shadow-md transition-all">
@@ -993,7 +993,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
                   {/* Internal Linking Suggestions Navigation Grid */}
                   <div className="pt-8 border-t border-slate-200 space-y-4">
-                    <h3 className="text-xl font-extrabold text-[#0F172A]">Explore ListPak Directory & Tech Jobs Ecosystem</h3>
+                    <h3 className="text-xl font-extrabold text-[#0F172A]">Explore LocalePak Directory & Tech Jobs Ecosystem</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
                       <Link href="/blog/jobs-in-pakistan" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Jobs in Pakistan Guide</Link>
                       <Link href="/jobs" className="p-3 bg-purple-50 text-purple-700 hover:bg-purple-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-purple-200">Job Vacancies Portal</Link>
@@ -1024,7 +1024,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   </p>
 
                   <p>
-                    For private employment, candidates can explore company career pages, professional networks, recruitment platforms and local business directories. <Link href="/jobs" className="text-blue-600 font-bold underline">ListPak Jobs</Link> is building its own directory ecosystem where businesses, hiring companies and professionals can create profiles and become easier to discover.
+                    For private employment, candidates can explore company career pages, professional networks, recruitment platforms and local business directories. <Link href="/jobs" className="text-blue-600 font-bold underline">LocalePak Jobs</Link> is building its own directory ecosystem where businesses, hiring companies and professionals can create profiles and become easier to discover.
                   </p>
 
                   <p className="p-4 bg-emerald-50 rounded-xl border border-emerald-200 text-sm font-semibold text-emerald-950">
@@ -1239,7 +1239,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       </div>
                       <div className="p-4 bg-blue-50/70 rounded-2xl border border-blue-100 space-y-1.5">
                         <strong className="text-sm font-bold text-blue-900 block">2. Build a Professional Profile</strong>
-                        <p>Create a verified professional profile on <Link href="/add-professional" className="text-blue-600 font-bold underline">ListPak Professionals</Link> to highlight your education, skills, and portfolio.</p>
+                        <p>Create a verified professional profile on <Link href="/add-professional" className="text-blue-600 font-bold underline">LocalePak Professionals</Link> to highlight your education, skills, and portfolio.</p>
                       </div>
                       <div className="p-4 bg-blue-50/70 rounded-2xl border border-blue-100 space-y-1.5">
                         <strong className="text-sm font-bold text-blue-900 block">3. Search by Specific Skills</strong>
@@ -1252,13 +1252,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     </div>
                   </div>
 
-                  {/* Section 8: Build Your Professional Profile on ListPak */}
+                  {/* Section 8: Build Your Professional Profile on LocalePak */}
                   <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-8 rounded-3xl space-y-4 border border-slate-800">
                     <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                      Build Your Professional Identity on ListPak
+                      Build Your Professional Identity on LocalePak
                     </h2>
                     <p className="text-slate-300 text-sm leading-relaxed">
-                      Finding a job is not only about searching for vacancies. It is also about making yourself discoverable to top employers. ListPak is developing a directory ecosystem connecting job seekers, professionals, local businesses, and hiring organizations.
+                      Finding a job is not only about searching for vacancies. It is also about making yourself discoverable to top employers. LocalePak is developing a directory ecosystem connecting job seekers, professionals, local businesses, and hiring organizations.
                     </p>
                     <div className="pt-2 flex flex-wrap gap-3">
                       <Link href="/add-professional" className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl shadow-md transition-all">
@@ -1292,7 +1292,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
                   {/* Internal Linking Suggestions Navigation Grid */}
                   <div className="pt-8 border-t border-slate-200 space-y-4">
-                    <h3 className="text-xl font-extrabold text-[#0F172A]">Explore ListPak Directory & Jobs Ecosystem</h3>
+                    <h3 className="text-xl font-extrabold text-[#0F172A]">Explore LocalePak Directory & Jobs Ecosystem</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
                       <Link href="/jobs" className="p-3 bg-purple-50 text-purple-700 hover:bg-purple-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-purple-200">Job Vacancies Portal</Link>
                       <Link href="/post-job" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">Post a Job Opening</Link>
@@ -1503,16 +1503,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     <p>Business directories continue to evolve with technology. Modern platforms now incorporate AI-powered search, voice search optimization, smart recommendations, advanced filtering, rich business profiles, interactive maps, verified business badges, and personalized search experiences.</p>
                   </div>
 
-                  {/* Section 9: Why ListPak Is Building the Future */}
+                  {/* Section 9: Why LocalePak Is Building the Future */}
                   <div className="bg-slate-900 text-white p-8 rounded-3xl space-y-4 border border-slate-800">
                     <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                      Why ListPak Is Building the Future of Pakistan&apos;s Business Directory
+                      Why LocalePak Is Building the Future of Pakistan&apos;s Business Directory
                     </h2>
                     <p className="text-slate-300 text-sm leading-relaxed">
                       Pakistan&apos;s digital economy is growing rapidly, creating opportunities for businesses of all sizes to establish a strong online presence. A modern business directory should not only connect customers with businesses but also support professionals, freelancers, startups, hiring companies, and service providers through comprehensive business profiles and powerful search features.
                     </p>
                     <p className="text-slate-300 text-sm leading-relaxed">
-                      ListPak is designed with this vision in mind, offering organized categories, location-based discovery, detailed business listings, and a user-friendly experience that helps businesses reach more customers while making it easier for users to find trusted services across Pakistan.
+                      LocalePak is designed with this vision in mind, offering organized categories, location-based discovery, detailed business listings, and a user-friendly experience that helps businesses reach more customers while making it easier for users to find trusted services across Pakistan.
                     </p>
                   </div>
 
@@ -1548,7 +1548,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
                   {/* Internal Linking Suggestions Navigation Grid */}
                   <div className="pt-8 border-t border-slate-200 space-y-4">
-                    <h3 className="text-xl font-extrabold text-[#0F172A]">Explore ListPak Directory</h3>
+                    <h3 className="text-xl font-extrabold text-[#0F172A]">Explore LocalePak Directory</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
                       <Link href="/categories" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Business Categories</Link>
                       <Link href="/search" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Browse Businesses</Link>
@@ -1566,7 +1566,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               ) : (
                 <>
                   <p className="text-lg font-normal text-slate-700 leading-relaxed">
-                    Listing your business free on ListPak takes less than 5 minutes and can help you reach thousands of potential customers across Karachi, Lahore, Islamabad, Rawalpindi, Faisalabad, Multan, Peshawar, Quetta, and 150+ cities in Pakistan.
+                    Listing your business free on LocalePak takes less than 5 minutes and can help you reach thousands of potential customers across Karachi, Lahore, Islamabad, Rawalpindi, Faisalabad, Multan, Peshawar, Quetta, and 150+ cities in Pakistan.
                   </p>
 
                   <h2 className="text-2xl font-bold text-[#0F172A] pt-4">1. Why Free Business Listing is Essential for Pakistani Businesses</h2>
@@ -1589,7 +1589,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
               {post.relatedSlugs && post.relatedSlugs.length > 0 && (
                 <section className="pt-8 border-t border-slate-200 space-y-4">
-                  <h2 className="text-xl sm:text-2xl font-extrabold text-[#0F172A]">Related ListPak guides</h2>
+                  <h2 className="text-xl sm:text-2xl font-extrabold text-[#0F172A]">Related LocalePak guides</h2>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {post.relatedSlugs.map((relatedSlug) => {
                       const relatedPost = BLOG_POSTS[relatedSlug]

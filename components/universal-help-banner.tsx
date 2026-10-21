@@ -14,7 +14,7 @@ export default function UniversalHelpBanner() {
               <div className="flex items-center gap-2 mb-1.5">
                 <span className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">
                   <ShieldCheck className="w-3.5 h-3.5" />
-                  ListPak 24/7 Support Desk
+                  LocalePak 24/7 Support Desk
                 </span>
               </div>
               <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white">

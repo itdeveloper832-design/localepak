@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 const INDEXNOW_API_KEY = '43b9d5f2de814afe8a49c2551466070d';
-const HOST = 'www.listpak.com';
+const HOST = 'www.localepak.com';
 const KEY_LOCATION = `https://${HOST}/${INDEXNOW_API_KEY}.txt`;
 
 async function runIndexNowSubmission() {

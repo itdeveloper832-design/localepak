@@ -19,7 +19,7 @@ export default function ClientProviders() {
         expand={true}
         toastOptions={{
           duration: 5000,
-          className: 'listpak-popup-toast',
+          className: 'localepak-popup-toast',
         }}
       />
       <SpeedInsights />

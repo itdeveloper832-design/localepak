@@ -5,10 +5,10 @@ import Footer from '@/components/footer'
 import { Headphones, Mail, Phone, MessageSquare } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Customer Support | ListPak Desk',
-  description: 'Connect with ListPak dedicated support desk for instant help with business listings, verified badges, and directory inquiries.',
+  title: 'Customer Support | LocalePak Desk',
+  description: 'Connect with LocalePak dedicated support desk for instant help with business listings, verified badges, and directory inquiries.',
   alternates: {
-    canonical: 'https://www.listpak.com/support/',
+    canonical: 'https://www.localepak.com/support/',
   },
 }
 
@@ -21,7 +21,7 @@ export default function SupportPage() {
           <div className="max-w-4xl mx-auto px-4">
             <Headphones className="w-12 h-12 text-blue-400 mx-auto mb-4" />
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
-              ListPak Customer Support Desk
+              LocalePak Customer Support Desk
             </h1>
             <p className="mt-4 text-slate-300 text-base sm:text-lg max-w-2xl mx-auto">
               Our support team is available 6 days a week to help resolve platform issues and answer directory questions.
@@ -44,7 +44,7 @@ export default function SupportPage() {
               <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200">
                 <Mail className="w-6 h-6 text-blue-600 mx-auto mb-2" />
                 <h4 className="font-bold text-slate-900 text-sm">Email Support</h4>
-                <p className="text-xs text-slate-500 mt-1">admin@listpak.com</p>
+                <p className="text-xs text-slate-500 mt-1">admin@localepak.com</p>
               </div>
 
               <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200">

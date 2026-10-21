@@ -40,7 +40,7 @@ async function syncToDataTs() {
       phone: data.phone || '+92 300 0000000',
       whatsapp: data.whatsapp || '923000000000',
       email: data.email || 'contact@business.pk',
-      website: data.website || data.websiteUrl || 'https://www.listpak.com',
+      website: data.website || data.websiteUrl || 'https://www.localepak.com',
       address: data.address || 'Pakistan',
       locations: data.locations || [],
       coverImage: data.coverImage || 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
@@ -81,9 +81,9 @@ async function syncToDataTs() {
       expiresAt: data.expiresAt || new Date(Date.now() + 30*86400000).toISOString(),
       status: data.status || 'approved',
       isFeatured: data.isFeatured ?? false,
-      applicationEmail: data.applicationEmail || 'jobs@listpak.com',
+      applicationEmail: data.applicationEmail || 'jobs@localepak.com',
       applicationWhatsapp: data.applicationWhatsapp || '+923000000000',
-      applicationWebsite: data.applicationWebsite || 'https://www.listpak.com'
+      applicationWebsite: data.applicationWebsite || 'https://www.localepak.com'
     });
   });
 
@@ -124,7 +124,7 @@ async function syncToDataTs() {
       verificationStatus: data.verificationStatus || 'VERIFIED',
       phone: data.phone || '+92 300 0000000',
       whatsapp: data.whatsapp || '923000000000',
-      email: data.email || 'contact@listpak.com',
+      email: data.email || 'contact@localepak.com',
       website: data.website || '',
       linkedin: data.linkedin || '',
       github: data.github || '',

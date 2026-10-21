@@ -57,7 +57,7 @@ export default function ExplorePakistanLinks() {
         <div>
           <div className="flex items-center gap-2 text-blue-600 font-bold text-xs uppercase tracking-wider mb-1">
             <Compass className="w-4 h-4" />
-            <span>ListPak Ecosystem</span>
+            <span>LocalePak Ecosystem</span>
           </div>
           <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900">
             Explore Pakistan Directory & Tools

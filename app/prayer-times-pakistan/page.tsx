@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'Prayer Times in Pakistan Today – Namaz Timings',
   description: "Check today's prayer times in Pakistan with Fajr, Sunrise, Dhuhr, Asr, Maghrib and Isha timings. Search your city for local Namaz times.",
   alternates: {
-    canonical: 'https://www.listpak.com/prayer-times-pakistan/',
+    canonical: 'https://www.localepak.com/prayer-times-pakistan/',
   },
   robots: {
     index: true,
@@ -25,8 +25,8 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Prayer Times in Pakistan Today – Namaz Timings',
     description: "Check today's prayer times in Pakistan with Fajr, Sunrise, Dhuhr, Asr, Maghrib and Isha timings. Search your city for local Namaz times.",
-    url: 'https://www.listpak.com/prayer-times-pakistan/',
-    siteName: 'ListPak',
+    url: 'https://www.localepak.com/prayer-times-pakistan/',
+    siteName: 'LocalePak',
     locale: 'en_PK',
     type: 'website',
   },
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
 }
 
 export default function PrayerTimesPakistanPage() {
-  const baseUrl = 'https://www.listpak.com'
+  const baseUrl = 'https://www.localepak.com'
   const pageUrl = `${baseUrl}/prayer-times-pakistan/`
 
   // 1. WebPage Schema
@@ -68,7 +68,7 @@ export default function PrayerTimesPakistanPage() {
     isPartOf: {
       '@type': 'WebSite',
       '@id': `${baseUrl}/#website`,
-      name: 'ListPak',
+      name: 'LocalePak',
       url: `${baseUrl}/`,
     },
   }

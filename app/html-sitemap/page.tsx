@@ -9,10 +9,10 @@ import { MapPin, Sparkles, FileText, Briefcase, Building2, Store } from 'lucide-
 export const revalidate = 3600
 
 export const metadata: Metadata = {
-  title: 'HTML Sitemap | ListPak Directory Structure',
-  description: 'Complete directory index of all verified business listings, industry categories, major cities, job portals, blogs, and legal pages on ListPak.',
+  title: 'HTML Sitemap | LocalePak Directory Structure',
+  description: 'Complete directory index of all verified business listings, industry categories, major cities, job portals, blogs, and legal pages on LocalePak.',
   alternates: {
-    canonical: 'https://www.listpak.com/html-sitemap/',
+    canonical: 'https://www.localepak.com/html-sitemap/',
   },
 }
 
@@ -27,7 +27,7 @@ export default async function HTMLSitemapPage() {
         <div className="max-w-6xl mx-auto bg-white border border-slate-200 rounded-3xl p-8 sm:p-12 shadow-sm space-y-12">
           <div>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              ListPak Complete Website HTML Sitemap
+              LocalePak Complete Website HTML Sitemap
             </h1>
             <p className="text-sm text-slate-500 mt-2">
               Browse the hierarchical index of all public sections, verified business listings, industry categories, city business hubs, and support policies.

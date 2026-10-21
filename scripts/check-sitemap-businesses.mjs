@@ -22,7 +22,7 @@ async function checkSitemapBusinesses() {
       const data = d.data();
       if ((data.status || 'approved') === 'approved') {
         approvedCount++;
-        console.log(`- https://www.listpak.com/business/${data.slug}`);
+        console.log(`- https://www.localepak.com/business/${data.slug}`);
       }
     });
     console.log(`\nTotal approved businesses accessible for sitemap: ${approvedCount}`);

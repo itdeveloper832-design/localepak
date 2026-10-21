@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Business Dashboard | ListPak',
-  description: 'Manage your verified business branches, lead inquiries, and business profile on ListPak.',
+  title: 'Business Dashboard | LocalePak',
+  description: 'Manage your verified business branches, lead inquiries, and business profile on LocalePak.',
   robots: { index: false, follow: false },
 }
 

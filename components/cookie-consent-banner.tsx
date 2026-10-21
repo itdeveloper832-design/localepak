@@ -4,8 +4,8 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Cookie, Shield, Check, X, Settings2 } from 'lucide-react'
 
-export const COOKIE_CONSENT_KEY = 'listpak_cookie_consent'
-export const COOKIE_PREFS_KEY = 'listpak_cookie_preferences'
+export const COOKIE_CONSENT_KEY = 'localepak_cookie_consent'
+export const COOKIE_PREFS_KEY = 'localepak_cookie_preferences'
 
 export interface CookiePreferences {
   essential: boolean
@@ -113,7 +113,7 @@ export default function CookieConsentBanner() {
                 <span>Cookie &amp; Privacy Preferences</span>
               </h2>
               <p className="text-xs text-slate-300 leading-relaxed">
-                ListPak and verified advertising partners (including <strong>Google AdSense</strong>) use cookies to guarantee platform security, analyze search trends, and deliver relevant advertisements. You can accept all or customize preferences at any time. Read our{' '}
+                LocalePak and verified advertising partners (including <strong>Google AdSense</strong>) use cookies to guarantee platform security, analyze search trends, and deliver relevant advertisements. You can accept all or customize preferences at any time. Read our{' '}
                 <Link href="/cookie-policy" className="text-blue-400 underline hover:text-blue-300">
                   Cookie Policy
                 </Link>{' '}
@@ -213,7 +213,7 @@ export default function CookieConsentBanner() {
               <div className="bg-slate-800/60 border border-slate-700/60 rounded-xl p-3.5 flex items-center justify-between">
                 <div className="space-y-0.5 pr-4">
                   <span className="text-xs font-bold text-white">Advertising &amp; Google AdSense</span>
-                  <p className="text-[11px] text-slate-400">Enables relevant advertisements and supports free directory services on ListPak.</p>
+                  <p className="text-[11px] text-slate-400">Enables relevant advertisements and supports free directory services on LocalePak.</p>
                 </div>
                 <label className="relative inline-flex items-center cursor-pointer">
                   <input

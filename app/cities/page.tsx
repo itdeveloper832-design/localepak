@@ -6,13 +6,13 @@ import { MapPin, Building2, ArrowRight } from 'lucide-react'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Cities Directory Pakistan | ListPak Enterprise Hub',
+  title: 'Cities Directory Pakistan | LocalePak Enterprise Hub',
   description: 'Explore business listings, companies, jobs, services, and professionals across Pakistani cities including Karachi, Lahore, Islamabad, Rawalpindi, Faisalabad, Multan, and Peshawar.',
-  alternates: { canonical: 'https://www.listpak.com/cities/' },
+  alternates: { canonical: 'https://www.localepak.com/cities/' },
   openGraph: {
-    title: 'Cities Directory Pakistan | ListPak Enterprise Hub',
+    title: 'Cities Directory Pakistan | LocalePak Enterprise Hub',
     description: 'Explore business listings, companies, jobs, services, and professionals across Pakistani cities including Karachi, Lahore, Islamabad, Rawalpindi, Faisalabad, Multan, and Peshawar.',
-    url: 'https://www.listpak.com/cities/',
+    url: 'https://www.localepak.com/cities/',
     type: 'website',
   },
 }

@@ -78,7 +78,7 @@ export default function PostJobPage() {
   const [reqInput, setReqInput] = useState('')
 
   // Application Method Fields
-  const [applicationMethod, setApplicationMethod] = useState<'both' | 'website' | 'email' | 'listpak'>('both')
+  const [applicationMethod, setApplicationMethod] = useState<'both' | 'website' | 'email' | 'localepak'>('both')
   const [applicationWebsite, setApplicationWebsite] = useState('')
   const [applicationEmail, setApplicationEmail] = useState('')
   const [appMethodError, setAppMethodError] = useState('')
@@ -122,7 +122,7 @@ export default function PostJobPage() {
     const cleanWeb = applicationWebsite.trim()
     const cleanMail = applicationEmail.trim()
 
-    if (applicationMethod !== 'listpak' && !cleanWeb && !cleanMail) {
+    if (applicationMethod !== 'localepak' && !cleanWeb && !cleanMail) {
       const msg = 'Please provide at least an Application Website URL or an Application Email Address.'
       setAppMethodError(msg)
       toast.error(msg)
@@ -188,7 +188,7 @@ export default function PostJobPage() {
             </div>
             <h2 className="text-xl font-extrabold text-slate-900">Job Opening Published!</h2>
             <p className="text-sm text-slate-600 max-w-md mx-auto">
-              Your job posting for <strong className="text-slate-900">{title}</strong> at {company} is now live on ListPak Jobs.
+              Your job posting for <strong className="text-slate-900">{title}</strong> at {company} is now live on LocalePak Jobs.
             </p>
             <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-left text-xs space-y-2">
               <div>

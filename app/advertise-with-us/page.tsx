@@ -5,10 +5,10 @@ import Footer from '@/components/footer'
 import { Megaphone, Target, BarChart3, CheckCircle2, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Advertise With Us | ListPak Commercial & Targeted Media',
-  description: 'Reach thousands of active consumers, employers, and enterprise clients across Pakistan with high-impact targeted advertising on ListPak.',
+  title: 'Advertise With Us | LocalePak Commercial & Targeted Media',
+  description: 'Reach thousands of active consumers, employers, and enterprise clients across Pakistan with high-impact targeted advertising on LocalePak.',
   alternates: {
-    canonical: 'https://www.listpak.com/advertise-with-us/',
+    canonical: 'https://www.localepak.com/advertise-with-us/',
   },
 }
 

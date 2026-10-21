@@ -5,11 +5,11 @@ import Link from 'next/link'
 import { BookOpen, Clock, ArrowRight, Sparkles, TrendingUp, ShieldCheck, Briefcase, FileText, CheckCircle2 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'ListPak Blog – Free Business Listing Tips, SEO Guides & Pakistan Business News',
-  description: 'Read ListPak blog for free business listing tips, local SEO guides, job posting strategies, and Pakistan business news. Expert advice for businesses in Karachi, Lahore, Islamabad.',
-  keywords: 'ListPak blog, free business listing tips, local SEO Pakistan, business directory guide, job posting tips Pakistan, Pakistan business news, online business marketing',
+  title: 'LocalePak Blog – Free Business Listing Tips, SEO Guides & Pakistan Business News',
+  description: 'Read LocalePak blog for free business listing tips, local SEO guides, job posting strategies, and Pakistan business news. Expert advice for businesses in Karachi, Lahore, Islamabad.',
+  keywords: 'LocalePak blog, free business listing tips, local SEO Pakistan, business directory guide, job posting tips Pakistan, Pakistan business news, online business marketing',
   alternates: {
-    canonical: 'https://www.listpak.com/blog/',
+    canonical: 'https://www.localepak.com/blog/',
   },
 }
 
@@ -78,9 +78,9 @@ const FEATURED_POSTS = [
     icon: Sparkles
   },
   {
-    slug: 'how-to-list-business-free-listpak-guide',
-    title: 'How to List Your Business Free on ListPak – Complete Step-by-Step Guide 2026',
-    excerpt: 'Learn exactly how to create your free business listing on ListPak in 5 minutes. This comprehensive guide covers everything from account creation to optimization tips for maximum visibility on Google.',
+    slug: 'how-to-list-business-free-localepak-guide',
+    title: 'How to List Your Business Free on LocalePak – Complete Step-by-Step Guide 2026',
+    excerpt: 'Learn exactly how to create your free business listing on LocalePak in 5 minutes. This comprehensive guide covers everything from account creation to optimization tips for maximum visibility on Google.',
     category: 'Free Business Listing Guide',
     date: 'August 1, 2026',
     readTime: '8 min read',
@@ -185,8 +185,8 @@ export default function BlogPage() {
   const blogSchema = {
     '@context': 'https://schema.org',
     '@type': 'Blog',
-    name: 'ListPak Blog – Free Business Listing Tips & Pakistan Business News',
-    url: 'https://www.listpak.com/blog/',
+    name: 'LocalePak Blog – Free Business Listing Tips & Pakistan Business News',
+    url: 'https://www.localepak.com/blog/',
     description: 'Expert guides on free business listing, local SEO, job posting, and growing your business in Pakistan',
   }
 
@@ -204,11 +204,11 @@ export default function BlogPage() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm font-semibold mb-6">
               <BookOpen className="w-4 h-4 text-emerald-400" />
-              <span>ListPak Knowledge Base & Business Guides</span>
+              <span>LocalePak Knowledge Base & Business Guides</span>
             </div>
 
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-              ListPak Blog – Business Listing Tips, SEO Guides & News
+              LocalePak Blog – Business Listing Tips, SEO Guides & News
             </h1>
 
             <p className="mt-6 text-base sm:text-xl text-slate-300 leading-relaxed font-normal">
@@ -308,7 +308,7 @@ export default function BlogPage() {
         <section className="py-16 bg-[#F8FAFC]">
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-white border border-[#E2E8F0] rounded-2xl p-8 shadow-md text-center">
-              <h2 className="text-2xl font-bold text-[#0F172A] mb-2">Subscribe to ListPak Business Newsletter</h2>
+              <h2 className="text-2xl font-bold text-[#0F172A] mb-2">Subscribe to LocalePak Business Newsletter</h2>
               <p className="text-xs sm:text-sm text-slate-600 mb-6">Get weekly free business listing tips, SEO strategies, and Pakistan business news delivered to your inbox.</p>
 
               <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">

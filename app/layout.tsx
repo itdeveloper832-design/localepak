@@ -11,34 +11,34 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 })
 
 export const metadata: Metadata = {
-  title: "Pakistan Business Directory, Jobs & Professionals | ListPak",
-  description: "Find businesses, companies, jobs, services and professionals across Pakistan. Search by city and category or add your free business listing on ListPak.",
-  metadataBase: new URL('https://www.listpak.com'),
+  title: "Pakistan Business Directory – Find & List Businesses Free | LocalePak",
+  description: "LocalePak is Pakistan's free business directory. Find verified businesses by city & category — or add your business listing free and get found on Google.",
+  metadataBase: new URL('https://www.localepak.com'),
   keywords: [
-    'ListPak Pakistan',
+    'LocalePak Pakistan',
     'Pakistan business directory',
     'free business listing Pakistan',
     'jobs in Pakistan',
     'Pakistani professionals',
     'verified companies Lahore Karachi Islamabad',
-    'ListPak enterprise ecosystem'
+    'LocalePak enterprise ecosystem'
   ],
   icons: {
     icon: [{ url: '/favicon.png', sizes: 'any' }],
     apple: [{ url: '/apple-icon.png', sizes: '180x180', type: 'image/png' }],
   },
   openGraph: {
-    title: "Pakistan Business Directory, Jobs & Professionals | ListPak",
-    description: "Find businesses, companies, jobs, services and professionals across Pakistan. Search by city and category or add your free business listing on ListPak.",
-    url: 'https://www.listpak.com/',
-    siteName: 'ListPak',
+    title: "Pakistan Business Directory – Find & List Businesses Free | LocalePak",
+    description: "LocalePak is Pakistan's free business directory. Find verified businesses by city & category — or add your business listing free and get found on Google.",
+    url: 'https://www.localepak.com/',
+    siteName: 'LocalePak',
     locale: 'en_PK',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Pakistan Business Directory, Jobs & Professionals | ListPak",
-    description: "Find businesses, companies, jobs, services and professionals across Pakistan. Search by city and category or add your free business listing on ListPak.",
+    title: "Pakistan Business Directory – Find & List Businesses Free | LocalePak",
+    description: "LocalePak is Pakistan's free business directory. Find verified businesses by city & category — or add your business listing free and get found on Google.",
   },
   robots: {
     index: true,
@@ -52,11 +52,11 @@ export default function RootLayout({
   const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'ListPak',
-    url: 'https://www.listpak.com/',
+    name: 'LocalePak',
+    url: 'https://www.localepak.com/',
     potentialAction: {
       '@type': 'SearchAction',
-      target: 'https://www.listpak.com/search?q={search_term_string}',
+      target: 'https://www.localepak.com/search?q={search_term_string}',
       'query-input': 'required name=search_term_string'
     }
   }
@@ -64,11 +64,11 @@ export default function RootLayout({
   const organizationSchema = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'ListPak',
-    url: 'https://www.listpak.com/',
-    logo: 'https://www.listpak.com/logo.png',
+    name: 'LocalePak',
+    url: 'https://www.localepak.com/',
+    logo: 'https://www.localepak.com/logo.png',
     telephone: '+92 334 5636230',
-    email: 'admin@listpak.com',
+    email: 'admin@localepak.com',
     address: {
       '@type': 'PostalAddress',
       streetAddress: 'Office 303, Evacuee Trust Complex, F-5/1',

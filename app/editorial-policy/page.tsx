@@ -3,10 +3,10 @@ import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 
 export const metadata: Metadata = {
-  title: 'Editorial Policy | ListPak - Pakistan Business Directory',
-  description: 'Our standards for publishing, reviewing, and fact-checking business listings, blogs, and market insights on ListPak.',
+  title: 'Editorial Policy | LocalePak - Pakistan Business Directory',
+  description: 'Our standards for publishing, reviewing, and fact-checking business listings, blogs, and market insights on LocalePak.',
   alternates: {
-    canonical: 'https://www.listpak.com/editorial-policy/',
+    canonical: 'https://www.localepak.com/editorial-policy/',
   },
 }
 
@@ -20,12 +20,12 @@ export default function EditorialPolicyPage() {
             Editorial & Publishing Policy
           </h1>
           <p className="text-sm text-slate-500 mb-8 border-b border-slate-100 pb-4">
-            Last Updated: August 2026 • ListPak Enterprise Ecosystem
+            Last Updated: August 2026 • LocalePak Enterprise Ecosystem
           </p>
 
           <div className="space-y-6 text-sm text-slate-600 leading-relaxed">
             <p>
-              At <strong>ListPak</strong>, we are committed to maintaining the highest level of integrity, accuracy, and trustworthiness across all published articles, business profiles, and city marketplace guides.
+              At <strong>LocalePak</strong>, we are committed to maintaining the highest level of integrity, accuracy, and trustworthiness across all published articles, business profiles, and city marketplace guides.
             </p>
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">1. Content Verification</h2>

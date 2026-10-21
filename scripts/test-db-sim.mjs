@@ -2,8 +2,8 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 import fs from 'fs';
 
-// Let's test with branches (ListPak) first
-const firebaseConfigListPak = {
+// Let's test with branches (LocalePak) first
+const firebaseConfigLocalePak = {
   apiKey: process.env.FIREBASE_API_KEY || "AIzaSyDummyKeyForDevelopment123456789",
   authDomain: process.env.FIREBASE_AUTH_DOMAIN || "app-local.firebaseapp.com",
   projectId: process.env.FIREBASE_PROJECT_ID || "app-local",
@@ -23,13 +23,13 @@ const firebaseConfigBizNest = {
 };
 
 // Read data.ts from branches
-const content = fs.readFileSync('d:/listpak/branches/lib/data.ts', 'utf8');
+const content = fs.readFileSync('d:/localepak/branches/lib/data.ts', 'utf8');
 const s = content.indexOf('export const MOCK_BUSINESSES: BusinessItem[] = ');
 const start = content.indexOf('[', s);
 const end = content.indexOf('export const MOCK_COMPANIES', start);
 const mockBiz = JSON.parse(content.slice(start, end).trim().replace(/;\s*$/, ''));
 
-console.log('MOCK_BUSINESSES in ListPak data.ts:', mockBiz.length);
+console.log('MOCK_BUSINESSES in LocalePak data.ts:', mockBiz.length);
 
 // What about usa-dollar-pr data.ts?
 if (fs.existsSync('d:/usa-dollar-pr/lib/data.ts')) {

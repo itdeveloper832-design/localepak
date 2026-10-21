@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-const content = fs.readFileSync('d:/listpak/branches/lib/data.ts', 'utf8');
+const content = fs.readFileSync('d:/localepak/branches/lib/data.ts', 'utf8');
 
 function extractExport(name) {
   const marker = `export const ${name}`;

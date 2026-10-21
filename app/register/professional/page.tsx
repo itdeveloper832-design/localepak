@@ -65,7 +65,7 @@ export default function ProfessionalRegisterPage() {
       }
 
       // Store professional user session
-      sessionStorage.setItem('listpak_user_session', JSON.stringify({
+      sessionStorage.setItem('localepak_user_session', JSON.stringify({
         name: fullName.trim(),
         email: email.trim(),
         role: 'professional',

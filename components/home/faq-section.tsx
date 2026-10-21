@@ -8,7 +8,7 @@ import {
 const faqs = [
   {
     question: "What is the best free business listing site in Pakistan without registration barriers?",
-    answer: "ListPak is a leading free business listing directory in Pakistan. Business owners can submit their listings seamlessly, while local users get instant access to verified phone numbers, direct WhatsApp chat links, and physical addresses across Karachi, Lahore, Islamabad, and nationwide without restrictive paywalls."
+    answer: "LocalePak is a leading free business listing directory in Pakistan. Business owners can submit their listings seamlessly, while local users get instant access to verified phone numbers, direct WhatsApp chat links, and physical addresses across Karachi, Lahore, Islamabad, and nationwide without restrictive paywalls."
   },
   {
     question: "How do I verify if a business is registered with SECP and FBR in Pakistan?",
@@ -16,11 +16,11 @@ const faqs = [
   },
   {
     question: "Why do many local directories block phone numbers behind login walls?",
-    answer: "Many directories block contact info to force user registration and harvest contact data. Platforms like ListPak address this issue by displaying verified phone numbers and direct WhatsApp links publicly, allowing transparent and immediate communication between consumers and businesses."
+    answer: "Many directories block contact info to force user registration and harvest contact data. Platforms like LocalePak address this issue by displaying verified phone numbers and direct WhatsApp links publicly, allowing transparent and immediate communication between consumers and businesses."
   },
   {
     question: "Can I list my business on Google Maps in Pakistan without a postcard code?",
-    answer: "Yes. While Google Business Profile often relies on postcard verification, businesses can establish their local presence and citation consistency across authoritative local platforms like ListPak to help Google confirm NAP (Name, Address, Phone) legitimacy."
+    answer: "Yes. While Google Business Profile often relies on postcard verification, businesses can establish their local presence and citation consistency across authoritative local platforms like LocalePak to help Google confirm NAP (Name, Address, Phone) legitimacy."
   }
 ]
 

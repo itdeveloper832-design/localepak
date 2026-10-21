@@ -76,8 +76,8 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
 
   const hasData = cityBusinesses.length > 0 || cityJobs.length > 0 || cityPros.length > 0
 
-  const title = `Businesses in ${cityName}, Pakistan | ListPak`
-  const description = `Explore businesses, services, jobs and professionals in ${cityName}, Pakistan. Browse verified local listings on ListPak.`
+  const title = `Businesses in ${cityName}, Pakistan | LocalePak`
+  const description = `Explore businesses, services, jobs and professionals in ${cityName}, Pakistan. Browse verified local listings on LocalePak.`
   const canonicalUrl = toCanonicalUrl(`city/${citySlug}`)
 
   return {
@@ -87,7 +87,7 @@ export async function generateMetadata(props: { params: Promise<{ slug: string }
       title,
       description,
       url: canonicalUrl,
-      siteName: 'ListPak',
+      siteName: 'LocalePak',
       locale: 'en_PK',
       type: 'website',
     },
@@ -131,7 +131,7 @@ export default async function CityDetailPage(props: { params: Promise<{ slug: st
     name: `Businesses in ${cityName}, Pakistan`,
     description: `Explore businesses, services, jobs and professionals in ${cityName}, Pakistan.`,
     url: canonicalUrl,
-    isPartOf: { '@type': 'WebSite', name: 'ListPak', url: 'https://www.listpak.com/' },
+    isPartOf: { '@type': 'WebSite', name: 'LocalePak', url: 'https://www.localepak.com/' },
     mainEntity: {
       '@type': 'ItemList',
       itemListElement: cityBusinesses.map((biz, idx) => ({
@@ -151,13 +151,13 @@ export default async function CityDetailPage(props: { params: Promise<{ slug: st
         '@type': 'ListItem',
         position: 1,
         name: 'Home',
-        item: 'https://listpak.com/'
+        item: 'https://www.localepak.com/'
       },
       {
         '@type': 'ListItem',
         position: 2,
         name: 'Cities',
-        item: 'https://listpak.com/cities/'
+        item: 'https://www.localepak.com/cities/'
       },
       {
         '@type': 'ListItem',
@@ -223,7 +223,7 @@ export default async function CityDetailPage(props: { params: Promise<{ slug: st
           <section className="bg-white rounded-2xl border border-slate-200 p-6 space-y-4">
             <p className="text-sm text-slate-700 leading-relaxed">{seoCopy.intro}</p>
             <p className="text-xs text-slate-600 leading-relaxed">{seoCopy.guidance}</p>
-            <nav aria-label="Related ListPak guides" className="flex flex-wrap gap-2">
+            <nav aria-label="Related LocalePak guides" className="flex flex-wrap gap-2">
               {seoCopy.links.map((link) => (
                 <Link key={link.href} href={link.href} className="rounded-lg bg-blue-50 px-3 py-2 text-xs font-bold text-blue-700 hover:bg-blue-100">
                   {link.label}

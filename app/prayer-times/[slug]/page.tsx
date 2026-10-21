@@ -64,15 +64,23 @@ export async function generateMetadata(props: {
 
   if (!cityName) {
     return {
-      title: 'City Prayer Times Not Found | ListPak',
+      title: 'City Prayer Times Not Found | LocalePak',
       robots: { index: false, follow: false },
     }
   }
 
   const citySlug = cityName.toLowerCase().replace(/\s+/g, '-')
+  // Phase 4 rule: only proven high-demand prayer cities stay indexable; the long
+  // tail earned impressions but ~0 clicks and dilutes the directory's topical focus.
+  const INDEXABLE_PRAYER_CITY_SLUGS = [
+    'islamabad', 'kallar-syedan', 'lahore', 'shujabad', 'sohawa', 'timergara',
+    'rawalpindi', 'sarai-alamgir', 'samundri', 'hassan-abdal', 'batkhela',
+    'peshawar', 'karachi',
+  ]
+  const isIndexableCity = INDEXABLE_PRAYER_CITY_SLUGS.includes(citySlug)
   const title = `Prayer Times in ${cityName} Today – Namaz Timings ${cityName}`
   const description = `Check today's prayer times in ${cityName}, Pakistan with Fajr, Sunrise, Dhuhr, Asr, Maghrib and Isha timings. Accurate live Namaz timings and countdown for ${cityName}.`
-  const canonicalUrl = `https://www.listpak.com/prayer-times-${citySlug}-today/`
+  const canonicalUrl = `https://www.localepak.com/prayer-times-${citySlug}-today/`
 
   return {
     title,
@@ -81,10 +89,10 @@ export async function generateMetadata(props: {
       canonical: canonicalUrl,
     },
     robots: {
-      index: true,
+      index: isIndexableCity,
       follow: true,
       googleBot: {
-        index: true,
+        index: isIndexableCity,
         follow: true,
         'max-video-preview': -1,
         'max-image-preview': 'large',
@@ -95,7 +103,7 @@ export async function generateMetadata(props: {
       title,
       description,
       url: canonicalUrl,
-      siteName: 'ListPak',
+      siteName: 'LocalePak',
       locale: 'en_PK',
       type: 'website',
     },
@@ -132,7 +140,7 @@ export default async function CityPrayerTimesPage(props: {
   }
 
   const citySlug = cityName.toLowerCase().replace(/\s+/g, '-')
-  const baseUrl = 'https://www.listpak.com'
+  const baseUrl = 'https://www.localepak.com'
   const pageUrl = `${baseUrl}/prayer-times-${citySlug}-today/`
   const pkNow = getPakistanDateTime()
   const displayDate = formatPakistanDisplayDate(pkNow)
@@ -186,7 +194,7 @@ export default async function CityPrayerTimesPage(props: {
     isPartOf: {
       '@type': 'WebSite',
       '@id': `${baseUrl}/#website`,
-      name: 'ListPak',
+      name: 'LocalePak',
       url: `${baseUrl}/`,
     },
   }
