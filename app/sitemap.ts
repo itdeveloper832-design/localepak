@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { CATEGORIES, CITIES } from '@/lib/data'
+import { CATEGORIES, CITIES, TOP_CITIES } from '@/lib/data'
 import { BLOG_POSTS } from '@/lib/blog-data'
 
 const BASE = 'https://www.localepak.com'
@@ -13,18 +13,17 @@ function citySlug(name: string): string {
 }
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const currentDate = new Date()
-
+  // Indexable core + policy pages only. /search is noindex, and
+  // /login, /register, /dashboard are auth/utility pages — none belong here.
   const corePages = [
     '',
     '/about',
     '/contact',
     '/categories',
     '/cities',
+    '/businesses',
+    '/companies',
     '/blog',
-    '/search',
-    '/login',
-    '/register',
     '/faqs',
     '/help-center',
     '/support',
@@ -47,33 +46,44 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/report-abuse',
   ]
 
+  // No lastModified on static routes: stamping every URL with "today"
+  // is a false freshness signal, so the field is omitted entirely.
   const coreRoutes = [...corePages, ...policyPages].map((path) => ({
     url: canonicalUrl(path),
-    lastModified: currentDate,
     changeFrequency: 'weekly' as const,
     priority: path === '' ? 1.0 : 0.6,
   }))
 
   const categoryRoutes = CATEGORIES.map((cat) => ({
     url: canonicalUrl(`/category/${cat.id}`),
-    lastModified: currentDate,
     changeFrequency: 'weekly' as const,
     priority: 0.8,
   }))
 
   const cityRoutes = CITIES.map((city) => ({
     url: canonicalUrl(`/city/${citySlug(city)}`),
-    lastModified: currentDate,
     changeFrequency: 'weekly' as const,
     priority: 0.8,
   }))
 
-  const blogRoutes = Object.values(BLOG_POSTS).map((post) => ({
-    url: canonicalUrl(`/blog/${post.slug}`),
-    lastModified: post.dateModified ? new Date(post.dateModified) : currentDate,
-    changeFrequency: 'monthly' as const,
-    priority: 0.7,
-  }))
+  const cityCategoryRoutes = TOP_CITIES.flatMap((city) =>
+    CATEGORIES.map((cat) => ({
+      url: canonicalUrl(`/city/${citySlug(city)}/${cat.id}`),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }))
+  )
 
-  return [...coreRoutes, ...categoryRoutes, ...cityRoutes, ...blogRoutes]
+  const blogRoutes = Object.values(BLOG_POSTS).map((post) => {
+    const realDate = post.dateModified || post.date
+    const parsed = realDate ? new Date(realDate) : null
+    return {
+      url: canonicalUrl(`/blog/${post.slug}`),
+      ...(parsed && !Number.isNaN(parsed.getTime()) ? { lastModified: parsed } : {}),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }
+  })
+
+  return [...coreRoutes, ...categoryRoutes, ...cityRoutes, ...cityCategoryRoutes, ...blogRoutes]
 }

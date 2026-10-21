@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
+import OwnerCtaBand from '@/components/owner-cta-band'
+import ListBusinessCta from '@/components/list-business-cta'
 import { CATEGORIES, TOP_CITIES } from '@/lib/data'
 import { generateCategoryContent } from '@/lib/seo-content'
 import { getCategorySeoCopy } from '@/lib/seo-directory-content'
@@ -85,11 +87,11 @@ export default async function CategoryPage(props: {
             {TOP_CITIES.map(city => (
               <Link
                 key={city}
-                href={`/city/${cityToSlug(city)}`}
+                href={`/city/${cityToSlug(city)}/${cat.id}`}
                 className="p-3.5 bg-white hover:bg-blue-600 rounded-xl border border-slate-200 text-slate-700 hover:text-white transition-all flex items-center gap-2 font-semibold text-xs group"
               >
                 <MapPin className="w-3.5 h-3.5 text-blue-600 group-hover:text-white" />
-                <span>{city}</span>
+                <span>{cat.name} in {city}</span>
               </Link>
             ))}
           </div>
@@ -143,9 +145,21 @@ export default async function CategoryPage(props: {
             ))}
           </div>
         </section>
+
+        <OwnerCtaBand
+          title={`Run a ${cat.name} business? Get listed free.`}
+          text={`Add your business to the ${cat.name} category: a free profile with call and WhatsApp buttons, hours, services and products — shown in your city and in search after a quick review.`}
+          links={[
+            { label: 'All businesses', href: '/businesses' },
+            { label: 'All companies', href: '/companies' },
+            { label: 'Browse cities', href: '/cities' },
+            { label: 'Listing guidelines', href: '/business-listing-guidelines' },
+          ]}
+        />
       </main>
 
       <Footer />
+      <ListBusinessCta />
     </div>
   )
 }

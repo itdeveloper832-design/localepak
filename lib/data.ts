@@ -52,7 +52,7 @@ export const TOP_CITIES = [
 
 export const CATEGORIES = [
   { id: 'restaurants', name: 'Restaurants & Food', icon: 'restaurant', color: '#f59e0b', desc: 'Find local cafes, fine dining, fast food, and food caterers' },
-  { id: 'real-estate', name: 'Real Estate & Property', icon: 'real-estate', color: '#10b981', desc: 'Verified property dealers, builders, and real estate consultants' },
+  { id: 'real-estate', name: 'Real Estate & Property', icon: 'real-estate', color: '#10b981', desc: 'Property dealers, builders, and real estate consultants' },
   { id: 'technology', name: 'Technology & IT', icon: 'technology', color: '#3b82f6', desc: 'Software houses, web developers, mobile apps, and IT agencies' },
   { id: 'healthcare', name: 'Healthcare & Medical', icon: 'healthcare', color: '#ef4444', desc: 'Hospitals, specialist doctors, diagnostic labs, and pharmacies' },
   { id: 'education', name: 'Education & Training', icon: 'education', color: '#8b5cf6', desc: 'Schools, universities, academies, and professional institutes' },

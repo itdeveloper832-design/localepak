@@ -3,7 +3,7 @@ import { CheckCircle } from 'lucide-react'
 
 const perks = [
   'Free to list – no credit card required',
-  'Reach thousands of local customers',
+  'Put your business in front of local searchers',
   'Manage your business profile easily',
   'Get found on Google and other search engines',
 ]
@@ -19,7 +19,7 @@ export default function CTASection() {
           List Your Company <span className="text-[#60a5fa]">Free</span> Today
         </h2>
         <p className="mt-4 text-white/65 text-lg max-w-xl mx-auto text-pretty">
-          Join thousands of businesses and professionals already growing with LocalePak, the premier Pakistan business directory.
+          List your business on LocalePak, the free Pakistan business directory built for local discovery.
           It&apos;s completely free and takes less than 2 minutes.
         </p>
 

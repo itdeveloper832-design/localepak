@@ -53,7 +53,7 @@ export default function ContactPage() {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
     name: 'Contact LocalePak: Free Business Listing Website Pakistan',
-    description: 'Contact LocalePak support for business listing assistance, professional profile help, job-posting questions, directory support, and technical issues.',
+    description: 'Contact LocalePak support for business listing assistance, company profiles, job-posting questions, directory support, and technical issues.',
     url: 'https://www.localepak.com/contact/',
   }
 
@@ -73,7 +73,7 @@ export default function ContactPage() {
               Contact LocalePak: Business Support & Inquiries
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-300 max-w-3xl mx-auto leading-relaxed">
-              Need help with a business listing, professional profile, job posting, or directory feature? Contact LocalePak support with the relevant details so the team can review your question.
+              Need help with a business listing, company profile, job posting, or directory feature? Contact LocalePak support with the relevant details so the team can review your question.
             </p>
           </div>
         </section>
@@ -121,7 +121,7 @@ export default function ContactPage() {
                   <li><strong>Official Helpline:</strong> +92 334 5636230</li>
                   <li>                  <strong>Listed address:</strong> Office 303, Evacuee Trust Complex, F-5/1, Islamabad 44000, Pakistan</li>
                 </ul>
-                <p className="text-xs text-[#64748B] leading-relaxed">Assistance with creating free business listings, profile verification, and job postings.</p>
+                <p className="text-xs text-[#64748B] leading-relaxed">Assistance with creating free business listings, listing reviews, and job postings.</p>
               </div>
 
               {/* WhatsApp Support */}

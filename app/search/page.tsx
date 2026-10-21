@@ -1,19 +1,33 @@
 'use client'
 
-import { useMemo, Suspense } from 'react'
+import { useMemo, useState, useEffect, Suspense } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
-import { CATEGORIES, CITIES } from '@/lib/data'
+import { CATEGORIES, CITIES, TOP_CITIES } from '@/lib/data'
 import { BLOG_POSTS } from '@/lib/blog-data'
-import { Search, MapPin, LayoutGrid, BookOpen } from 'lucide-react'
+import { db } from '@/lib/firebase'
+import { collection, query, where, getDocs } from 'firebase/firestore'
+import { Search, MapPin, LayoutGrid, BookOpen, Building2, Briefcase, ArrowRight } from 'lucide-react'
 
 type Result = {
-  type: 'Category' | 'City' | 'Guide'
+  type: 'Business' | 'Company' | 'Category' | 'City' | 'Guide'
   title: string
   snippet: string
   href: string
+}
+
+const TYPE_FILTERS = ['All', 'Businesses', 'Companies', 'Categories', 'Cities', 'Blog'] as const
+type TypeFilter = (typeof TYPE_FILTERS)[number]
+
+function matchesFilter(type: Result['type'], filter: TypeFilter): boolean {
+  if (filter === 'All') return true
+  if (filter === 'Businesses') return type === 'Business'
+  if (filter === 'Companies') return type === 'Company'
+  if (filter === 'Categories') return type === 'Category'
+  if (filter === 'Cities') return type === 'City'
+  return type === 'Guide'
 }
 
 function cityToSlug(name: string): string {
@@ -45,24 +59,73 @@ function SearchResults() {
   const searchParams = useSearchParams()
   const q = (searchParams.get('q') || '').trim()
   const city = (searchParams.get('city') || '').trim()
+  const [liveItems, setLiveItems] = useState<Result[]>([])
+  const [typeFilter, setTypeFilter] = useState<TypeFilter>('All')
+
+  // Merge live, approved businesses + companies into the search index.
+  useEffect(() => {
+    let cancelled = false
+    const load = async () => {
+      const items: Result[] = []
+      try {
+        const bizSnap = await getDocs(query(collection(db, 'businesses'), where('status', '==', 'approved')))
+        bizSnap.forEach((d) => {
+          const data = d.data() as any
+          if (!data.name || !data.slug) return
+          const label = data.category || data.mainCategory || 'Business'
+          items.push({
+            type: 'Business',
+            title: data.name,
+            snippet: `${label}${data.city ? ` in ${data.city}` : ''} — view contact details, hours, services and reviews.`,
+            href: `/business/${data.slug}`,
+          })
+        })
+      } catch {
+        // Live inventory is an enhancement; taxonomy results still work without it.
+      }
+      try {
+        const compSnap = await getDocs(query(collection(db, 'companies'), where('status', '==', 'approved')))
+        compSnap.forEach((d) => {
+          const data = d.data() as any
+          if (!data.name || !data.slug) return
+          const label = data.industry || data.category || 'Company'
+          items.push({
+            type: 'Company',
+            title: data.name,
+            snippet: `${label} company${data.city ? ` based in ${data.city}` : ''} — view the company profile and contact details.`,
+            href: `/company/${data.slug}`,
+          })
+        })
+      } catch {
+        // Same graceful fallback as above.
+      }
+      if (!cancelled) setLiveItems(items)
+    }
+    load()
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   const results = useMemo(() => {
     const query = q.toLowerCase()
     const cityQuery = city.toLowerCase()
-    return INDEX.filter(item => {
+    return [...liveItems, ...INDEX].filter(item => {
       const matchesQuery = !query ||
         item.title.toLowerCase().includes(query) ||
         item.snippet.toLowerCase().includes(query)
       const matchesCity = !cityQuery ||
         item.title.toLowerCase().includes(cityQuery) ||
         item.snippet.toLowerCase().includes(cityQuery)
-      return matchesQuery && matchesCity
+      return matchesQuery && matchesCity && matchesFilter(item.type, typeFilter)
     }).slice(0, 60)
-  }, [q, city])
+  }, [q, city, liveItems, typeFilter])
 
   const iconFor = (type: Result['type']) =>
     type === 'City' ? <MapPin className="w-5 h-5 text-emerald-600" />
     : type === 'Guide' ? <BookOpen className="w-5 h-5 text-amber-600" />
+    : type === 'Business' ? <Building2 className="w-5 h-5 text-blue-600" />
+    : type === 'Company' ? <Briefcase className="w-5 h-5 text-indigo-600" />
     : <LayoutGrid className="w-5 h-5 text-blue-600" />
 
   return (
@@ -90,20 +153,66 @@ function SearchResults() {
           <p className="text-xs text-slate-400" role="status">
             {q || city
               ? `${results.length} result${results.length === 1 ? '' : 's'}${q ? ` for "${q}"` : ''}${city ? ` in ${city}` : ''}`
-              : 'Search across all categories, city guides and blog articles.'}
+              : 'Search listed businesses and companies, all categories, city guides and blog articles.'}
           </p>
+          <div className="flex flex-wrap gap-2" role="group" aria-label="Filter results by type">
+            {TYPE_FILTERS.map((filter) => (
+              <button
+                key={filter}
+                type="button"
+                onClick={() => setTypeFilter(filter)}
+                aria-pressed={typeFilter === filter}
+                className={`px-3.5 py-1.5 rounded-full text-xs font-bold border transition-colors cursor-pointer ${
+                  typeFilter === filter
+                    ? 'bg-blue-600 border-blue-600 text-white'
+                    : 'bg-white/10 border-white/20 text-slate-200 hover:bg-white/20'
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
+          </div>
         </div>
       </section>
 
       <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
         {results.length === 0 ? (
-          <div className="bg-white rounded-2xl border border-slate-200 p-10 text-center space-y-3">
-            <h2 className="font-extrabold text-slate-900 text-lg">No results found</h2>
-            <p className="text-sm text-slate-500">
-              Try a different keyword, or browse the{' '}
-              <Link href="/categories" className="text-blue-600 font-semibold hover:underline">categories</Link> and{' '}
-              <Link href="/cities" className="text-blue-600 font-semibold hover:underline">cities</Link> directly.
-            </p>
+          <div className="bg-white rounded-2xl border border-slate-200 p-10 text-center space-y-5">
+            <div className="space-y-2">
+              <h2 className="font-extrabold text-slate-900 text-lg">No results found</h2>
+              <p className="text-sm text-slate-500 max-w-md mx-auto">
+                Nothing matches that search yet. LocalePak is a growing directory — the business you are
+                looking for may simply not be listed yet.
+              </p>
+            </div>
+            <Link
+              href="/add-business"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors"
+            >
+              Run this business? Add it free <ArrowRight className="w-4 h-4" />
+            </Link>
+            <div className="pt-2 space-y-3">
+              <p className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Popular categories</p>
+              <div className="flex flex-wrap justify-center gap-2">
+                {CATEGORIES.slice(0, 6).map((cat) => (
+                  <Link key={cat.id} href={`/category/${cat.id}`} className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs font-semibold text-slate-700 hover:border-blue-500">
+                    {cat.name}
+                  </Link>
+                ))}
+              </div>
+              <p className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Popular cities</p>
+              <div className="flex flex-wrap justify-center gap-2">
+                {TOP_CITIES.slice(0, 8).map((c) => (
+                  <Link key={c} href={`/city/${cityToSlug(c)}`} className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs font-semibold text-slate-700 hover:border-blue-500">
+                    {c}
+                  </Link>
+                ))}
+              </div>
+              <p className="text-xs text-slate-500">
+                Or browse all <Link href="/categories" className="text-blue-600 font-semibold hover:underline">categories</Link> and{' '}
+                <Link href="/cities" className="text-blue-600 font-semibold hover:underline">cities</Link> directly.
+              </p>
+            </div>
           </div>
         ) : (
           <ul className="space-y-4">

@@ -6,7 +6,7 @@ import { Headphones, Mail, Phone, MessageSquare } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Customer Support | LocalePak Desk',
-  description: 'Connect with LocalePak dedicated support desk for instant help with business listings, verified badges, and directory inquiries.',
+  description: 'Connect with the LocalePak support desk for help with business listings, listing reviews, and directory inquiries.',
   alternates: {
     canonical: 'https://www.localepak.com/support/',
   },

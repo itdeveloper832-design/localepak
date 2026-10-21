@@ -23,7 +23,9 @@ export default function CareersPage() {
               Build the Future of Digital Pakistan
             </h1>
             <p className="mt-4 text-slate-300 text-base sm:text-lg max-w-2xl mx-auto">
-              Join our engineering, product, sales, and community management teams in Islamabad and remote across Pakistan.
+              LocalePak is a small, founder-led team, and we have no open roles right now. The roles below
+              describe the kind of help we expect to hire for as the directory grows — speculative
+              applications are welcome in the meantime.
             </p>
           </div>
         </section>

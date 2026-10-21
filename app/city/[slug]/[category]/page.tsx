@@ -1,0 +1,196 @@
+import React from 'react'
+import { Metadata } from 'next'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import Navbar from '@/components/navbar'
+import Footer from '@/components/footer'
+import OwnerCtaBand from '@/components/owner-cta-band'
+import ListBusinessCta from '@/components/list-business-cta'
+import { CITIES, CATEGORIES, TOP_CITIES } from '@/lib/data'
+import { CITY_INFO, generateCityCategoryContent } from '@/lib/seo-content'
+import MarkdownContent from '@/components/seo/markdown-content'
+import CityCategoryListings from './listings'
+import { MapPin, Building2, ArrowRight } from 'lucide-react'
+
+function cityToSlug(name: string): string {
+  return name.toLowerCase().replace(/\s+/g, '-')
+}
+
+function resolveCity(slug: string): string | null {
+  return CITIES.find(c => cityToSlug(c) === slug.toLowerCase()) || null
+}
+
+function resolveCategory(slug: string) {
+  return CATEGORIES.find(c => c.id === slug.toLowerCase()) || null
+}
+
+export const dynamicParams = true
+
+export function generateStaticParams() {
+  return TOP_CITIES.flatMap(city =>
+    CATEGORIES.map(cat => ({ slug: cityToSlug(city), category: cat.id }))
+  )
+}
+
+function metaDescription(city: string, categoryId: string, categoryName: string): string {
+  const md = generateCityCategoryContent(city, categoryId)
+  const firstPara = md
+    .split(/\n{2,}/)
+    .map(s => s.trim())
+    .find(s => s.length > 0 && !s.startsWith('#'))
+  const text = (firstPara || `${categoryName} businesses and services in ${city}, Pakistan.`)
+    .replace(/[#*_]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+  return text.length > 160 ? `${text.slice(0, 157).trimEnd()}...` : text
+}
+
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string; category: string }>
+}): Promise<Metadata> {
+  const params = await props.params
+  const city = resolveCity(params.slug)
+  const cat = resolveCategory(params.category)
+  if (!city || !cat) {
+    return { title: 'Page Not Found | LocalePak', robots: { index: false, follow: false } }
+  }
+  const title = `${cat.name} in ${city} | LocalePak`
+  const description = metaDescription(city, cat.id, cat.name)
+  const canonical = `https://www.localepak.com/city/${cityToSlug(city)}/${cat.id}`
+  return {
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: { title, description, url: canonical, siteName: 'LocalePak', locale: 'en_PK', type: 'website' },
+    twitter: { card: 'summary_large_image', title, description },
+  }
+}
+
+export default async function CityCategoryPage(props: {
+  params: Promise<{ slug: string; category: string }>
+}) {
+  const params = await props.params
+  const city = resolveCity(params.slug)
+  const cat = resolveCategory(params.category)
+  if (!city || !cat) notFound()
+
+  const citySlug = cityToSlug(city)
+  const info = CITY_INFO[city]
+  const guide = generateCityCategoryContent(city, cat.id)
+  const otherCategories = CATEGORIES.filter(c => c.id !== cat.id).slice(0, 8)
+  const otherCities = TOP_CITIES.filter(c => c !== city).slice(0, 10)
+
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://www.localepak.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Cities', item: 'https://www.localepak.com/cities/' },
+      { '@type': 'ListItem', position: 3, name: city, item: `https://www.localepak.com/city/${citySlug}/` },
+      { '@type': 'ListItem', position: 4, name: cat.name, item: `https://www.localepak.com/city/${citySlug}/${cat.id}/` },
+    ],
+  }
+
+  return (
+    <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans">
+      <Navbar />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+
+      <main id="main-content" className="flex-1">
+        {/* Hero */}
+        <section className="bg-slate-900 text-white py-14 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-5xl mx-auto space-y-4">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold border border-blue-500/30">
+              <Building2 className="w-3.5 h-3.5" />
+              {city} · {info ? info.province : 'Pakistan'}
+            </span>
+            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
+              {cat.name} <span className="text-blue-400">in {city}</span>
+            </h1>
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-3xl">
+              {cat.desc}. Browse the approved {cat.name.toLowerCase()} businesses listed in {city} so far,
+              read our local guide, and contact providers directly by phone or WhatsApp.
+            </p>
+            <p className="text-xs text-slate-400 flex items-center gap-1.5">
+              <MapPin className="w-3.5 h-3.5 text-emerald-400" />
+              <Link href={`/city/${citySlug}`} className="hover:text-emerald-300 font-semibold">
+                See all businesses and categories in {city}
+              </Link>
+            </p>
+          </div>
+        </section>
+
+        {/* Listings */}
+        <section className="py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6">
+          <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+            Listed {cat.name} in {city}
+          </h2>
+          <CityCategoryListings city={city} citySlug={citySlug} categoryId={cat.id} categoryName={cat.name} />
+        </section>
+
+        {/* Guide */}
+        <section className="bg-white py-14 px-4 sm:px-6 lg:px-8 border-y border-slate-200/80">
+          <div className="max-w-4xl mx-auto">
+            <MarkdownContent content={guide} />
+          </div>
+        </section>
+
+        {/* More categories in this city */}
+        <section className="py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6">
+          <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+            More Categories in {city}
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+            {otherCategories.map(c => (
+              <Link
+                key={c.id}
+                href={`/city/${citySlug}/${c.id}`}
+                className="bg-white rounded-2xl p-5 border border-slate-200/80 hover:border-blue-500 hover:shadow-md transition-all group"
+              >
+                <Building2 className="w-6 h-6 text-blue-600 mb-2" />
+                <h3 className="font-bold text-slate-900 text-sm group-hover:text-blue-600">{c.name} in {city}</h3>
+                <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">{c.desc}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* Same category in other cities */}
+        <section className="pb-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-6">
+          <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+            {cat.name} in Other Cities
+          </h2>
+          <div className="flex flex-wrap gap-2.5">
+            {otherCities.map(c => (
+              <Link
+                key={c}
+                href={`/city/${cityToSlug(c)}/${cat.id}`}
+                className="px-3.5 py-2 bg-white border border-slate-200 rounded-xl hover:border-blue-500 text-xs font-medium inline-flex items-center gap-1"
+              >
+                {cat.name} in {c}
+                <ArrowRight className="w-3 h-3" />
+              </Link>
+            ))}
+            <Link href={`/category/${cat.id}`} className="px-3.5 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 text-xs font-bold">
+              {cat.name} Across Pakistan
+            </Link>
+          </div>
+        </section>
+
+        <OwnerCtaBand
+          title={`Run a ${cat.name.toLowerCase()} business in ${city}?`}
+          text={`List it free on this page: register, complete the eight-step form, and after review your profile appears here with call and WhatsApp buttons customers can use directly.`}
+          links={[
+            { label: `All businesses in ${city}`, href: `/city/${citySlug}` },
+            { label: `${cat.name} across Pakistan`, href: `/category/${cat.id}` },
+            { label: 'Browse all businesses', href: '/businesses' },
+            { label: 'Listing guidelines', href: '/business-listing-guidelines' },
+          ]}
+        />
+      </main>
+
+      <Footer />
+      <ListBusinessCta />
+    </div>
+  )
+}

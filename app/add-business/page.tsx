@@ -1,0 +1,696 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import Navbar from '@/components/navbar'
+import Footer from '@/components/footer'
+import { Building2, ArrowLeft, ArrowRight, Info, X, Plus, CheckCircle2 } from 'lucide-react'
+import { toast } from 'sonner'
+import { auth, db } from '@/lib/firebase'
+import { onAuthStateChanged, User } from 'firebase/auth'
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+import { CATEGORIES, CITIES } from '@/lib/data'
+
+function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+type DayKey = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'
+type DayHours = { open: string; close: string; closed: boolean }
+
+const DAY_KEYS: DayKey[] = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
+const DAY_LABELS: Record<DayKey, string> = {
+  mon: 'Monday',
+  tue: 'Tuesday',
+  wed: 'Wednesday',
+  thu: 'Thursday',
+  fri: 'Friday',
+  sat: 'Saturday',
+  sun: 'Sunday',
+}
+
+function defaultHours(): Record<DayKey, DayHours> {
+  const open: DayHours = { open: '09:00', close: '18:00', closed: false }
+  return {
+    mon: { ...open },
+    tue: { ...open },
+    wed: { ...open },
+    thu: { ...open },
+    fri: { ...open },
+    sat: { ...open },
+    sun: { open: '09:00', close: '18:00', closed: true },
+  }
+}
+
+type Product = { name: string; price: string }
+
+type FormState = {
+  name: string
+  email: string
+  phone: string
+  whatsapp: string
+  mainCategory: string
+  secondaryCategory: string
+  city: string
+  address: string
+  area: string
+  mapsUrl: string
+  hours: Record<DayKey, DayHours>
+  services: string[]
+  products: Product[]
+  website: string
+  facebook: string
+  instagram: string
+  youtube: string
+  description: string
+  tags: string
+}
+
+const initialForm: FormState = {
+  name: '',
+  email: '',
+  phone: '',
+  whatsapp: '',
+  mainCategory: '',
+  secondaryCategory: '',
+  city: '',
+  address: '',
+  area: '',
+  mapsUrl: '',
+  hours: defaultHours(),
+  services: [],
+  products: [],
+  website: '',
+  facebook: '',
+  instagram: '',
+  youtube: '',
+  description: '',
+  tags: '',
+}
+
+const STEP_TITLES = [
+  'Basic Info',
+  'Categories',
+  'Location',
+  'Business Hours',
+  'Services',
+  'Products',
+  'Online Presence',
+  'Description & Publish',
+]
+
+const inputClass =
+  'w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600'
+const labelClass = 'block text-xs font-bold text-slate-700 mb-1'
+
+function isValidPakistaniPhone(value: string): boolean {
+  const normalized = value.replace(/[\s-]/g, '')
+  return /^(\+92|0)?3\d{9}$/.test(normalized) || normalized.replace(/\D/g, '').length >= 10
+}
+
+function isValidEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())
+}
+
+export default function AddBusinessPage() {
+  const router = useRouter()
+  const [user, setUser] = useState<User | null>(null)
+  const [authLoading, setAuthLoading] = useState(true)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [step, setStep] = useState(1)
+  const [stepError, setStepError] = useState('')
+  const [form, setForm] = useState<FormState>(initialForm)
+  const [serviceInput, setServiceInput] = useState('')
+  const [productName, setProductName] = useState('')
+  const [productPrice, setProductPrice] = useState('')
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (u) => {
+      if (!u) {
+        router.push('/login')
+        return
+      }
+      setUser(u)
+      setAuthLoading(false)
+    })
+    return () => unsub()
+  }, [router])
+
+  const set = <K extends keyof FormState>(key: K, value: FormState[K]) => {
+    setForm((f) => ({ ...f, [key]: value }))
+    setStepError('')
+  }
+
+  const setDayHours = (day: DayKey, patch: Partial<DayHours>) => {
+    setForm((f) => ({ ...f, hours: { ...f.hours, [day]: { ...f.hours[day], ...patch } } }))
+    setStepError('')
+  }
+
+  const applyMondayToWeek = () => {
+    setForm((f) => {
+      const mon = f.hours.mon
+      const next = { ...f.hours }
+      DAY_KEYS.forEach((key) => {
+        if (!next[key].closed) {
+          next[key] = { ...next[key], open: mon.open, close: mon.close }
+        }
+      })
+      return { ...f, hours: next }
+    })
+    toast.success('Monday hours applied to all open days.')
+  }
+
+  const validateStep = (s: number): string => {
+    switch (s) {
+      case 1:
+        if (!form.name.trim()) return 'Business name is required.'
+        if (!isValidEmail(form.email)) return 'Please enter a valid business email address.'
+        if (!isValidPakistaniPhone(form.phone)) return 'Please enter a valid Pakistani phone number (e.g. 0300 1234567).'
+        if (form.whatsapp.trim() && !isValidPakistaniPhone(form.whatsapp)) return 'Please enter a valid WhatsApp number, or leave it empty to use your phone number.'
+        return ''
+      case 2:
+        if (!form.mainCategory) return 'Please select a main category.'
+        if (form.secondaryCategory && form.secondaryCategory === form.mainCategory)
+          return 'Secondary category cannot be the same as the main category.'
+        return ''
+      case 3:
+        if (!form.city) return 'Please select your city.'
+        if (!form.address.trim()) return 'Complete address is required.'
+        return ''
+      case 4:
+        for (const key of DAY_KEYS) {
+          const d = form.hours[key]
+          if (!d.closed && (!d.open || !d.close)) return `Please set open and close times for ${DAY_LABELS[key]}, or mark it closed.`
+        }
+        return ''
+      case 8:
+        if (form.description.trim().length < 30) return 'Description must be at least 30 characters so customers understand your business.'
+        return ''
+      default:
+        return ''
+    }
+  }
+
+  const goNext = () => {
+    const err = validateStep(step)
+    if (err) {
+      setStepError(err)
+      return
+    }
+    setStepError('')
+    setStep((s) => Math.min(8, s + 1))
+  }
+
+  const goBack = () => {
+    setStepError('')
+    setStep((s) => Math.max(1, s - 1))
+  }
+
+  const addService = () => {
+    const value = serviceInput.trim()
+    if (!value) return
+    if (form.services.includes(value)) {
+      setServiceInput('')
+      return
+    }
+    set('services', [...form.services, value])
+    setServiceInput('')
+  }
+
+  const addProduct = () => {
+    const name = productName.trim()
+    if (!name) return
+    set('products', [...form.products, { name, price: productPrice.trim() }])
+    setProductName('')
+    setProductPrice('')
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (step < 8) {
+      goNext()
+      return
+    }
+    const err = validateStep(8)
+    if (err) {
+      setStepError(err)
+      return
+    }
+    if (!user) return
+    setIsSubmitting(true)
+    try {
+      const tags = form.tags
+        .split(',')
+        .map((t) => t.trim())
+        .filter(Boolean)
+      await addDoc(collection(db, 'businesses'), {
+        name: form.name.trim(),
+        slug: `${slugify(form.name)}-${slugify(form.city)}`,
+        email: form.email.trim(),
+        phone: form.phone.trim(),
+        whatsapp: form.whatsapp.trim() || form.phone.trim(),
+        category: form.mainCategory,
+        mainCategory: form.mainCategory,
+        secondaryCategory: form.secondaryCategory,
+        city: form.city,
+        address: form.address.trim(),
+        area: form.area.trim(),
+        mapsUrl: form.mapsUrl.trim(),
+        hours: form.hours,
+        services: form.services,
+        products: form.products,
+        website: form.website.trim(),
+        facebook: form.facebook.trim(),
+        instagram: form.instagram.trim(),
+        youtube: form.youtube.trim(),
+        description: form.description.trim(),
+        tags,
+        ownerId: user.uid,
+        ownerEmail: user.email || '',
+        ownerName: user.displayName || '',
+        status: 'pending',
+        createdAt: serverTimestamp(),
+      })
+      toast.success('Business submitted for review.')
+      router.push('/dashboard')
+    } catch (err: any) {
+      toast.error(`Could not submit your business: ${err?.message || 'Unknown error'}`)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  if (authLoading) {
+    return (
+      <>
+        <Navbar />
+        <main className="bg-[#F8FAFC] min-h-screen py-16 px-4 flex items-center justify-center">
+          <p className="text-sm text-slate-400">Loading...</p>
+        </main>
+        <Footer />
+      </>
+    )
+  }
+
+  const progressPct = (step / 8) * 100
+
+  return (
+    <>
+      <Navbar />
+      <main className="bg-[#F8FAFC] text-slate-800 font-sans min-h-screen py-16 px-4">
+        <div className="max-w-2xl mx-auto bg-white border border-slate-200 rounded-3xl p-8 shadow-xl">
+          <div className="text-center mb-6">
+            <div className="inline-flex p-3 rounded-2xl bg-blue-50 text-blue-600 mb-3">
+              <Building2 className="w-8 h-8" />
+            </div>
+            <h1 className="text-2xl font-bold text-slate-900">Add Your Business</h1>
+            <p className="text-xs text-slate-500 mt-1">Free listing — reach customers across Pakistan</p>
+          </div>
+
+          {/* Progress */}
+          <div className="mb-8">
+            <div className="flex items-center justify-between text-xs font-bold mb-2">
+              <span className="text-slate-700">
+                Step {step} of 8 — <span className="text-blue-600">{STEP_TITLES[step - 1]}</span>
+              </span>
+              <span className="text-slate-400">{Math.round(progressPct)}%</span>
+            </div>
+            <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-blue-600 rounded-full transition-all duration-300"
+                style={{ width: `${progressPct}%` }}
+              />
+            </div>
+            <div className="hidden sm:flex justify-between mt-2">
+              {STEP_TITLES.map((title, i) => (
+                <span
+                  key={title}
+                  className={`text-[10px] font-semibold ${i + 1 === step ? 'text-blue-600' : i + 1 < step ? 'text-emerald-600' : 'text-slate-300'}`}
+                >
+                  {title}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {stepError && (
+            <div className="mb-4 p-3.5 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 font-medium">
+              {stepError}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {step === 1 && (
+              <div className="space-y-4">
+                <div>
+                  <label className={labelClass}>Business Name *</label>
+                  <input type="text" required value={form.name} onChange={(e) => set('name', e.target.value)} placeholder="Pak Tech Solutions" className={inputClass} />
+                </div>
+                <div>
+                  <label className={labelClass}>Business Email *</label>
+                  <input type="email" required value={form.email} onChange={(e) => set('email', e.target.value)} placeholder="info@yourbusiness.pk" className={inputClass} />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className={labelClass}>Business Phone *</label>
+                    <input type="tel" required value={form.phone} onChange={(e) => set('phone', e.target.value)} placeholder="+92 300 1234567" className={inputClass} />
+                  </div>
+                  <div>
+                    <label className={labelClass}>WhatsApp</label>
+                    <input type="tel" value={form.whatsapp} onChange={(e) => set('whatsapp', e.target.value)} placeholder="Same as phone if empty" className={inputClass} />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {step === 2 && (
+              <div className="space-y-4">
+                <div>
+                  <label className={labelClass}>Main Category *</label>
+                  <select required value={form.mainCategory} onChange={(e) => set('mainCategory', e.target.value)} className={inputClass}>
+                    <option value="" disabled>Select a category</option>
+                    {CATEGORIES.map((cat) => (
+                      <option key={cat.id} value={cat.name}>{cat.name}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className={labelClass}>Secondary Category</label>
+                  <select value={form.secondaryCategory} onChange={(e) => set('secondaryCategory', e.target.value)} className={inputClass}>
+                    <option value="">None</option>
+                    {CATEGORIES.map((cat) => (
+                      <option key={cat.id} value={cat.name} disabled={cat.name === form.mainCategory}>
+                        {cat.name}
+                      </option>
+                    ))}
+                  </select>
+                  <p className="text-[11px] text-slate-400 mt-1">Optional — pick a second category if your business fits more than one. It cannot be the same as your main category.</p>
+                </div>
+              </div>
+            )}
+
+            {step === 3 && (
+              <div className="space-y-4">
+                <div>
+                  <label className={labelClass}>City *</label>
+                  <select required value={form.city} onChange={(e) => set('city', e.target.value)} className={inputClass}>
+                    <option value="" disabled>Select a city</option>
+                    {CITIES.map((c) => (
+                      <option key={c} value={c}>{c}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className={labelClass}>Complete Address *</label>
+                  <textarea required value={form.address} onChange={(e) => set('address', e.target.value)} rows={2} placeholder="Shop 12, Main Boulevard, Gulberg III" className={inputClass} />
+                </div>
+                <div>
+                  <label className={labelClass}>Area / Locality</label>
+                  <input type="text" value={form.area} onChange={(e) => set('area', e.target.value)} placeholder="Gulberg, DHA, Clifton..." className={inputClass} />
+                </div>
+                <div>
+                  <label className={labelClass}>Google Maps Link</label>
+                  <input type="url" value={form.mapsUrl} onChange={(e) => set('mapsUrl', e.target.value)} placeholder="https://maps.google.com/..." className={inputClass} />
+                </div>
+              </div>
+            )}
+
+            {step === 4 && (
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <p className="text-xs text-slate-500">Set opening hours for each day, or mark a day closed.</p>
+                  <button type="button" onClick={applyMondayToWeek} className="text-xs font-bold text-blue-600 hover:underline cursor-pointer whitespace-nowrap ml-3">
+                    Same hours all week
+                  </button>
+                </div>
+                {DAY_KEYS.map((key) => {
+                  const d = form.hours[key]
+                  return (
+                    <div key={key} className="flex flex-wrap items-center gap-3 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3">
+                      <span className="w-24 text-sm font-bold text-slate-700">{DAY_LABELS[key]}</span>
+                      <input
+                        type="time"
+                        value={d.open}
+                        disabled={d.closed}
+                        onChange={(e) => setDayHours(key, { open: e.target.value })}
+                        className="px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm disabled:opacity-40"
+                      />
+                      <span className="text-slate-400 text-xs font-bold">to</span>
+                      <input
+                        type="time"
+                        value={d.close}
+                        disabled={d.closed}
+                        onChange={(e) => setDayHours(key, { close: e.target.value })}
+                        className="px-3 py-2 bg-white border border-slate-200 rounded-lg text-sm disabled:opacity-40"
+                      />
+                      <label className="flex items-center gap-1.5 text-xs font-semibold text-slate-600 ml-auto cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={d.closed}
+                          onChange={(e) => setDayHours(key, { closed: e.target.checked })}
+                          className="w-4 h-4 accent-red-500"
+                        />
+                        Closed
+                      </label>
+                    </div>
+                  )
+                })}
+              </div>
+            )}
+
+            {step === 5 && (
+              <div className="space-y-4">
+                <p className="text-xs text-slate-500">
+                  Add the services you offer so customers can find you faster — for example <em>Home Delivery</em>, <em>Free Installation</em>, or <em>24/7 Emergency Service</em>. This step is optional, but listings with services get more calls.
+                </p>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={serviceInput}
+                    onChange={(e) => setServiceInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault()
+                        addService()
+                      }
+                    }}
+                    placeholder="e.g. Home Delivery"
+                    className={inputClass}
+                  />
+                  <button type="button" onClick={addService} className="shrink-0 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl flex items-center gap-1.5 cursor-pointer">
+                    <Plus className="w-4 h-4" /> Add
+                  </button>
+                </div>
+                {form.services.length > 0 ? (
+                  <div className="flex flex-wrap gap-2">
+                    {form.services.map((service) => (
+                      <span key={service} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-700 border border-blue-100 rounded-full text-xs font-semibold">
+                        {service}
+                        <button
+                          type="button"
+                          onClick={() => set('services', form.services.filter((s) => s !== service))}
+                          className="text-blue-400 hover:text-red-500 cursor-pointer"
+                          aria-label={`Remove ${service}`}
+                        >
+                          <X className="w-3.5 h-3.5" />
+                        </button>
+                      </span>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-xs text-slate-400 italic">No services added yet.</p>
+                )}
+              </div>
+            )}
+
+            {step === 6 && (
+              <div className="space-y-4">
+                <p className="text-xs text-slate-500">
+                  List your main products with prices (price is optional) — for example <em>Chicken Biryani — Rs 350</em>. This step is optional.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <input type="text" value={productName} onChange={(e) => setProductName(e.target.value)} placeholder="Product name" className={inputClass} />
+                  <input type="text" value={productPrice} onChange={(e) => setProductPrice(e.target.value)} placeholder="Price (e.g. Rs 350)" className="w-full sm:w-44 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600" />
+                  <button type="button" onClick={addProduct} className="shrink-0 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl flex items-center justify-center gap-1.5 cursor-pointer">
+                    <Plus className="w-4 h-4" /> Add
+                  </button>
+                </div>
+                {form.products.length > 0 ? (
+                  <ul className="divide-y divide-slate-100 border border-slate-200 rounded-xl overflow-hidden">
+                    {form.products.map((product, i) => (
+                      <li key={`${product.name}-${i}`} className="flex items-center justify-between px-4 py-2.5 bg-slate-50 text-sm">
+                        <span className="font-medium text-slate-700">{product.name}</span>
+                        <span className="flex items-center gap-3">
+                          {product.price && <span className="text-xs font-bold text-emerald-600">{product.price}</span>}
+                          <button
+                            type="button"
+                            onClick={() => set('products', form.products.filter((_, idx) => idx !== i))}
+                            className="text-slate-400 hover:text-red-500 cursor-pointer"
+                            aria-label={`Remove ${product.name}`}
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-xs text-slate-400 italic">No products added yet.</p>
+                )}
+              </div>
+            )}
+
+            {step === 7 && (
+              <div className="space-y-4">
+                <div>
+                  <label className={labelClass}>Website</label>
+                  <input type="url" value={form.website} onChange={(e) => set('website', e.target.value)} placeholder="https://yourbusiness.pk" className={inputClass} />
+                </div>
+                <div>
+                  <label className={labelClass}>Facebook Page</label>
+                  <input type="url" value={form.facebook} onChange={(e) => set('facebook', e.target.value)} placeholder="https://facebook.com/yourbusiness" className={inputClass} />
+                </div>
+                <div>
+                  <label className={labelClass}>Instagram</label>
+                  <input type="url" value={form.instagram} onChange={(e) => set('instagram', e.target.value)} placeholder="https://instagram.com/yourbusiness" className={inputClass} />
+                </div>
+                <div>
+                  <label className={labelClass}>YouTube Channel</label>
+                  <input type="url" value={form.youtube} onChange={(e) => set('youtube', e.target.value)} placeholder="https://youtube.com/@yourbusiness" className={inputClass} />
+                </div>
+              </div>
+            )}
+
+            {step === 8 && (
+              <div className="space-y-5">
+                <div>
+                  <label className={labelClass}>Business Description *</label>
+                  <textarea
+                    required
+                    value={form.description}
+                    onChange={(e) => set('description', e.target.value)}
+                    rows={4}
+                    placeholder="Tell customers what your business offers, your experience, and why they should choose you (at least 30 characters)."
+                    className={inputClass}
+                  />
+                  <p className={`text-[11px] mt-1 font-medium ${form.description.trim().length >= 30 ? 'text-emerald-600' : 'text-slate-400'}`}>
+                    {form.description.trim().length}/30 characters minimum
+                  </p>
+                </div>
+                <div>
+                  <label className={labelClass}>Tags / Keywords</label>
+                  <input
+                    type="text"
+                    value={form.tags}
+                    onChange={(e) => set('tags', e.target.value)}
+                    placeholder="biryani, karahi, family dinner (comma-separated)"
+                    className={inputClass}
+                  />
+                </div>
+
+                <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4 text-xs text-slate-600">
+                  <h3 className="font-extrabold text-slate-900 text-sm flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Review your business
+                  </h3>
+                  <div>
+                    <p className="font-bold text-slate-800 mb-1">Basic Info</p>
+                    <p>{form.name} · {form.email} · {form.phone}{form.whatsapp ? ` · WhatsApp: ${form.whatsapp}` : ' · WhatsApp: same as phone'}</p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-slate-800 mb-1">Categories</p>
+                    <p>{form.mainCategory}{form.secondaryCategory ? ` · also: ${form.secondaryCategory}` : ''}</p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-slate-800 mb-1">Location</p>
+                    <p>{form.city}{form.area ? ` — ${form.area}` : ''} · {form.address}{form.mapsUrl ? ' · Maps link added' : ''}</p>
+                  </div>
+                  <div>
+                    <p className="font-bold text-slate-800 mb-1">Business Hours</p>
+                    <p>
+                      {DAY_KEYS.map((key) => {
+                        const d = form.hours[key]
+                        return `${DAY_LABELS[key].slice(0, 3)}: ${d.closed ? 'Closed' : `${d.open}–${d.close}`}`
+                      }).join(' · ')}
+                    </p>
+                  </div>
+                  {form.services.length > 0 && (
+                    <div>
+                      <p className="font-bold text-slate-800 mb-1">Services</p>
+                      <p>{form.services.join(', ')}</p>
+                    </div>
+                  )}
+                  {form.products.length > 0 && (
+                    <div>
+                      <p className="font-bold text-slate-800 mb-1">Products</p>
+                      <p>{form.products.map((p) => (p.price ? `${p.name} (${p.price})` : p.name)).join(', ')}</p>
+                    </div>
+                  )}
+                  {(form.website || form.facebook || form.instagram || form.youtube) && (
+                    <div>
+                      <p className="font-bold text-slate-800 mb-1">Online Presence</p>
+                      <p>{[form.website, form.facebook, form.instagram, form.youtube].filter(Boolean).join(' · ')}</p>
+                    </div>
+                  )}
+                  {form.tags.trim() && (
+                    <div>
+                      <p className="font-bold text-slate-800 mb-1">Tags</p>
+                      <p>{form.tags}</p>
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex gap-2.5 p-3.5 bg-blue-50 border border-blue-100 rounded-xl text-xs text-slate-600">
+                  <Info className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                  <span>Your listing goes through a quick review and appears publicly on LocalePak after approval.</span>
+                </div>
+              </div>
+            )}
+
+            {/* Navigation */}
+            <div className="flex items-center justify-between pt-2 border-t border-slate-100">
+              {step > 1 ? (
+                <button
+                  type="button"
+                  onClick={goBack}
+                  className="px-5 py-2.5 bg-white border border-slate-200 hover:border-blue-500 text-slate-700 font-bold text-sm rounded-xl flex items-center gap-2 cursor-pointer transition-colors"
+                >
+                  <ArrowLeft className="w-4 h-4" /> Back
+                </button>
+              ) : (
+                <span />
+              )}
+
+              {step < 8 ? (
+                <button
+                  type="button"
+                  onClick={goNext}
+                  className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl flex items-center gap-2 cursor-pointer transition-colors shadow-md"
+                >
+                  Next <ArrowRight className="w-4 h-4" />
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl flex items-center gap-2 cursor-pointer transition-colors shadow-md disabled:opacity-50"
+                >
+                  {isSubmitting ? 'Submitting...' : 'Submit Business for Review'}
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+
+            <p className="text-center text-[11px] text-slate-400">
+              Need help? See the <Link href="/business-listing-guidelines" className="text-blue-600 font-semibold hover:underline">listing guidelines</Link>.
+            </p>
+          </form>
+        </div>
+      </main>
+      <Footer />
+    </>
+  )
+}

@@ -25,6 +25,9 @@ const CORE_LINKS: { label: string; href: string }[] = [
   { label: 'My Dashboard', href: '/dashboard' },
   { label: 'All Categories', href: '/categories' },
   { label: 'All Cities', href: '/cities' },
+  { label: 'All Businesses', href: '/businesses' },
+  { label: 'All Companies', href: '/companies' },
+  { label: 'Add Your Business — Free', href: '/add-business' },
   { label: 'Blog', href: '/blog' },
   { label: 'Careers', href: '/careers' },
   { label: 'Advertise With Us', href: '/advertise-with-us' },
@@ -91,15 +94,31 @@ export default function HtmlSitemapPage() {
               <LinkList items={CATEGORIES.map(c => ({ label: c.name, href: `/category/${c.id}` }))} />
             </section>
 
-            <section aria-label="Top cities" className="bg-white rounded-3xl border border-slate-200 p-7">
-              <h2 className="font-extrabold text-slate-900 text-lg mb-4">Top Cities</h2>
-              <LinkList items={TOP_CITIES.map(c => ({ label: `Businesses in ${c}`, href: `/city/${cityToSlug(c)}` }))} />
-              <p className="text-xs text-slate-400 mt-4">
-                Plus guides for {CITIES.length - TOP_CITIES.length} more cities — see the{' '}
-                <Link href="/cities" className="text-blue-700 hover:underline font-medium">cities index</Link>.
-              </p>
+            <section aria-label="All cities" className="bg-white rounded-3xl border border-slate-200 p-7">
+              <h2 className="font-extrabold text-slate-900 text-lg mb-4">All Cities ({CITIES.length})</h2>
+              <div className="max-h-96 overflow-y-auto pr-2">
+                <LinkList items={CITIES.map(c => ({ label: `Businesses in ${c}`, href: `/city/${cityToSlug(c)}` }))} />
+              </div>
             </section>
           </div>
+
+          <section aria-label="Top cities by category" className="bg-white rounded-3xl border border-slate-200 p-7">
+            <h2 className="font-extrabold text-slate-900 text-lg mb-4">Top Cities by Category</h2>
+            <p className="text-xs text-slate-500 mb-4">
+              Every category has a dedicated page in each of our {TOP_CITIES.length} top cities —{' '}
+              {TOP_CITIES.length * CATEGORIES.length} pages in total. A selection:
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10">
+              <LinkList
+                items={TOP_CITIES.slice(0, 10).flatMap(c =>
+                  CATEGORIES.slice(0, 3).map(cat => ({
+                    label: `${cat.name} in ${c}`,
+                    href: `/city/${cityToSlug(c)}/${cat.id}`,
+                  }))
+                )}
+              />
+            </div>
+          </section>
 
           <section aria-label="Blog articles" className="bg-white rounded-3xl border border-slate-200 p-7">
             <h2 className="font-extrabold text-slate-900 text-lg mb-4">Blog Articles & Guides</h2>

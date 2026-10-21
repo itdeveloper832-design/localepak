@@ -4,20 +4,21 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import {
   Search, MapPin, ChevronRight, ArrowRight, ShieldCheck, Globe,
-  BookOpen, Mail, Sparkles, LayoutGrid, Compass
+  BookOpen, Sparkles, LayoutGrid, Compass, Building2, MessageCircle, ListChecks
 } from 'lucide-react'
 import { CATEGORIES, TOP_CITIES } from '@/lib/data'
+import ListBusinessCta from '@/components/list-business-cta'
 import { BLOG_POSTS } from '@/lib/blog-data'
 
 export const metadata: Metadata = {
   title: "Pakistan Business Directory – Find & List Businesses Free | LocalePak",
-  description: "LocalePak is Pakistan's free business directory. Find verified businesses by city & category — or add your business listing free and get found on Google.",
+  description: "LocalePak is Pakistan's free business directory. Find local businesses by city & category — or add your business listing free and get found on Google.",
   alternates: {
     canonical: 'https://www.localepak.com/',
   },
   openGraph: {
     title: "Pakistan Business Directory – Find & List Businesses Free | LocalePak",
-    description: "LocalePak is Pakistan's free business directory. Find verified businesses by city & category — or add your business listing free and get found on Google.",
+    description: "LocalePak is Pakistan's free business directory. Find local businesses by city & category — or add your business listing free and get found on Google.",
     url: 'https://www.localepak.com/',
     siteName: 'LocalePak',
     locale: 'en_PK',
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Pakistan Business Directory – Find & List Businesses Free | LocalePak",
-    description: "LocalePak is Pakistan's free business directory. Find verified businesses by city & category — or add your business listing free and get found on Google.",
+    description: "LocalePak is Pakistan's free business directory. Find local businesses by city & category — or add your business listing free and get found on Google.",
   },
 }
 
@@ -45,7 +46,7 @@ const FAQS = [
   },
   {
     question: 'I run a business. How can I get listed?',
-    answer: 'Business listings are being prepared for launch. In the meantime, read our listing guide on the blog or contact us and we will let you know as soon as free listings open.'
+    answer: 'Create a free account, then complete the Add Business form — eight short steps covering your contact details, category, city, opening hours, services and products. Our team reviews every submission, and once it is approved your business gets its own profile page and appears in its category, city and search results.'
   }
 ]
 
@@ -57,19 +58,6 @@ export default function HomePage() {
   const latestPosts = Object.values(BLOG_POSTS)
     .sort((a, b) => (a.date < b.date ? 1 : -1))
     .slice(0, 3)
-
-  const websiteSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'LocalePak',
-    url: 'https://www.localepak.com/',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: 'https://www.localepak.com/search?q={search_term_string}',
-      'query-input': 'required name=search_term_string'
-    },
-    description: 'Pakistan business directory with city and category guides for local businesses and services'
-  }
 
   const faqSchema = {
     '@context': 'https://schema.org',
@@ -85,7 +73,6 @@ export default function HomePage() {
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans">
       <Navbar />
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
 
       <main id="main-content">
@@ -160,6 +147,26 @@ export default function HomePage() {
                 <Link href="/category/healthcare" className="hover:text-blue-600 font-semibold">Healthcare</Link>
                 <span>•</span>
                 <Link href="/blog" className="hover:text-emerald-600 font-bold">Business Guides &rarr;</Link>
+              </div>
+
+              <div className="mt-4 pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 px-2">
+                <p className="text-xs sm:text-sm text-slate-600 font-medium">
+                  <strong className="text-slate-900">Own a business?</strong> Get a free profile page and let customers find you.
+                </p>
+                <div className="flex items-center gap-2.5 shrink-0">
+                  <Link
+                    href="/add-business"
+                    className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors"
+                  >
+                    Add Your Business — Free
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="px-5 py-2.5 bg-white border border-slate-200 hover:border-blue-500 text-slate-700 font-bold text-xs rounded-xl transition-colors"
+                  >
+                    Create Free Account
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -293,9 +300,63 @@ export default function HomePage() {
               <div className="bg-[#F8FAFC] p-6 rounded-2xl border border-slate-200/80 space-y-3">
                 <Globe className="w-8 h-8 text-purple-600" />
                 <h3 className="font-bold text-slate-900 text-base">Built to Rank on Google</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">Fast, server-rendered pages with structured data — so when the directory's listings open, businesses get profiles that search engines can properly read.</p>
+                <p className="text-xs text-slate-600 leading-relaxed">Fast, server-rendered pages with structured data — so listed businesses get profile pages that search engines can properly read.</p>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* FOR BUSINESS OWNERS */}
+        <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+          <div className="text-center max-w-3xl mx-auto space-y-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">For Business Owners</span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              Put Your Business on LocalePak — Free
+            </h2>
+            <p className="text-slate-500 text-xs sm:text-sm">
+              Register in minutes, complete the eight-step Add Business form, and after a quick review your business gets its own page on Pakistan's business directory.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-white p-6 rounded-2xl border border-slate-200/80 space-y-3">
+              <Building2 className="w-8 h-8 text-blue-600" />
+              <h3 className="font-bold text-slate-900 text-base">Your Own Profile Page</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">A dedicated page for your business with your name, description, address and contact details — built to be read properly by Google.</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl border border-slate-200/80 space-y-3">
+              <Search className="w-8 h-8 text-emerald-600" />
+              <h3 className="font-bold text-slate-900 text-base">Found in Category, City & Search</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">Approved listings appear on their category page, their city page and in LocalePak search — the three places customers actually look.</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl border border-slate-200/80 space-y-3">
+              <MessageCircle className="w-8 h-8 text-emerald-600" />
+              <h3 className="font-bold text-slate-900 text-base">Calls & WhatsApp, Directly to You</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">Your profile carries Call and WhatsApp buttons, so customers reach you directly — no middleman and no commission on enquiries.</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl border border-slate-200/80 space-y-3">
+              <ListChecks className="w-8 h-8 text-amber-600" />
+              <h3 className="font-bold text-slate-900 text-base">Hours, Services & Products</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">Add your opening hours, the services you offer and your main products, so customers know exactly what you do before they call.</p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-3 justify-center flex-wrap">
+            <Link
+              href="/register"
+              className="px-7 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-2xl shadow-lg shadow-blue-600/20 transition-all"
+            >
+              Create Free Account
+            </Link>
+            <Link
+              href="/add-business"
+              className="px-7 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-2xl transition-all"
+            >
+              Add Your Business
+            </Link>
           </div>
         </section>
 
@@ -346,30 +407,78 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* NEWSLETTER */}
+        {/* DIRECTORY CTA */}
         <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           <div className="bg-slate-900 rounded-3xl p-8 sm:p-12 text-white text-center max-w-4xl mx-auto space-y-6">
-            <Mail className="w-10 h-10 text-blue-400 mx-auto" />
+            <Building2 className="w-10 h-10 text-blue-400 mx-auto" />
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              Get Local Business Tips in Your Inbox
+              Explore the Directory — or Put Your Business on It
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto">
-              One short email a week: local SEO tips, hiring advice and new features for Pakistani businesses. No spam.
+              Browse businesses by category and city, or list your own business free in a few minutes and get a profile page customers can call or WhatsApp directly.
             </p>
-            <form action="#" className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <label htmlFor="newsletter-email-input" className="sr-only">Email address</label>
-              <input
-                id="newsletter-email-input"
-                type="email"
-                placeholder="Enter your email address"
-                required
-                className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-400 focus:outline-none focus:border-blue-500"
-              />
-              <button type="submit" aria-label="Subscribe to Newsletter" className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl transition-colors shrink-0">
-                Subscribe Free
-              </button>
-            </form>
+            <div className="flex items-center gap-3 justify-center flex-wrap">
+              <Link
+                href="/categories"
+                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl transition-colors"
+              >
+                Browse Categories
+              </Link>
+              <Link
+                href="/add-business"
+                className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors"
+              >
+                List Your Business Free
+              </Link>
+            </div>
           </div>
+        </section>
+
+        {/* HOW IT WORKS + VERIFICATION */}
+        <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
+          <div className="text-center space-y-2">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+              How LocalePak Works — and How Listings Are Checked
+            </h2>
+            <p className="text-sm text-slate-500 max-w-2xl mx-auto">
+              No listing appears on LocalePak by accident. Every profile is submitted by the business
+              itself and reviewed by our team before it goes public.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="bg-white rounded-3xl border border-slate-200 p-7 space-y-3">
+              <ListChecks className="w-8 h-8 text-blue-600" />
+              <h3 className="font-extrabold text-slate-900">1. The owner submits</h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                The business owner creates a free account and completes the eight-step form —
+                contact details, category, city, hours, services and products.
+              </p>
+            </div>
+            <div className="bg-white rounded-3xl border border-slate-200 p-7 space-y-3">
+              <ShieldCheck className="w-8 h-8 text-blue-600" />
+              <h3 className="font-extrabold text-slate-900">2. Our team reviews</h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                We check the essentials before approving: a genuine business name, a working phone
+                number, and the correct category and city. Spam and duplicates are rejected.
+              </p>
+            </div>
+            <div className="bg-white rounded-3xl border border-slate-200 p-7 space-y-3">
+              <MessageCircle className="w-8 h-8 text-blue-600" />
+              <h3 className="font-extrabold text-slate-900">3. Customers connect directly</h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                Approved profiles go public in their category, city and search. Customers call or
+                WhatsApp the business directly — we take no commission and never sit in between.
+              </p>
+            </div>
+          </div>
+          <p className="text-center text-xs text-slate-500">
+            Read the full standards in our{' '}
+            <Link href="/verification-policy" className="text-blue-600 font-semibold hover:underline">verification policy</Link>{' '}
+            and{' '}
+            <Link href="/editorial-policy" className="text-blue-600 font-semibold hover:underline">editorial policy</Link>,
+            or report a problem listing via{' '}
+            <Link href="/report-abuse" className="text-blue-600 font-semibold hover:underline">Report Abuse</Link>.
+          </p>
         </section>
 
         {/* FINAL CTA */}
@@ -377,26 +486,26 @@ export default function HomePage() {
           <div className="bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-900 rounded-3xl p-8 sm:p-12 text-white shadow-2xl flex flex-col lg:flex-row justify-between items-center gap-8">
             <div className="space-y-3 max-w-2xl text-center lg:text-left">
               <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
-                Start Exploring Pakistan's Business Directory
+                Your Customers Are Searching. Be There.
               </h2>
               <p className="text-blue-100 text-xs sm:text-sm leading-relaxed">
-                Browse categories, explore your city's guide, or read practical advice for growing a local business.
+                Create a free account and add your business in eight short steps. After a quick review, your profile appears in your category, your city and search.
               </p>
             </div>
 
             <div className="flex items-center gap-4 flex-wrap justify-center shrink-0">
               <Link
-                href="/categories"
+                href="/add-business"
                 className="px-8 py-4 bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-sm rounded-2xl shadow-xl transition-all flex items-center gap-2"
               >
-                <span>Browse Categories</span>
+                <span>Add Your Business — Free</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/about"
+                href="/register"
                 className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-extrabold text-sm rounded-2xl transition-all"
               >
-                About LocalePak
+                Create Free Account
               </Link>
             </div>
           </div>
@@ -404,6 +513,7 @@ export default function HomePage() {
       </main>
 
       <Footer />
+      <ListBusinessCta />
     </div>
   )
 }

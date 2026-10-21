@@ -17,7 +17,7 @@ export default function AboutSection() {
             <a className="text-primary font-medium hover:underline" href="/categories/" title="Browse all business categories in Pakistan">
               business categories in Pakistan
             </a>
-            , and list your own business at no cost. Get discovered by thousands of customers searching for services in Karachi, Lahore, Islamabad, and beyond.
+            , and list your own business at no cost. Get discovered by customers searching for services in Karachi, Lahore, Islamabad, and beyond.
           </p>
         </div>
         
@@ -48,7 +48,7 @@ export default function AboutSection() {
             </div>
             <div>
               <h3 className="font-semibold text-gray-900 mb-1">Pakistan Wide</h3>
-              <p className="text-sm text-gray-600">Covering 150+ cities from Karachi to Islamabad.</p>
+              <p className="text-sm text-gray-600">City guides covering towns and cities across Pakistan, from Karachi to Islamabad.</p>
             </div>
           </div>
           
@@ -75,7 +75,7 @@ export default function AboutSection() {
                 <span className="ml-2 underline underline-offset-4 decoration-emerald-300">Free</span>
               </span>
             </a>
-            <p className="text-xs sm:text-sm text-gray-500 mt-2">Join thousands of businesses already listed</p>
+            <p className="text-xs sm:text-sm text-gray-500 mt-2">Be among the first businesses listed</p>
           </div>
         </div>
       </div>

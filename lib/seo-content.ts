@@ -168,6 +168,66 @@ const CATEGORY_INFO: Record<string, { label: string; description: string; exampl
     description: 'courier and shipping companies, warehousing operators and transport providers',
     examples: ['courier companies', 'freight and shipping firms', 'warehousing', 'freight forwarders', 'house-moving services', 'trucking companies'],
   },
+  'home-services': {
+    label: 'Home Services',
+    description: 'plumbers, electricians, carpenters, painters, cleaners and repair technicians who work in your home',
+    examples: ['plumbers', 'electricians', 'carpenters', 'painters', 'AC and appliance repair', 'cleaning services', 'pest control'],
+  },
+  legal: {
+    label: 'Legal Services',
+    description: 'law firms, advocates, notaries and legal consultants for individuals and businesses',
+    examples: ['law firms and advocates', 'corporate lawyers', 'family lawyers', 'property lawyers', 'tax lawyers', 'notary and documentation services'],
+  },
+  'solar-energy': {
+    label: 'Solar Energy',
+    description: 'solar panel installers, inverter and battery suppliers, and renewable-energy system designers',
+    examples: ['solar panel installers', 'solar system dealers', 'inverter and battery suppliers', 'net-metering consultants', 'solar maintenance services'],
+  },
+  events: {
+    label: 'Events & Weddings',
+    description: 'event planners, wedding venues and marquees, caterers, decorators and photographers',
+    examples: ['wedding planners', 'banquet halls and marquees', 'caterers', 'decorators', 'photographers and videographers', 'sound and lighting rentals'],
+  },
+  manufacturing: {
+    label: 'Manufacturing & Industry',
+    description: 'factories, industrial units, textile mills, engineering works and industrial suppliers',
+    examples: ['textile mills', 'engineering works', 'food processing units', 'packaging manufacturers', 'industrial equipment suppliers', 'export manufacturers'],
+  },
+  agriculture: {
+    label: 'Agriculture',
+    description: 'farm suppliers, seed and fertiliser dealers, livestock services and agri-machinery providers',
+    examples: ['seed and fertiliser dealers', 'tractor and machinery dealers', 'livestock and dairy services', 'pesticide suppliers', 'cold storage operators'],
+  },
+  security: {
+    label: 'Security Services',
+    description: 'private security companies, CCTV and alarm installers, and guarding services',
+    examples: ['security guard companies', 'CCTV installers', 'alarm system providers', 'access control installers', 'event security'],
+  },
+  printing: {
+    label: 'Printing & Packaging',
+    description: 'printing presses, packaging manufacturers, signage makers and design studios',
+    examples: ['offset and digital printing', 'packaging manufacturers', 'signage and flex printing', 'stationery printers', 'label and sticker printing'],
+  },
+  furniture: {
+    label: 'Furniture & Decor',
+    description: 'furniture makers and showrooms, carpenters, and home and office decor suppliers',
+    examples: ['furniture showrooms', 'custom furniture makers', 'office furniture suppliers', 'curtain and upholstery shops', 'interior decor stores'],
+  },
+  media: {
+    label: 'Media & Marketing',
+    description: 'advertising and digital marketing agencies, production houses, photographers and content studios',
+    examples: ['digital marketing agencies', 'advertising agencies', 'video production houses', 'photography studios', 'social media agencies', 'graphic design studios'],
+  },
+  sports: {
+    label: 'Sports & Fitness',
+    description: 'sports goods manufacturers and retailers, gyms, sports clubs and coaching academies',
+    examples: ['sports goods manufacturers', 'sports shops', 'gyms and fitness clubs', 'cricket academies', 'sports coaching centres'],
+  },
+  pets: {
+    label: 'Pets & Animals',
+    description: 'veterinary clinics, pet shops, grooming services and animal feed suppliers',
+    examples: ['veterinary clinics', 'pet shops', 'pet grooming services', 'animal feed suppliers', 'pet boarding'],
+  },
 }
 
 export function generateCityContent(city: string): string {
@@ -183,11 +243,11 @@ export function generateCityContent(city: string): string {
 
   return `## Businesses in ${city} — A Complete Local Directory Guide
 
-Located in ${info.province}, ${city} is ${info.description}. Its economy is broad and energetic: thousands of enterprises operate here, from neighbourhood family shops to national corporations. If you live in the city and need a dependable service, or you run a company and want a foothold in this market, ${city} offers openings in practically every trade.
+Located in ${info.province}, ${city} is ${info.description}. Businesses of every size operate here, from neighbourhood family shops to national corporations. If you live in the city and need a dependable service, or you run a company and want a foothold in this market, ${city} offers openings in practically every trade.
 
 ### Why Look Up Businesses in ${city}?
 
-Tracking down the right service provider should not eat up your afternoon. LocalePak gives you a checked, regularly refreshed directory spanning every major trade in ${city} — restaurants, retail stores, healthcare providers, technology companies and much more. Listings carry phone numbers, addresses and links to each business's online presence, and many let you connect on WhatsApp instantly, with no sign-up needed.
+Tracking down the right service provider should not eat up your afternoon. LocalePak organises ${city}'s trades into one free directory — restaurants, retail stores, healthcare providers, technology companies and much more. Businesses submit their own listings, and every submission is reviewed by our team before it appears. An approved profile carries the business's phone and WhatsApp number, address, opening hours and links to its online presence, so you can call or message it directly, with no sign-up needed.
 
 ### Leading Business Sectors in ${city}
 
@@ -197,25 +257,57 @@ Public investment in commerce by the ${info.province} government has strengthene
 
 ### How to Find a Business in ${city}
 
-Start with the category you need and work through the ${city} listings on LocalePak. Planning a family dinner, facing an urgent repair at home, or hiring consultants for a digital project — the right provider is a few taps away: open a listing, call the number shown, or send a WhatsApp message straight from the page.
+Start with the category you need on this page: each category link opens the ${city} page for that trade, with its own guide and the approved businesses listed in it so far. When a profile fits, open it and call the number shown, or send a WhatsApp message straight from the page. Planning a family dinner, facing an urgent repair at home, or hiring consultants for a digital project — that is the fastest route to a local provider.
 
 ### Business Districts and Commercial Areas in ${city}
 
 Commerce in ${city} clusters in well-known districts, and each one has its own specialities. ${districtsText} 
 
-Knowing the districts pays off when you search. Our listings show where each business is based, so you can favour a provider near your home or office instead of crossing the city, and compare your options area by area.
+Knowing the districts pays off when you search. Business profiles show their area and address, so you can favour a provider near your home or office instead of crossing the city, and compare your options area by area.
 
 ### Add Your Business in ${city} — It's Free
 
-Own a business in ${city}? Put it in front of the customers already searching here — listing on LocalePak costs nothing. Submit your business name, address, contact details and a short description, and your profile starts appearing for ${city} searches in your category, reaching thousands of potential customers every month.
+Own a business in ${city}? Listing on LocalePak costs nothing. Create a free account, then complete the eight-step Add Business form — contact details, category, location, opening hours, services and products. Our team reviews every submission, and once yours is approved your profile appears on this city page, on your category page and in search results, where customers can call or WhatsApp you directly.
 
 Want customers to trust your profile faster? Add the official identifiers you already hold: your FBR NTN if you are tax-registered with the Federal Board of Revenue, your Securities and Exchange Commission of Pakistan incorporation details if you run a registered company, or membership of a local chamber such as the Karachi Chamber of Commerce and Industry or the Lahore Chamber of Commerce and Industry.
 
-LocalePak backs the growth of ${city}'s business community. Join the hundreds of companies already listed, start receiving customer enquiries, and pay nothing for the privilege — no subscription, no hidden charges, just a free, high-quality listing on Pakistan's leading business directory.
+There is no subscription and no hidden charges — just a free listing on a business directory built for Pakistan. Add your business, keep your details accurate, and let ${city} customers find you.
+
+### What People Search For in ${city}
+
+Everyday searches in ${city} follow the rhythm of local life. Residents look for restaurants and home-delivery options for family meals, clinics and pharmacies when someone is unwell, and reliable plumbers, electricians and carpenters when something breaks at home. Parents compare schools, academies and tuition centres before admissions season, while professionals search for chartered accountants, law firms, real-estate agents and digital agencies to support their work. Shoppers hunt for clothing, electronics and furniture in the city's bazaars and malls, and anyone planning an event looks for caterers, decorators, photographers and banquet halls. Whatever the need, starting from the right category below is faster than scrolling through scattered social-media posts.
+
+### How to Choose a Provider in ${city}
+
+A short, sensible routine works for almost any trade in ${city}:
+
+1. Shortlist two or three providers from the category you need, and read their full profiles — services, hours and area covered.
+2. Check the basics: a working phone number, a real address or service area, and opening hours that suit you.
+3. Ask for a written quote or price list on WhatsApp before you commit, and confirm what is included — materials, delivery, warranty or after-service.
+4. For larger jobs, ask about registration (FBR NTN or SECP incorporation where relevant) and whether they issue a proper invoice.
+5. Start small where you can: a first order or a trial visit tells you more than any advertisement.
+
+### Frequently Asked Questions About Businesses in ${city}
+
+### How do I find a business in ${city} on LocalePak?
+
+Pick the category you need on this page — for example restaurants, healthcare or home services — and open the ${city} page for that trade. Approved businesses listed there show their phone and WhatsApp numbers, address and opening hours, so you can contact them directly without creating an account.
+
+### Is it free to list my business in ${city}?
+
+Yes. Creating an account and submitting a business is completely free, with no subscription and no card details. Our team reviews each submission, and once approved your profile appears on this city page, your category page and in search results.
+
+### What information does a LocalePak profile show?
+
+An approved profile shows the business name, category, address and area, phone and WhatsApp number, opening hours for the week, the services and products it offers, links to its website and social pages, and a description written by the owner.
+
+### Can I suggest a correction to a listing?
+
+Yes — if you spot an outdated phone number or a business that has moved or closed, tell us through the contact page. Accurate listings are the whole point of the directory, and corrections are checked and applied by our team.
 
 ### Explore ${city} Businesses by Category
 
-Work through the categories below to see every type of business trading in ${city}. Open any category for a focused list of the providers offering exactly those services in ${city}.`
+Work through the category links on this page to see every type of business covered in ${city}. Open any category for its ${city} guide and the approved providers listed in that trade so far.`
 }
 
 export function generateCategoryContent(categorySlug: string): string {
@@ -227,31 +319,75 @@ export function generateCategoryContent(categorySlug: string): string {
 
   return `## ${info.label} Businesses in Pakistan — The Full Directory
 
-Pakistan's ${info.label.toLowerCase()} sector is thriving, with thousands of providers serving customers in every major city. On LocalePak you will find one of the most comprehensive directories of ${info.description} anywhere in Pakistan, refreshed regularly as fresh listings arrive.
+Pakistan's ${info.label.toLowerCase()} sector is broad and busy, with providers serving customers in every major city. LocalePak's ${info.label.toLowerCase()} directory covers ${info.description}, organised by city so you can find providers near you — and it grows as businesses submit their own listings.
 
 ### Finding the Best ${info.label} Providers
 
-Wherever you are — Karachi, Lahore, Islamabad or a smaller town — tracking down quality ${info.label.toLowerCase()} services takes minutes here. Every profile carries contact details and verified local citations, typically including a WhatsApp number, a street address and links to the business's website or social profiles, so you can judge your options on facts rather than guesswork.
+Wherever you are — Karachi, Lahore, Islamabad or a smaller town — start by picking your city below. Every approved profile carries the details you need to judge your options on facts rather than guesswork: a phone and WhatsApp number, a street address, opening hours and links to the business's website or social profiles where it has them.
 
 ### What's Inside the ${info.label} Directory
 
-Inside this category you will find ${info.examples.slice(0, 5).join(', ')} — and plenty beyond that list. Each profile shows the company's name and phone number alongside a fuller description, which makes shortlisting the right partner straightforward.
+Inside this category you will find ${info.examples.slice(0, 5).join(', ')} — and plenty beyond that list. Each profile shows the business's name, contact details and a fuller description of what it offers, which makes shortlisting the right partner straightforward.
+
+### Sub-Services and Specialisms
+
+The ${info.label.toLowerCase()} category covers a wide range of specialisms, including:
+
+${info.examples.map(e => `- ${e.charAt(0).toUpperCase() + e.slice(1)}`).join('\n')}
+
+Many providers focus on one or two of these niches rather than all of them, so check the services list on each profile — owners write it themselves, and it is the clearest signal of what a business actually does day to day. If your need is unusual, message the business on WhatsApp and ask directly before travelling.
+
+### How to Choose a ${info.label} Provider
+
+Good providers share a few habits, whatever the trade:
+
+1. They answer the phone or reply on WhatsApp promptly, and they explain their process in plain words.
+2. They give prices or estimates in writing before work starts, and say clearly what is and is not included.
+3. They have a real premises or a clearly stated service area, and their opening hours are published.
+4. For regulated work, they can show registration or credentials — an FBR NTN, SECP incorporation, a medical or engineering licence, or chamber-of-commerce membership, as the trade requires.
+5. They stand behind the job: a warranty, a return policy or after-service support, stated up front.
+
+### Questions to Ask Before You Hire
+
+Before you commit, it is worth asking: What exactly is included in the price? How long will it take, and what could delay it? Do you provide a written invoice or receipt? What happens if something goes wrong afterwards? A provider who answers these calmly and clearly is usually a safe pair of hands.
+
+### Red Flags to Watch For
+
+Be cautious with any ${info.label.toLowerCase()} provider that refuses to give a price or estimate in writing, demands the full amount in advance in cash with no receipt, has no reachable phone number or physical address, pressures you to decide immediately, or cannot explain what happens if the work or product is faulty. Honest businesses expect these questions and answer them without fuss.
+
+### Frequently Asked Questions About ${info.label} in Pakistan
+
+### How do I find ${info.label.toLowerCase()} providers near me?
+
+Choose your city from the list below to open its dedicated ${info.label.toLowerCase()} page. Listed businesses there show phone and WhatsApp numbers, addresses and opening hours, so you can compare and contact them directly — no account needed.
+
+### Is LocalePak free for customers and for businesses?
+
+Yes, both. Searching and contacting businesses costs nothing, and owners list their businesses free: create an account, complete the eight-step form, and after review the profile appears in this category, on the city page and in search.
+
+### How are listings checked before they appear?
+
+Every submission is reviewed by our team before it goes public. We check that the business name, phone number and category look genuine and consistent. Listings are owner-submitted, so details come from the business itself — if you spot an error, report it through the contact page and we will check it.
+
+### Can I list a business that works from home or has no shop?
+
+Yes, if it genuinely serves customers. Choose the closest matching category, give the city and area you serve, and use your working phone or WhatsApp number as the contact — many freelancers, tutors, home bakers and repair technicians list exactly this way.
 
 ### Why Search ${info.label} on LocalePak?
 
-LocalePak is a free directory spanning more than one hundred and fifty Pakistani cities, and every ${info.label.toLowerCase()} listing here was submitted by the business itself and then verified, so the details you act on are accurate and genuinely useful. Small freelancers sit alongside large, long-established companies; size is no barrier to being listed.
+LocalePak is a free directory with guides for cities and towns across Pakistan. Businesses submit their own listings, and our team reviews every submission before it appears — so freelancers, small shops and long-established companies are all listed on the same honest terms, and size is no barrier to being included.
 
-Place profiles side by side, weigh them up, then reach out directly or continue to the provider's own website and social pages. There is nothing to register for — simply browse and make contact.
+Open a profile, weigh it up, then reach out directly or continue to the provider's own website and social pages. There is nothing to register for — simply browse and make contact.
 
 ### ${info.label} in Cities Across Pakistan
 
-Providers cluster most densely in Karachi, Lahore and Islamabad, but strong options exist well beyond the big three — Faisalabad, Multan, Peshawar, Quetta and Sialkot among them. Narrow the field with the city filter below.
+Providers cluster most densely in Karachi, Lahore and Islamabad, but strong options exist well beyond the big three — Faisalabad, Multan, Peshawar, Quetta and Sialkot among them. Pick a city below to open its dedicated ${info.label.toLowerCase()} page, with a local guide and the approved businesses listed there.
 
 ### List Your ${info.label} Business — Free
 
-Run a ${info.label.toLowerCase()} business anywhere in Pakistan? Listing it on LocalePak is free, and thousands of people search for ${info.label.toLowerCase()} services every day. Build your complete profile today — no charge, no card details, no subscription — and let those searches find you.
+Run a ${info.label.toLowerCase()} business anywhere in Pakistan? Listing it on LocalePak is free: create an account, complete the eight-step Add Business form, and after review your profile appears in this category, on your city page and in search. No charge, no card details, no subscription.
 
-Scroll through the ${info.label} businesses below and get in touch with the provider that fits your needs.`
+Choose your city below to start comparing ${info.label.toLowerCase()} providers near you.`
 }
 
 export function generateCityCategoryContent(city: string, categorySlug: string): string {
@@ -268,7 +404,7 @@ export function generateCityCategoryContent(city: string, categorySlug: string):
 
   return `## ${catInfo.label} Businesses in ${city} — Your Local Directory
 
-Hunting for dependable ${catInfo.label.toLowerCase()} services in ${city}? Start here. LocalePak maintains a current, comprehensive directory of ${catInfo.description} operating in ${city}, ${cityInfo.province}.
+Hunting for dependable ${catInfo.label.toLowerCase()} services in ${city}? Start here. This page is LocalePak's home for ${catInfo.description} operating in ${city}, ${cityInfo.province}: a local guide plus the businesses that have been submitted and approved in this trade so far.
 
 ### Why ${city} Stands Out for ${catInfo.label}
 
@@ -278,7 +414,7 @@ Because ${city} is ${cityInfo.description}, it has built a deep bench of ${catIn
 
 Expect variety: the ${catInfo.label.toLowerCase()} sector in ${city} spans ${catInfo.examples.slice(0, 4).join(', ')}. Quick one-off jobs and long-term arrangements are both easy to arrange, with price points and service levels for nearly every budget and requirement.
 
-Modern ${catInfo.label.toLowerCase()} businesses in ${city} increasingly take bookings online, consult over WhatsApp and deliver at home or on site, which makes them easier to reach than ever. Looking for verified ${catInfo.label.toLowerCase()} services near me in ${city}? Each LocalePak profile includes direct WhatsApp numbers and full addresses, so getting in touch takes seconds.
+Modern ${catInfo.label.toLowerCase()} businesses in ${city} increasingly take bookings online, consult over WhatsApp and deliver at home or on site, which makes them easier to reach than ever. When a business is listed on this page, its profile shows its phone and WhatsApp number and full address, so getting in touch takes seconds.
 
 ### Choosing the Right ${catInfo.label} Provider in ${city}
 
@@ -291,11 +427,33 @@ Before you commit to a ${catInfo.label.toLowerCase()} business in ${city}, weigh
 
 For extra confidence, check legal registration: many businesses publish their FBR NTN or cite their Securities and Exchange Commission of Pakistan registration, and membership of a chamber of commerce — the Lahore Chamber of Commerce and Industry or the Karachi Chamber of Commerce and Industry, for example — is another good sign.
 
-On LocalePak you can line up several ${catInfo.label.toLowerCase()} businesses in ${city} and compare them at a glance before you decide.
+On LocalePak you can line up the ${catInfo.label.toLowerCase()} businesses listed in ${city} and compare them at a glance before you decide.
+
+### What to Expect When You Hire in ${city}
+
+Prices and timelines for ${catInfo.label.toLowerCase()} work vary with the job, the materials involved and the provider's workload — there is no single going rate, and any provider quoting without asking about your requirements deserves a second look. Ask two or three providers for written estimates, confirm whether materials, delivery and after-service are included, and agree the schedule before work starts. Paying in stages against completed work is normal practice for larger jobs, and a proper invoice or receipt protects both sides.
+
+### Frequently Asked Questions About ${catInfo.label} in ${city}
+
+### How do I contact a ${catInfo.label.toLowerCase()} business in ${city}?
+
+Open its profile from the listings on this page and use the call or WhatsApp button — you speak to the business directly, and LocalePak never charges you or takes a commission on the enquiry.
+
+### How much does ${catInfo.label.toLowerCase()} cost in ${city}?
+
+It depends on the exact service, scale and materials. The reliable way to find out is to shortlist two or three providers from this page and ask each for a written quote for the same requirements, then compare what is included.
+
+### Are the businesses on this page reviewed before listing?
+
+Yes. Owners submit their own listings and our team reviews each one before it appears — checking the business name, a working phone number and the correct category and city. Details are provided by the business itself, so confirm anything critical when you make contact.
+
+### I run a ${catInfo.label.toLowerCase()} business in ${city}. How do I get listed here?
+
+Create a free account and complete the eight-step Add Business form. After review, your profile appears on this page, on the ${city} page and in search — free, with your call and WhatsApp buttons live.
 
 ### Own a ${catInfo.label} Business in ${city}? List It Free
 
-Run a ${catInfo.label.toLowerCase()} business in ${city}? Put it where thousands of local customers are already looking. A LocalePak listing is completely free — add your contact details, address, description and website, and you can be live today.
+Run a ${catInfo.label.toLowerCase()} business in ${city}? A LocalePak listing is completely free. Create an account, complete the eight-step Add Business form with your contact details, address, hours, services and products, and once our team approves it, your profile appears on this page — where customers searching for ${catInfo.label.toLowerCase()} in ${city} can call or WhatsApp you directly.
 
-See every ${catInfo.label} business in ${city} in the listings below.`
+Approved ${catInfo.label} businesses in ${city} appear in the listings section of this page.`
 }

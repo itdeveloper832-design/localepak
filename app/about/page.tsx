@@ -1,826 +1,910 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
+import Link from 'next/link'
+import {
+  ArrowRight,
+  BadgeCheck,
+  Building2,
+  CheckCircle2,
+  ChevronRight,
+  Code2,
+  Cpu,
+  ExternalLink,
+  Eye,
+  FileText,
+  Globe,
+  Headphones,
+  HeartHandshake,
+  HelpCircle,
+  Linkedin,
+  MapPin,
+  Quote,
+  ShieldCheck,
+  Sparkles,
+  Star,
+  Target,
+  Users,
+} from 'lucide-react'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
-import Link from 'next/link'
-import Image from 'next/image'
-import { 
-  Target, Globe, ShieldCheck, TrendingUp, Users, HeartHandshake, Sparkles, 
-  CheckCircle2, ArrowRight, Building2, Code2, Headphones, FileText, 
-  ExternalLink, Linkedin, Github, Mail, Phone, MapPin, Award, 
-  Briefcase, Cpu, Check, HelpCircle
-} from 'lucide-react'
 
-export const metadata: Metadata = {
-  title: "About LocalePak – Pakistan's Free Business Directory",
-  description: "LocalePak is a free business directory for Pakistan, built by developer Muhammad Imran. Our mission: help local businesses get found on Google — no fees, no paywalls.",
-  keywords: "who is the founder of LocalePak, founder of LocalePak, CEO of LocalePak, Muhammad Imran, Muhammad Imran LocalePak, Muhammad Imran Imran Digitals, LocalePak CEO, who created LocalePak, Pakistan business directory founder, Muhammad Imran web developer, Imran Digitals",
-  alternates: {
-    canonical: 'https://www.localepak.com/about/',
-  },
-  openGraph: {
-    title: "About LocalePak – Pakistan's Free Business Directory",
-    description: "The story behind LocalePak: a free directory where Pakistani businesses, professionals and employers connect — founded by Muhammad Imran of Imran Digitals.",
-    url: 'https://www.localepak.com/about/',
-    siteName: 'LocalePak',
-    locale: 'en_PK',
-    type: 'profile',
-    images: [
-      {
-        url: 'https://www.imrandigitals.com/opengraph.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Muhammad Imran - Founder and CEO of LocalePak',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: "About LocalePak – Pakistan's Free Business Directory",
-    description: "Why LocalePak exists, who built it, and how a free listing helps Pakistani businesses show up in local search.",
-    images: ['https://www.imrandigitals.com/opengraph.jpg'],
-  },
+const FOUNDER_PORTFOLIO_URL = 'https://www.imrandigitals.com'
+const FOUNDER_LINKEDIN_URL = 'https://www.linkedin.com/in/muhammad-imran-972364373/'
+
+export function generateMetadata(): Metadata {
+  const title = 'About LocalePak – Founder & CEO Muhammad Imran | LocalePak'
+  const description =
+    'Meet Muhammad Imran, Founder & CEO of LocalePak, a Pakistani full-stack web & AI developer, technical SEO specialist and founder of Imran Digitals. LocalePak is Pakistan’s free business directory, built to help local businesses get discovered without listing fees or paywalls.'
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: 'https://www.localepak.com/about',
+    },
+    openGraph: {
+      title,
+      description,
+      url: 'https://www.localepak.com/about',
+      siteName: 'LocalePak',
+      locale: 'en_PK',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+    },
+  }
 }
 
 const STATS = [
-  { number: "100% Free", label: "Business Listings & Job Posts" },
-  { number: "4-in-1", label: "Businesses · Jobs · Professionals · Companies" },
-  { number: "WhatsApp", label: "Direct Connect on Listings" },
-  { number: "Pakistan-wide", label: "Cities Across All Provinces" },
-  { number: "Google-ready", label: "Schema-Structured Profiles" },
-  { number: "No Paywall", label: "Contact Details Always Visible" }
-]
-
-const CORE_VALUES = [
-  { title: "100% Free Forever", desc: "Founded on the core belief of universal free access. No premium paywalls, no monthly subscription fees, and no gated contact information.", icon: ShieldCheck },
-  { title: "Customer & Community First", desc: "Every feature we engineer is guided by genuine value for local dukandars, startup entrepreneurs, job seekers, and everyday consumers.", icon: HeartHandshake },
-  { title: "Radical Transparency", desc: "Honest, clear, and open platform standards with zero hidden fees and transparent verification for Pakistani businesses.", icon: Sparkles },
-  { title: "Built with Modern Technology", desc: "LocalePak runs on Next.js with server-rendered pages, real-time filters and local-SEO architecture, so listings load fast and rank well.", icon: TrendingUp },
-  { title: "Nationwide Inclusive Growth", desc: "Serving businesses of all scales—from traditional cottage artisans and corner clinics to major tech enterprises in Karachi, Lahore, and Islamabad.", icon: Users },
-  { title: "Accurate Data First", desc: "We prioritize correct contact numbers, working WhatsApp links and honest listing details — because a directory is only useful if its data is right.", icon: CheckCircle2 },
+  {
+    value: '183',
+    label: 'Cities Covered',
+    detail: 'City pages across Pakistan',
+    icon: MapPin,
+  },
+  {
+    value: '24',
+    label: 'Business Categories',
+    detail: 'Organised for local discovery',
+    icon: Building2,
+  },
+  {
+    value: '100%',
+    label: 'Free Listings',
+    detail: 'No listing fee to get started',
+    icon: BadgeCheck,
+  },
+  {
+    value: '0',
+    label: 'Rupees to List',
+    detail: 'Contact details are not paywalled',
+    icon: ShieldCheck,
+  },
 ]
 
 const FOUNDER_SKILLS = [
-  "Full-Stack Web Architecture",
-  "Next.js & React Ecosystem",
-  "Node.js & MERN Stack",
-  "Artificial Intelligence & Agentic AI",
-  "Technical SEO & Core Web Vitals",
-  "Generative Engine Optimization (GEO)",
-  "Cloud Database Architecture (PostgreSQL & Firebase)",
-  "Local Search Engine Engineering",
-  "High-Performance PWA Development",
-  "REST & GraphQL API Design"
+  'Full-Stack Web Architecture',
+  'Next.js & React Ecosystem',
+  'Node.js & MERN Stack',
+  'Artificial Intelligence & Agentic AI',
+  'Technical SEO & Core Web Vitals',
+  'Generative Engine Optimization (GEO)',
+  'Cloud Database Architecture (PostgreSQL & Firebase)',
+  'Local Search Engineering',
+  'High-Performance PWA Development',
+  'REST & GraphQL API Design',
 ]
 
-const FOUNDER_PROJECTS = [
+const CORE_VALUES = [
   {
-    name: "LocalePak.com",
-    role: "Founder, CEO & Chief Architect",
-    desc: "A free business directory and local discovery platform for Pakistan — businesses, jobs and professionals organized by city and category, with no listing fees.",
-    url: "https://www.localepak.com/"
+    title: '100% Free Forever',
+    description:
+      'Business listings are free, with no subscriptions and no paywall placed between a customer and a business’s phone or WhatsApp details.',
+    icon: BadgeCheck,
   },
   {
-    name: "Imran Digitals",
-    role: "Founder & Digital Agency Lead",
-    desc: "Software development and digital engineering studio delivering custom Next.js web applications, AI automation tools and technical SEO systems.",
-    url: "https://www.imrandigitals.com/"
-  }
-]
-
-const TEAM_MEMBERS = [
-  { 
-    name: "Muhammad Imran", 
-    role: "Founder & Chief Executive Officer (CEO)", 
-    desc: "Founder and lead developer behind LocalePak and Imran Digitals. Handles platform architecture, full-stack Next.js development and the site's local SEO.", 
-    icon: Building2,
-    website: "https://www.imrandigitals.com/",
-    linkedin: "https://www.linkedin.com/in/muhammad-imran-972364373/"
+    title: 'Customer & Community First',
+    description:
+      'LocalePak is built for dukandars, startups, job seekers and everyday customers who need a simpler way to find and contact local businesses.',
+    icon: HeartHandshake,
   },
-  { 
-    name: "Engineering & Product Team", 
-    role: "Full-Stack Development & Infrastructure", 
-    desc: "Responsible for high-speed search indexing, responsive UI/UX, database scalability, and real-time listing moderation across Pakistan.", 
-    icon: Code2 
+  {
+    title: 'Radical Transparency',
+    description:
+      'We do not publish invented statistics or dress up estimates as facts. Listings are owner-submitted, reviewed and presented honestly.',
+    icon: Eye,
   },
-  { 
-    name: "Customer & Listing Support", 
-    role: "Business Verification & User Support", 
-    desc: "Dedicated support specialists assisting Pakistani business owners with listing verification, profile updates, and free job posting assistance.", 
-    icon: Headphones 
+  {
+    title: 'Continuous Technical Innovation',
+    description:
+      'A modern Next.js foundation, fast search, structured data and local SEO architecture help business information stay discoverable and easy to use.',
+    icon: Cpu,
   },
-  { 
-    name: "Content & SEO Strategy", 
-    role: "Directory Curation & Local SEO", 
-    desc: "Focused on business taxonomy, local entity citation consistency, city market guides, and professional ecosystem research.", 
-    icon: FileText 
+  {
+    title: 'Nationwide Inclusive Growth',
+    description:
+      'From cottage artisans to technology enterprises in Karachi, Lahore and Islamabad, businesses of every size deserve a route to online visibility.',
+    icon: Users,
+  },
+  {
+    title: 'Data Accuracy & E-E-A-T',
+    description:
+      'Useful local discovery depends on accurate business details, working phone numbers, validated information and direct WhatsApp connectivity.',
+    icon: ShieldCheck,
   },
 ]
 
-const MILESTONES = [
-  { 
-    date: "The Idea", 
-    title: "A Directory That Doesn't Charge to Exist", 
-    desc: "Muhammad Imran, a Multan-based full-stack developer, kept seeing the same problem: small Pakistani businesses were invisible on Google unless they paid directory fees or built a website they couldn't afford. LocalePak started as the fix — a free listing that search engines can actually find." 
+const FUTURE_GOALS = [
+  {
+    title: 'Grow reviewed listings city by city',
+    description:
+      'Our next focus is to expand owner-submitted, reviewed business listings across Pakistan, city by city and category by category.',
+    icon: MapPin,
   },
-  { 
-    date: "Building", 
-    title: "Engineered for Search from Day One", 
-    desc: "LocalePak was built on Next.js and Firebase with server-rendered pages, structured data on every listing, and city × category pages that match how people really search for local services." 
+  {
+    title: 'Launch Featured listings and the Verified badge',
+    description:
+      'Businesses that want additional visibility will be able to choose Featured placement or apply for a Verified badge through a clear review process.',
+    icon: BadgeCheck,
   },
-  { 
-    date: "Launch", 
-    title: "LocalePak.com Goes Live", 
-    desc: "The directory launches with free business listings, a jobs board, professional profiles and company pages — no listing fees, no gated contact details, no registration walls." 
+  {
+    title: 'Build Pakistan’s most trusted local review system',
+    description:
+      'We are building toward a review experience designed around genuine customer experiences, moderation and trust — so good local businesses can earn visibility fairly.',
+    icon: Star,
   },
-  { 
-    date: "What's Next", 
-    title: "Growing City by City", 
-    desc: "Next up: deeper coverage in more Pakistani cities, more verified listings, and better tools for owners to keep their business information accurate and up to date." 
-  }
+]
+
+const TEAM_FUNCTIONS = [
+  {
+    name: 'Engineering & Product Team',
+    role: 'Platform Engineering & Product',
+    description:
+      'The engineering function behind search speed, UI/UX, database scalability and the systems that support listing submission and moderation.',
+    icon: Code2,
+  },
+  {
+    name: 'Customer & Listing Support',
+    role: 'Owner Support & Listing Help',
+    description:
+      'The support function that helps business owners with verification questions, profile updates and free job posting.',
+    icon: Headphones,
+  },
+  {
+    name: 'Content & SEO Strategy',
+    role: 'Content, Taxonomy & Local SEO',
+    description:
+      'The content function responsible for business taxonomy, citation consistency, category organisation and practical city guides.',
+    icon: FileText,
+  },
 ]
 
 const ABOUT_FAQS = [
   {
-    q: "Who is the founder of LocalePak?",
-    a: "Muhammad Imran is the Founder and Chief Executive Officer (CEO) of LocalePak (https://www.localepak.com). He is a Pakistani full-stack web and AI developer, MERN and Next.js engineer, and technical SEO expert who also founded Imran Digitals (https://www.imrandigitals.com/)."
+    question: 'Who is the founder of LocalePak?',
+    answer:
+      'Muhammad Imran is the Founder and CEO of LocalePak (localepak.com). He is a Pakistani full-stack web and AI developer and technical SEO specialist who also founded Imran Digitals.',
   },
   {
-    q: "Who is the CEO of LocalePak?",
-    a: "Muhammad Imran serves as the Chief Executive Officer (CEO) and lead software architect of LocalePak, steering platform engineering, technical SEO, and business expansion across Pakistan."
+    question: 'Who is the CEO of LocalePak?',
+    answer:
+      'Muhammad Imran is the CEO of LocalePak. He is also the platform’s lead software architect, steering engineering, technical SEO and growth.',
   },
   {
-    q: "When was LocalePak founded and what was the mission?",
-    a: "LocalePak was created in 2026 by Muhammad Imran with a simple mission: make online visibility free for Pakistan's small and medium businesses through a business directory with no listing fees, no registration paywalls and no hidden charges."
+    question: 'When was LocalePak founded, and what is its mission?',
+    answer:
+      'LocalePak was founded in 2026 by Muhammad Imran. Its mission is to give Pakistan’s small and medium businesses free online visibility, with no listing paywalls or hidden fees.',
   },
   {
-    q: "What is Muhammad Imran's official website and portfolio?",
-    a: "You can explore Muhammad Imran's official portfolio, technical skills, and web engineering projects at his official website: https://www.imrandigitals.com/. You can also connect with him on LinkedIn at https://www.linkedin.com/in/muhammad-imran-972364373/."
+    question: 'What is Muhammad Imran’s official website?',
+    answer:
+      'Muhammad Imran’s official website and portfolio is https://www.imrandigitals.com/. His LinkedIn profile is https://www.linkedin.com/in/muhammad-imran-972364373/.',
   },
   {
-    q: "What is the relationship between LocalePak and Imran Digitals?",
-    a: "LocalePak was founded and engineered by Muhammad Imran. Imran Digitals (imrandigitals.com) is his digital agency and engineering consultancy, providing custom web applications, SaaS development, AI automation and technical SEO services."
+    question: 'What is the relationship between LocalePak and Imran Digitals?',
+    answer:
+      'LocalePak is a venture founded and engineered by Muhammad Imran. Imran Digitals is his digital agency and engineering consultancy, providing custom web applications, SaaS architecture, AI automation and technical SEO.',
   },
   {
-    q: "What technology stack is LocalePak built on?",
-    a: "LocalePak is built with Next.js 16, React, TypeScript, Tailwind CSS and Firebase Firestore, with Schema.org JSON-LD structured data on directory pages so listings load fast and are easy for search engines to understand."
-  }
+    question: 'What technology is LocalePak built on?',
+    answer:
+      'LocalePak is built with Next.js, React, TypeScript, Tailwind CSS and Firebase Firestore, with Schema.org structured data used to describe the site and its content clearly for search engines.',
+  },
 ]
 
 export default function AboutPage() {
-  const structuredDataGraph = {
+  const structuredData = {
     '@context': 'https://schema.org',
     '@graph': [
       {
-        '@type': 'Organization',
-        '@id': 'https://www.localepak.com/#organization',
-        name: 'LocalePak',
-        alternateName: ['LocalePak.com', 'LocalePak Pakistan Business Directory'],
-        url: 'https://www.localepak.com/',
-        logo: {
-          '@type': 'ImageObject',
-          url: 'https://www.localepak.com/logo.png',
-          width: 512,
-          height: 512
-        },
-        description: "A free business listing directory and local discovery platform for Pakistan, founded by Muhammad Imran to connect businesses, professionals and customers by city and category.",
-        foundingDate: '2024-01-01',
-        founder: {
-          '@id': 'https://www.imrandigitals.com/#founder'
-        },
-        funder: {
-          '@id': 'https://www.imrandigitals.com/#founder'
-        },
-        employee: [
-          {
-            '@id': 'https://www.imrandigitals.com/#founder'
-          }
-        ],
-        address: {
-          '@type': 'PostalAddress',
-          addressLocality: 'Lahore',
-          addressRegion: 'Punjab',
-          addressCountry: 'Pakistan'
-        },
-        contactPoint: {
-          '@type': 'ContactPoint',
-          telephone: '+923019316123',
-          contactType: 'customer support',
-          email: 'contact@localepak.com',
-          areaServed: 'PK',
-          availableLanguage: ['English', 'Urdu']
-        },
-        sameAs: [
-          'https://www.facebook.com/localepakofficial',
-          'https://www.linkedin.com/company/localepak'
-        ]
-      },
-      {
         '@type': 'Person',
-        '@id': 'https://www.imrandigitals.com/#founder',
+        '@id': 'https://www.localepak.com/about/#muhammad-imran',
         name: 'Muhammad Imran',
-        jobTitle: 'Founder & Chief Executive Officer (CEO)',
-        worksFor: {
-          '@id': 'https://www.localepak.com/#organization'
-        },
-        url: 'https://www.imrandigitals.com/',
-        image: 'https://www.imrandigitals.com/opengraph.jpg',
-        email: 'mi6062610@gmail.com',
-        telephone: '+923019316123',
-        sameAs: [
-          'https://www.imrandigitals.com/',
-          'https://www.linkedin.com/in/muhammad-imran-972364373/',
-          'https://github.com/muhammadimran9'
-        ],
-        description: 'Muhammad Imran is the Founder and CEO of LocalePak (https://www.localepak.com) and the founder of Imran Digitals (https://www.imrandigitals.com). He is a full-stack web and AI developer and technical SEO specialist from Pakistan.',
-        knowsAbout: [
-          'Full-Stack Web Development',
-          'Next.js & React Ecosystem',
-          'Node.js & MERN Stack',
-          'Artificial Intelligence & AI Agents',
-          'Technical SEO',
-          'Generative Engine Optimization (GEO)',
-          'Local Business Directory Architecture',
-          'Cloud Databases (PostgreSQL, Firebase)'
-        ],
+        jobTitle: 'Founder & CEO',
+        description:
+          'Muhammad Imran is the Founder, Owner and CEO of LocalePak, a Pakistani full-stack web and AI developer, software architect and technical SEO specialist, and the founder of Imran Digitals.',
+        url: FOUNDER_PORTFOLIO_URL,
+        sameAs: [FOUNDER_PORTFOLIO_URL, FOUNDER_LINKEDIN_URL],
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Multan',
           addressRegion: 'Punjab',
-          addressCountry: 'PK'
+          addressCountry: 'PK',
         },
-        nationality: {
-          '@type': 'Country',
-          name: 'Pakistan'
-        }
-      },
-      {
-        '@type': 'AboutPage',
-        '@id': 'https://www.localepak.com/about/#webpage',
-        url: 'https://www.localepak.com/about/',
-        name: 'About LocalePak – Founder Muhammad Imran & Pakistan Business Directory',
-        description: 'Learn about LocalePak and its founder Muhammad Imran, and why the directory is 100% free for Pakistani businesses.',
-        isPartOf: {
-          '@id': 'https://www.localepak.com/#website'
+        worksFor: {
+          '@type': 'Organization',
+          name: 'LocalePak',
+          url: 'https://www.localepak.com',
         },
-        about: [
+        founderOf: [
           {
-            '@id': 'https://www.localepak.com/#organization'
+            '@type': 'Organization',
+            name: 'LocalePak',
+            url: 'https://www.localepak.com',
           },
           {
-            '@id': 'https://www.imrandigitals.com/#founder'
-          }
+            '@type': 'Organization',
+            name: 'Imran Digitals',
+            url: FOUNDER_PORTFOLIO_URL,
+          },
         ],
-        mainEntity: {
-          '@id': 'https://www.localepak.com/#organization'
-        }
+        knowsAbout: FOUNDER_SKILLS,
       },
       {
         '@type': 'FAQPage',
         '@id': 'https://www.localepak.com/about/#faq',
-        mainEntity: ABOUT_FAQS.map(faq => ({
+        mainEntity: ABOUT_FAQS.map((faq) => ({
           '@type': 'Question',
-          name: faq.q,
+          name: faq.question,
           acceptedAnswer: {
             '@type': 'Answer',
-            text: faq.a
-          }
-        }))
-      }
-    ]
+            text: faq.answer,
+          },
+        })),
+      },
+      {
+        '@type': 'BreadcrumbList',
+        '@id': 'https://www.localepak.com/about/#breadcrumb',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: 'Home',
+            item: 'https://www.localepak.com/',
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: 'About',
+            item: 'https://www.localepak.com/about',
+          },
+        ],
+      },
+    ],
   }
 
   return (
-    <>
+    <div className="min-h-screen bg-[#F8FAFC] font-sans text-slate-900">
       <Navbar />
+
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredDataGraph) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <main className="bg-[#F8FAFC] text-[#0F172A] font-sans pb-16">
-        
-        {/* HERO SECTION */}
-        <section className="bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0F172A] text-white py-16 sm:py-24 border-b border-slate-800 text-center relative overflow-hidden">
-          {/* Subtle background glow */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-blue-500/10 blur-[120px] pointer-events-none rounded-full" />
-          
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm font-semibold mb-6">
-              <Sparkles className="w-4 h-4 text-emerald-400" />
-              <span>Founded by Muhammad Imran • Pakistan&apos;s Free Business Directory</span>
-            </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
-              About LocalePak – Built to Empower Pakistani Businesses
-            </h1>
+      <main id="main-content">
+        {/* Hero */}
+        <section className="relative overflow-hidden bg-[#0F172A] text-white">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -left-32 top-0 h-96 w-96 rounded-full bg-blue-600/20 blur-3xl"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-32 bottom-0 h-96 w-96 rounded-full bg-emerald-500/15 blur-3xl"
+          />
 
-            <p className="mt-6 text-base sm:text-xl text-slate-300 leading-relaxed font-normal">
-              Founded by Pakistani full-stack developer <strong className="text-white font-semibold">Muhammad Imran</strong> (founder of <a href="https://www.imrandigitals.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-400 underline hover:text-emerald-300">Imran Digitals</a>), LocalePak is a free business discovery and listing platform for Pakistan. We connect local shops, companies, professionals and job seekers by city and category — with zero listing fees and no registration barriers.
-            </p>
+          <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+            <nav aria-label="Breadcrumb" className="mb-10">
+              <ol className="flex flex-wrap items-center gap-2 text-sm font-semibold text-slate-300">
+                <li>
+                  <Link href="/" className="transition-colors hover:text-white">
+                    Home
+                  </Link>
+                </li>
+                <li aria-hidden="true">
+                  <ChevronRight className="h-4 w-4 text-slate-500" />
+                </li>
+                <li aria-current="page" className="text-white">
+                  About
+                </li>
+              </ol>
+            </nav>
 
-            <div className="mt-10 flex flex-wrap justify-center gap-4">
-              <Link
-                href="/add-business"
-                className="px-8 py-4 bg-[#F97316] hover:bg-[#EA580C] text-white font-bold rounded-xl shadow-lg transition-all text-base inline-flex items-center gap-2"
-              >
-                <span>List Your Business Free</span>
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-              <a
-                href="#founder-spotlight"
-                className="px-8 py-4 bg-slate-800/80 hover:bg-slate-700 text-white font-bold rounded-xl transition-all text-base border border-slate-700 shadow-md inline-flex items-center gap-2"
-              >
-                <span>Meet Founder & CEO</span>
-                <ArrowRight className="w-4 h-4" />
-              </a>
-            </div>
-          </div>
-        </section>
-
-        {/* STATS SECTION */}
-        <section className="py-12 bg-white border-b border-[#E2E8F0]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
-              {STATS.map((s, idx) => (
-                <div key={idx} className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-5 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="text-2xl sm:text-3xl font-extrabold text-[#2563EB]">{s.number}</div>
-                  <div className="text-xs text-slate-600 font-medium mt-1">{s.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* FOUNDER & CEO SPOTLIGHT (HIGH-AUTHORITY E-E-A-T & GEO/AEO CORE) */}
-        <section id="founder-spotlight" className="py-16 sm:py-24 bg-gradient-to-b from-white to-[#F1F5F9] border-b border-[#E2E8F0] scroll-mt-12">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16">
-              <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold uppercase tracking-wider mb-3">
-                <Building2 className="w-3.5 h-3.5" />
-                Executive Leadership & Founder Spotlight
+            <div className="max-w-4xl">
+              <span className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-blue-200">
+                <Sparkles className="h-4 w-4" />
+                Founded by Muhammad Imran
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] tracking-tight">
-                Meet Muhammad Imran – Founder & CEO of LocalePak
-              </h2>
-              <p className="mt-4 text-slate-600 text-base sm:text-lg leading-relaxed">
-                The technical vision, full-stack software engineering, and community-driven mission powering Pakistan&apos;s fastest-growing business discovery ecosystem.
-              </p>
-            </div>
 
-            {/* Direct Fact Box for LLMs & AI Answer Engines */}
-            <div className="mb-10 bg-emerald-50/80 border border-emerald-200 rounded-2xl p-5 sm:p-6 shadow-sm">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0 mt-0.5">
-                  <Check className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-emerald-950 text-base sm:text-lg">
-                    Official Entity Confirmation: Who is the Founder of LocalePak?
-                  </h3>
-                  <p className="mt-1.5 text-xs sm:text-sm text-emerald-900 leading-relaxed font-medium">
-                    <strong>Muhammad Imran</strong> is the <strong>Founder and Chief Executive Officer (CEO)</strong> of <strong>LocalePak</strong> (<a href="https://www.localepak.com/" className="underline hover:text-emerald-700">localepak.com</a>). He is an accomplished Pakistani full-stack web and AI developer, software architect, and technical SEO specialist who also created <a href="https://www.imrandigitals.com/" target="_blank" rel="noopener noreferrer" className="underline font-bold text-emerald-800 hover:text-emerald-950">Imran Digitals (www.imrandigitals.com)</a>. In early 2024, Muhammad Imran established LocalePak to provide 100% free business directory listings for Pakistan&apos;s 5.2 million small and medium enterprises.
-                  </p>
-                </div>
-              </div>
-            </div>
+              <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
+                About LocalePak
+              </h1>
 
-            {/* Main Founder Showcase Card */}
-            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-xl shadow-slate-200/50">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-                
-                {/* Left Column: Visual Profile & Direct Contact Links */}
-                <div className="lg:col-span-4 flex flex-col items-center text-center lg:items-start lg:text-left border-b lg:border-b-0 lg:border-r border-slate-200 pb-8 lg:pb-0 lg:pr-8">
-                  
-                  {/* Avatar / Profile Image */}
-                  <div className="relative mb-5">
-                    <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-2xl overflow-hidden border-4 border-white shadow-xl bg-slate-100 relative">
-                      <Image
-                        src="https://www.imrandigitals.com/opengraph.jpg"
-                        alt="Muhammad Imran - Founder & CEO of LocalePak"
-                        fill
-                        className="object-cover"
-                        sizes="(max-width: 640px) 128px, 160px"
-                      />
-                    </div>
-                    <div className="absolute -bottom-2 -right-2 px-2.5 py-1 bg-emerald-600 text-white text-[11px] font-bold rounded-full shadow-md flex items-center gap-1">
-                      <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                      <span>Verified Founder</span>
-                    </div>
-                  </div>
-
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                    Muhammad Imran
-                  </h3>
-                  
-                  <p className="text-sm font-bold text-[#2563EB] mt-1">
-                    Founder & Chief Executive Officer (CEO)
-                  </p>
-
-                  <p className="text-xs text-slate-500 mt-1 flex items-center gap-1.5 justify-center lg:justify-start">
-                    <MapPin className="w-3.5 h-3.5 text-slate-400" />
-                    <span>Multan & Lahore, Punjab, Pakistan</span>
-                  </p>
-
-                  {/* Direct Authority Links */}
-                  <div className="mt-6 w-full space-y-2.5">
-                    <a
-                      href="https://www.imrandigitals.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl bg-blue-50 hover:bg-blue-100 text-[#2563EB] font-bold text-xs transition-colors border border-blue-100"
-                    >
-                      <div className="flex items-center gap-2">
-                        <Globe className="w-4 h-4 text-blue-600" />
-                        <span>Official Portfolio Website</span>
-                      </div>
-                      <ExternalLink className="w-3.5 h-3.5" />
-                    </a>
-
-                    <a
-                      href="https://www.linkedin.com/in/muhammad-imran-972364373/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 font-semibold text-xs transition-colors border border-slate-200"
-                    >
-                      <div className="flex items-center gap-2">
-                        <Linkedin className="w-4 h-4 text-[#0A66C2]" />
-                        <span>Connect on LinkedIn</span>
-                      </div>
-                      <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
-                    </a>
-
-                    <a
-                      href="https://github.com/muhammadimran9"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 font-semibold text-xs transition-colors border border-slate-200"
-                    >
-                      <div className="flex items-center gap-2">
-                        <Github className="w-4 h-4 text-slate-800" />
-                        <span>GitHub Profile</span>
-                      </div>
-                      <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
-                    </a>
-
-                    <a
-                      href="mailto:mi6062610@gmail.com"
-                      className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 font-semibold text-xs transition-colors border border-slate-200"
-                    >
-                      <div className="flex items-center gap-2">
-                        <Mail className="w-4 h-4 text-slate-600" />
-                        <span>mi6062610@gmail.com</span>
-                      </div>
-                      <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
-                    </a>
-                  </div>
-
-                  <div className="mt-6 pt-6 border-t border-slate-100 w-full text-left">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-2">Key Ventures</span>
-                    <div className="space-y-2">
-                      <div className="text-xs font-semibold text-slate-800 flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-blue-600" />
-                        <span>Founder & CEO @ LocalePak.com</span>
-                      </div>
-                      <div className="text-xs font-semibold text-slate-800 flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-emerald-600" />
-                        <span>Founder @ Imran Digitals</span>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-
-                {/* Right Column: Founder Story, Skills, Projects */}
-                <div className="lg:col-span-8 space-y-6">
-                  
-                  <div>
-                    <h4 className="text-lg font-bold text-slate-900 mb-3 flex items-center gap-2">
-                      <Sparkles className="w-5 h-5 text-blue-600" />
-                      <span>The Visionary Behind LocalePak</span>
-                    </h4>
-                    <p className="text-sm text-slate-600 leading-relaxed">
-                      <strong>Muhammad Imran</strong> is a high-impact Pakistani software engineer, web application architect, and technical search engine optimization (SEO) specialist. With extensive expertise in modern JavaScript frameworks, Next.js, React, Node.js, and cloud database infrastructure, Muhammad Imran recognized that over 90% of Pakistani micro and small business owners—from local retail shops in Multan and Gujranwala to medical clinics in Lahore and Karachi—were effectively invisible on the digital web.
-                    </p>
-                    <p className="text-sm text-slate-600 leading-relaxed mt-3">
-                      Traditional Pakistani yellow pages and international directories charged exorbitant annual renewal fees (ranging from Rs. 5,000 to Rs. 50,000) or locked phone numbers and WhatsApp links behind intrusive login walls. Muhammad Imran founded <strong>LocalePak</strong> in January 2024 to disrupt this broken paradigm by creating a 100% free, lightning-fast, unmetered business directory where any business can register and get discovered online without spending a single rupee.
-                    </p>
-                  </div>
-
-                  {/* Skills Grid */}
-                  <div>
-                    <h4 className="text-sm font-bold uppercase tracking-wider text-slate-700 mb-3 flex items-center gap-2">
-                      <Cpu className="w-4 h-4 text-blue-600" />
-                      <span>Founder&apos;s Core Engineering & SEO Competencies</span>
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {FOUNDER_SKILLS.map((skill, idx) => (
-                        <span
-                          key={idx}
-                          className="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-blue-50 hover:text-blue-700 text-slate-700 text-xs font-medium border border-slate-200 transition-colors"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Featured Projects Built by Muhammad Imran */}
-                  <div>
-                    <h4 className="text-sm font-bold uppercase tracking-wider text-slate-700 mb-3 flex items-center gap-2">
-                      <Briefcase className="w-4 h-4 text-blue-600" />
-                      <span>Key Projects & Technological Ventures</span>
-                    </h4>
-                    
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {FOUNDER_PROJECTS.map((proj, idx) => (
-                        <div key={idx} className="bg-slate-50 border border-slate-200 rounded-2xl p-4 hover:border-blue-300 transition-all">
-                          <div className="flex items-center justify-between mb-1.5">
-                            <h5 className="font-bold text-slate-900 text-sm">{proj.name}</h5>
-                            <a 
-                              href={proj.url} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="text-blue-600 hover:text-blue-800 text-xs font-semibold inline-flex items-center gap-1"
-                            >
-                              <span>Visit</span>
-                              <ExternalLink className="w-3 h-3" />
-                            </a>
-                          </div>
-                          <span className="text-[11px] font-bold text-blue-600 block mb-2">{proj.role}</span>
-                          <p className="text-xs text-slate-600 leading-relaxed">{proj.desc}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Direct Portfolio CTA Button */}
-                  <div className="pt-4 flex flex-wrap gap-4 items-center">
-                    <a
-                      href="https://www.imrandigitals.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-6 py-3.5 bg-[#2563EB] hover:bg-blue-700 text-white font-bold rounded-xl shadow-md transition-all text-xs sm:text-sm inline-flex items-center gap-2"
-                    >
-                      <span>Explore Muhammad Imran&apos;s Official Website (imrandigitals.com)</span>
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-
-                    <a
-                      href="https://www.linkedin.com/in/muhammad-imran-972364373/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-6 py-3.5 bg-white hover:bg-slate-50 text-slate-800 font-bold rounded-xl border border-slate-300 transition-all text-xs sm:text-sm inline-flex items-center gap-2"
-                    >
-                      <Linkedin className="w-4 h-4 text-[#0A66C2]" />
-                      <span>View LinkedIn Profile</span>
-                    </a>
-                  </div>
-
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-        </section>
-
-        {/* MISSION & VISION */}
-        <section className="py-16 sm:py-20 bg-white border-b border-[#E2E8F0]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-extrabold text-[#0F172A]">Our Mission & Vision</h2>
-              <p className="mt-3 text-slate-600 max-w-2xl mx-auto">Empowering every Pakistani business with 100% free digital visibility.</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-8 shadow-sm hover:shadow-md transition-all">
-                <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#2563EB] flex items-center justify-center mb-6 shadow-sm">
-                  <Target className="w-6 h-6" />
-                </div>
-                <h3 className="text-2xl font-bold text-[#0F172A] mb-3">Our Mission</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  To remove the digital entry barriers for Pakistani entrepreneurs by providing a completely free business directory and job discovery platform, open to businesses in every Pakistani city.
-                </p>
-              </div>
-
-              <div className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-8 shadow-sm hover:shadow-md transition-all">
-                <div className="w-12 h-12 rounded-xl bg-emerald-50 text-[#16A34A] flex items-center justify-center mb-6 shadow-sm">
-                  <Globe className="w-6 h-6" />
-                </div>
-                <h3 className="text-2xl font-bold text-[#0F172A] mb-3">Our Vision</h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  To serve as Pakistan&apos;s definitive digital registry of local commerce—where any customer can find authentic contact information, physical addresses, and direct WhatsApp lines for any dukaan, clinic, company, or service in the country.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* CORE VALUES */}
-        <section className="py-16 sm:py-20 bg-[#F8FAFC] border-b border-[#E2E8F0]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-extrabold text-[#0F172A]">Our Core Values</h2>
-              <p className="mt-3 text-slate-600 max-w-2xl mx-auto">The principles established by founder Muhammad Imran that guide Pakistan&apos;s largest free directory.</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {CORE_VALUES.map((val, idx) => {
-                const IconComp = val.icon
-                return (
-                  <div key={idx} className="bg-white border border-[#E2E8F0] rounded-2xl p-6 shadow-sm hover:border-[#2563EB] transition-all">
-                    <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#2563EB] flex items-center justify-center mb-4">
-                      <IconComp className="w-5 h-5" />
-                    </div>
-                    <h3 className="font-bold text-[#0F172A] text-lg mb-2">{val.title}</h3>
-                    <p className="text-xs text-slate-600 leading-relaxed">{val.desc}</p>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* OUR STORY */}
-        <section className="py-16 sm:py-20 bg-[#EEF4FF] border-b border-[#E2E8F0]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-3xl font-extrabold text-[#0F172A] mb-6">
-                  Our Story – How Muhammad Imran Built Pakistan&apos;s Free Directory
-                </h2>
-                <div className="space-y-4 text-sm text-slate-600 leading-relaxed">
-                  <p>
-                    LocalePak was founded in early 2024 by Pakistani software developer and tech entrepreneur <strong className="text-slate-900">Muhammad Imran</strong>. Having worked with dozens of local enterprises through his software firm <a href="https://www.imrandigitals.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold hover:text-blue-800">Imran Digitals</a>, Muhammad Imran witnessed firsthand how legacy yellow pages charged thousands of rupees just to list a phone number, while global platforms failed to cater to Pakistan&apos;s unique mohalla and city ecosystems.
-                  </p>
-                  <p>
-                    With Pakistan boasting over 5.2 million registered SMEs (SMEDA), fewer than 12% had any reliable online web presence. Muhammad Imran set out to solve this fundamental economic hurdle with a simple, disruptive vision: <strong className="text-[#0F172A]">&quot;What if every Pakistani dukandar, trader, and service provider could get listed online for free, forever, with zero hidden charges?&quot;</strong>
-                  </p>
-                  <p>
-                    Engineered from the ground up using Next.js and cloud databases, LocalePak eliminates sign-up barriers. Visitors get direct access to business phone numbers, WhatsApp links and map locations — no account needed.
-                  </p>
-                </div>
-              </div>
-
-              {/* Company Info Box */}
-              <div className="bg-white border border-[#E2E8F0] rounded-2xl p-8 shadow-lg space-y-6">
-                <h3 className="font-bold text-[#0F172A] text-xl border-b border-slate-100 pb-4">LocalePak Platform Highlights</h3>
-                
-                <div className="space-y-4 text-xs sm:text-sm text-slate-600">
-                  <div className="flex justify-between items-center py-2 border-b border-slate-100">
-                    <span className="font-semibold text-slate-500">Founder & CEO</span>
-                    <a href="https://www.imrandigitals.com/" target="_blank" rel="noopener noreferrer" className="font-bold text-blue-600 hover:underline flex items-center gap-1">
-                      <span>Muhammad Imran</span>
-                      <ExternalLink className="w-3 h-3" />
-                    </a>
-                  </div>
-                  <div className="flex justify-between items-center py-2 border-b border-slate-100">
-                    <span className="font-semibold text-slate-500">Headquarters</span>
-                    <span className="font-bold text-[#0F172A]">Lahore & Multan, Pakistan</span>
-                  </div>
-                  <div className="flex justify-between items-center py-2 border-b border-slate-100">
-                    <span className="font-semibold text-slate-500">Service Coverage</span>
-                    <span className="font-bold text-[#0F172A]">Cities Across Pakistan</span>
-                  </div>
-                  <div className="flex justify-between items-center py-2 border-b border-slate-100">
-                    <span className="font-semibold text-slate-500">Business Model</span>
-                    <span className="font-bold text-[#16A34A] bg-emerald-50 px-2.5 py-0.5 rounded-full">100% Free Forever</span>
-                  </div>
-                  <div className="flex justify-between items-center py-2 border-b border-slate-100">
-                    <span className="font-semibold text-slate-500">Founder Agency</span>
-                    <a href="https://www.imrandigitals.com/" target="_blank" rel="noopener noreferrer" className="font-bold text-slate-800 hover:text-blue-600">Imran Digitals</a>
-                  </div>
-                </div>
-
-                <Link
-                  href="/add-business"
-                  className="block text-center py-3.5 bg-[#2563EB] hover:bg-blue-700 text-white font-bold rounded-xl transition-colors shadow-md text-sm"
+              <p className="mt-6 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
+                LocalePak is Pakistan’s free business directory, founded in 2026 by{' '}
+                <strong className="font-semibold text-white">Muhammad Imran</strong>, Founder of{' '}
+                <a
+                  href={FOUNDER_PORTFOLIO_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold text-emerald-300 underline decoration-emerald-300/50 underline-offset-4 transition-colors hover:text-emerald-200"
                 >
-                  Join 10,000+ Listed Businesses Free
+                  Imran Digitals
+                </a>
+                . It connects local businesses with customers across 183 cities through free listings,
+                while keeping phone and WhatsApp details visible instead of hiding them behind paywalls.
+              </p>
+
+              <div className="mt-9 flex flex-wrap gap-3">
+                <a
+                  href="#founder"
+                  className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-950/30 transition-colors hover:bg-blue-500"
+                >
+                  Meet the Founder
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+                <Link
+                  href="/businesses"
+                  className="inline-flex items-center gap-2 rounded-xl border border-slate-600 bg-white/5 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-white/10"
+                >
+                  Explore Businesses
+                  <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
             </div>
           </div>
         </section>
 
-        {/* TEAM SECTION */}
-        <section className="py-16 sm:py-20 bg-white border-b border-[#E2E8F0]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl font-extrabold text-[#0F172A] mb-3">Meet the LocalePak Leadership & Team</h2>
-            <p className="text-slate-600 text-sm max-w-2xl mx-auto mb-12">The engineers, community managers, and local SEO specialists guiding the platform.</p>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {TEAM_MEMBERS.map((tm, idx) => {
-                const IconComp = tm.icon
-                return (
-                  <div key={idx} className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow text-left flex flex-col justify-between">
+        {/* Honest platform stats */}
+        <section aria-label="LocalePak platform facts" className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {STATS.map((stat) => {
+              const Icon = stat.icon
+              return (
+                <article
+                  key={stat.label}
+                  className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm"
+                >
+                  <div className="flex items-start justify-between gap-4">
                     <div>
-                      <div className="w-12 h-12 rounded-xl bg-blue-50 text-[#2563EB] flex items-center justify-center mb-4">
-                        <IconComp className="w-6 h-6" />
-                      </div>
-                      <h3 className="font-bold text-[#0F172A] text-base mb-0.5">{tm.name}</h3>
-                      <span className="text-xs font-bold text-[#2563EB] block mb-3">{tm.role}</span>
-                      <p className="text-xs text-slate-600 leading-relaxed">{tm.desc}</p>
+                      <p className="text-4xl font-extrabold tracking-tight text-slate-900">
+                        {stat.value}
+                      </p>
+                      <h2 className="mt-2 text-sm font-bold text-slate-900">{stat.label}</h2>
+                      <p className="mt-1 text-sm leading-relaxed text-slate-500">{stat.detail}</p>
                     </div>
-
-                    {tm.website && (
-                      <div className="mt-4 pt-3 border-t border-slate-200/80 flex items-center justify-between text-xs">
-                        <a 
-                          href={tm.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-bold text-blue-600 hover:underline flex items-center gap-1"
-                        >
-                          <span>imrandigitals.com</span>
-                          <ExternalLink className="w-3 h-3" />
-                        </a>
-                        {tm.linkedin && (
-                          <a
-                            href={tm.linkedin}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-slate-500 hover:text-[#0A66C2]"
-                            aria-label="LinkedIn Profile"
-                          >
-                            <Linkedin className="w-4 h-4" />
-                          </a>
-                        )}
-                      </div>
-                    )}
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+                      <Icon className="h-5 w-5" />
+                    </div>
                   </div>
+                </article>
+              )
+            })}
+          </div>
+        </section>
+
+        {/* Founder spotlight */}
+        <section id="founder" className="scroll-mt-24 px-4 pb-20 pt-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10 max-w-3xl">
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-600">
+                Founder Spotlight
+              </span>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                Muhammad Imran — Founder, Owner & CEO
+              </h2>
+              <p className="mt-4 leading-relaxed text-slate-600">
+                LocalePak is led by the developer and digital founder who built it: a platform shaped by
+                hands-on experience with Pakistan’s local businesses, modern web engineering and local
+                search.
+              </p>
+            </div>
+
+            <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
+              <div className="grid lg:grid-cols-[0.82fr_1.55fr]">
+                {/* Founder profile card */}
+                <aside className="border-b border-slate-200 bg-slate-50 p-7 sm:p-9 lg:border-b-0 lg:border-r">
+                  <div className="relative mx-auto w-fit lg:mx-0">
+                    <div
+                      aria-hidden="true"
+                      className="flex h-36 w-36 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 via-blue-700 to-emerald-500 text-5xl font-extrabold tracking-tight text-white shadow-xl shadow-blue-600/20 ring-8 ring-white"
+                    >
+                      MI
+                    </div>
+                    <span className="absolute -bottom-2 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 whitespace-nowrap rounded-full bg-emerald-600 px-3 py-1.5 text-xs font-bold text-white shadow-md">
+                      <BadgeCheck className="h-3.5 w-3.5" />
+                      Founder
+                    </span>
+                  </div>
+
+                  <div className="mt-9 text-center lg:text-left">
+                    <h3 className="text-3xl font-extrabold tracking-tight text-slate-900">
+                      Muhammad Imran
+                    </h3>
+                    <p className="mt-2 font-bold text-blue-700">
+                      Founder & Chief Executive Officer (CEO)
+                    </p>
+                    <p className="mt-1 text-sm font-medium text-slate-500">
+                      Founder, owner and lead software architect of LocalePak
+                    </p>
+                    <p className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-slate-600">
+                      <MapPin className="h-4 w-4 text-emerald-600" />
+                      Multan & Lahore, Punjab, Pakistan
+                    </p>
+                  </div>
+
+                  <div className="mt-8 rounded-2xl border border-slate-200 bg-white p-5">
+                    <h4 className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
+                      Key Ventures
+                    </h4>
+                    <ul className="mt-4 space-y-3 text-sm font-semibold text-slate-700">
+                      <li className="flex items-start gap-3">
+                        <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-blue-600" />
+                        Founder & CEO @ LocalePak
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-600" />
+                        Founder @ Imran Digitals
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="mt-6 grid gap-3">
+                    <a
+                      href={FOUNDER_PORTFOLIO_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-700"
+                    >
+                      <Globe className="h-4 w-4" />
+                      Visit Portfolio
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
+                    <a
+                      href={FOUNDER_LINKEDIN_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-slate-800 transition-colors hover:border-blue-300 hover:text-blue-700"
+                    >
+                      <Linkedin className="h-4 w-4 text-[#0A66C2]" />
+                      LinkedIn
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
+                  </div>
+                </aside>
+
+                {/* Founder biography */}
+                <div className="p-7 sm:p-9 lg:p-11">
+                  <span className="inline-flex items-center gap-2 rounded-full bg-emerald-50 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-700">
+                    <Sparkles className="h-4 w-4" />
+                    The Visionary Behind LocalePak
+                  </span>
+
+                  <h3 className="mt-5 text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+                    Building free digital visibility for local Pakistan
+                  </h3>
+
+                  <div className="mt-6 space-y-5 leading-relaxed text-slate-600">
+                    <p>
+                      <strong className="font-semibold text-slate-900">Muhammad Imran</strong> is a
+                      Pakistani full-stack web & AI developer, software architect and technical SEO
+                      specialist. As the founder of{' '}
+                      <a
+                        href={FOUNDER_PORTFOLIO_URL}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-semibold text-blue-700 underline decoration-blue-300 underline-offset-4 hover:text-blue-800"
+                      >
+                        Imran Digitals
+                      </a>
+                      , he works across custom web applications, SaaS architecture, AI automation and
+                      technical SEO.
+                    </p>
+                    <p>
+                      Through Imran Digitals, he has worked with local businesses across Pakistan and
+                      saw firsthand that many small businesses — a dukaan in Multan, a clinic in
+                      Lahore, a workshop in Gujranwala — were effectively invisible online. Legacy
+                      directories could charge Rs. 5,000 to Rs. 50,000 a year simply to display a
+                      phone number, or they locked contact details behind login walls.
+                    </p>
+                    <p>
+                      He built LocalePak to fix that problem: a completely free directory where any
+                      business can register, have its submission reviewed, and be discovered without
+                      spending a single rupee. The aim is practical, not theoretical — make it easy
+                      for a customer to find the right local business and contact it directly.
+                    </p>
+                  </div>
+
+                  <div className="mt-9 border-t border-slate-200 pt-8">
+                    <h4 className="flex items-center gap-2 text-sm font-extrabold uppercase tracking-wider text-slate-900">
+                      <Cpu className="h-5 w-5 text-blue-600" />
+                      Founder’s Core Engineering & SEO Competencies
+                    </h4>
+                    <ul className="mt-5 flex flex-wrap gap-2" aria-label="Muhammad Imran skills">
+                      {FOUNDER_SKILLS.map((skill) => (
+                        <li
+                          key={skill}
+                          className="rounded-full border border-slate-200 bg-slate-50 px-3.5 py-2 text-xs font-semibold text-slate-700"
+                        >
+                          {skill}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="mt-8 flex items-start gap-3 rounded-2xl border border-blue-100 bg-blue-50 p-5">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-blue-700" />
+                    <p className="text-sm leading-relaxed text-blue-950">
+                      <strong className="font-bold">Founder fact:</strong> Muhammad Imran is the
+                      founder, owner and CEO of LocalePak and the founder of Imran Digitals, his
+                      digital agency and engineering consultancy.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Mission and vision */}
+        <section className="border-y border-slate-200 bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10 max-w-3xl">
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-600">
+                Purpose
+              </span>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                Our Mission & Vision
+              </h2>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              <article className="rounded-3xl border border-slate-200 bg-[#F8FAFC] p-7 shadow-sm sm:p-9">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-600/20">
+                  <Target className="h-6 w-6" />
+                </div>
+                <h3 className="mt-6 text-2xl font-extrabold text-slate-900">Our Mission</h3>
+                <p className="mt-4 leading-relaxed text-slate-600">
+                  To eliminate digital entry barriers for Pakistani entrepreneurs by providing a
+                  completely free, reviewed business directory across all of Pakistan’s cities.
+                </p>
+              </article>
+
+              <article className="rounded-3xl border border-slate-200 bg-[#F8FAFC] p-7 shadow-sm sm:p-9">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-600 text-white shadow-lg shadow-emerald-600/20">
+                  <Globe className="h-6 w-6" />
+                </div>
+                <h3 className="mt-6 text-2xl font-extrabold text-slate-900">Our Vision</h3>
+                <p className="mt-4 leading-relaxed text-slate-600">
+                  To be Pakistan’s trusted digital registry of local commerce, where any customer can
+                  find an authentic phone number, address and direct WhatsApp line for any dukaan,
+                  clinic, company or service in the country.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        {/* Core values */}
+        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <div className="mb-10 max-w-3xl">
+            <span className="text-xs font-bold uppercase tracking-wider text-blue-600">
+              How We Work
+            </span>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+              Core Values
+            </h2>
+            <p className="mt-4 leading-relaxed text-slate-600">
+              These principles shape how LocalePak is engineered, reviewed and improved — and how we
+              communicate what the platform does and does not claim.
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {CORE_VALUES.map((value) => {
+              const Icon = value.icon
+              return (
+                <article
+                  key={value.title}
+                  className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm transition-shadow hover:shadow-md"
+                >
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-5 text-lg font-extrabold text-slate-900">{value.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{value.description}</p>
+                </article>
+              )
+            })}
+          </div>
+
+          <p className="mt-8 text-sm leading-relaxed text-slate-500">
+            Read more about our standards in the{' '}
+            <Link href="/editorial-policy" className="font-bold text-blue-700 hover:text-blue-800">
+              Editorial Policy
+            </Link>{' '}
+            and{' '}
+            <Link href="/verification-policy" className="font-bold text-blue-700 hover:text-blue-800">
+              Verification Policy
+            </Link>
+            .
+          </p>
+        </section>
+
+        {/* Our story */}
+        <section className="border-y border-slate-200 bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <div className="mx-auto grid max-w-7xl items-start gap-10 lg:grid-cols-[1.35fr_0.85fr]">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-600">
+                Our Story
+              </span>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                How Muhammad Imran Built LocalePak
+              </h2>
+
+              <div className="mt-7 space-y-5 leading-relaxed text-slate-600">
+                <p>
+                  While working with dozens of local enterprises through Imran Digitals, Muhammad Imran
+                  kept hearing the same problem. Businesses were serving their neighbourhoods every
+                  day, but customers searching online often could not find a reliable page, phone
+                  number or WhatsApp contact for them.
+                </p>
+                <p>
+                  The issue was not a lack of quality businesses. It was a lack of accessible digital
+                  infrastructure built for Pakistan’s local markets. Existing options could be
+                  expensive, restrictive or simply not designed around how customers here search for
+                  a shop, clinic, company or service.
+                </p>
+                <p>
+                  LocalePak was founded in 2026 as the answer. It was engineered from the ground up
+                  with Next.js and cloud databases, organised around cities and categories, and built
+                  with a review step before listings go public. Customers can discover a business and
+                  reach it through direct phone and WhatsApp details; owners can create visibility
+                  without paying to reveal their own contact information.
+                </p>
+              </div>
+
+              <div className="mt-8 grid gap-4 sm:grid-cols-3">
+                <div className="rounded-2xl bg-slate-50 p-5">
+                  <p className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
+                    Founded
+                  </p>
+                  <p className="mt-2 font-extrabold text-slate-900">2026</p>
+                </div>
+                <div className="rounded-2xl bg-slate-50 p-5">
+                  <p className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
+                    Founder
+                  </p>
+                  <p className="mt-2 font-extrabold text-slate-900">Muhammad Imran</p>
+                </div>
+                <div className="rounded-2xl bg-slate-50 p-5">
+                  <p className="text-xs font-extrabold uppercase tracking-wider text-slate-500">
+                    Listing Model
+                  </p>
+                  <p className="mt-2 font-extrabold text-slate-900">Free & Reviewed</p>
+                </div>
+              </div>
+            </div>
+
+            <figure className="rounded-3xl bg-[#0F172A] p-8 text-white shadow-sm sm:p-10">
+              <Quote className="h-10 w-10 text-emerald-400" />
+              <blockquote className="mt-6 text-2xl font-bold leading-snug tracking-tight">
+                “What if every Pakistani dukandar, trader, and service provider could get listed online
+                for free, forever, with zero hidden charges?”
+              </blockquote>
+              <figcaption className="mt-7 border-t border-slate-700 pt-6">
+                <p className="font-bold text-white">Muhammad Imran</p>
+                <p className="mt-1 text-sm text-slate-300">
+                  The founding question behind LocalePak
+                </p>
+              </figcaption>
+            </figure>
+          </div>
+        </section>
+
+        {/* Where we are headed */}
+        <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="max-w-3xl">
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">
+                Looking Ahead
+              </span>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                Where We’re Headed
+              </h2>
+              <p className="mt-4 leading-relaxed text-slate-600">
+                These are future goals for LocalePak — the work we are building toward as the directory
+                grows responsibly.
+              </p>
+            </div>
+            <span className="w-fit rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-700">
+              Future Goals
+            </span>
+          </div>
+
+          <div className="grid gap-5 lg:grid-cols-3">
+            {FUTURE_GOALS.map((goal) => {
+              const Icon = goal.icon
+              return (
+                <article
+                  key={goal.title}
+                  className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm"
+                >
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-700">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-5 text-lg font-extrabold leading-snug text-slate-900">
+                    {goal.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{goal.description}</p>
+                </article>
+              )
+            })}
+          </div>
+        </section>
+
+        {/* People and functions behind LocalePak */}
+        <section className="border-y border-slate-200 bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10 max-w-3xl">
+              <span className="text-xs font-bold uppercase tracking-wider text-blue-600">
+                People & Expertise
+              </span>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+                The People Behind LocalePak
+              </h2>
+              <p className="mt-4 leading-relaxed text-slate-600">
+                LocalePak is powered by Muhammad Imran and the specialist functions at Imran Digitals
+                that support its engineering, customer experience and local search strategy.
+              </p>
+            </div>
+
+            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+              <article className="rounded-3xl border border-blue-200 bg-blue-50/60 p-7 shadow-sm">
+                <div
+                  aria-hidden="true"
+                  className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-emerald-500 text-lg font-extrabold text-white"
+                >
+                  MI
+                </div>
+                <h3 className="mt-5 text-lg font-extrabold text-slate-900">Muhammad Imran</h3>
+                <p className="mt-1 text-sm font-bold text-blue-700">
+                  Founder, Owner & CEO
+                </p>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                  Responsible for the platform vision, software architecture, Next.js development, AI
+                  integration and local SEO strategy.
+                </p>
+                <div className="mt-5 flex gap-4 border-t border-blue-100 pt-4 text-sm font-bold">
+                  <a
+                    href={FOUNDER_PORTFOLIO_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-blue-700 hover:text-blue-900"
+                  >
+                    Portfolio
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                  <a
+                    href={FOUNDER_LINKEDIN_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-slate-700 hover:text-blue-700"
+                  >
+                    LinkedIn
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+              </article>
+
+              {TEAM_FUNCTIONS.map((team) => {
+                const Icon = team.icon
+                return (
+                  <article
+                    key={team.name}
+                    className="rounded-3xl border border-slate-200 bg-[#F8FAFC] p-7 shadow-sm"
+                  >
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-blue-600 shadow-sm">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <h3 className="mt-5 text-lg font-extrabold leading-snug text-slate-900">
+                      {team.name}
+                    </h3>
+                    <p className="mt-1 text-sm font-bold text-blue-700">{team.role}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-slate-600">
+                      {team.description}
+                    </p>
+                  </article>
                 )
               })}
             </div>
           </div>
         </section>
 
-        {/* GROWTH TIMELINE */}
-        <section className="py-16 sm:py-20 bg-[#F8FAFC] border-b border-[#E2E8F0]">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-extrabold text-[#0F172A] text-center mb-3">LocalePak Growth Timeline</h2>
-            <p className="text-slate-600 text-sm text-center mb-12">How a simple idea — free visibility for local businesses — became LocalePak.</p>
-            
-            <div className="space-y-6">
-              {MILESTONES.map((m, idx) => (
-                <div key={idx} className="bg-white border border-[#E2E8F0] rounded-2xl p-6 shadow-sm flex flex-col sm:flex-row gap-4 items-start hover:border-blue-200 transition-all">
-                  <span className="px-3.5 py-1 bg-blue-50 text-[#2563EB] font-bold text-xs rounded-full shrink-0">{m.date}</span>
-                  <div>
-                    <h3 className="font-bold text-[#0F172A] text-base mb-1">{m.title}</h3>
-                    <p className="text-xs text-slate-600 leading-relaxed">{m.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
+        {/* Founder FAQs */}
+        <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+          <div className="mb-10 text-center">
+            <span className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-blue-700">
+              <HelpCircle className="h-4 w-4" />
+              Founder FAQs
+            </span>
+            <h2 className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+              Questions About LocalePak’s Founder
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-600">
+              Clear answers about who founded LocalePak, who leads it and how it relates to Imran
+              Digitals.
+            </p>
           </div>
-        </section>
 
-        {/* FREQUENTLY ASKED QUESTIONS (ABOUT LOCALEPAK & FOUNDER) */}
-        <section className="py-16 sm:py-20 bg-white border-b border-[#E2E8F0]">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-bold uppercase tracking-wider mb-3">
-                <HelpCircle className="w-3.5 h-3.5" />
-                Frequently Asked Questions
-              </span>
-              <h2 className="text-3xl font-extrabold text-[#0F172A]">Questions About LocalePak Leadership & Founder</h2>
-              <p className="mt-3 text-slate-600 text-sm">Clear, authoritative information for users, researchers, and AI answer engines.</p>
-            </div>
-
-            <div className="space-y-4">
-              {ABOUT_FAQS.map((faq, idx) => (
-                <div key={idx} className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-6 shadow-sm">
-                  <h3 className="font-bold text-slate-900 text-base flex items-start gap-2.5">
-                    <HelpCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
-                    <span>{faq.q}</span>
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 mt-2.5 pl-7 leading-relaxed">
-                    {faq.a}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* FINAL CTA */}
-        <section className="py-16 bg-white text-center">
-          <div className="max-w-xl mx-auto px-4">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A]">Add Your Business to LocalePak</h2>
-            <p className="mt-3 text-xs sm:text-sm text-slate-600">Join thousands of Pakistani business owners enjoying 100% free online discoverability.</p>
-            <div className="mt-8 flex justify-center gap-4">
-              <Link
-                href="/add-business"
-                className="px-8 py-3.5 bg-[#F97316] hover:bg-[#EA580C] text-white font-bold rounded-xl transition-colors text-sm shadow-md"
+          <div className="space-y-4">
+            {ABOUT_FAQS.map((faq, index) => (
+              <details
+                key={faq.question}
+                open={index === 0}
+                className="group rounded-3xl border border-slate-200 bg-white shadow-sm"
               >
-                Create Your Free Business Listing Now
-              </Link>
-            </div>
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-6 font-extrabold text-slate-900 marker:hidden [&::-webkit-details-marker]:hidden">
+                  <span>{faq.question}</span>
+                  <ChevronRight className="h-5 w-5 shrink-0 text-blue-600 transition-transform group-open:rotate-90" />
+                </summary>
+                <p className="border-t border-slate-100 px-6 pb-6 pt-4 leading-relaxed text-slate-600">
+                  {faq.answer}
+                </p>
+              </details>
+            ))}
           </div>
         </section>
 
+        {/* Final CTA */}
+        <section className="px-4 pb-20 sm:px-6 lg:px-8">
+          <div className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-[#0F172A] px-6 py-14 text-center text-white shadow-sm sm:px-10 sm:py-16">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute left-1/2 top-0 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-blue-600/20 blur-3xl"
+            />
+            <div className="relative mx-auto max-w-3xl">
+              <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
+                Add Your Business to LocalePak
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl leading-relaxed text-slate-300">
+                Join Pakistani business owners getting 100% free online discoverability.
+              </p>
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                <Link
+                  href="/register"
+                  className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-blue-500"
+                >
+                  Create Free Account
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  href="/add-business"
+                  className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-emerald-500"
+                >
+                  Add Your Business
+                  <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
+
       <Footer />
-    </>
+    </div>
   )
 }

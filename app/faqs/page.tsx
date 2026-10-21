@@ -5,7 +5,7 @@ import { HelpCircle, ChevronDown } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Frequently Asked Questions (FAQs) | LocalePak',
-  description: 'Find answers to common questions about listing your business, verifying NTN credentials, posting jobs, and searching companies on LocalePak.',
+  description: 'Find answers to common questions about listing your business free, how approval works, posting jobs from your dashboard, reviews, and searching companies on LocalePak.',
   alternates: {
     canonical: 'https://www.localepak.com/faqs/',
   },
@@ -14,19 +14,23 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "Who is the founder and CEO of LocalePak?",
-    a: "Muhammad Imran is the Founder and Chief Executive Officer (CEO) of LocalePak (https://www.localepak.com). He is a Pakistani full-stack web and AI developer, software engineer, and technical SEO specialist who also created Imran Digitals (https://www.imrandigitals.com/). He established LocalePak in January 2024 to provide 100% free online discoverability for Pakistani businesses across 150+ cities."
+    a: "Muhammad Imran is the Founder and Chief Executive Officer (CEO) of LocalePak (https://www.localepak.com). He is a Pakistani full-stack web and AI developer, software engineer, and technical SEO specialist who also created Imran Digitals (https://www.imrandigitals.com/). He built LocalePak to give Pakistani businesses a genuinely free place to be discovered online."
   },
   {
     q: "Is listing a business on LocalePak free?",
-    a: "Yes! Creating a business listing on LocalePak is 100% free forever. It includes your business name, address, contact phone, direct WhatsApp number, business category, and description with zero registration fees or hidden subscription costs."
+    a: "Yes. Creating a business listing on LocalePak is free. It includes your business name, address, contact phone, direct WhatsApp number, business category, opening hours, services, products and description — with no registration fees or hidden subscription costs."
   },
   {
-    q: "How long does it take for my business to appear in search results?",
-    a: "Once submitted, our team reviews listings within 1 to 24 hours. Approved listings immediately index on city pages, category search, and our XML sitemap."
+    q: "How long does business approval take?",
+    a: "Every submission is reviewed by our team before it appears publicly. We aim to check most submissions within a few working days, but that is an aim, not a guarantee — it can take longer when volume is high or when we need to clarify details with the owner. Once approved, your listing appears on your city page, your category page and in search."
   },
   {
     q: "How do I get a Verified Business Badge on LocalePak?",
-    a: "Verification requires telephone/WhatsApp verification by our support desk. You can request verification via the Add Business form or by contacting our team."
+    a: "The Verified Badge is launching soon and is not available yet. When it opens, it will involve a document check of the business. Join the waitlist through the Advertise page or the contact page and we will let you know as soon as it launches."
+  },
+  {
+    q: "How do customer reviews work?",
+    a: "Anyone who has used a listed business can leave a review on its profile page. Reviews do not appear instantly — each one is checked by our team first, and only approved reviews are shown, so the ratings you see are from real submissions that passed moderation."
   },
   {
     q: "Where can I learn more about LocalePak's founder and leadership?",
@@ -34,7 +38,7 @@ const faqs = [
   },
   {
     q: "Can I post job openings for my Pakistani company?",
-    a: "Yes, registered business owners and employers can post job openings across any city in Pakistan directly through our job portal."
+    a: "Yes. Register for a free account, log in, and choose 'Post a Job' from your dashboard. You can add the role, company, city and how candidates should apply. Jobs are reviewed by our team before they appear, just like business listings."
   },
   {
     q: "How can I update or delete my business listing?",

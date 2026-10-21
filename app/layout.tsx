@@ -12,16 +12,16 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: "Pakistan Business Directory – Find & List Businesses Free | LocalePak",
-  description: "LocalePak is Pakistan's free business directory. Find verified businesses by city & category — or add your business listing free and get found on Google.",
+  description: "LocalePak is Pakistan's free business directory. Find local businesses by city & category — or add your business listing free and get found on Google.",
   metadataBase: new URL('https://www.localepak.com'),
   keywords: [
-    'LocalePak Pakistan',
-    'Pakistan business directory',
+    'business directory Pakistan',
+    'businesses in Pakistan',
+    'list business free',
+    'companies in Pakistan',
+    'local services Pakistan',
     'free business listing Pakistan',
-    'jobs in Pakistan',
-    'Pakistani professionals',
-    'verified companies Lahore Karachi Islamabad',
-    'LocalePak enterprise ecosystem'
+    'LocalePak'
   ],
   icons: {
     icon: [{ url: '/favicon.png', sizes: 'any' }],
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Pakistan Business Directory – Find & List Businesses Free | LocalePak",
-    description: "LocalePak is Pakistan's free business directory. Find verified businesses by city & category — or add your business listing free and get found on Google.",
+    description: "LocalePak is Pakistan's free business directory. Find local businesses by city & category — or add your business listing free and get found on Google.",
     url: 'https://www.localepak.com/',
     siteName: 'LocalePak',
     locale: 'en_PK',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Pakistan Business Directory – Find & List Businesses Free | LocalePak",
-    description: "LocalePak is Pakistan's free business directory. Find verified businesses by city & category — or add your business listing free and get found on Google.",
+    description: "LocalePak is Pakistan's free business directory. Find local businesses by city & category — or add your business listing free and get found on Google.",
   },
   robots: {
     index: true,
@@ -71,9 +71,6 @@ export default function RootLayout({
     email: 'admin@localepak.com',
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Office 303, Evacuee Trust Complex, F-5/1',
-      addressLocality: 'Islamabad',
-      postalCode: '44000',
       addressCountry: 'PK',
     },
     contactPoint: {

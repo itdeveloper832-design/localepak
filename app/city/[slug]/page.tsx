@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
+import OwnerCtaBand from '@/components/owner-cta-band'
+import ListBusinessCta from '@/components/list-business-cta'
 import { CITIES, CATEGORIES } from '@/lib/data'
 import { CITY_INFO, generateCityContent } from '@/lib/seo-content'
 import { getCitySeoCopy } from '@/lib/seo-directory-content'
@@ -58,6 +60,9 @@ export default async function CityPage(props: {
   const copy = getCitySeoCopy(slug)
   const guide = generateCityContent(city)
   const otherCities = CITIES.filter(c => c !== city).slice(0, 12)
+  const provinceCities = info?.province
+    ? CITIES.filter(c => c !== city && CITY_INFO[c]?.province === info.province).slice(0, 8)
+    : []
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans">
@@ -103,11 +108,11 @@ export default async function CityPage(props: {
             {CATEGORIES.map(cat => (
               <Link
                 key={cat.id}
-                href={`/category/${cat.id}`}
+                href={`/city/${slug}/${cat.id}`}
                 className="bg-white rounded-2xl p-5 border border-slate-200/80 hover:border-blue-500 hover:shadow-md transition-all group"
               >
                 <Building2 className="w-6 h-6 text-blue-600 mb-2" />
-                <h3 className="font-bold text-slate-900 text-sm group-hover:text-blue-600">{cat.name}</h3>
+                <h3 className="font-bold text-slate-900 text-sm group-hover:text-blue-600">{cat.name} in {city}</h3>
                 <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">{cat.desc}</p>
               </Link>
             ))}
@@ -141,10 +146,38 @@ export default async function CityPage(props: {
               View All Cities
             </Link>
           </div>
+          {provinceCities.length > 0 && info && (
+            <div className="space-y-3 pt-2">
+              <h3 className="font-bold text-slate-900 text-sm">More Cities in {info.province}</h3>
+              <div className="flex flex-wrap gap-2.5">
+                {provinceCities.map(c => (
+                  <Link
+                    key={c}
+                    href={`/city/${cityToSlug(c)}`}
+                    className="px-3.5 py-2 bg-white border border-slate-200 rounded-xl hover:border-blue-500 text-xs font-medium"
+                  >
+                    Businesses in {c}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
         </section>
+
+        <OwnerCtaBand
+          title={`Run a business in ${city}? Get listed free.`}
+          text={`Join the ${city} directory: create a free account, complete the eight-step form, and after review your profile appears on this page, in your category and in search.`}
+          links={[
+            { label: `All businesses in ${city}`, href: '/businesses' },
+            { label: 'Browse categories', href: '/categories' },
+            { label: 'Listing guidelines', href: '/business-listing-guidelines' },
+            { label: 'All cities', href: '/cities' },
+          ]}
+        />
       </main>
 
       <Footer />
+      <ListBusinessCta />
     </div>
   )
 }

@@ -12,10 +12,9 @@ export type DirectorySeoCopy = {
 const CATEGORY_COPY: Record<string, DirectorySeoCopy> = {
   technology: {
     intro: 'Browse Pakistan’s software houses, IT firms, web developers, product teams and other technology service providers.',
-    guidance: 'Weigh up each profile on the services offered, the city it operates from, its public website, portfolio or case-study proof, contact details and any current vacancies. This page covers the providers actually listed here — it is a directory of real profiles, not a claim to a complete national ranking.',
+    guidance: 'Weigh up each profile on the services offered, the city it operates from, its public website, portfolio or case-study proof, and its contact details. Profiles are a starting point for comparison — always confirm the details with the business itself before you commit.',
     links: [
       { label: 'Compare Pakistan’s software houses', href: '/blog/best-software-houses-pakistan-2026/' },
-      { label: 'See IT jobs across Pakistan', href: '/blog/it-jobs-in-pakistan/' },
       { label: 'View technology company listings', href: '/companies/' },
     ],
   },
@@ -56,7 +55,7 @@ const CATEGORY_COPY: Record<string, DirectorySeoCopy> = {
     guidance: 'Money and tax decisions deserve proper diligence: check current credentials, service terms and official confirmations for yourself. A directory profile is a place to discover a provider — never a replacement for professional or regulatory checks.',
     links: [
       { label: 'Read the city guide to accountant jobs', href: '/blog/accountant-jobs-pakistan-city-guide/' },
-      { label: 'Browse professional profiles', href: '/professionals/' },
+      { label: 'Browse company listings', href: '/companies/' },
     ],
   },
   'home-services': {
@@ -71,7 +70,7 @@ const CATEGORY_COPY: Record<string, DirectorySeoCopy> = {
 
 const CITY_COPY: Record<string, DirectorySeoCopy> = {
   karachi: {
-    intro: 'Discover companies, local services, job openings and professional profiles listed across Karachi, Pakistan.',
+    intro: 'Discover businesses, companies and local services across Karachi, Pakistan, organised by category.',
     guidance: 'Most Karachi searches pair a trade or industry with the city itself. Work through the category and business links below to narrow the field, then confirm the address, opening hours and contact details straight with the provider.',
     links: [
       { label: 'Guide to restaurants in Karachi', href: '/blog/restaurants-in-karachi/' },
@@ -80,7 +79,7 @@ const CITY_COPY: Record<string, DirectorySeoCopy> = {
     ],
   },
   lahore: {
-    intro: 'Browse the businesses, services, employers and professionals currently listed in Lahore, Pakistan.',
+    intro: 'Browse businesses, local services and companies in Lahore, Pakistan, organised by category and neighbourhood.',
     guidance: 'People search Lahore by neighbourhood, by service and by category. Treat the listing details as your starting point, and check the business’s current operating information before you visit or hire.',
     links: [
       { label: 'Guide to Lahore businesses by category', href: '/blog/businesses-in-lahore-by-category/' },
@@ -89,15 +88,15 @@ const CITY_COPY: Record<string, DirectorySeoCopy> = {
     ],
   },
   islamabad: {
-    intro: 'See which businesses, services, companies, jobs and professional profiles are listed in Islamabad, Pakistan.',
+    intro: 'See businesses, local services and companies in Islamabad, Pakistan, organised by category.',
     guidance: 'Pair the city with a category to compare Islamabad providers properly. Confirm the precise office location or service area, up-to-date contact details and — where a trade is regulated — credentials from authoritative sources.',
     links: [
       { label: 'Technology businesses', href: '/category/technology/' },
-      { label: 'Professional profiles', href: '/professionals/' },
+      { label: 'Company listings', href: '/companies/' },
     ],
   },
   rawalpindi: {
-    intro: 'Explore the companies, services, vacancies and professional profiles listed in Rawalpindi, Pakistan.',
+    intro: 'Explore companies and local services in Rawalpindi, Pakistan, organised by category.',
     guidance: 'Start from the service you need, then study each listing’s location, contact route and operating details before you decide.',
     links: [
       { label: 'Local services guide', href: '/blog/local-services-pakistan-by-city/' },
@@ -105,7 +104,7 @@ const CITY_COPY: Record<string, DirectorySeoCopy> = {
     ],
   },
   faisalabad: {
-    intro: 'Discover businesses, services, employers and professional profiles available in Faisalabad, Pakistan.',
+    intro: 'Discover businesses, local services and companies in Faisalabad, Pakistan, organised by category.',
     guidance: 'Combine this city page with the industry categories that fit to surface local providers — and always check that contact details and service scope are current before you engage one.',
     links: [
       { label: 'Manufacturing businesses', href: '/category/manufacturing/' },
@@ -113,7 +112,7 @@ const CITY_COPY: Record<string, DirectorySeoCopy> = {
     ],
   },
   multan: {
-    intro: 'Browse local businesses, services, companies, jobs and professionals listed in Multan, Pakistan.',
+    intro: 'Browse local businesses, services and companies in Multan, Pakistan, organised by category.',
     guidance: 'Refine a Multan search by category, service or profession — then confirm the provider’s details are current before you call or visit.',
     links: [
       { label: 'All business categories', href: '/categories/' },
@@ -121,7 +120,7 @@ const CITY_COPY: Record<string, DirectorySeoCopy> = {
     ],
   },
   sialkot: {
-    intro: 'Find businesses, industrial firms, services and professional profiles listed in Sialkot, Pakistan.',
+    intro: 'Find businesses, industrial firms and local services in Sialkot, Pakistan, organised by category.',
     guidance: 'Used together, the city and category pages are a practical first pass over Sialkot’s industrial, commercial and professional providers. Confirm products, services and contact details directly with the business before going further.',
     links: [
       { label: 'Manufacturing businesses', href: '/category/manufacturing/' },

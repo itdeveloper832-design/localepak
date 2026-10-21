@@ -1,0 +1,179 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import Navbar from '@/components/navbar'
+import Footer from '@/components/footer'
+import { Factory, ArrowRight, Info } from 'lucide-react'
+import { toast } from 'sonner'
+import { auth, db } from '@/lib/firebase'
+import { onAuthStateChanged, User } from 'firebase/auth'
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
+import { CATEGORIES, CITIES } from '@/lib/data'
+
+function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+const inputClass =
+  'w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600'
+const labelClass = 'block text-xs font-bold text-slate-700 mb-1'
+
+export default function AddCompanyPage() {
+  const router = useRouter()
+  const [user, setUser] = useState<User | null>(null)
+  const [authLoading, setAuthLoading] = useState(true)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const [name, setName] = useState('')
+  const [industry, setIndustry] = useState('')
+  const [city, setCity] = useState('')
+  const [phone, setPhone] = useState('')
+  const [email, setEmail] = useState('')
+  const [website, setWebsite] = useState('')
+  const [address, setAddress] = useState('')
+  const [description, setDescription] = useState('')
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (u) => {
+      if (!u) {
+        router.push('/login')
+        return
+      }
+      setUser(u)
+      setAuthLoading(false)
+    })
+    return () => unsub()
+  }, [router])
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!user) return
+    setIsSubmitting(true)
+    try {
+      await addDoc(collection(db, 'companies'), {
+        name: name.trim(),
+        slug: `${slugify(name)}-${slugify(city)}`,
+        industry,
+        city,
+        phone: phone.trim(),
+        email: email.trim(),
+        website: website.trim(),
+        address: address.trim(),
+        description: description.trim(),
+        ownerId: user.uid,
+        ownerEmail: user.email || '',
+        ownerName: user.displayName || '',
+        status: 'pending',
+        createdAt: serverTimestamp(),
+      })
+      toast.success('Company submitted for review.')
+      router.push('/dashboard')
+    } catch (err: any) {
+      toast.error(`Could not submit your company: ${err?.message || 'Unknown error'}`)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  if (authLoading) {
+    return (
+      <>
+        <Navbar />
+        <main className="bg-[#F8FAFC] min-h-screen py-16 px-4 flex items-center justify-center">
+          <p className="text-sm text-slate-400">Loading...</p>
+        </main>
+        <Footer />
+      </>
+    )
+  }
+
+  return (
+    <>
+      <Navbar />
+      <main className="bg-[#F8FAFC] text-slate-800 font-sans min-h-screen py-16 px-4 flex items-center justify-center">
+        <div className="max-w-lg w-full bg-white border border-slate-200 rounded-3xl p-8 shadow-xl">
+          <div className="text-center mb-8">
+            <div className="inline-flex p-3 rounded-2xl bg-emerald-50 text-emerald-600 mb-3">
+              <Factory className="w-8 h-8" />
+            </div>
+            <h1 className="text-2xl font-bold text-slate-900">Add Your Company</h1>
+            <p className="text-xs text-slate-500 mt-1">Free company profile — build trust with buyers across Pakistan</p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className={labelClass}>Company Name *</label>
+              <input type="text" required value={name} onChange={(e) => setName(e.target.value)} placeholder="Pak Industries (Pvt) Ltd" className={inputClass} />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className={labelClass}>Industry *</label>
+                <select required value={industry} onChange={(e) => setIndustry(e.target.value)} className={inputClass}>
+                  <option value="" disabled>Select an industry</option>
+                  {CATEGORIES.map((cat) => (
+                    <option key={cat.id} value={cat.name}>{cat.name}</option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className={labelClass}>City *</label>
+                <select required value={city} onChange={(e) => setCity(e.target.value)} className={inputClass}>
+                  <option value="" disabled>Select a city</option>
+                  {CITIES.map((c) => (
+                    <option key={c} value={c}>{c}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label className={labelClass}>Phone *</label>
+                <input type="tel" required value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+92 300 1234567" className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>Email</label>
+                <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="info@company.pk" className={inputClass} />
+              </div>
+            </div>
+
+            <div>
+              <label className={labelClass}>Website</label>
+              <input type="url" value={website} onChange={(e) => setWebsite(e.target.value)} placeholder="https://yourcompany.pk" className={inputClass} />
+            </div>
+
+            <div>
+              <label className={labelClass}>Address</label>
+              <input type="text" value={address} onChange={(e) => setAddress(e.target.value)} placeholder="Office 303, Evacuee Trust Complex, F-5/1" className={inputClass} />
+            </div>
+
+            <div>
+              <label className={labelClass}>Description</label>
+              <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={4} placeholder="Tell buyers what your company does, your products or services, and your track record." className={inputClass} />
+            </div>
+
+            <div className="flex gap-2.5 p-3.5 bg-blue-50 border border-blue-100 rounded-xl text-xs text-slate-600">
+              <Info className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+              <span>Your company profile goes through a quick review and appears publicly on LocalePak after approval.</span>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+            >
+              <span>{isSubmitting ? 'Submitting...' : 'Submit Company'}</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </form>
+        </div>
+      </main>
+      <Footer />
+    </>
+  )
+}

@@ -1,14 +1,32 @@
 'use client'
 
-import { useState, useEffect, Suspense } from 'react'
+import { useState, Suspense } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
-import { Mail, Lock, LogIn, User, Building2, ArrowRight, AlertCircle, Sparkles, Eye, EyeOff } from 'lucide-react'
+import { Mail, Lock, LogIn, ArrowRight, AlertCircle, CheckCircle2, Eye, EyeOff } from 'lucide-react'
 import { toast } from 'sonner'
 import { auth } from '@/lib/firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
+
+function mapLoginError(err: any): string {
+  switch (err?.code) {
+    case 'auth/invalid-credential':
+    case 'auth/wrong-password':
+      return 'Invalid email or password.'
+    case 'auth/user-not-found':
+      return 'No account found with this email. Please create an account first.'
+    case 'auth/invalid-email':
+      return 'Please enter a valid email address.'
+    case 'auth/too-many-requests':
+      return 'Too many failed sign-in attempts. Please wait a while and try again.'
+    case 'auth/network-request-failed':
+      return 'Network error. Please check your connection and try again.'
+    default:
+      return `Sign-in failed: ${err?.message || 'Unknown error'}. If this keeps happening, Firebase may not be configured yet.`
+  }
+}
 
 function LoginForm() {
   const searchParams = useSearchParams()
@@ -19,6 +37,7 @@ function LoginForm() {
   const [errorMsg, setErrorMsg] = useState('')
   const router = useRouter()
 
+  const justRegistered = searchParams.get('registered') === '1'
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -26,20 +45,13 @@ function LoginForm() {
     setIsLoading(true)
 
     try {
-      // Try Firebase Auth if available
-      try {
-        await signInWithEmailAndPassword(auth, email.trim(), password)
-      } catch (authErr: any) {
-        console.warn('Firebase Auth notice (falling back to user session):', authErr?.message)
-      }
-
-      const fbUid = auth.currentUser?.uid || ''
+      const cred = await signInWithEmailAndPassword(auth, email.trim(), password)
       const sessionPayload = {
         email: email.trim(),
-        name: auth.currentUser?.displayName || email.split('@')[0],
-        uid: fbUid,
-        userId: fbUid,
-        role: 'member'
+        name: cred.user.displayName || email.split('@')[0],
+        uid: cred.user.uid,
+        userId: cred.user.uid,
+        role: 'member',
       }
       sessionStorage.setItem('localepak_user_session', JSON.stringify(sessionPayload))
       localStorage.setItem('localepak_user_session', JSON.stringify(sessionPayload))
@@ -48,7 +60,7 @@ function LoginForm() {
         router.push('/dashboard')
       }, 500)
     } catch (err: any) {
-      setErrorMsg('Invalid login credentials. Please try again.')
+      setErrorMsg(mapLoginError(err))
     } finally {
       setIsLoading(false)
     }
@@ -65,6 +77,13 @@ function LoginForm() {
           Access your LocalePak account and saved preferences.
         </p>
       </div>
+
+      {justRegistered && (
+        <div className="p-3.5 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-700 font-medium flex items-center gap-2">
+          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+          <span>Your account was created. Sign in with your email and password to open your dashboard.</span>
+        </div>
+      )}
 
       {errorMsg && (
         <div className="p-3.5 bg-red-50 border border-red-200 rounded-xl text-xs text-red-700 font-medium flex items-center gap-2">
@@ -115,9 +134,7 @@ function LoginForm() {
         <button
           type="submit"
           disabled={isLoading}
-          className={`w-full py-3.5 text-white font-bold text-sm rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 ${
-            'bg-slate-900 hover:bg-slate-800'
-          }`}
+          className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
         >
           <span>{isLoading ? 'Signing in...' : 'Sign In'}</span>
           <ArrowRight className="w-4 h-4" />
