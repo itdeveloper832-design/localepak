@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Plus, Info } from 'lucide-react'
+import { Home, LayoutGrid, Info } from 'lucide-react'
 
 export default function BottomNav() {
   const pathname = usePathname()
@@ -15,9 +15,9 @@ export default function BottomNav() {
       active: pathname === '/'
     },
     {
-      label: 'Add Business',
-      href: '/add-business',
-      icon: Plus,
+      label: 'Categories',
+      href: '/categories',
+      icon: LayoutGrid,
       isCenter: true
     },
     {
@@ -29,7 +29,7 @@ export default function BottomNav() {
   ]
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-[#0f2b3d] border-t border-white/5 rounded-t-3xl shadow-[0_-8px_30px_rgba(0,0,0,0.3)] md:hidden pb-safe" aria-label="Mobile bottom navigation">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-[#09090b] border-t border-white/5 rounded-t-3xl shadow-[0_-8px_30px_rgba(0,0,0,0.3)] md:hidden pb-safe" aria-label="Mobile bottom navigation">
       <div className="flex items-center justify-around h-16 px-2 relative">
         {items.map((item, idx) => {
           const Icon = item.icon
@@ -41,11 +41,11 @@ export default function BottomNav() {
                 key={idx}
                 id={navId}
                 href={item.href}
-                aria-label="Add Your Business Free"
-                className="relative -top-4 flex items-center justify-center w-14 h-14 bg-emerald-500 hover:bg-emerald-600 rounded-full text-white border-4 border-[#0f2b3d] shadow-lg hover:scale-105 transition-all duration-200"
-                title="Add Your Business Free"
+                aria-label="Browse Categories"
+                className="relative -top-4 flex items-center justify-center w-14 h-14 bg-emerald-500 hover:bg-emerald-600 rounded-full text-white border-4 border-[#09090b] shadow-lg hover:scale-105 transition-all duration-200"
+                title="Browse Categories"
               >
-                <Plus className="w-8 h-8" />
+                <LayoutGrid className="w-8 h-8" />
               </Link>
             )
           }

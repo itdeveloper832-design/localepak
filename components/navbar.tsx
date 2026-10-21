@@ -4,13 +4,14 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Plus, Building2, Search, Briefcase, Users } from 'lucide-react'
+import { Menu, X, Plus, Building2, Search, Briefcase, MapPin, Newspaper } from 'lucide-react'
 
 const navLinks = [
-  { href: '/search', label: 'Businesses', icon: Building2 },
-  { href: '/jobs', label: 'Jobs', icon: Briefcase, badge: 'Hiring' },
-  { href: '/professionals', label: 'Professionals', icon: Users },
-  { href: '/categories', label: 'Categories' },
+  { href: '/categories', label: 'Categories', icon: Building2 },
+  { href: '/cities', label: 'Cities', icon: MapPin },
+  { href: '/blog', label: 'Blog', icon: Newspaper },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
 ]
 
 export default function Navbar() {
@@ -25,7 +26,7 @@ export default function Navbar() {
           {/* Brand Logo */}
           <Link href="/" aria-label="LocalePak Home Page" className="flex items-center group py-1">
             <Image
-              src="/logo.png"
+              src="/logo.svg"
               alt="LocalePak - Pakistan Business Directory"
               width={160}
               height={48}
@@ -44,17 +45,12 @@ export default function Navbar() {
                   href={link.href}
                   className={`text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 px-3 py-2 rounded-lg ${
                     isActive
-                      ? 'text-red-400 bg-zinc-850/80'
+                      ? 'text-blue-400 bg-zinc-850/80'
                       : 'text-zinc-300 hover:text-white hover:bg-zinc-800/40'
                   }`}
                 >
                   {link.icon && <link.icon className="w-4 h-4 opacity-80" />}
                   <span>{link.label}</span>
-                  {link.badge && (
-                    <span className="ml-1 text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-red-500/20 text-red-400 border border-red-500/30">
-                      {link.badge}
-                    </span>
-                  )}
                 </Link>
               )
             })}
@@ -78,16 +74,16 @@ export default function Navbar() {
               className="px-3.5 py-2 rounded-xl text-zinc-300 hover:text-white hover:bg-zinc-800/70 transition-colors flex items-center gap-1.5 text-sm font-medium"
               title="Business & Profile Dashboard"
             >
-              <Building2 className="w-4 h-4 text-red-400" />
+              <Building2 className="w-4 h-4 text-blue-400" />
               <span>Dashboard</span>
             </Link>
 
             <Link
-              href="/add-business"
-              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 hover:from-red-700 hover:to-rose-700 text-white text-sm font-bold shadow-md shadow-red-600/25 hover:shadow-red-600/35 transition-all duration-200 inline-flex items-center gap-2"
+              href="/register"
+              className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-md shadow-blue-600/25 transition-all duration-200 inline-flex items-center gap-2"
             >
               <Plus className="w-4 h-4" />
-              <span>Add Business</span>
+              <span>Get Started</span>
             </Link>
           </div>
 
@@ -123,19 +119,14 @@ export default function Navbar() {
                 onClick={() => setOpen(false)}
                 className={`text-sm font-semibold py-3 px-4 rounded-xl transition-colors flex items-center justify-between ${
                   isActive
-                    ? 'bg-zinc-800 text-red-400'
+                    ? 'bg-zinc-800 text-blue-400'
                     : 'text-zinc-300 hover:bg-zinc-800 hover:text-white'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  {link.icon && <link.icon className="w-4 h-4 text-red-400" />}
+                  {link.icon && <link.icon className="w-4 h-4 text-blue-400" />}
                   <span>{link.label}</span>
                 </div>
-                {link.badge && (
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-500/20 text-red-400">
-                    {link.badge}
-                  </span>
-                )}
               </Link>
             )
           })}
@@ -146,26 +137,18 @@ export default function Navbar() {
               onClick={() => setOpen(false)}
               className="text-sm font-semibold py-3 px-4 rounded-xl text-zinc-300 hover:bg-zinc-800 flex items-center gap-3"
             >
-              <Building2 className="w-4 h-4 text-red-400" />
+              <Building2 className="w-4 h-4 text-blue-400" />
               <span>Business Dashboard</span>
             </Link>
 
-            <Link
-              href="/post-job"
-              onClick={() => setOpen(false)}
-              className="text-sm font-semibold py-3 px-4 rounded-xl text-zinc-300 hover:bg-zinc-800 flex items-center gap-3"
-            >
-              <Briefcase className="w-4 h-4 text-red-400" />
-              <span>Post a Job Opening</span>
-            </Link>
 
             <Link
-              href="/add-business"
+              href="/register"
               onClick={() => setOpen(false)}
-              className="mt-2 px-4 py-3 rounded-xl bg-gradient-to-r from-red-600 to-rose-600 text-white text-sm font-bold text-center shadow-md shadow-red-600/30 flex items-center justify-center gap-2"
+              className="mt-2 px-4 py-3 rounded-xl bg-blue-600 text-white text-sm font-bold text-center shadow-md shadow-blue-600/30 flex items-center justify-center gap-2"
             >
               <Plus className="w-4 h-4" />
-              <span>List Business Free</span>
+              <span>Get Started Free</span>
             </Link>
           </div>
         </nav>

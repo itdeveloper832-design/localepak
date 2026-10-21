@@ -2,137 +2,115 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
-import { CATEGORIES, TOP_CITIES } from '@/lib/data'
-import { getAllBusinesses } from '@/lib/db-service'
-import { MapPin, Sparkles, FileText, Briefcase, Building2, Store } from 'lucide-react'
-
-export const revalidate = 3600
+import { CATEGORIES, TOP_CITIES, CITIES } from '@/lib/data'
+import { BLOG_POSTS } from '@/lib/blog-data'
 
 export const metadata: Metadata = {
-  title: 'HTML Sitemap | LocalePak Directory Structure',
-  description: 'Complete directory index of all verified business listings, industry categories, major cities, job portals, blogs, and legal pages on LocalePak.',
-  alternates: {
-    canonical: 'https://www.localepak.com/html-sitemap/',
-  },
+  title: 'Sitemap | LocalePak',
+  description: 'A complete map of LocalePak — core pages, business categories, city guides and blog articles.',
+  alternates: { canonical: 'https://www.localepak.com/html-sitemap/' },
 }
 
-export default async function HTMLSitemapPage() {
-  const businesses = await getAllBusinesses(false)
-  const approvedBusinesses = businesses.filter(b => (b.status || 'approved') === 'approved')
+function cityToSlug(name: string): string {
+  return name.toLowerCase().replace(/\s+/g, '-')
+}
+
+const CORE_LINKS: { label: string; href: string }[] = [
+  { label: 'Home', href: '/' },
+  { label: 'About LocalePak', href: '/about' },
+  { label: 'Contact Us', href: '/contact' },
+  { label: 'Search', href: '/search' },
+  { label: 'Sign In', href: '/login' },
+  { label: 'Create Account', href: '/register' },
+  { label: 'My Dashboard', href: '/dashboard' },
+  { label: 'All Categories', href: '/categories' },
+  { label: 'All Cities', href: '/cities' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Careers', href: '/careers' },
+  { label: 'Advertise With Us', href: '/advertise-with-us' },
+  { label: 'FAQs', href: '/faqs' },
+  { label: 'Help Center', href: '/help-center' },
+  { label: 'Customer Support', href: '/support' },
+]
+
+const POLICY_LINKS: { label: string; href: string }[] = [
+  { label: 'Privacy Policy', href: '/privacy' },
+  { label: 'Terms & Conditions', href: '/terms' },
+  { label: 'Cookie Policy', href: '/cookie-policy' },
+  { label: 'Disclaimer', href: '/disclaimer' },
+  { label: 'Refund Policy', href: '/refund-policy' },
+  { label: 'Editorial Policy', href: '/editorial-policy' },
+  { label: 'Community Guidelines', href: '/community-guidelines' },
+  { label: 'Business Listing Guidelines', href: '/business-listing-guidelines' },
+  { label: 'Verification Policy', href: '/verification-policy' },
+  { label: 'Accessibility Statement', href: '/accessibility' },
+  { label: 'Report Abuse', href: '/report-abuse' },
+]
+
+function LinkList({ items }: { items: { label: string; href: string }[] }) {
+  return (
+    <ul className="space-y-2">
+      {items.map(item => (
+        <li key={item.href}>
+          <Link href={item.href} className="text-sm text-blue-700 hover:underline font-medium">
+            {item.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+export default function HtmlSitemapPage() {
+  const posts = Object.values(BLOG_POSTS).sort((a, b) => (a.date < b.date ? 1 : -1))
 
   return (
-    <>
+    <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans">
       <Navbar />
-      <main className="bg-[#F8FAFC] text-slate-800 font-sans min-h-screen py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto bg-white border border-slate-200 rounded-3xl p-8 sm:p-12 shadow-sm space-y-12">
-          <div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-              LocalePak Complete Website HTML Sitemap
-            </h1>
-            <p className="text-sm text-slate-500 mt-2">
-              Browse the hierarchical index of all public sections, verified business listings, industry categories, city business hubs, and support policies.
-            </p>
+
+      <main id="main-content" className="flex-1 py-14 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto space-y-12">
+          <div className="space-y-2">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">LocalePak Sitemap</h1>
+            <p className="text-sm text-slate-500">Every page on LocalePak, organized by section.</p>
           </div>
 
-          {/* Core App Pages */}
-          <div>
-            <h2 className="text-xl font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4 flex items-center gap-2">
-              <Building2 className="w-5 h-5 text-blue-600" />
-              <span>Main Portal Sections</span>
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-semibold text-slate-700">
-              <Link href="/" className="p-2.5 bg-slate-50 rounded-xl hover:text-blue-600 border border-slate-100">Homepage</Link>
-              <Link href="/about" className="p-2.5 bg-slate-50 rounded-xl hover:text-blue-600 border border-slate-100">About Us</Link>
-              <Link href="/contact" className="p-2.5 bg-slate-50 rounded-xl hover:text-blue-600 border border-slate-100">Contact Us</Link>
-              <Link href="/search" className="p-2.5 bg-slate-50 rounded-xl hover:text-blue-600 border border-slate-100">Business Search</Link>
-              <Link href="/add-business" className="p-2.5 bg-slate-50 rounded-xl hover:text-blue-600 border border-slate-100">Add Business</Link>
-              <Link href="/categories" className="p-2.5 bg-slate-50 rounded-xl hover:text-blue-600 border border-slate-100">Categories Index</Link>
-              <Link href="/cities" className="p-2.5 bg-slate-50 rounded-xl hover:text-blue-600 border border-slate-100">Cities Index</Link>
-              <Link href="/jobs" className="p-2.5 bg-slate-50 rounded-xl hover:text-blue-600 border border-slate-100">Jobs Portal</Link>
-              <Link href="/post-job" className="p-2.5 bg-slate-50 rounded-xl hover:text-blue-600 border border-slate-100">Post a Job</Link>
-              <Link href="/professionals" className="p-2.5 bg-slate-50 rounded-xl hover:text-blue-600 border border-slate-100">Professionals</Link>
-              <Link href="/blog" className="p-2.5 bg-slate-50 rounded-xl hover:text-blue-600 border border-slate-100">Business Blog</Link>
-              <Link href="/login" className="p-2.5 bg-slate-50 rounded-xl hover:text-blue-600 border border-slate-100">Login</Link>
-              <Link href="/register" className="p-2.5 bg-slate-50 rounded-xl hover:text-blue-600 border border-slate-100">Register Account</Link>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <section aria-label="Core pages" className="bg-white rounded-3xl border border-slate-200 p-7">
+              <h2 className="font-extrabold text-slate-900 text-lg mb-4">Core Pages</h2>
+              <LinkList items={CORE_LINKS} />
+            </section>
+
+            <section aria-label="Policies and support" className="bg-white rounded-3xl border border-slate-200 p-7">
+              <h2 className="font-extrabold text-slate-900 text-lg mb-4">Policies & Support</h2>
+              <LinkList items={POLICY_LINKS} />
+            </section>
+
+            <section aria-label="Business categories" className="bg-white rounded-3xl border border-slate-200 p-7">
+              <h2 className="font-extrabold text-slate-900 text-lg mb-4">Business Categories</h2>
+              <LinkList items={CATEGORIES.map(c => ({ label: c.name, href: `/category/${c.id}` }))} />
+            </section>
+
+            <section aria-label="Top cities" className="bg-white rounded-3xl border border-slate-200 p-7">
+              <h2 className="font-extrabold text-slate-900 text-lg mb-4">Top Cities</h2>
+              <LinkList items={TOP_CITIES.map(c => ({ label: `Businesses in ${c}`, href: `/city/${cityToSlug(c)}` }))} />
+              <p className="text-xs text-slate-400 mt-4">
+                Plus guides for {CITIES.length - TOP_CITIES.length} more cities — see the{' '}
+                <Link href="/cities" className="text-blue-700 hover:underline font-medium">cities index</Link>.
+              </p>
+            </section>
           </div>
 
-          {/* Verified Business Listings Index */}
-          <div>
-            <h2 className="text-xl font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4 flex items-center gap-2">
-              <Store className="w-5 h-5 text-blue-600" />
-              <span>Verified Business Listings Index ({approvedBusinesses.length})</span>
-            </h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-xs text-slate-600">
-              {approvedBusinesses.map((biz) => (
-                <Link key={biz.id || biz.slug} href={`/business/${biz.slug}`} className="hover:text-blue-600 hover:underline flex items-center gap-1.5 p-1.5 bg-slate-50/50 rounded-lg border border-slate-100">
-                  <span className="text-blue-500 font-bold">•</span>
-                  <span className="font-semibold text-slate-800 truncate">{biz.name}</span>
-                  <span className="text-slate-400 text-[10px]">({biz.city})</span>
-                </Link>
-              ))}
+          <section aria-label="Blog articles" className="bg-white rounded-3xl border border-slate-200 p-7">
+            <h2 className="font-extrabold text-slate-900 text-lg mb-4">Blog Articles & Guides</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10">
+              <LinkList items={posts.map(p => ({ label: p.title, href: `/blog/${p.slug}` }))} />
             </div>
-          </div>
-
-          {/* Categories */}
-          <div>
-            <h2 className="text-xl font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4 flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-emerald-600" />
-              <span>Industry Categories ({CATEGORIES.length})</span>
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 text-xs text-slate-600">
-              {CATEGORIES.map(cat => (
-                <Link key={cat.id} href={`/category/${cat.id}`} className="hover:text-blue-600 hover:underline">
-                  • {cat.name}
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Major Cities */}
-          <div>
-            <h2 className="text-xl font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4 flex items-center gap-2">
-              <MapPin className="w-5 h-5 text-amber-600" />
-              <span>Pakistani City Directories ({TOP_CITIES.length})</span>
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2.5 text-xs text-slate-600">
-              {TOP_CITIES.map(city => (
-                <Link key={city} href={`/city/${city.toLowerCase()}`} className="hover:text-emerald-600 hover:underline">
-                  • {city} Business Directory
-                </Link>
-              ))}
-            </div>
-          </div>
-
-          {/* Trust, Support & Legal Policies */}
-          <div>
-            <h2 className="text-xl font-bold text-slate-900 border-b border-slate-200 pb-2 mb-4 flex items-center gap-2">
-              <FileText className="w-5 h-5 text-purple-600" />
-              <span>Trust, Support & Legal Documentation</span>
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-semibold text-slate-700">
-              <Link href="/privacy" className="p-2 bg-slate-50 rounded-lg hover:text-purple-600">Privacy Policy</Link>
-              <Link href="/terms" className="p-2 bg-slate-50 rounded-lg hover:text-purple-600">Terms of Service</Link>
-              <Link href="/cookie-policy" className="p-2 bg-slate-50 rounded-lg hover:text-purple-600">Cookie Policy</Link>
-              <Link href="/disclaimer" className="p-2 bg-slate-50 rounded-lg hover:text-purple-600">Disclaimer</Link>
-              <Link href="/editorial-policy" className="p-2 bg-slate-50 rounded-lg hover:text-purple-600">Editorial Policy</Link>
-              <Link href="/community-guidelines" className="p-2 bg-slate-50 rounded-lg hover:text-purple-600">Community Guidelines</Link>
-              <Link href="/business-listing-guidelines" className="p-2 bg-slate-50 rounded-lg hover:text-purple-600">Listing Guidelines</Link>
-              <Link href="/verification-policy" className="p-2 bg-slate-50 rounded-lg hover:text-purple-600">Verification Policy</Link>
-              <Link href="/refund-policy" className="p-2 bg-slate-50 rounded-lg hover:text-purple-600">Refund Policy</Link>
-              <Link href="/advertise-with-us" className="p-2 bg-slate-50 rounded-lg hover:text-purple-600">Advertise With Us</Link>
-              <Link href="/careers" className="p-2 bg-slate-50 rounded-lg hover:text-purple-600">Careers</Link>
-              <Link href="/faqs" className="p-2 bg-slate-50 rounded-lg hover:text-purple-600">FAQs</Link>
-              <Link href="/help-center" className="p-2 bg-slate-50 rounded-lg hover:text-purple-600">Help Center</Link>
-              <Link href="/support" className="p-2 bg-slate-50 rounded-lg hover:text-purple-600">Customer Support</Link>
-              <Link href="/report-listing" className="p-2 bg-slate-50 rounded-lg hover:text-purple-600">Report Listing</Link>
-              <Link href="/report-abuse" className="p-2 bg-slate-50 rounded-lg hover:text-purple-600">Report Abuse</Link>
-              <Link href="/accessibility" className="p-2 bg-slate-50 rounded-lg hover:text-purple-600">Accessibility Statement</Link>
-            </div>
-          </div>
+          </section>
         </div>
       </main>
+
       <Footer />
-    </>
+    </div>
   )
 }

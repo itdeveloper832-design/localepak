@@ -9,13 +9,9 @@ import { Mail, Lock, LogIn, User, Building2, ArrowRight, AlertCircle, Sparkles, 
 import { toast } from 'sonner'
 import { auth } from '@/lib/firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { getAllProfessionals } from '@/lib/professional-service'
 
 function LoginForm() {
   const searchParams = useSearchParams()
-  const initialRole = searchParams.get('role') === 'professional' ? 'professional' : 'business'
-  
-  const [accountType, setAccountType] = useState<'business' | 'professional'>(initialRole)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
@@ -23,12 +19,6 @@ function LoginForm() {
   const [errorMsg, setErrorMsg] = useState('')
   const router = useRouter()
 
-  useEffect(() => {
-    const roleParam = searchParams.get('role')
-    if (roleParam === 'professional') {
-      setAccountType('professional')
-    }
-  }, [searchParams])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -43,41 +33,20 @@ function LoginForm() {
         console.warn('Firebase Auth notice (falling back to user session):', authErr?.message)
       }
 
-      if (accountType === 'professional') {
-        const allPros = await getAllProfessionals(true)
-        const userPro = allPros.find(p => 
-          (p.email && p.email.toLowerCase().trim() === email.trim().toLowerCase()) ||
-          (p.username && p.username.toLowerCase().trim() === email.trim().toLowerCase())
-        )
-
-        sessionStorage.setItem('localepak_user_session', JSON.stringify({
-          name: userPro?.name || userPro?.fullName || email.split('@')[0],
-          email: email.trim(),
-          role: 'professional',
-          hasProfile: Boolean(userPro),
-          username: userPro?.username || email.split('@')[0]
-        }))
-
-        toast.success('Welcome back to your Professional Dashboard!')
-        setTimeout(() => {
-          router.push('/dashboard/professional')
-        }, 500)
-      } else {
-        const fbUid = auth.currentUser?.uid || ''
-        const sessionPayload = {
-          email: email.trim(),
-          name: auth.currentUser?.displayName || email.split('@')[0],
-          uid: fbUid,
-          userId: fbUid,
-          role: 'business'
-        }
-        sessionStorage.setItem('localepak_user_session', JSON.stringify(sessionPayload))
-        localStorage.setItem('localepak_user_session', JSON.stringify(sessionPayload))
-        toast.success('Successfully logged into LocalePak Business Portal.')
-        setTimeout(() => {
-          router.push('/dashboard')
-        }, 500)
+      const fbUid = auth.currentUser?.uid || ''
+      const sessionPayload = {
+        email: email.trim(),
+        name: auth.currentUser?.displayName || email.split('@')[0],
+        uid: fbUid,
+        userId: fbUid,
+        role: 'member'
       }
+      sessionStorage.setItem('localepak_user_session', JSON.stringify(sessionPayload))
+      localStorage.setItem('localepak_user_session', JSON.stringify(sessionPayload))
+      toast.success('Successfully logged into LocalePak.')
+      setTimeout(() => {
+        router.push('/dashboard')
+      }, 500)
     } catch (err: any) {
       setErrorMsg('Invalid login credentials. Please try again.')
     } finally {
@@ -93,32 +62,8 @@ function LoginForm() {
         </div>
         <h1 className="text-2xl font-extrabold text-slate-900">Sign In to LocalePak</h1>
         <p className="text-xs text-slate-500 max-w-sm mx-auto">
-          Access your business listings, job applications, or professional profile.
+          Access your LocalePak account and saved preferences.
         </p>
-      </div>
-
-      {/* Account Type Selector */}
-      <div className="grid grid-cols-2 p-1 bg-slate-100 rounded-2xl text-xs font-bold">
-        <button
-          type="button"
-          onClick={() => setAccountType('professional')}
-          className={`py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-            accountType === 'professional' ? 'bg-blue-600 text-white shadow-md' : 'text-slate-600 hover:text-slate-900'
-          }`}
-        >
-          <User className="w-3.5 h-3.5" />
-          <span>Professional</span>
-        </button>
-        <button
-          type="button"
-          onClick={() => setAccountType('business')}
-          className={`py-2.5 rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer ${
-            accountType === 'business' ? 'bg-slate-900 text-white shadow-md' : 'text-slate-600 hover:text-slate-900'
-          }`}
-        >
-          <Building2 className="w-3.5 h-3.5" />
-          <span>Business / Employer</span>
-        </button>
       </div>
 
       {errorMsg && (
@@ -138,7 +83,7 @@ function LoginForm() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder={accountType === 'professional' ? 'ali@professional.pk' : 'owner@company.pk'}
+              placeholder="you@example.com"
               className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-600"
             />
           </div>
@@ -171,7 +116,7 @@ function LoginForm() {
           type="submit"
           disabled={isLoading}
           className={`w-full py-3.5 text-white font-bold text-sm rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 ${
-            accountType === 'professional' ? 'bg-blue-600 hover:bg-blue-700' : 'bg-slate-900 hover:bg-slate-800'
+            'bg-slate-900 hover:bg-slate-800'
           }`}
         >
           <span>{isLoading ? 'Signing in...' : 'Sign In'}</span>
@@ -183,7 +128,7 @@ function LoginForm() {
         <p className="text-xs text-slate-500">
           Don&apos;t have an account yet?{' '}
           <Link
-            href={accountType === 'professional' ? '/register/professional' : '/register'}
+            href="/register"
             className="text-blue-600 font-bold hover:underline"
           >
             Create Account

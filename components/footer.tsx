@@ -15,7 +15,7 @@ export default function Footer() {
           <div className="flex flex-col gap-3">
             <Link href="/" aria-label="LocalePak Home Page" className="inline-block group">
               <Image
-                src="/logo.png"
+                src="/logo.svg"
                 alt="LocalePak - Pakistan Business Directory"
                 width={160}
                 height={48}
@@ -68,12 +68,7 @@ export default function Footer() {
             <ul className="space-y-2 text-xs text-slate-300">
               <li><Link href="/categories" className="hover:text-blue-400 transition-colors">All Categories</Link></li>
               <li><Link href="/cities" className="hover:text-blue-400 transition-colors">All Cities</Link></li>
-              <li><Link href="/search" className="hover:text-blue-400 transition-colors">Business Search</Link></li>
-              <li><Link href="/add-business" className="hover:text-blue-400 transition-colors">Add Business</Link></li>
-              <li><Link href="/professionals" className="hover:text-blue-400 transition-colors">Professional Profiles</Link></li>
-              <li><Link href="/jobs" className="hover:text-blue-400 transition-colors">Pakistan Jobs</Link></li>
-              <li><Link href="/prayer-times-pakistan" className="hover:text-blue-400 transition-colors">Prayer Times Pakistan</Link></li>
-              <li><Link href="/post-job" className="hover:text-blue-400 transition-colors">Post Job Opening</Link></li>
+              <li><Link href="/search" className="hover:text-blue-400 transition-colors">Search</Link></li>
             </ul>
           </div>
 
@@ -120,7 +115,6 @@ export default function Footer() {
               <li><Link href="/help-center" className="hover:text-sky-400 transition-colors">Help Center</Link></li>
               <li><Link href="/support" className="hover:text-sky-400 transition-colors">Customer Support</Link></li>
               <li><Link href="/faqs" className="hover:text-sky-400 transition-colors">FAQs</Link></li>
-              <li><Link href="/report-listing" className="hover:text-sky-400 transition-colors">Report a Listing</Link></li>
               <li><Link href="/report-abuse" className="hover:text-sky-400 transition-colors">Report Abuse</Link></li>
               <li><Link href="/accessibility" className="hover:text-sky-400 transition-colors">Accessibility Statement</Link></li>
             </ul>

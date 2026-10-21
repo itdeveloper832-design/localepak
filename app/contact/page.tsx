@@ -4,7 +4,6 @@ import { useState } from 'react'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import { Mail, Phone, MapPin, MessageSquare, ShieldCheck } from 'lucide-react'
-import { saveContactMessage } from '@/lib/db-service'
 import { toast } from 'sonner'
 
 export default function ContactPage() {
@@ -28,13 +27,18 @@ export default function ContactPage() {
 
     setIsSubmitting(true)
     try {
-      await saveContactMessage({
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        subject: `${formData.subject} (${formData.city || 'Pakistan'})`,
-        message: formData.message
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          subject: `${formData.subject} (${formData.city || 'Pakistan'})`,
+          message: formData.message
+        })
       })
+      if (!res.ok) throw new Error('Contact submission failed')
       setIsSubmitting(false)
       setSubmitted(true)
       toast.success('Your message has been submitted successfully to LocalePak administration.')

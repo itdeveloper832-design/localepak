@@ -66,7 +66,7 @@ export default function RootLayout({
     '@type': 'Organization',
     name: 'LocalePak',
     url: 'https://www.localepak.com/',
-    logo: 'https://www.localepak.com/logo.png',
+    logo: 'https://www.localepak.com/logo.svg',
     telephone: '+92 334 5636230',
     email: 'admin@localepak.com',
     address: {
@@ -95,7 +95,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationSchema, websiteSchema]) }}
         />
       </head>
-      <body className="font-sans antialiased bg-[#FAFAFA] text-[#09090B] pb-16 md:pb-0 min-h-screen selection:bg-red-600 selection:text-white">
+      <body className="font-sans antialiased bg-[#FAFAFA] text-[#09090B] pb-16 md:pb-0 min-h-screen selection:bg-blue-600 selection:text-white">
         {children}
         <ClientProviders />
       </body>
