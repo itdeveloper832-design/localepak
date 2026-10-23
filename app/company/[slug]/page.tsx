@@ -1,73 +1,72 @@
-'use client'
-
-import { useState, useEffect } from 'react'
+import { cache } from 'react'
+import { Metadata } from 'next'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import { MapPin, Phone, Globe, Mail, ArrowLeft } from 'lucide-react'
-import { db } from '@/lib/firebase'
-import { collection, query, where, limit, getDocs } from 'firebase/firestore'
+import { fetchCompanyBySlug } from '@/lib/public-listings'
 
-function upsertMetaDescription(content: string) {
-  let tag = document.querySelector('meta[name="description"]') as HTMLMetaElement | null
-  if (!tag) {
-    tag = document.createElement('meta')
-    tag.setAttribute('name', 'description')
-    document.head.appendChild(tag)
-  }
-  tag.setAttribute('content', content)
+// Company detail route — SERVER component (Round 3 parity with
+// /business/[slug]): the company is fetched HERE, on the server, and
+// rendered into the initial HTML. The browser makes no Firestore read
+// for it (anti-scrape), and the per-listing SEO that the old client
+// page applied with effects (document.title, meta description,
+// Organization JSON-LD) is now real server output — generateMetadata
+// plus an inline JSON-LD script — which is strictly better for
+// crawlers than the post-hydration DOM edits it replaces.
+//
+// Visibility posture (unchanged): companies have NO weekly release
+// cycle, and the public URL reflects PUBLIC visibility only — the
+// server reads anonymously, so a company appears here exactly when a
+// visitor could see it: status 'approved'. Owners manage pending
+// companies from their dashboard; admins from the admin panel.
+
+// A newly approved company should appear without a rebuild.
+export const revalidate = 3600
+
+/** One anonymous read per request, shared by metadata + page. */
+const loadCompany = cache(async (slug: string): Promise<any | null> => {
+  const found = await fetchCompanyBySlug(slug)
+  if (!found || found.data?.status !== 'approved') return null
+  return { id: found.id, ...found.data }
+})
+
+function metaDescriptionFor(company: any): string {
+  const industryLabel = company.industry || company.category || 'Company'
+  const rawDesc = (company.description || '').replace(/\s+/g, ' ').trim()
+  return rawDesc
+    ? `${rawDesc.slice(0, 150)}${rawDesc.length > 150 ? '...' : ''}`
+    : `${company.name} is a ${industryLabel} company in ${company.city || 'Pakistan'}. Contact details and company profile on LocalePak.`
 }
 
-export default function CompanyDetailPage() {
-  const params = useParams()
-  const slug = (params?.slug as string) || ''
-  const [company, setCompany] = useState<any | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [notFound, setNotFound] = useState(false)
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+  const { slug } = await params
+  const company = await loadCompany(slug)
+  if (!company) return {}
+  const industryLabel = company.industry || company.category || 'Company'
+  return {
+    title: `${company.name} — ${industryLabel} in ${company.city || 'Pakistan'} | LocalePak`,
+    description: metaDescriptionFor(company),
+  }
+}
 
-  useEffect(() => {
-    let cancelled = false
-    const load = async () => {
-      if (!slug) {
-        setNotFound(true)
-        setLoading(false)
-        return
-      }
-      try {
-        const snap = await getDocs(query(collection(db, 'companies'), where('slug', '==', slug), limit(1)))
-        if (cancelled) return
-        if (snap.empty) {
-          setNotFound(true)
-        } else {
-          setCompany({ id: snap.docs[0].id, ...snap.docs[0].data() })
-        }
-      } catch {
-        if (!cancelled) setNotFound(true)
-      } finally {
-        if (!cancelled) setLoading(false)
-      }
-    }
-    load()
-    return () => {
-      cancelled = true
-    }
-  }, [slug])
+export default async function CompanyDetailPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>
+}) {
+  const { slug } = await params
+  const company = await loadCompany(slug)
 
-  // Per-listing SEO: real title, meta description and Organization JSON-LD
-  useEffect(() => {
-    if (!company) return
-    const industryLabel = company.industry || company.category || 'Company'
-    document.title = `${company.name} — ${industryLabel} in ${company.city || 'Pakistan'} | LocalePak`
-    const rawDesc = (company.description || '').replace(/\s+/g, ' ').trim()
-    upsertMetaDescription(
-      rawDesc
-        ? `${rawDesc.slice(0, 150)}${rawDesc.length > 150 ? '...' : ''}`
-        : `${company.name} is a ${industryLabel} company in ${company.city || 'Pakistan'}. Contact details and company profile on LocalePak.`
-    )
-
+  // Organization JSON-LD — same fields the old client page injected.
+  let jsonLd: Record<string, any> | null = null
+  if (company) {
     const sameAs = [company.website].filter(Boolean)
-    const jsonLd: Record<string, any> = {
+    jsonLd = {
       '@context': 'https://schema.org',
       '@type': 'Organization',
       name: company.name,
@@ -85,32 +84,24 @@ export default function CompanyDetailPage() {
       }
     }
     if (sameAs.length > 0) jsonLd.sameAs = sameAs
-
-    document.getElementById('listing-jsonld')?.remove()
-    const script = document.createElement('script')
-    script.type = 'application/ld+json'
-    script.id = 'listing-jsonld'
-    script.textContent = JSON.stringify(jsonLd)
-    document.head.appendChild(script)
-    return () => {
-      script.remove()
-    }
-  }, [company, slug])
+  }
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans">
       <Navbar />
+      {jsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      )}
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1 w-full">
         <Link href="/companies" className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 hover:text-blue-700 mb-6">
           <ArrowLeft className="w-4 h-4" /> Back to Companies
         </Link>
 
-        {loading ? (
-          <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center text-sm text-slate-500">
-            Loading company...
-          </div>
-        ) : notFound || !company ? (
+        {!company ? (
           <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center space-y-4">
             <h1 className="font-extrabold text-slate-900 text-lg">Company not found</h1>
             <p className="text-sm text-slate-500 max-w-sm mx-auto">

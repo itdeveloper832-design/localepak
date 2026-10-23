@@ -2,13 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { useParams } from 'next/navigation'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import { MapPin, Phone, MessageCircle, Globe, Facebook, Instagram, Youtube, ArrowLeft, Clock, Tag, Mail, Star, Send, Flag } from 'lucide-react'
 import { db } from '@/lib/firebase'
-import { collection, query, where, limit, getDocs, addDoc, serverTimestamp } from 'firebase/firestore'
-import { isReleased, releaseDateLabel } from '@/lib/release'
+import { collection, query, where, getDocs, addDoc, serverTimestamp } from 'firebase/firestore'
 import { toast } from 'sonner'
 
 type DayKey = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'
@@ -80,53 +78,28 @@ type Review = {
   ts: number
 }
 
-export default function BusinessDetailPage() {
-  const params = useParams()
-  const slug = (params?.slug as string) || ''
-  const [business, setBusiness] = useState<any | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [notFound, setNotFound] = useState(false)
+// Round 3: this is now a client ISLAND. The listing itself is fetched
+// on the server by app/business/[slug]/page.tsx (lib/public-listings.ts)
+// and arrives as props — the profile is part of the initial HTML and
+// the browser issues no Firestore read for it. Only the interactive
+// parts (approved-reviews fetch + the review form) still run here.
+export default function BusinessDetailPage({
+  slug,
+  initialBusiness,
+  initialUnreleased,
+}: {
+  slug: string
+  initialBusiness: any | null
+  initialUnreleased: { name: string; releaseLabel: string } | null
+}) {
+  const business = initialBusiness
   // Set when the listing is approved but its weekly release is still
   // pending (lib/release.ts) — the profile stays hidden until then.
-  const [unreleased, setUnreleased] = useState<{ name: string; releaseLabel: string } | null>(null)
+  const unreleased = initialUnreleased
+  const notFound = !business && !unreleased
   const [reviews, setReviews] = useState<Review[]>([])
   const [reviewForm, setReviewForm] = useState({ name: '', rating: 0, text: '' })
   const [submittingReview, setSubmittingReview] = useState(false)
-
-  useEffect(() => {
-    let cancelled = false
-    const load = async () => {
-      if (!slug) {
-        setNotFound(true)
-        setLoading(false)
-        return
-      }
-      try {
-        const snap = await getDocs(query(collection(db, 'businesses'), where('slug', '==', slug), limit(1)))
-        if (cancelled) return
-        if (snap.empty) {
-          setNotFound(true)
-        } else {
-          const data = snap.docs[0].data() as any
-          // Weekly batch release (lib/release.ts): an approved business
-          // stays hidden until the next 7-day cycle boundary passes.
-          if (data.status === 'approved' && !isReleased(data.approvedAt, Date.now())) {
-            setUnreleased({ name: data.name || 'This business', releaseLabel: releaseDateLabel(Date.now()) })
-          } else {
-            setBusiness({ id: snap.docs[0].id, ...data })
-          }
-        }
-      } catch {
-        if (!cancelled) setNotFound(true)
-      } finally {
-        if (!cancelled) setLoading(false)
-      }
-    }
-    load()
-    return () => {
-      cancelled = true
-    }
-  }, [slug])
 
   // Per-listing SEO: real title, meta description and LocalBusiness JSON-LD
   useEffect(() => {
@@ -275,11 +248,7 @@ export default function BusinessDetailPage() {
           <ArrowLeft className="w-4 h-4" /> Back to Businesses
         </Link>
 
-        {loading ? (
-          <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center text-sm text-slate-500">
-            Loading business...
-          </div>
-        ) : unreleased ? (
+        {unreleased ? (
           <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center space-y-4">
             <h1 className="font-extrabold text-slate-900 text-lg">
               This business listing goes live on {unreleased.releaseLabel}

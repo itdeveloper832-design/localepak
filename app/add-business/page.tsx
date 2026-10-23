@@ -13,6 +13,7 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { CATEGORIES, CITIES } from '@/lib/data'
 import CityCombobox from '@/components/city-combobox'
 import { isValidPakistaniPhone, normalizePakistaniPhone, sanitizePhoneInput, isValidPrice } from '@/lib/validation'
+import { writeOwnerContact } from '@/lib/owner-contact'
 
 function slugify(value: string): string {
   return value
@@ -255,7 +256,7 @@ export default function AddBusinessPage() {
         .split(',')
         .map((t) => t.trim())
         .filter(Boolean)
-      await addDoc(collection(db, 'businesses'), {
+      const ref = await addDoc(collection(db, 'businesses'), {
         name: form.name.trim(),
         slug: `${slugify(form.name)}-${slugify(form.city)}`,
         email: form.email.trim(),
@@ -278,11 +279,14 @@ export default function AddBusinessPage() {
         description: form.description.trim(),
         tags,
         ownerId: user.uid,
-        ownerEmail: user.email || '',
         ownerName: user.displayName || '',
         status: 'pending',
         createdAt: serverTimestamp(),
       })
+      // Owner contact (login email) is private: it goes to the
+      // owner/admin-only subcollection, never into the main document
+      // (see lib/owner-contact.ts).
+      await writeOwnerContact('businesses', ref.id, user.uid, user.email || '')
       toast.success('Business submitted for review.')
       router.push('/dashboard')
     } catch (err: any) {

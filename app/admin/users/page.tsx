@@ -31,21 +31,23 @@ export default function AdminUsersPage() {
     load()
   }, [])
 
-  const toggleRole = async (item: Item) => {
+  // Owner's standing rule: NOBODY can be made an admin from this panel — the
+  // only admin is the owner's own account. The assignable role here is
+  // 'tester': testers can add businesses and edit/delete ONLY their own
+  // listings; existing listings stay under the owner's ownership.
+  const setTesterRole = async (item: Item, makeTester: boolean) => {
     const { id, data } = item
-    const isAdmin = data.role === 'admin'
-    if (id === myUid && isAdmin) {
-      toast.error('You cannot demote your own account.')
-      return
-    }
-    const next = isAdmin ? 'member' : 'admin'
+    const next = makeTester ? 'tester' : 'member'
     const label = data.ownerName || data.email || 'this user'
-    if (!window.confirm(`${isAdmin ? 'Demote' : 'Promote'} ${label} ${isAdmin ? 'to member' : 'to admin'}?`)) return
+    const prompt = makeTester
+      ? `Make ${label} a tester? Testers can add businesses and manage only their own listings.`
+      : `Remove the tester role from ${label} (back to member)?`
+    if (!window.confirm(prompt)) return
     setBusy(id)
     try {
       await updateDoc(doc(db, 'users', id), { role: next })
       setItems((prev) => prev.map((it) => (it.id === id ? { ...it, data: { ...it.data, role: next } } : it)))
-      toast.success(`${label} is now ${next === 'admin' ? 'an admin' : 'a member'}.`)
+      toast.success(`${label} is now ${makeTester ? 'a tester' : 'a member'}.`)
     } catch {
       toast.error('Role change failed — check permissions and try again.')
     } finally {
@@ -57,7 +59,10 @@ export default function AdminUsersPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Users</h1>
-        <p className="text-sm text-slate-500">{items.length} registered · promote or demote roles. You can never demote yourself.</p>
+        <p className="text-sm text-slate-500">
+          {items.length} registered · assign the Tester role here — testers manage only their own listings.
+          Admin is the owner&apos;s account only; nobody can be made an admin from this panel.
+        </p>
       </div>
 
       {loading ? (
@@ -68,32 +73,45 @@ export default function AdminUsersPage() {
         <div className="space-y-3">
           {items.map((item) => {
             const { id, data } = item
-            const isAdmin = data.role === 'admin'
+            const role = data.role || 'member'
+            const isAdmin = role === 'admin'
+            const isTester = role === 'tester'
             const isSelf = id === myUid
             return (
               <article key={id} className="bg-white rounded-2xl border border-slate-200 p-5 flex flex-col md:flex-row md:items-center gap-4">
                 <div className="flex-1 min-w-0 space-y-1">
                   <div className="flex flex-wrap items-center gap-2">
                     <h2 className="font-extrabold text-slate-900 text-sm">{data.ownerName || data.name || 'Unnamed user'}</h2>
-                    <span className={`px-2.5 py-1 rounded-full text-[11px] font-bold border ${isAdmin ? 'bg-blue-600 text-white border-blue-600' : 'bg-slate-50 text-slate-600 border-slate-200'}`}>
-                      {isAdmin ? 'Admin' : 'Member'}
+                    <span
+                      className={`px-2.5 py-1 rounded-full text-[11px] font-bold border ${
+                        isAdmin
+                          ? 'bg-blue-600 text-white border-blue-600'
+                          : isTester
+                            ? 'bg-amber-100 text-amber-800 border-amber-300'
+                            : 'bg-slate-50 text-slate-600 border-slate-200'
+                      }`}
+                    >
+                      {isAdmin ? 'Admin' : isTester ? 'Tester' : 'Member'}
                     </span>
                     {isSelf && <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wide">(you)</span>}
                   </div>
                   <p className="text-xs text-slate-500">
                     {data.email || '—'} · {data.phone || 'no phone'} · Joined {formatDate(data.createdAt)}
                   </p>
+                  {isTester && (
+                    <p className="text-[11px] text-amber-700">Tester — can add businesses and edit/delete only their own listings.</p>
+                  )}
                 </div>
                 <div className="shrink-0">
-                  <button
-                    type="button"
-                    disabled={busy === id || (isSelf && isAdmin)}
-                    onClick={() => toggleRole(item)}
-                    className={neutralBtn}
-                    title={isSelf && isAdmin ? 'You cannot demote yourself' : undefined}
-                  >
-                    {isAdmin ? 'Demote to Member' : 'Promote to Admin'}
-                  </button>
+                  {isAdmin ? (
+                    <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wide" title="The admin role belongs to the owner only and cannot be changed here">
+                      Owner — locked
+                    </span>
+                  ) : (
+                    <button type="button" disabled={busy === id} onClick={() => setTesterRole(item, !isTester)} className={neutralBtn}>
+                      {isTester ? 'Make Member' : 'Make Tester'}
+                    </button>
+                  )}
                 </div>
               </article>
             )

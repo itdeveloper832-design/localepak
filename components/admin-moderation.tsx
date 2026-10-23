@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { db } from '@/lib/firebase'
 import { doc, updateDoc, deleteDoc, serverTimestamp } from 'firebase/firestore'
 import { queueOwnerEmail, buildRejectionEmail, buildDeletionEmail } from '@/lib/owner-mail'
+import { loadOwnerEmail, ownerContactRef } from '@/lib/owner-contact'
 import { dangerBtn, neutralBtn } from '@/components/admin-shared'
 
 export const REJECTION_REASONS = [
@@ -44,7 +45,11 @@ export async function moderateReject(
     reasons,
     note: note || undefined,
   })
-  return queueOwnerEmail(item.data.ownerEmail || '', email.subject, email.text, email.html)
+  // Owner email comes from the private subcollection (Round 3) — the
+  // list pages pre-resolve it onto item.data, but resolve here too so a
+  // stale item can never silently skip the notification.
+  const ownerEmail = item.data.ownerEmail || (await loadOwnerEmail(col, item.id))
+  return queueOwnerEmail(ownerEmail, email.subject, email.text, email.html)
 }
 
 /**
@@ -57,7 +62,16 @@ export async function moderateDelete(col: string, item: ModItem, note: string): 
     ownerName: item.data.ownerName || '',
     note: note || undefined,
   })
-  const queued = await queueOwnerEmail(item.data.ownerEmail || '', email.subject, email.text, email.html)
+  const ownerEmail = item.data.ownerEmail || (await loadOwnerEmail(col, item.id))
+  const queued = await queueOwnerEmail(ownerEmail, email.subject, email.text, email.html)
+  // Firestore does not cascade-delete subcollections — remove the
+  // private owner-contact document explicitly so no orphaned private
+  // data survives the listing.
+  try {
+    await deleteDoc(ownerContactRef(col, item.id))
+  } catch {
+    // Best effort only; deleting the listing itself must not fail on this.
+  }
   await deleteDoc(doc(db, col, item.id))
   return queued
 }

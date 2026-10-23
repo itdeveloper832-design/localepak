@@ -10,6 +10,7 @@ import { auth, db } from '@/lib/firebase'
 import { onAuthStateChanged, User } from 'firebase/auth'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { CITIES } from '@/lib/data'
+import { writeOwnerContact } from '@/lib/owner-contact'
 import CityCombobox from '@/components/city-combobox'
 
 function slugify(value: string): string {
@@ -56,7 +57,7 @@ export default function AddJobPage() {
     if (!user) return
     setIsSubmitting(true)
     try {
-      await addDoc(collection(db, 'jobs'), {
+      const ref = await addDoc(collection(db, 'jobs'), {
         title: title.trim(),
         slug: `${slugify(title)}-${slugify(city)}`,
         companyName: companyName.trim(),
@@ -66,11 +67,14 @@ export default function AddJobPage() {
         contact: contact.trim(),
         description: description.trim(),
         ownerId: user.uid,
-        ownerEmail: user.email || '',
         ownerName: user.displayName || '',
         status: 'pending',
         createdAt: serverTimestamp(),
       })
+      // Owner contact (login email) is private: it goes to the
+      // owner/admin-only subcollection, never into the main document
+      // (see lib/owner-contact.ts).
+      await writeOwnerContact('jobs', ref.id, user.uid, user.email || '')
       toast.success('Job submitted for review.')
       router.push('/dashboard')
     } catch (err: any) {

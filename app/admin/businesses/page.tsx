@@ -8,6 +8,7 @@ import { toast } from 'sonner'
 import { Eye, Star, BadgeCheck, Pencil } from 'lucide-react'
 import { StatusBadge, AdminLoading, AdminEmpty, formatDate, approveBtn, rejectBtn, neutralBtn, dangerBtn } from '@/components/admin-shared'
 import { RejectPanel, DeletePanel, moderateReject, moderateDelete } from '@/components/admin-moderation'
+import { resolveOwnerEmails } from '@/lib/owner-contact'
 
 type Item = { id: string; data: any }
 const TABS = ['all', 'pending', 'approved', 'rejected'] as const
@@ -27,8 +28,12 @@ export default function AdminBusinessesPage() {
         const snap = await getDocs(collection(db, COL))
         const rows: Item[] = []
         snap.forEach((d) => rows.push({ id: d.id, data: d.data() }))
-        rows.sort((a, b) => (b.data.createdAt?.toMillis?.() || 0) - (a.data.createdAt?.toMillis?.() || 0))
-        setItems(rows)
+        // Owner emails live in the private subcollection now (Round 3);
+        // resolve them (legacy main-doc field is the fallback) so the
+        // "Owner:" line and moderation emails keep working.
+        const resolved = await resolveOwnerEmails(COL, rows)
+        resolved.sort((a, b) => (b.data.createdAt?.toMillis?.() || 0) - (a.data.createdAt?.toMillis?.() || 0))
+        setItems(resolved)
       } catch {
         toast.error('Could not load businesses.')
       } finally {

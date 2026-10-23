@@ -61,6 +61,16 @@ service cloud.firestore {
             && request.resource.data.get('featured', false) == resource.data.get('featured', false)
             && request.resource.data.get('verified', false) == resource.data.get('verified', false));
       allow delete: if isOwner(resource.data.ownerId) || isAdmin();
+
+      // Owner-private contact (Round 3): businesses/{id}/private/contact
+      // mein owner ka login email hota hai. Sirf owner (parent doc ke
+      // ownerId se match karke) ya admin parh/likh sakta hai — public
+      // kabhi nahi, aur listing queries is subcollection ko nahi chhoo sakti.
+      match /private/{docId} {
+        allow read, write: if isAdmin()
+          || (isSignedIn()
+              && request.auth.uid == get(/databases/$(database)/documents/businesses/$(businessId)).data.ownerId);
+      }
     }
 
     // ---------- Companies ----------
@@ -80,6 +90,14 @@ service cloud.firestore {
             && request.resource.data.get('featured', false) == resource.data.get('featured', false)
             && request.resource.data.get('verified', false) == resource.data.get('verified', false));
       allow delete: if isOwner(resource.data.ownerId) || isAdmin();
+
+      // Owner-private contact (Round 3): companies/{id}/private/contact —
+      // sirf owner (parent doc ke ownerId se match) ya admin.
+      match /private/{docId} {
+        allow read, write: if isAdmin()
+          || (isSignedIn()
+              && request.auth.uid == get(/databases/$(database)/documents/companies/$(companyId)).data.ownerId);
+      }
     }
 
     // ---------- Jobs ----------
@@ -95,6 +113,14 @@ service cloud.firestore {
             && request.resource.data.ownerId == resource.data.ownerId
             && request.resource.data.status == resource.data.status);
       allow delete: if isOwner(resource.data.ownerId) || isAdmin();
+
+      // Owner-private contact (Round 3): jobs/{id}/private/contact —
+      // sirf owner (parent doc ke ownerId se match) ya admin.
+      match /private/{docId} {
+        allow read, write: if isAdmin()
+          || (isSignedIn()
+              && request.auth.uid == get(/databases/$(database)/documents/jobs/$(jobId)).data.ownerId);
+      }
     }
 
     // ---------- Reviews (business reviews) ----------

@@ -1,140 +1,21 @@
-'use client'
-
-import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { Building2, MapPin, Phone, ArrowRight } from 'lucide-react'
-import { db } from '@/lib/firebase'
-import { collection, query, where, getDocs } from 'firebase/firestore'
-import { SEED_BUSINESSES } from '@/lib/seed-businesses'
-import { isReleased } from '@/lib/release'
+import type { PublicBusinessCard } from '@/lib/public-listings'
 
-type Business = {
-  id: string
-  name: string
-  slug: string
-  category: string
-  city: string
-  phone: string
-  description: string
-}
-
-function slugify(value: string): string {
-  return (value || '')
-    .toLowerCase()
-    .replace(/&/g, 'and')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
-}
-
+// SERVER component (Round 3): the parent page fetches the approved +
+// released Firestore listings for this city x category on the server
+// and merges them with the page's static seed listings (see
+// lib/public-listings.ts) — this component only renders what it is
+// given. No Firestore query runs in the browser for these pages.
 export default function CityCategoryListings({
+  businesses,
   city,
-  citySlug,
-  categoryId,
   categoryName,
 }: {
+  businesses: PublicBusinessCard[]
   city: string
-  citySlug: string
-  categoryId: string
   categoryName: string
 }) {
-  const [firestoreBusinesses, setFirestoreBusinesses] = useState<Business[]>([])
-  const [loading, setLoading] = useState(true)
-
-  // Static seed listings for this city x category (build-time data from
-  // lib/seed-businesses.ts — zero Firestore reads). They render in the
-  // initial HTML of the page so these listings exist for crawlers, and
-  // merge with the approved Firestore results below.
-  const seedBusinesses = useMemo<Business[]>(
-    () =>
-      SEED_BUSINESSES.filter((s) => s.citySlug === citySlug && s.categorySlug === categoryId).map(
-        (s) => ({
-          id: `seed-${s.slug}`,
-          name: s.name,
-          slug: s.slug,
-          category: s.category,
-          city: s.city,
-          phone: s.phone || '',
-          description: s.description,
-        })
-      ),
-    [citySlug, categoryId]
-  )
-
-  useEffect(() => {
-    let cancelled = false
-    const load = async () => {
-      try {
-        const snap = await getDocs(query(collection(db, 'businesses'), where('status', '==', 'approved')))
-        const items: Business[] = []
-        snap.forEach((d) => {
-          const data = d.data() as any
-          // Weekly batch release (lib/release.ts): approved businesses go
-          // public at the next 7-day cycle boundary, not immediately.
-          if (!isReleased(data.approvedAt, Date.now())) return
-          const docCity = data.city || ''
-          const docCategory = data.category || data.mainCategory || ''
-          // Business docs store display names for city + category; category ids are accepted too.
-          const cityMatches = slugify(docCity) === citySlug || docCity === city
-          const categoryMatches =
-            docCategory === categoryName ||
-            docCategory === categoryId ||
-            slugify(docCategory) === slugify(categoryName)
-          if (!cityMatches || !categoryMatches) return
-          items.push({
-            id: d.id,
-            name: data.name || 'Unnamed Business',
-            slug: data.slug || d.id,
-            category: docCategory || categoryName,
-            city: docCity,
-            phone: data.phone || '',
-            description: data.description || '',
-          })
-        })
-        if (!cancelled) setFirestoreBusinesses(items)
-      } catch {
-        if (!cancelled) setFirestoreBusinesses([])
-      } finally {
-        if (!cancelled) setLoading(false)
-      }
-    }
-    load()
-    return () => {
-      cancelled = true
-    }
-  }, [city, citySlug, categoryId, categoryName])
-
-  // Merge Firestore results into the seed listings WITHOUT moving them
-  // (a prepend merge shoves the rendered seed cards down when the fetch
-  // lands = layout shift / CLS): a Firestore listing wins on a slug clash
-  // by replacing the seed in its existing slot (keeping the seed's
-  // element id so React updates the card in place, same dedupe rule as
-  // /businesses, e.g. once a seed business is claimed and re-added by its
-  // owner); genuinely new listings append after the seeds.
-  const businesses = useMemo<Business[]>(() => {
-    const seedIndexBySlug = new Map(seedBusinesses.map((s, i) => [s.slug, i] as const))
-    const merged = [...seedBusinesses]
-    const replacedSlugs = new Set<string>()
-    const extras: Business[] = []
-    for (const item of firestoreBusinesses) {
-      const idx = seedIndexBySlug.get(item.slug)
-      if (idx !== undefined && !replacedSlugs.has(item.slug)) {
-        merged[idx] = { ...item, id: seedBusinesses[idx].id }
-        replacedSlugs.add(item.slug)
-      } else {
-        extras.push(item)
-      }
-    }
-    return [...merged, ...extras]
-  }, [firestoreBusinesses, seedBusinesses])
-
-  if (loading && businesses.length === 0) {
-    return (
-      <div className="bg-white rounded-3xl border border-slate-200 p-10 text-center text-sm text-slate-500 min-h-[300px] flex items-center justify-center">
-        Loading {categoryName} in {city}...
-      </div>
-    )
-  }
-
   if (businesses.length === 0) {
     return (
       <div className="bg-white rounded-3xl border border-slate-200 p-10 text-center space-y-4">

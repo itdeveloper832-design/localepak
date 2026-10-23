@@ -12,6 +12,7 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { CATEGORIES, CITIES } from '@/lib/data'
 import CityCombobox from '@/components/city-combobox'
 import { isValidPakistaniPhone, normalizePakistaniPhone, sanitizePhoneInput } from '@/lib/validation'
+import { writeOwnerContact } from '@/lib/owner-contact'
 
 function slugify(value: string): string {
   return value
@@ -60,7 +61,7 @@ export default function AddCompanyPage() {
     }
     setIsSubmitting(true)
     try {
-      await addDoc(collection(db, 'companies'), {
+      const ref = await addDoc(collection(db, 'companies'), {
         name: name.trim(),
         slug: `${slugify(name)}-${slugify(city)}`,
         industry,
@@ -71,11 +72,14 @@ export default function AddCompanyPage() {
         address: address.trim(),
         description: description.trim(),
         ownerId: user.uid,
-        ownerEmail: user.email || '',
         ownerName: user.displayName || '',
         status: 'pending',
         createdAt: serverTimestamp(),
       })
+      // Owner contact (login email) is private: it goes to the
+      // owner/admin-only subcollection, never into the main document
+      // (see lib/owner-contact.ts).
+      await writeOwnerContact('companies', ref.id, user.uid, user.email || '')
       toast.success('Company submitted for review.')
       router.push('/dashboard')
     } catch (err: any) {

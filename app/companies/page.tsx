@@ -1,57 +1,21 @@
-'use client'
-
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import { Factory, MapPin, Phone, ArrowRight } from 'lucide-react'
-import { db } from '@/lib/firebase'
-import { collection, query, where, getDocs } from 'firebase/firestore'
+import { getApprovedCompanyCards } from '@/lib/public-listings'
 
-type Company = {
-  id: string
-  name: string
-  slug: string
-  industry: string
-  city: string
-  phone: string
-  description: string
-}
+// SERVER component (Round 3 parity with /businesses): the approved
+// Firestore companies are fetched on the server, so the full grid is
+// part of the initial HTML — real LCP content, no layout shift, and NO
+// Firestore list query ever runs in a visitor's browser (anti-scrape:
+// the data layer is no longer downloadable; only what is rendered on
+// the page is visible). Companies have no weekly release cycle —
+// approved companies are public immediately, as before.
+// ISR keeps the data fresh without a read per visitor.
+export const revalidate = 3600
 
-export default function CompaniesPage() {
-  const [companies, setCompanies] = useState<Company[]>([])
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    let cancelled = false
-    const load = async () => {
-      try {
-        const snap = await getDocs(query(collection(db, 'companies'), where('status', '==', 'approved')))
-        const items: Company[] = []
-        snap.forEach((d) => {
-          const data = d.data() as any
-          items.push({
-            id: d.id,
-            name: data.name || 'Unnamed Company',
-            slug: data.slug || d.id,
-            industry: data.industry || data.category || 'General',
-            city: data.city || '',
-            phone: data.phone || '',
-            description: data.description || '',
-          })
-        })
-        if (!cancelled) setCompanies(items)
-      } catch {
-        if (!cancelled) setCompanies([])
-      } finally {
-        if (!cancelled) setLoading(false)
-      }
-    }
-    load()
-    return () => {
-      cancelled = true
-    }
-  }, [])
+export default async function CompaniesPage() {
+  const companies = await getApprovedCompanyCards()
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans">
@@ -71,11 +35,7 @@ export default function CompaniesPage() {
       </section>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1 w-full">
-        {loading ? (
-          <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center text-sm text-slate-500">
-            Loading companies...
-          </div>
-        ) : companies.length === 0 ? (
+        {companies.length === 0 ? (
           <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center space-y-4">
             <Factory className="w-10 h-10 text-slate-300 mx-auto" />
             <h2 className="font-extrabold text-slate-900 text-lg">No companies listed yet — be the first to add yours</h2>

@@ -10,6 +10,7 @@ import { CITIES, CATEGORIES, TOP_CITIES } from '@/lib/data'
 import { CITY_INFO, generateCityCategoryContent } from '@/lib/seo-content'
 import MarkdownContent from '@/components/seo/markdown-content'
 import CityCategoryListings from './listings'
+import { getCityCategoryCards } from '@/lib/public-listings'
 import { MapPin, Building2, ArrowRight } from 'lucide-react'
 
 function cityToSlug(name: string): string {
@@ -25,6 +26,10 @@ function resolveCategory(slug: string) {
 }
 
 export const dynamicParams = true
+
+// Listings are fetched server-side (Round 3); ISR refreshes the merged
+// seed + Firestore grid hourly — far inside the 7-day release cycle.
+export const revalidate = 3600
 
 export function generateStaticParams() {
   return TOP_CITIES.flatMap(city =>
@@ -75,6 +80,12 @@ export default async function CityCategoryPage(props: {
   if (!city || !cat) notFound()
 
   const citySlug = cityToSlug(city)
+  const listings = await getCityCategoryCards({
+    city,
+    citySlug,
+    categoryId: cat.id,
+    categoryName: cat.name,
+  })
   const info = CITY_INFO[city]
   const guide = generateCityCategoryContent(city, cat.id)
   const otherCategories = CATEGORIES.filter(c => c.id !== cat.id).slice(0, 8)
@@ -125,7 +136,7 @@ export default async function CityCategoryPage(props: {
           <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
             Listed {cat.name} in {city}
           </h2>
-          <CityCategoryListings city={city} citySlug={citySlug} categoryId={cat.id} categoryName={cat.name} />
+          <CityCategoryListings businesses={listings} city={city} categoryName={cat.name} />
         </section>
 
         {/* Guide */}

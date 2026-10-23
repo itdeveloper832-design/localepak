@@ -1,95 +1,21 @@
-'use client'
-
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import { Building2, MapPin, Phone, ArrowRight } from 'lucide-react'
-import { db } from '@/lib/firebase'
-import { collection, query, where, getDocs } from 'firebase/firestore'
-import { SEED_BUSINESSES } from '@/lib/seed-businesses'
-import { isReleased } from '@/lib/release'
+import { getMergedBusinessCards } from '@/lib/public-listings'
 
-type Business = {
-  id: string
-  name: string
-  slug: string
-  category: string
-  city: string
-  phone: string
-  description: string
-}
+// SERVER component (Round 3): the approved + released Firestore
+// listings are fetched on the server and merged with the static seed
+// listings here, so the full grid is part of the initial HTML — real
+// LCP content, no layout shift, and NO Firestore list query ever runs
+// in a visitor's browser (anti-scrape: the data layer is no longer
+// downloadable; only what is rendered on the page is visible).
+// ISR keeps the data fresh without a read per visitor; the weekly
+// release cycle makes an hourly refresh more than sufficient.
+export const revalidate = 3600
 
-// Static seed listings are known at build time, so they are the initial
-// state: the grid is part of the server-rendered HTML (real LCP content, no
-// layout shift) instead of appearing only after the Firestore fetch below.
-const SEED_ITEMS: Business[] = SEED_BUSINESSES.map((seed) => ({
-  id: `seed-${seed.slug}`,
-  name: seed.name,
-  slug: seed.slug,
-  category: seed.category,
-  city: seed.city,
-  phone: seed.phone || '',
-  description: seed.description,
-}))
-
-export default function BusinessesPage() {
-  const [businesses, setBusinesses] = useState<Business[]>(SEED_ITEMS)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    let cancelled = false
-    const load = async () => {
-      const items: Business[] = []
-      try {
-        const snap = await getDocs(query(collection(db, 'businesses'), where('status', '==', 'approved')))
-        snap.forEach((d) => {
-          const data = d.data() as any
-          // Weekly batch release (lib/release.ts): approved businesses go
-          // public at the next 7-day cycle boundary, not immediately.
-          if (!isReleased(data.approvedAt, Date.now())) return
-          items.push({
-            id: d.id,
-            name: data.name || 'Unnamed Business',
-            slug: data.slug || d.id,
-            category: data.category || 'General',
-            city: data.city || '',
-            phone: data.phone || '',
-            description: data.description || '',
-          })
-        })
-      } catch {
-        // Firestore inventory is an enhancement; the static seed listings
-        // below still render if it is unavailable.
-      }
-      // Merge the Firestore results into the static seed listings that are
-      // already rendered, WITHOUT moving them (a prepend merge shoves the
-      // whole seed grid down when the fetch lands = layout shift / CLS):
-      // a Firestore listing wins on a slug clash by replacing the seed in
-      // its existing slot (keeping the seed's element id so React updates
-      // the card in place), and genuinely new listings append after.
-      const seedIndexBySlug = new Map(SEED_ITEMS.map((s, i) => [s.slug, i] as const))
-      const merged = [...SEED_ITEMS]
-      const replacedSlugs = new Set<string>()
-      const extras: Business[] = []
-      for (const item of items) {
-        const idx = seedIndexBySlug.get(item.slug)
-        if (idx !== undefined && !replacedSlugs.has(item.slug)) {
-          merged[idx] = { ...item, id: SEED_ITEMS[idx].id }
-          replacedSlugs.add(item.slug)
-        } else {
-          extras.push(item)
-        }
-      }
-      merged.push(...extras)
-      if (!cancelled) setBusinesses(merged)
-      if (!cancelled) setLoading(false)
-    }
-    load()
-    return () => {
-      cancelled = true
-    }
-  }, [])
+export default async function BusinessesPage() {
+  const businesses = await getMergedBusinessCards()
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans">
@@ -109,11 +35,7 @@ export default function BusinessesPage() {
       </section>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1 w-full">
-        {loading && businesses.length === 0 ? (
-          <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center text-sm text-slate-500">
-            Loading businesses...
-          </div>
-        ) : businesses.length === 0 ? (
+        {businesses.length === 0 ? (
           <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center space-y-4">
             <Building2 className="w-10 h-10 text-slate-300 mx-auto" />
             <h2 className="font-extrabold text-slate-900 text-lg">No businesses listed yet — be the first to add yours</h2>
