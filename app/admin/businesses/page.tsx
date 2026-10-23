@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { db } from '@/lib/firebase'
-import { collection, getDocs, doc, updateDoc } from 'firebase/firestore'
+import { collection, getDocs, doc, updateDoc, serverTimestamp } from 'firebase/firestore'
 import { toast } from 'sonner'
 import { Eye, Star, BadgeCheck, Pencil } from 'lucide-react'
 import { StatusBadge, AdminLoading, AdminEmpty, formatDate, approveBtn, rejectBtn, neutralBtn, dangerBtn } from '@/components/admin-shared'
@@ -54,8 +54,11 @@ export default function AdminBusinessesPage() {
   const approve = (item: Item) =>
     patch(
       item.id,
-      { status: 'approved', rejectionReasons: [], rejectionNote: '', rejectedAt: null },
-      'Business approved (any previous rejection cleared).'
+      // approvedAt stamps WHEN the approval happened; public visibility
+      // follows the weekly release cycle (see lib/release.ts) — an approved
+      // business goes live at the next cycle boundary, not immediately.
+      { status: 'approved', approvedAt: serverTimestamp(), rejectionReasons: [], rejectionNote: '', rejectedAt: null },
+      'Business approved (any previous rejection cleared). It goes live at the next weekly release.'
     )
 
   const confirmReject = async (item: Item, reasons: string[], note: string) => {

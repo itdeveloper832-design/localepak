@@ -11,12 +11,14 @@ import { collection, query, where, getDocs, doc, getDoc, addDoc, serverTimestamp
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { User as UserIcon, Mail, ShieldCheck, LogOut, LayoutGrid, MapPin, HelpCircle, Building2, Factory, Briefcase, PlusCircle, ClipboardList, Crown, BadgeCheck, X, Upload, ShieldAlert } from 'lucide-react'
 import { toast } from 'sonner'
+import { isReleased, releaseDateLabel } from '@/lib/release'
 
 type ListingItem = {
   id: string
   type: 'Business' | 'Company' | 'Job'
   name: string
   status: string
+  approvedAt?: any
   rejectionReasons?: string[]
   rejectionNote?: string
 }
@@ -63,6 +65,7 @@ export default function DashboardPage() {
               type: source.type,
               name: data.name || data.title || data.companyName || 'Untitled listing',
               status: data.status || 'pending',
+              approvedAt: data.approvedAt ?? null,
               rejectionReasons: Array.isArray(data.rejectionReasons) ? data.rejectionReasons : [],
               rejectionNote: data.rejectionNote || '',
             })
@@ -320,6 +323,11 @@ export default function DashboardPage() {
                       const proof = proofs[item.id]
                       const upgradeable = item.type === 'Business' || item.type === 'Company'
                       const panelOpen = upgradeFor === item.id
+                      // Businesses publish in a weekly batch (lib/release.ts):
+                      // an approved business whose release is still pending
+                      // gets a "goes live on" note instead of looking live.
+                      const awaitingRelease =
+                        item.type === 'Business' && item.status === 'approved' && !isReleased(item.approvedAt, Date.now())
                       return (
                         <li key={`${item.type}-${item.id}`} className="py-3.5 space-y-3">
                           <div className="flex items-center justify-between gap-3">
@@ -368,6 +376,12 @@ export default function DashboardPage() {
                               )}
                             </div>
                           </div>
+
+                          {awaitingRelease && (
+                            <p className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2">
+                              Approved — goes live on LocalePak on {releaseDateLabel(Date.now())}
+                            </p>
+                          )}
 
                           {item.status === 'rejected' && (
                             <div className="bg-red-50 border border-red-200 rounded-2xl p-4 space-y-2" role="alert">

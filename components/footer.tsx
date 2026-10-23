@@ -68,9 +68,9 @@ export default function Footer() {
             <ul className="space-y-2 text-xs text-slate-300">
               <li><Link href="/categories" className="hover:text-blue-400 transition-colors">All Categories</Link></li>
               <li><Link href="/cities" className="hover:text-blue-400 transition-colors">All Cities</Link></li>
-              <li><Link href="/businesses" className="hover:text-blue-400 transition-colors">Businesses</Link></li>
-              <li><Link href="/companies" className="hover:text-blue-400 transition-colors">Companies</Link></li>
-              <li><Link href="/search" className="hover:text-blue-400 transition-colors">Search</Link></li>
+              <li><Link href="/businesses" prefetch={false} className="hover:text-blue-400 transition-colors">Businesses</Link></li>
+              <li><Link href="/companies" prefetch={false} className="hover:text-blue-400 transition-colors">Companies</Link></li>
+              <li><Link href="/search" prefetch={false} className="hover:text-blue-400 transition-colors">Search</Link></li>
             </ul>
           </div>
 

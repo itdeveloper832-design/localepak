@@ -984,6 +984,273 @@ export const SEED_BUSINESSES: SeedBusiness[] = [
     city: "Karachi",
     citySlug: "karachi",
     description: "The Pool Guy is listed on LocalePak under Home Services & Repairs in Karachi, Pakistan. Providers in this category offer repair, maintenance and installation services — such as plumbing, electrical work and appliance servicing — at customers’ homes and offices."
+  },
+  // ----------------------------------------------------------
+  // Bank branches (added 2026-10-23): top-5 banks x top-5
+  // cities, ONE main/head-office-style branch per bank per
+  // city, taken from each bank's OFFICIAL published branch
+  // list (MCB Branch Network Jun-2026; UBL Branches Network
+  // Dec-2025; NBP Authorized Branches list Apr-2025; HBL and
+  // Meezan official branch lists). A phone is included ONLY
+  // where the bank's own list publishes one for that branch
+  // (UBL, Meezan and NBP lists publish no branch phones, so
+  // those listings are phone-less). No addresses, ratings or
+  // other fields are recorded for these listings.
+  // ----------------------------------------------------------
+  {
+    seed: true,
+    slug: "hbl-plaza-branch-karachi",
+    name: "HBL Plaza Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Karachi",
+    citySlug: "karachi",
+    description: "HBL Plaza Branch is listed on LocalePak under Finance & Banking in Karachi, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "hbl-bank-square-branch-lahore",
+    name: "HBL Bank Square Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Lahore",
+    citySlug: "lahore",
+    description: "HBL Bank Square Branch is listed on LocalePak under Finance & Banking in Lahore, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "hbl-jinnah-avenue-branch-islamabad",
+    name: "HBL Jinnah Avenue Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Islamabad",
+    citySlug: "islamabad",
+    description: "HBL Jinnah Avenue Branch is listed on LocalePak under Finance & Banking in Islamabad, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "hbl-city-branch-rawalpindi",
+    name: "HBL City Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Rawalpindi",
+    citySlug: "rawalpindi",
+    description: "HBL City Branch is listed on LocalePak under Finance & Banking in Rawalpindi, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "hbl-circular-road-branch-faisalabad",
+    name: "HBL Circular Road Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Faisalabad",
+    citySlug: "faisalabad",
+    description: "HBL Circular Road Branch is listed on LocalePak under Finance & Banking in Faisalabad, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "ubl-main-branch-karachi",
+    name: "UBL Main Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Karachi",
+    citySlug: "karachi",
+    description: "UBL Main Branch is listed on LocalePak under Finance & Banking in Karachi, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "ubl-main-branch-lahore",
+    name: "UBL Main Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Lahore",
+    citySlug: "lahore",
+    description: "UBL Main Branch is listed on LocalePak under Finance & Banking in Lahore, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "ubl-main-branch-islamabad",
+    name: "UBL Main Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Islamabad",
+    citySlug: "islamabad",
+    description: "UBL Main Branch is listed on LocalePak under Finance & Banking in Islamabad, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "ubl-main-branch-rawalpindi",
+    name: "UBL Main Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Rawalpindi",
+    citySlug: "rawalpindi",
+    description: "UBL Main Branch is listed on LocalePak under Finance & Banking in Rawalpindi, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "ubl-kotwali-road-branch-faisalabad",
+    name: "UBL Kotwali Road Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Faisalabad",
+    citySlug: "faisalabad",
+    description: "UBL Kotwali Road Branch is listed on LocalePak under Finance & Banking in Faisalabad, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "mcb-main-branch-karachi",
+    name: "MCB Karachi Main Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Karachi",
+    citySlug: "karachi",
+    phone: "021-32413983",
+    description: "MCB Karachi Main Branch is listed on LocalePak under Finance & Banking in Karachi, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "mcb-main-boulevard-gulberg-branch-lahore",
+    name: "MCB Corporate Main Boulevard Gulberg Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Lahore",
+    citySlug: "lahore",
+    phone: "042-35790410",
+    description: "MCB Corporate Main Boulevard Gulberg Branch is listed on LocalePak under Finance & Banking in Lahore, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "mcb-blue-area-branch-islamabad",
+    name: "MCB Blue Area Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Islamabad",
+    citySlug: "islamabad",
+    phone: "051-2278081",
+    description: "MCB Blue Area Branch is listed on LocalePak under Finance & Banking in Islamabad, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "mcb-saddar-road-branch-rawalpindi",
+    name: "MCB Saddar Road Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Rawalpindi",
+    citySlug: "rawalpindi",
+    phone: "051-5515729",
+    description: "MCB Saddar Road Branch is listed on LocalePak under Finance & Banking in Rawalpindi, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "mcb-circular-road-branch-faisalabad",
+    name: "MCB Circular Road Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Faisalabad",
+    citySlug: "faisalabad",
+    phone: "041-2636496",
+    description: "MCB Circular Road Branch is listed on LocalePak under Finance & Banking in Faisalabad, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "meezan-bank-gulbai-ho-branch-karachi",
+    name: "Meezan Bank Gulbai (HO) Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Karachi",
+    citySlug: "karachi",
+    description: "Meezan Bank Gulbai (HO) Branch is listed on LocalePak under Finance & Banking in Karachi, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "meezan-bank-mall-road-branch-lahore",
+    name: "Meezan Bank Mall Road Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Lahore",
+    citySlug: "lahore",
+    description: "Meezan Bank Mall Road Branch is listed on LocalePak under Finance & Banking in Lahore, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "meezan-bank-jinnah-avenue-branch-islamabad",
+    name: "Meezan Bank Jinnah Avenue Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Islamabad",
+    citySlug: "islamabad",
+    description: "Meezan Bank Jinnah Avenue Branch is listed on LocalePak under Finance & Banking in Islamabad, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "meezan-bank-saddar-branch-rawalpindi",
+    name: "Meezan Bank Saddar Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Rawalpindi",
+    citySlug: "rawalpindi",
+    description: "Meezan Bank Saddar Branch is listed on LocalePak under Finance & Banking in Rawalpindi, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "meezan-bank-circular-road-branch-faisalabad",
+    name: "Meezan Bank Circular Road Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Faisalabad",
+    citySlug: "faisalabad",
+    description: "Meezan Bank Circular Road Branch is listed on LocalePak under Finance & Banking in Faisalabad, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "nbp-main-branch-karachi",
+    name: "National Bank of Pakistan Main Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Karachi",
+    citySlug: "karachi",
+    description: "National Bank of Pakistan Main Branch is listed on LocalePak under Finance & Banking in Karachi, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "nbp-main-branch-lahore",
+    name: "National Bank of Pakistan Main Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Lahore",
+    citySlug: "lahore",
+    description: "National Bank of Pakistan Main Branch is listed on LocalePak under Finance & Banking in Lahore, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "nbp-civic-centre-main-branch-islamabad",
+    name: "National Bank of Pakistan Civic Centre Main Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Islamabad",
+    citySlug: "islamabad",
+    description: "National Bank of Pakistan Civic Centre Main Branch is listed on LocalePak under Finance & Banking in Islamabad, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "nbp-cantt-branch-rawalpindi",
+    name: "National Bank of Pakistan Rawalpindi Cantt Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Rawalpindi",
+    citySlug: "rawalpindi",
+    description: "National Bank of Pakistan Rawalpindi Cantt Branch is listed on LocalePak under Finance & Banking in Rawalpindi, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
+  },
+  {
+    seed: true,
+    slug: "nbp-clock-tower-branch-faisalabad",
+    name: "National Bank of Pakistan Clock Tower Branch",
+    category: "Finance & Banking",
+    categorySlug: "finance",
+    city: "Faisalabad",
+    citySlug: "faisalabad",
+    description: "National Bank of Pakistan Clock Tower Branch is listed on LocalePak under Finance & Banking in Faisalabad, Pakistan. Banks in this category provide current and savings accounts, loans and credit cards, money transfers and digital banking services for individuals and businesses."
   }
 ]
 

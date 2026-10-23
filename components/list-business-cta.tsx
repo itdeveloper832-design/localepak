@@ -10,7 +10,7 @@ export default function ListBusinessCta() {
   return (
     <div className="fixed bottom-0 inset-x-0 z-40 md:hidden bg-slate-900/95 backdrop-blur border-t border-slate-700 px-4 py-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))]">
       <Link
-        href="/add-business"
+        href="/add-business" prefetch={false}
         className="flex items-center justify-center gap-2 w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors"
         aria-label="List your business on LocalePak for free"
       >

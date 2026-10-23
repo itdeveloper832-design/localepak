@@ -25,13 +25,13 @@ export default function OwnerCtaBand({
           </div>
           <div className="flex flex-col sm:flex-row gap-3 shrink-0">
             <Link
-              href="/add-business"
+              href="/add-business" prefetch={false}
               className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors"
             >
               Add Your Business — Free <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              href="/register"
+              href="/register" prefetch={false}
               className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 text-white font-bold text-sm rounded-xl border border-white/20 transition-colors"
             >
               Create Free Account

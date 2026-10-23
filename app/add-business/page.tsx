@@ -11,6 +11,7 @@ import { auth, db } from '@/lib/firebase'
 import { onAuthStateChanged, User } from 'firebase/auth'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { CATEGORIES, CITIES } from '@/lib/data'
+import CityCombobox from '@/components/city-combobox'
 
 function slugify(value: string): string {
   return value
@@ -397,12 +398,7 @@ export default function AddBusinessPage() {
               <div className="space-y-4">
                 <div>
                   <label className={labelClass}>City *</label>
-                  <select required value={form.city} onChange={(e) => set('city', e.target.value)} className={inputClass}>
-                    <option value="" disabled>Select a city</option>
-                    {CITIES.map((c) => (
-                      <option key={c} value={c}>{c}</option>
-                    ))}
-                  </select>
+                  <CityCombobox required value={form.city} onChange={(city) => set('city', city)} className={inputClass} />
                 </div>
                 <div>
                   <label className={labelClass}>Complete Address *</label>

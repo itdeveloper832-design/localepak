@@ -8,6 +8,7 @@ import Footer from '@/components/footer'
 import { MapPin, Phone, MessageCircle, Globe, Facebook, Instagram, Youtube, ArrowLeft, Clock, Tag, Mail, Star, Send, Flag } from 'lucide-react'
 import { db } from '@/lib/firebase'
 import { collection, query, where, limit, getDocs, addDoc, serverTimestamp } from 'firebase/firestore'
+import { isReleased, releaseDateLabel } from '@/lib/release'
 import { toast } from 'sonner'
 
 type DayKey = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'
@@ -85,6 +86,9 @@ export default function BusinessDetailPage() {
   const [business, setBusiness] = useState<any | null>(null)
   const [loading, setLoading] = useState(true)
   const [notFound, setNotFound] = useState(false)
+  // Set when the listing is approved but its weekly release is still
+  // pending (lib/release.ts) — the profile stays hidden until then.
+  const [unreleased, setUnreleased] = useState<{ name: string; releaseLabel: string } | null>(null)
   const [reviews, setReviews] = useState<Review[]>([])
   const [reviewForm, setReviewForm] = useState({ name: '', rating: 0, text: '' })
   const [submittingReview, setSubmittingReview] = useState(false)
@@ -103,7 +107,14 @@ export default function BusinessDetailPage() {
         if (snap.empty) {
           setNotFound(true)
         } else {
-          setBusiness({ id: snap.docs[0].id, ...snap.docs[0].data() })
+          const data = snap.docs[0].data() as any
+          // Weekly batch release (lib/release.ts): an approved business
+          // stays hidden until the next 7-day cycle boundary passes.
+          if (data.status === 'approved' && !isReleased(data.approvedAt, Date.now())) {
+            setUnreleased({ name: data.name || 'This business', releaseLabel: releaseDateLabel(Date.now()) })
+          } else {
+            setBusiness({ id: snap.docs[0].id, ...data })
+          }
         }
       } catch {
         if (!cancelled) setNotFound(true)
@@ -267,6 +278,19 @@ export default function BusinessDetailPage() {
         {loading ? (
           <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center text-sm text-slate-500">
             Loading business...
+          </div>
+        ) : unreleased ? (
+          <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center space-y-4">
+            <h1 className="font-extrabold text-slate-900 text-lg">
+              This business listing goes live on {unreleased.releaseLabel}
+            </h1>
+            <p className="text-sm text-slate-500 max-w-sm mx-auto">
+              {unreleased.name} has been approved — LocalePak publishes newly approved listings together
+              in a weekly release, so its full profile will appear here on {unreleased.releaseLabel}.
+            </p>
+            <Link href="/businesses" className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors">
+              <ArrowLeft className="w-4 h-4" /> Browse Businesses
+            </Link>
           </div>
         ) : notFound || !business ? (
           <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center space-y-4">

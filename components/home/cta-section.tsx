@@ -34,7 +34,7 @@ export default function CTASection() {
 
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
           <Link
-            href="/add-business"
+            href="/add-business" prefetch={false}
             className="px-8 py-4 bg-[#60a5fa] hover:bg-blue-400 text-white font-bold rounded-xl transition-colors duration-200 text-base shadow-lg"
           >
             Add Your Business – It&apos;s Free

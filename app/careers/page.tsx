@@ -6,7 +6,7 @@ import { Briefcase, Building2, MapPin, Users } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Careers at LocalePak | Join Pakistan Digital Business Platform',
-  description: 'Explore career opportunities at LocalePak. Help build Pakistan largest digital business and employment ecosystem.',
+  description: 'Explore career opportunities at LocalePak. Help build Pakistan\'s free digital business and employment ecosystem.',
   alternates: {
     canonical: 'https://www.localepak.com/careers/',
   },

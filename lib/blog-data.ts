@@ -62,47 +62,6 @@ export const BLOG_POSTS: Record<string, BlogPost> = {
       }
     ]
   },
-  'restaurants-in-pakistan': {
-    slug: 'restaurants-in-pakistan',
-    title: 'Restaurants in Pakistan 2026: Where to Eat, Cuisines & Food Guide',
-    metaTitle: 'Restaurants in Pakistan 2026: Food, Cuisines & Where to Eat',
-    metaDescription: 'Discover eating out in Pakistan city by city — compare restaurants by cuisine, budget and occasion, and learn how to spot great family spots, fine dining and affordable local food.',
-    focusKeyword: 'Restaurants in Pakistan',
-    category: 'Restaurants & Food',
-    date: 'August 13, 2026',
-    readTime: '16 min read',
-    excerpt: 'Discover eating out in Pakistan city by city — compare restaurants by cuisine, budget and occasion, and learn how to spot great family spots, fine dining and affordable local food.',
-    faqs: [
-      {
-        question: 'Which Pakistani city has the best food scene?',
-        answer: 'Several cities compete strongly, Karachi, Lahore and Islamabad among them. Which one is “best” really depends on the cuisine and the kind of dining experience you are after.'
-      },
-      {
-        question: 'What are Pakistan’s most loved dishes?',
-        answer: 'Biryani, BBQ, karahi, nihari, haleem, pulao and kebabs top most lists, alongside a deep bench of regional specialities and desserts.'
-      },
-      {
-        question: 'How do I find restaurants close to me?',
-        answer: 'Use a location-based restaurant directory like LocalePak, or search for the exact cuisine and area you have in mind.'
-      },
-      {
-        question: 'What should I verify before going to a restaurant?',
-        answer: 'Confirm the current address, opening hours, menu, contact details, price range and recent customer feedback before you set out.'
-      },
-      {
-        question: 'What makes a restaurant good for families?',
-        answer: 'Comfortable seating, a genuinely family-friendly environment, a menu broad enough for everyone, parking, and prices that suit your group.'
-      },
-      {
-        question: 'Where can I find Pakistani (desi) restaurants?',
-        answer: 'Desi restaurants operate in major cities and smaller towns right across Pakistan — narrow your search by city, neighbourhood and cuisine.'
-      },
-      {
-        question: 'How can restaurant owners join LocalePak?',
-        answer: 'Owners can create a free listing on LocalePak, adding their location, a menu link, the right category, contact information and opening hours.'
-      }
-    ]
-  },
   'best-universities-computer-science-pakistan': {
     slug: 'best-universities-computer-science-pakistan',
     title: 'Best Universities for Computer Science in Pakistan: CS, IT & Software Engineering Compared',
@@ -226,48 +185,11 @@ export const BLOG_POSTS: Record<string, BlogPost> = {
       }
     ]
   },
-  'jobs-in-pakistan': {
-    slug: 'jobs-in-pakistan',
-    title: 'Jobs in Pakistan 2026: Government, Private, Online & Graduate Careers',
-    metaTitle: 'Jobs in Pakistan 2026: Government, Private & Online Jobs Guide',
-    metaDescription: 'Navigate Pakistan’s 2026 job market — government and private roles, IT, teaching, banking, healthcare, remote and part-time work, plus how to find openings and apply well.',
-    focusKeyword: 'Jobs in Pakistan',
-    category: 'Jobs & Careers',
-    date: 'August 13, 2026',
-    readTime: '12 min read',
-    excerpt: 'Navigate Pakistan’s 2026 job market — government and private roles, IT, teaching, banking, healthcare, remote and part-time work, plus how to find openings and apply well.',
-    faqs: [
-      {
-        question: 'What kinds of jobs are most common in Pakistan?',
-        answer: 'Employment is spread across IT, education, healthcare, banking, finance, sales, marketing, engineering, administration, retail, construction, hospitality and many other industries.'
-      },
-      {
-        question: 'Where do I look for government jobs in Pakistan?',
-        answer: 'The National Jobs Portal is the Government of Pakistan’s official platform for government vacancies, with searches by keyword and location across government departments.'
-      },
-      {
-        question: 'Are there jobs for fresh graduates in Pakistan?',
-        answer: 'Yes. Live job-search results show graduate, fresh-graduate, trainee and internship openings in technology, sales, engineering, healthcare and other fields.'
-      },
-      {
-        question: 'Which skills help fresh graduates get hired?',
-        answer: 'It varies by career: technology candidates should build programming and software skills, marketing candidates SEO, content and digital marketing experience — while communication, teamwork, problem-solving and practical experience help everywhere.'
-      },
-      {
-        question: 'Can I work remotely from Pakistan?',
-        answer: 'Yes, remote openings exist in software development, design, marketing, writing, customer support, virtual assistance, education and more. Always verify the employer before accepting a remote role.'
-      },
-      {
-        question: 'How do I search for jobs in my own city?',
-        answer: 'Combine the profession with the city — for example “software developer jobs in Karachi,” “teaching jobs in Lahore” or “accounting jobs in Islamabad” — and explore local companies and professional profiles.'
-      }
-    ]
-  },
   'top-business-directory-websites-pakistan': {
     slug: 'top-business-directory-websites-pakistan',
     title: 'Top Business Directory Websites in Pakistan: Your Guide to Finding Local Businesses You Can Trust',
     metaTitle: 'Best Business Directory Websites in Pakistan (2026 Guide)',
-    metaDescription: 'Survey the leading business directory websites in Pakistan and find dependable businesses, services, companies, professionals, restaurants, hospitals and more.',
+    metaDescription: 'Compare well-known business directory websites in Pakistan and find dependable businesses, services, companies, professionals, restaurants, hospitals and more.',
     focusKeyword: 'Business Directory Pakistan',
     category: 'Directory Guide',
     date: 'August 7, 2026',
@@ -304,8 +226,13 @@ export const BLOG_POSTS: Record<string, BlogPost> = {
     focusKeyword: 'Free Business Listing Pakistan',
     category: 'Free Business Listing Guide',
     date: 'August 1, 2026',
-    readTime: '8 min read',
+    dateModified: 'October 23, 2026',
+    readTime: '7 min read',
     excerpt: 'Exactly how to create a free business listing on LocalePak in 5 minutes — from setting up your account to the optimisation tips that get you seen on Google.',
+    authorName: 'LocalePak Editorial Team',
+    authorUrl: 'https://www.localepak.com/about/',
+    content: NEW_BLOG_CONTENT['how-to-list-business-free-localepak-guide'],
+    relatedSlugs: ['free-business-listing-checklist-pakistan', 'local-seo-pakistan-businesses-google-ranking', 'top-business-directory-websites-pakistan']
   },
   'local-seo-pakistan-businesses-google-ranking': {
     slug: 'local-seo-pakistan-businesses-google-ranking',
@@ -315,19 +242,13 @@ export const BLOG_POSTS: Record<string, BlogPost> = {
     focusKeyword: 'Local SEO Pakistan',
     category: 'Local SEO Pakistan',
     date: 'July 28, 2026',
-    readTime: '12 min read',
+    dateModified: 'October 23, 2026',
+    readTime: '8 min read',
     excerpt: 'Practical local SEO strategies for Pakistani businesses chasing searches like “restaurants in Lahore” or “plumbers in Karachi,” with concrete listing-optimisation advice.',
-  },
-  'free-job-posting-pakistan-hire-employees': {
-    slug: 'free-job-posting-pakistan-hire-employees',
-    title: 'Free Job Posting in Pakistan – Hire Employees Without Spending a Rupee',
-    metaTitle: 'Free Job Posting in Pakistan – Hire Employees at No Cost',
-    metaDescription: 'A complete walkthrough of posting jobs free on the LocalePak job portal — write sharper job descriptions and recruit skilled Pakistani talent.',
-    focusKeyword: 'Free Job Posting Pakistan',
-    category: 'Free Job Portal Guide',
-    date: 'July 25, 2026',
-    readTime: '10 min read',
-    excerpt: 'Your guide to posting jobs free on the LocalePak job portal: craft job descriptions that attract qualified candidates and hire employees anywhere in Pakistan.',
+    authorName: 'LocalePak Editorial Team',
+    authorUrl: 'https://www.localepak.com/about/',
+    content: NEW_BLOG_CONTENT['local-seo-pakistan-businesses-google-ranking'],
+    relatedSlugs: ['how-to-list-business-free-localepak-guide', 'how-to-build-a-professional-profile-pakistan', 'free-business-listing-checklist-pakistan']
   },
   'best-software-houses-pakistan-2026': {
     slug: 'best-software-houses-pakistan-2026',
@@ -343,7 +264,7 @@ export const BLOG_POSTS: Record<string, BlogPost> = {
     authorName: 'LocalePak Editorial Team',
     authorUrl: 'https://www.localepak.com/about/',
     content: NEW_BLOG_CONTENT['best-software-houses-pakistan-2026'],
-    relatedSlugs: ['it-jobs-in-pakistan', 'jobs-in-pakistan', 'universities-in-pakistan']
+    relatedSlugs: ['it-jobs-in-pakistan', 'universities-in-pakistan']
   },
   'how-to-find-jobs-in-pakistan-2026': {
     slug: 'how-to-find-jobs-in-pakistan-2026',
@@ -359,7 +280,7 @@ export const BLOG_POSTS: Record<string, BlogPost> = {
     authorName: 'LocalePak Editorial Team',
     authorUrl: 'https://www.localepak.com/about/',
     content: NEW_BLOG_CONTENT['how-to-find-jobs-in-pakistan-2026'],
-    relatedSlugs: ['jobs-in-pakistan', 'it-jobs-in-pakistan', 'best-software-houses-pakistan-2026']
+    relatedSlugs: ['it-jobs-in-pakistan', 'best-software-houses-pakistan-2026']
   },
   'remote-jobs-pakistan-fresh-graduates': {
     slug: 'remote-jobs-pakistan-fresh-graduates',
@@ -375,7 +296,7 @@ export const BLOG_POSTS: Record<string, BlogPost> = {
     authorName: 'LocalePak Editorial Team',
     authorUrl: 'https://www.localepak.com/about/',
     content: NEW_BLOG_CONTENT['remote-jobs-pakistan-fresh-graduates'],
-    relatedSlugs: ['jobs-in-pakistan', 'it-jobs-in-pakistan', 'how-to-find-jobs-in-pakistan-2026']
+    relatedSlugs: ['it-jobs-in-pakistan', 'how-to-find-jobs-in-pakistan-2026']
   },
   'accountant-jobs-pakistan-city-guide': {
     slug: 'accountant-jobs-pakistan-city-guide',
@@ -391,7 +312,7 @@ export const BLOG_POSTS: Record<string, BlogPost> = {
     authorName: 'LocalePak Editorial Team',
     authorUrl: 'https://www.localepak.com/about/',
     content: NEW_BLOG_CONTENT['accountant-jobs-pakistan-city-guide'],
-    relatedSlugs: ['jobs-in-pakistan', 'universities-in-pakistan']
+    relatedSlugs: ['universities-in-pakistan', 'how-to-find-jobs-in-pakistan-2026']
   },
   'local-services-pakistan-by-city': {
     slug: 'local-services-pakistan-by-city',
@@ -407,23 +328,7 @@ export const BLOG_POSTS: Record<string, BlogPost> = {
     authorName: 'LocalePak Editorial Team',
     authorUrl: 'https://www.localepak.com/about/',
     content: NEW_BLOG_CONTENT['local-services-pakistan-by-city'],
-    relatedSlugs: ['restaurants-in-pakistan', 'top-business-directory-websites-pakistan', 'local-seo-pakistan-businesses-google-ranking']
-  },
-  'how-to-find-trusted-professionals-pakistan': {
-    slug: 'how-to-find-trusted-professionals-pakistan',
-    title: 'How to Find Trusted Professionals in Pakistan: A Verification-First Guide',
-    metaTitle: 'Finding Trusted Professionals in Pakistan: Verification Guide',
-    metaDescription: 'Compare Pakistani doctors, lawyers, accountants, developers, tutors, designers and service professionals properly — using profiles, evidence and verification, not guesswork.',
-    focusKeyword: 'Find Professionals in Pakistan',
-    category: 'Professional Discovery',
-    date: 'August 23, 2026',
-    dateModified: 'August 23, 2026',
-    readTime: '10 min read',
-    excerpt: 'A verification-led guide to choosing Pakistani professionals by specialisation, city, service, credentials and publicly checkable evidence.',
-    authorName: 'LocalePak Editorial Team',
-    authorUrl: 'https://www.localepak.com/about/',
-    content: NEW_BLOG_CONTENT['how-to-find-trusted-professionals-pakistan'],
-    relatedSlugs: ['professionals', 'local-services-pakistan-by-city', 'jobs-in-pakistan']
+    relatedSlugs: ['restaurants-in-karachi', 'top-business-directory-websites-pakistan', 'local-seo-pakistan-businesses-google-ranking']
   },
   'best-startups-pakistan-2026': {
     slug: 'best-startups-pakistan-2026',
@@ -439,7 +344,7 @@ export const BLOG_POSTS: Record<string, BlogPost> = {
     authorName: 'LocalePak Editorial Team',
     authorUrl: 'https://www.localepak.com/about/',
     content: NEW_BLOG_CONTENT['best-startups-pakistan-2026'],
-    relatedSlugs: ['best-software-houses-pakistan-2026', 'jobs-in-pakistan', 'it-jobs-in-pakistan']
+    relatedSlugs: ['best-software-houses-pakistan-2026', 'it-jobs-in-pakistan']
   },
   'businesses-in-lahore-by-category': {
     slug: 'businesses-in-lahore-by-category',
@@ -471,6 +376,70 @@ export const BLOG_POSTS: Record<string, BlogPost> = {
     authorName: 'LocalePak Editorial Team',
     authorUrl: 'https://www.localepak.com/about/',
     content: NEW_BLOG_CONTENT['digital-marketing-jobs-lahore-guide'],
-    relatedSlugs: ['it-jobs-in-pakistan', 'jobs-in-pakistan', 'businesses-in-lahore-by-category']
+    relatedSlugs: ['it-jobs-in-pakistan', 'businesses-in-lahore-by-category']
+  },
+  'free-business-listing-checklist-pakistan': {
+    slug: 'free-business-listing-checklist-pakistan',
+    title: 'Free Business Listing Checklist for Pakistan: What to Prepare Before You Publish',
+    metaTitle: 'Free Business Listing Checklist Pakistan: Prepare & Publish',
+    metaDescription: 'A practical checklist for Pakistani businesses creating a free listing — details to gather, category and city choices, honest descriptions, trust signals and upkeep.',
+    focusKeyword: 'Free Business Listing Checklist Pakistan',
+    category: 'Free Business Listing Guide',
+    date: 'October 23, 2026',
+    dateModified: 'October 23, 2026',
+    readTime: '3 min read',
+    excerpt: 'A free listing only pays off when customers can check who you are and get in touch. This checklist covers what to prepare, how to choose a category and city, and how to keep the listing accurate.',
+    authorName: 'LocalePak Editorial Team',
+    authorUrl: 'https://www.localepak.com/about/',
+    content: NEW_BLOG_CONTENT['free-business-listing-checklist-pakistan'],
+    relatedSlugs: ['how-to-build-a-professional-profile-pakistan', 'top-business-directory-websites-pakistan', 'businesses-in-lahore-by-category']
+  },
+  'how-to-build-a-professional-profile-pakistan': {
+    slug: 'how-to-build-a-professional-profile-pakistan',
+    title: 'How to Build a Professional Profile in Pakistan That Clients Trust',
+    metaTitle: 'Build a Professional Profile in Pakistan: Structure & Evidence',
+    metaDescription: 'Structure a professional profile that answers who you are, what you do, where you work and why to get in touch — categories, biographies, credentials, privacy and upkeep.',
+    focusKeyword: 'Professional Profile Pakistan',
+    category: 'Professional Discovery',
+    date: 'October 23, 2026',
+    dateModified: 'October 23, 2026',
+    readTime: '3 min read',
+    excerpt: 'A good professional profile answers four questions fast: who you are, what you do, where you work, and why someone should get in touch. Here is how to build one properly.',
+    authorName: 'LocalePak Editorial Team',
+    authorUrl: 'https://www.localepak.com/about/',
+    content: NEW_BLOG_CONTENT['how-to-build-a-professional-profile-pakistan'],
+    relatedSlugs: ['local-services-pakistan-by-city', 'free-business-listing-checklist-pakistan', 'accountant-jobs-pakistan-city-guide']
+  },
+  'how-to-register-a-company-in-pakistan': {
+    slug: 'how-to-register-a-company-in-pakistan',
+    title: 'How to Register a Company in Pakistan: SECP, NTN & FBR Steps, Fees and Timeline (2026)',
+    metaTitle: 'Register a Company in Pakistan: SECP, NTN & FBR Guide 2026',
+    metaDescription: 'Register a company in Pakistan step by step — choose a structure, reserve a name with SECP, incorporate, get an NTN from FBR, open a bank account and get found online.',
+    focusKeyword: 'How to Register a Company in Pakistan',
+    category: 'Business Setup & Registration',
+    date: 'October 23, 2026',
+    dateModified: 'October 23, 2026',
+    readTime: '6 min read',
+    excerpt: 'From choosing between sole proprietorship, SMC and private limited to SECP name reservation, incorporation, the FBR NTN and your first bank account — the full company registration process, in order.',
+    authorName: 'LocalePak Editorial Team',
+    authorUrl: 'https://www.localepak.com/about/',
+    content: NEW_BLOG_CONTENT['how-to-register-a-company-in-pakistan'],
+    relatedSlugs: ['how-to-get-ntn-become-a-filer-pakistan', 'free-business-listing-checklist-pakistan', 'top-business-directory-websites-pakistan']
+  },
+  'how-to-get-ntn-become-a-filer-pakistan': {
+    slug: 'how-to-get-ntn-become-a-filer-pakistan',
+    title: 'How to Become a Tax Filer & Get an NTN in Pakistan: IRIS Step-by-Step',
+    metaTitle: 'Get an NTN & Become a Tax Filer in Pakistan: IRIS Guide',
+    metaDescription: 'Get your NTN through FBR IRIS and become an active filer — registration steps, documents, salaried and freelancer specifics, ATL checks and the mistakes that stall applications.',
+    focusKeyword: 'How to Get NTN in Pakistan',
+    category: 'Tax & Finance Guide',
+    date: 'October 23, 2026',
+    dateModified: 'October 23, 2026',
+    readTime: '6 min read',
+    excerpt: 'An NTN and filer status are not the same thing. This IRIS step-by-step explains both — registration, the documents you need, filing the return, and confirming your name on the Active Taxpayer List.',
+    authorName: 'LocalePak Editorial Team',
+    authorUrl: 'https://www.localepak.com/about/',
+    content: NEW_BLOG_CONTENT['how-to-get-ntn-become-a-filer-pakistan'],
+    relatedSlugs: ['how-to-register-a-company-in-pakistan', 'free-business-listing-checklist-pakistan', 'accountant-jobs-pakistan-city-guide']
   }
 }

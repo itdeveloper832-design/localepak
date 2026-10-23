@@ -19,8 +19,21 @@ type Business = {
   description: string
 }
 
+// Static seed listings are known at build time, so they are the initial
+// state: the grid is part of the server-rendered HTML (real LCP content, no
+// layout shift) instead of appearing only after the Firestore fetch below.
+const SEED_ITEMS: Business[] = SEED_BUSINESSES.map((seed) => ({
+  id: `seed-${seed.slug}`,
+  name: seed.name,
+  slug: seed.slug,
+  category: seed.category,
+  city: seed.city,
+  phone: seed.phone || '',
+  description: seed.description,
+}))
+
 export default function BusinessesPage() {
-  const [businesses, setBusinesses] = useState<Business[]>([])
+  const [businesses, setBusinesses] = useState<Business[]>(SEED_ITEMS)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -45,23 +58,12 @@ export default function BusinessesPage() {
         // Firestore inventory is an enhancement; the static seed listings
         // below still render if it is unavailable.
       }
-      // Merge in the static seed listings (directory-created pages in
-      // lib/seed-businesses.ts). A Firestore listing wins on slug clashes
-      // (e.g. once the owner claims and re-adds the business).
+      // Merge the Firestore results with the static seed listings that are
+      // already rendered. A Firestore listing wins on slug clashes (e.g.
+      // once the owner claims and re-adds the business).
       const seenSlugs = new Set(items.map((b) => b.slug))
-      for (const seed of SEED_BUSINESSES) {
-        if (seenSlugs.has(seed.slug)) continue
-        items.push({
-          id: `seed-${seed.slug}`,
-          name: seed.name,
-          slug: seed.slug,
-          category: seed.category,
-          city: seed.city,
-          phone: seed.phone || '',
-          description: seed.description,
-        })
-      }
-      if (!cancelled) setBusinesses(items)
+      const merged = [...items, ...SEED_ITEMS.filter((s) => !seenSlugs.has(s.slug))]
+      if (!cancelled) setBusinesses(merged)
       if (!cancelled) setLoading(false)
     }
     load()
@@ -88,7 +90,7 @@ export default function BusinessesPage() {
       </section>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1 w-full">
-        {loading ? (
+        {loading && businesses.length === 0 ? (
           <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center text-sm text-slate-500">
             Loading businesses...
           </div>

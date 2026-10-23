@@ -4,11 +4,11 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "LocalePak — Pakistan's Digital Business & Enterprise Ecosystem",
     short_name: 'LocalePak',
-    description: "Discover, connect, and grow with Pakistan's largest digital business platform. Verified businesses, job portal, and professional talent.",
+    description: "Discover, connect, and grow with Pakistan's free digital business platform. Local businesses, job portal, and professional talent.",
     start_url: '/',
     display: 'standalone',
     background_color: '#F8FAFC',
-    theme_color: '#2563EB',
+    theme_color: '#DC2626',
     icons: [
       {
         src: '/favicon.png',

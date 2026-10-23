@@ -59,7 +59,7 @@ export default function Navbar() {
           {/* Desktop Right Actions */}
           <div className="hidden sm:flex items-center gap-3">
             <Link
-              href="/search"
+              href="/search" prefetch={false}
               aria-label="Search Directory"
               className="p-2.5 rounded-xl text-zinc-300 hover:text-white hover:bg-zinc-800/70 transition-colors flex items-center gap-1.5 text-sm font-medium"
               title="Search Directory"
@@ -69,7 +69,7 @@ export default function Navbar() {
             </Link>
 
             <Link
-              href="/dashboard"
+              href="/dashboard" prefetch={false}
               aria-label="Business & Profile Dashboard"
               className="px-3.5 py-2 rounded-xl text-zinc-300 hover:text-white hover:bg-zinc-800/70 transition-colors flex items-center gap-1.5 text-sm font-medium"
               title="Business & Profile Dashboard"
@@ -79,7 +79,7 @@ export default function Navbar() {
             </Link>
 
             <Link
-              href="/register"
+              href="/register" prefetch={false}
               className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-md shadow-blue-600/25 transition-all duration-200 inline-flex items-center gap-2"
             >
               <Plus className="w-4 h-4" />
@@ -133,7 +133,7 @@ export default function Navbar() {
           
           <div className="pt-3 border-t border-zinc-800 flex flex-col gap-2">
             <Link
-              href="/dashboard"
+              href="/dashboard" prefetch={false}
               onClick={() => setOpen(false)}
               className="text-sm font-semibold py-3 px-4 rounded-xl text-zinc-300 hover:bg-zinc-800 flex items-center gap-3"
             >
@@ -143,7 +143,7 @@ export default function Navbar() {
 
 
             <Link
-              href="/register"
+              href="/register" prefetch={false}
               onClick={() => setOpen(false)}
               className="mt-2 px-4 py-3 rounded-xl bg-blue-600 text-white text-sm font-bold text-center shadow-md shadow-blue-600/30 flex items-center justify-center gap-2"
             >

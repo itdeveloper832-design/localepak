@@ -1,10 +1,12 @@
 import { MetadataRoute } from 'next'
 import { CATEGORIES, CITIES, TOP_CITIES } from '@/lib/data'
 import { BLOG_POSTS } from '@/lib/blog-data'
+import { SEED_BUSINESSES } from '@/lib/seed-businesses'
 
 const BASE = 'https://www.localepak.com'
 
 function canonicalUrl(path: string): string {
+  if (path === '' || path === '/') return `${BASE}/`
   return `${BASE}${path.startsWith('/') ? path : `/${path}`}/`
 }
 
@@ -85,5 +87,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }
   })
 
-  return [...coreRoutes, ...categoryRoutes, ...cityRoutes, ...cityCategoryRoutes, ...blogRoutes]
+  // Static seed business listings (lib/seed-businesses.ts) — fully
+  // static pages, always indexable. Owner-added Firestore listings are
+  // not listed here (they are discovered via /businesses and search).
+  const seedBusinessRoutes = SEED_BUSINESSES.map((biz) => ({
+    url: canonicalUrl(`/business/${biz.slug}`),
+    changeFrequency: 'monthly' as const,
+    priority: 0.6,
+  }))
+
+  return [...coreRoutes, ...categoryRoutes, ...cityRoutes, ...cityCategoryRoutes, ...blogRoutes, ...seedBusinessRoutes]
 }

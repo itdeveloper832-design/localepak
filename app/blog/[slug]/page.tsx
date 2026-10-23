@@ -58,6 +58,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const post = BLOG_POSTS[slug]
   if (!post) notFound()
 
+  // A post with no real body (no structured content and no hardcoded article
+  // below) must 404 — never render placeholder or fallback copy.
+  const hasHardcodedBody =
+    slug === 'restaurants-in-karachi' ||
+    slug === 'best-universities-computer-science-pakistan' ||
+    slug === 'universities-in-pakistan' ||
+    slug === 'it-jobs-in-pakistan' ||
+    slug === 'top-business-directory-websites-pakistan'
+  if (!post.content && !hasHardcodedBody) notFound()
+
   const title = post.title
   const publishDate = post.date
   const readTime = post.readTime
@@ -168,7 +178,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   </p>
 
                   <p className="p-4 bg-blue-50 rounded-xl border border-blue-100 text-sm font-semibold text-blue-950">
-                    💡 <strong>National Dining Guide:</strong> Exploring food across the entire country? Read our pillar guide to <Link href="/blog/restaurants-in-pakistan" className="text-blue-700 font-extrabold underline">Restaurants in Pakistan</Link> covering cuisines, cities, and local food culture.
+                    💡 <strong>Start with the directory:</strong> Comparing places in other cities too? Browse <Link href="/category/restaurants/" className="text-blue-700 font-extrabold underline">restaurants and food businesses</Link> by city and cuisine on LocalePak, and check each listing&apos;s hours and contact details before you set out.
                   </p>
 
                   {/* Section 1: Restaurants by Cuisine */}
@@ -289,168 +299,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <div className="pt-8 border-t border-slate-200 space-y-4">
                     <h3 className="text-xl font-extrabold text-[#0F172A]">Explore LocalePak Directory & Guides</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
-                      <Link href="/blog/restaurants-in-pakistan" className="p-3 bg-amber-50 text-amber-700 hover:bg-amber-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-amber-200">Pakistan Restaurants Guide</Link>
-                      <Link href="/blog/jobs-in-pakistan" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Jobs in Pakistan</Link>
+                      <Link href="/blog/businesses-in-lahore-by-category" className="p-3 bg-amber-50 text-amber-700 hover:bg-amber-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-amber-200">Lahore Businesses Guide</Link>
+                      <Link href="/blog/how-to-find-jobs-in-pakistan-2026" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Jobs in Pakistan</Link>
                       <Link href="/blog/it-jobs-in-pakistan" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">IT Jobs in Pakistan</Link>
                       <Link href="/blog/universities-in-pakistan" className="p-3 bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-indigo-200">Universities Guide</Link>
                       <Link href="/blog/best-universities-computer-science-pakistan" className="p-3 bg-purple-50 text-purple-700 hover:bg-purple-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-purple-200">CS Universities</Link>
                       <Link href="/add-job" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Post a Job (Employers)</Link>
                       <Link href="/companies" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Hiring Companies</Link>
-                      <Link href="/search" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Search Directory</Link>
-                      <Link href="/cities" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Cities Index</Link>
-                      <Link href="/add-business" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Add Business</Link>
-                    </div>
-                  </div>
-                </>
-              ) : slug === 'restaurants-in-pakistan' ? (
-                <>
-                  {/* Article Intro */}
-                  <p className="text-lg font-medium text-slate-800 leading-relaxed bg-gradient-to-r from-amber-50 to-orange-50/50 p-6 rounded-2xl border border-amber-100/80 shadow-xs">
-                    Pakistan has a diverse food culture, and finding the right restaurant can depend on much more than simply looking for the nearest place to eat. Someone searching for a restaurant may want a quick lunch, a family dinner, traditional Pakistani food, fast food, a café, fine dining, a birthday dinner, or a business meal.
-                  </p>
-
-                  <p>
-                    This guide explains how to find <strong>restaurants in Pakistan</strong>, the major types of restaurants available, popular cuisines, important food cities, restaurant choices for different occasions and what customers should consider before visiting a restaurant.
-                  </p>
-
-                  <p className="p-4 bg-blue-50 rounded-xl border border-blue-100 text-sm font-semibold text-blue-950">
-                    💡 <strong>Explore Directory Features:</strong> LocalePak organizes food businesses by city, area, and cuisine. Explore <Link href="/categories" className="text-blue-700 font-extrabold underline">Business Categories</Link> or add your food business on <Link href="/add-business" className="text-blue-700 font-extrabold underline">LocalePak Add Business</Link>.
-                  </p>
-
-                  {/* Section 1: Types of Restaurants */}
-                  <div className="space-y-4 pt-6 border-t border-slate-100">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
-                      What Types of Restaurants Are Available in Pakistan?
-                    </h2>
-                    <p>
-                      Pakistan&apos;s restaurant industry includes a wide range of food establishments catering to different tastes, budgets, and dining occasions:
-                    </p>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 text-xs font-semibold text-slate-700 bg-slate-50 p-5 rounded-2xl border border-slate-200">
-                      {['Pakistani & Desi Food', 'BBQ & Grill Houses', 'Biryani & Rice Places', 'Chinese & Pan-Asian', 'Italian & Pizza Places', 'Continental & Steaks', 'Fast-Food & Burgers', 'Seafood Restaurants', 'Cafés & Coffee Shops', 'Bakeries & Desserts', 'Family Restaurants', 'Fine Dining Places', 'Breakfast & Halwa Puri', 'Buffet Restaurants', 'Food Courts & Street Food', 'Takeaway & Delivery'].map(type => (
-                        <div key={type} className="flex items-center gap-1.5">• {type}</div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Section 2: City Food Hubs */}
-                  <div className="space-y-6 pt-6 border-t border-slate-100">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
-                      Restaurant Hubs Across Major Cities
-                    </h2>
-                    <div className="space-y-3 bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                      <h3 className="text-xl font-bold text-slate-900">Restaurants in Karachi</h3>
-                      <p className="text-sm text-slate-600">
-                        Karachi is an extremely diverse food market featuring street food, seafood, authentic Pakistani BBQ, Chinese, Italian, continental fine dining, and coastal dining. Read our comprehensive guide to <Link href="/blog/restaurants-in-karachi" className="text-blue-600 font-bold underline">Restaurants in Karachi</Link> for area-wise and cuisine-wise options.
-                      </p>
-                    </div>
-
-                    <div className="space-y-3 bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                      <h3 className="text-xl font-bold text-slate-900">Restaurants in Lahore</h3>
-                      <p className="text-sm text-slate-600">
-                        Lahore is famous for its rich culinary heritage, offering iconic desi food streets, traditional BBQ, karahi, breakfast places, aesthetic cafés, and modern fine dining. Look for family suitability, seating comfort, and verified operating hours.
-                      </p>
-                    </div>
-
-                    <div className="space-y-3 bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                      <h3 className="text-xl font-bold text-slate-900">Restaurants in Islamabad & Rawalpindi</h3>
-                      <p className="text-sm text-slate-600">
-                        Islamabad and Rawalpindi offer scenic hilltop dining, family-friendly eateries, international chains, quiet work-friendly cafés, and traditional BBQ spots across sectors and commercial centers.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Section 3: Popular Cuisines & Food Categories */}
-                  <div className="space-y-4 pt-6 border-t border-slate-100">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
-                      Popular Pakistani Cuisines & Specialties
-                    </h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
-                      <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <strong className="text-amber-700 font-bold block text-sm">Biryani & Pulao</strong>
-                        <p className="text-slate-600">Spiced rice dishes with regional variations across Karachi, Sindh, and Punjab.</p>
-                      </div>
-                      <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <strong className="text-amber-700 font-bold block text-sm">Pakistani BBQ</strong>
-                        <p className="text-slate-600">Chicken Tikka, Seekh Kebab, Malai Boti, Reshmi Kebab, and Mutton Chops.</p>
-                      </div>
-                      <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <strong className="text-amber-700 font-bold block text-sm">Nihari & Karahi</strong>
-                        <p className="text-slate-600">Slow-cooked stews and wok-cooked chicken or mutton karahi with freshly baked naans.</p>
-                      </div>
-                      <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <strong className="text-amber-700 font-bold block text-sm">Desi Desserts</strong>
-                        <p className="text-slate-600">Gulab Jamun, Jalebi, Kheer, Ras Malai, Gajar Ka Halwa, and Kulfi.</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Section 4: Dining for Different Occasions */}
-                  <div className="space-y-4 pt-6 border-t border-slate-100">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
-                      Choosing a Restaurant by Occasion
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                      <div className="p-5 bg-blue-50/70 rounded-2xl border border-blue-100 space-y-2">
-                        <strong className="text-sm font-bold text-blue-900 block">Family Dinners</strong>
-                        <p className="text-slate-700">Prioritize comfortable seating, family hall areas, parking availability, diverse menus, and child-friendly options.</p>
-                      </div>
-                      <div className="p-5 bg-amber-50/70 rounded-2xl border border-amber-100 space-y-2">
-                        <strong className="text-sm font-bold text-amber-900 block">Cafés & Work Meetings</strong>
-                        <p className="text-slate-700">Prioritize fast Wi-Fi, power sockets, comfortable seating, quality coffee, and quiet environments for work or casual catch-ups.</p>
-                      </div>
-                      <div className="p-5 bg-purple-50/70 rounded-2xl border border-purple-100 space-y-2">
-                        <strong className="text-sm font-bold text-purple-900 block">Fine Dining & Celebrations</strong>
-                        <p className="text-slate-700">Ideal for birthdays, business lunches, and anniversaries. Look for reservation options, specialized menus, and ambiance.</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Section 5: LocalePak Restaurant & Business Listing */}
-                  <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-8 rounded-3xl space-y-4 border border-slate-800">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                      List Your Restaurant or Food Business on LocalePak
-                    </h2>
-                    <p className="text-slate-300 text-sm leading-relaxed">
-                      Are you a restaurant owner, café operator, bakery, or food business in Pakistan? Create a free listing on LocalePak to showcase your menu link, location, phone number and opening hours to local customers searching in your area.
-                    </p>
-                    <div className="pt-2 flex flex-wrap gap-3">
-                      <Link href="/add-business" className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl shadow-md transition-all">
-                        List Restaurant Free
-                      </Link>
-                      <Link href="/categories" className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition-all">
-                        Explore Food Categories
-                      </Link>
-                    </div>
-                  </div>
-
-                  {/* Frequently Asked Questions (FAQ) */}
-                  <div className="space-y-6 pt-6 border-t border-slate-200">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight flex items-center gap-2">
-                      <HelpCircle className="w-6 h-6 text-blue-600" />
-                      <span>Frequently Asked Questions (FAQ)</span>
-                    </h2>
-
-                    <div className="space-y-4">
-                      {post?.faqs?.map((faq, i) => (
-                        <div key={i} className="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-2">
-                          <h3 className="font-bold text-[#0F172A] text-base sm:text-lg">{faq.question}</h3>
-                          <p className="text-sm text-slate-600 leading-relaxed">{faq.answer}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Internal Linking Navigation Grid */}
-                  <div className="pt-8 border-t border-slate-200 space-y-4">
-                    <h3 className="text-xl font-extrabold text-[#0F172A]">Explore LocalePak Directory & Guides</h3>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
-                      <Link href="/blog/jobs-in-pakistan" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Jobs in Pakistan</Link>
-                      <Link href="/blog/it-jobs-in-pakistan" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">IT Jobs in Pakistan</Link>
-                      <Link href="/blog/universities-in-pakistan" className="p-3 bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-indigo-200">Universities Guide</Link>
-                      <Link href="/blog/best-universities-computer-science-pakistan" className="p-3 bg-purple-50 text-purple-700 hover:bg-purple-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-purple-200">CS Universities</Link>
-                      <Link href="/add-job" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Post a Job (Employers)</Link>
-                      <Link href="/companies" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Hiring Companies</Link>
-                      <Link href="/businesses" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">All Businesses</Link>
                       <Link href="/search" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Search Directory</Link>
                       <Link href="/cities" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Cities Index</Link>
                       <Link href="/add-business" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Add Business</Link>
@@ -620,7 +475,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     <h3 className="text-xl font-extrabold text-[#0F172A]">Explore LocalePak Directory & Education Ecosystem</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
                       <Link href="/blog/universities-in-pakistan" className="p-3 bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-indigo-200">Universities Guide</Link>
-                      <Link href="/blog/jobs-in-pakistan" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Jobs in Pakistan</Link>
+                      <Link href="/blog/how-to-find-jobs-in-pakistan-2026" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Jobs in Pakistan</Link>
                       <Link href="/blog/it-jobs-in-pakistan" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">IT Jobs in Pakistan</Link>
                       <Link href="/companies" className="p-3 bg-purple-50 text-purple-700 hover:bg-purple-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-purple-200">Job Vacancies</Link>
                       <Link href="/companies" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Hiring Companies</Link>
@@ -648,7 +503,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   </p>
 
                   <p className="p-4 bg-emerald-50 rounded-xl border border-emerald-200 text-sm font-semibold text-emerald-950">
-                    💡 <strong>Specialized Technology Degrees:</strong> Students interested in CS, IT, and Software Engineering can explore our dedicated guide to the <Link href="/blog/best-universities-computer-science-pakistan" className="text-emerald-700 font-extrabold underline">Best Universities for Computer Science in Pakistan</Link>. Planning for future employment? Check our guides to <Link href="/blog/jobs-in-pakistan" className="text-emerald-700 font-extrabold underline">Jobs in Pakistan</Link> and <Link href="/blog/it-jobs-in-pakistan" className="text-emerald-700 font-extrabold underline">IT Jobs in Pakistan</Link>.
+                    💡 <strong>Specialized Technology Degrees:</strong> Students interested in CS, IT, and Software Engineering can explore our dedicated guide to the <Link href="/blog/best-universities-computer-science-pakistan" className="text-emerald-700 font-extrabold underline">Best Universities for Computer Science in Pakistan</Link>. Planning for future employment? Check our guides to <Link href="/blog/how-to-find-jobs-in-pakistan-2026" className="text-emerald-700 font-extrabold underline">Jobs in Pakistan</Link> and <Link href="/blog/it-jobs-in-pakistan" className="text-emerald-700 font-extrabold underline">IT Jobs in Pakistan</Link>.
                   </p>
 
                   {/* Section 1: What Should Students Consider? */}
@@ -797,7 +652,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <div className="pt-8 border-t border-slate-200 space-y-4">
                     <h3 className="text-xl font-extrabold text-[#0F172A]">Explore LocalePak Directory & Education Ecosystem</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
-                      <Link href="/blog/jobs-in-pakistan" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Jobs in Pakistan</Link>
+                      <Link href="/blog/how-to-find-jobs-in-pakistan-2026" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Jobs in Pakistan</Link>
                       <Link href="/blog/it-jobs-in-pakistan" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">IT Jobs in Pakistan</Link>
                       <Link href="/companies" className="p-3 bg-purple-50 text-purple-700 hover:bg-purple-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-purple-200">Job Vacancies</Link>
                       <Link href="/companies" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Hiring Companies</Link>
@@ -826,7 +681,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   </p>
 
                   <p className="p-4 bg-blue-50 rounded-xl border border-blue-100 text-sm font-medium text-blue-900">
-                    💡 If you are also exploring employment opportunities outside technology, see our broader guide to <Link href="/blog/jobs-in-pakistan" className="text-blue-700 font-bold underline">Jobs in Pakistan</Link>, which covers government, private, graduate, remote and other career opportunities.
+                    💡 If you are also exploring employment opportunities outside technology, see our broader guide to <Link href="/blog/how-to-find-jobs-in-pakistan-2026" className="text-blue-700 font-bold underline">Jobs in Pakistan</Link>, which covers government, private, graduate, remote and other career opportunities.
                   </p>
 
                   {/* Section 1: What Types of IT Jobs Are Available in Pakistan? */}
@@ -995,7 +850,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <div className="pt-8 border-t border-slate-200 space-y-4">
                     <h3 className="text-xl font-extrabold text-[#0F172A]">Explore LocalePak Directory & Tech Jobs Ecosystem</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
-                      <Link href="/blog/jobs-in-pakistan" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Jobs in Pakistan Guide</Link>
+                      <Link href="/blog/how-to-find-jobs-in-pakistan-2026" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Jobs in Pakistan Guide</Link>
                       <Link href="/companies" className="p-3 bg-purple-50 text-purple-700 hover:bg-purple-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-purple-200">Companies Directory</Link>
                       <Link href="/post-job" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">Post a Job Opening</Link>
                       <Link href="/companies" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Hiring Companies</Link>
@@ -1004,305 +859,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       <Link href="/cities" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Cities Index</Link>
                       <Link href="/add-business" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Add Business</Link>
                       <Link href="/blog" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Latest Blogs</Link>
-                      <Link href="/contact" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Contact Us</Link>
-                    </div>
-                  </div>
-                </>
-              ) : slug === 'jobs-in-pakistan' ? (
-                <>
-                  {/* Article Intro */}
-                  <p className="text-lg font-medium text-slate-800 leading-relaxed bg-gradient-to-r from-blue-50 to-indigo-50/50 p-6 rounded-2xl border border-blue-100/80 shadow-xs">
-                    Finding the right job in Pakistan can be challenging, especially when thousands of people are searching for government jobs, private-sector opportunities, internships, remote work, and jobs for fresh graduates at the same time. The good news is that Pakistan&apos;s employment market includes opportunities across technology, education, healthcare, banking, engineering, sales, marketing, administration, customer service, finance, construction, retail, hospitality and many other industries.
-                  </p>
-
-                  <p>
-                    This guide explains how to find <strong>jobs in Pakistan</strong>, what types of jobs are available, where fresh graduates can start their careers, how to search for opportunities in major Pakistani cities, and what applicants should check before applying.
-                  </p>
-
-                  <p>
-                    For government employment, the <a href="https://njp.gov.pk" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold underline">National Jobs Portal</a> is an important official source. Its current platform allows candidates to search government opportunities by job title, keyword and location and reports hundreds of active positions across more than 200 departments.
-                  </p>
-
-                  <p>
-                    For private employment, candidates can explore company career pages, professional networks, recruitment platforms and local business directories. employers can <Link href="/add-job" className="text-blue-600 font-bold underline">post a job from their LocalePak dashboard</Link>, and businesses and companies can create free profiles to become easier to discover.
-                  </p>
-
-                  <p className="p-4 bg-emerald-50 rounded-xl border border-emerald-200 text-sm font-semibold text-emerald-950">
-                    💡 <strong>Looking for Technology Careers?</strong> For software engineers, web developers, AI specialists, and tech fresh graduates, see our complete guide to <Link href="/blog/it-jobs-in-pakistan" className="text-emerald-700 font-extrabold underline">IT Jobs in Pakistan</Link>.
-                  </p>
-
-                  {/* Section 1: Jobs in Pakistan: What Opportunities Are Available? */}
-                  <div className="space-y-4 pt-6 border-t border-slate-100">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
-                      Jobs in Pakistan: What Opportunities Are Available?
-                    </h2>
-                    <p>
-                      The Pakistani job market covers a wide range of industries. Your best opportunity depends on your education, experience, technical skills, location and career goals.
-                    </p>
-                    <p className="font-bold text-[#0F172A]">Some of the most common employment categories include:</p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5 text-xs font-semibold text-slate-700 bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                      <div className="flex items-center gap-2">✓ Government jobs</div>
-                      <div className="flex items-center gap-2">✓ Private-sector jobs</div>
-                      <div className="flex items-center gap-2">✓ IT & software jobs</div>
-                      <div className="flex items-center gap-2">✓ Teaching & education jobs</div>
-                      <div className="flex items-center gap-2">✓ Banking & finance jobs</div>
-                      <div className="flex items-center gap-2">✓ Healthcare jobs</div>
-                      <div className="flex items-center gap-2">✓ Engineering jobs</div>
-                      <div className="flex items-center gap-2">✓ Sales & marketing jobs</div>
-                      <div className="flex items-center gap-2">✓ Accounting jobs</div>
-                      <div className="flex items-center gap-2">✓ Human resources jobs</div>
-                      <div className="flex items-center gap-2">✓ Customer service jobs</div>
-                      <div className="flex items-center gap-2">✓ Administration jobs</div>
-                      <div className="flex items-center gap-2">✓ Construction jobs</div>
-                      <div className="flex items-center gap-2">✓ Retail & sales jobs</div>
-                      <div className="flex items-center gap-2">✓ Hospitality & restaurants</div>
-                      <div className="flex items-center gap-2">✓ Freelance work</div>
-                      <div className="flex items-center gap-2">✓ Remote jobs</div>
-                      <div className="flex items-center gap-2">✓ Internships & Trainees</div>
-                    </div>
-                    <p>
-                      The National Jobs Portal currently highlights areas such as software engineering, civil engineering, teaching, healthcare and administration among its popular job searches.
-                    </p>
-                    <p>
-                      This variety means that job seekers should avoid searching for only one broad term such as &quot;jobs in Pakistan.&quot; A better strategy is to combine the job type with your profession, experience level or location.
-                    </p>
-                    <div className="p-4 bg-blue-50/60 rounded-xl border border-blue-100 text-sm space-y-2">
-                      <p>For example: <strong className="text-blue-900">Software developer jobs in Pakistan</strong> is more specific than <em>Jobs in Pakistan</em>.</p>
-                      <p>Similarly: <strong className="text-blue-900">Fresh graduate jobs in Karachi</strong> can be more useful to a new graduate than a general search across the entire country.</p>
-                    </div>
-                  </div>
-
-                  {/* Section 2: Government Jobs in Pakistan */}
-                  <div className="space-y-4 pt-6 border-t border-slate-100">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
-                      Government Jobs in Pakistan
-                    </h2>
-                    <p>
-                      Government jobs remain an important career option for Pakistani job seekers who are looking for public-sector employment.
-                    </p>
-                    <p>
-                      Government opportunities can be available across federal departments, public organizations and other government institutions. Positions can range from clerical and administrative roles to engineering, information technology, finance, healthcare, education and management positions.
-                    </p>
-                    <p>
-                      The official <a href="https://njp.gov.pk" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold underline">National Jobs Portal</a> provides a centralized way to search government vacancies and currently describes its listings as verified opportunities from government departments.
-                    </p>
-                    <div className="space-y-2">
-                      <p className="font-bold text-[#0F172A]">Common government-sector job categories include:</p>
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-semibold text-slate-700 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                        <li>• Administrative jobs</li>
-                        <li>• Assistant and clerical positions</li>
-                        <li>• IT & Software jobs</li>
-                        <li>• Engineering jobs</li>
-                        <li>• Education & Teaching jobs</li>
-                        <li>• Healthcare positions</li>
-                        <li>• Finance and accounting</li>
-                        <li>• Project management</li>
-                        <li>• Public administration</li>
-                        <li>• Technical & diploma positions</li>
-                      </ul>
-                    </div>
-                    <p className="text-sm bg-amber-50 p-4 rounded-xl border border-amber-200 text-amber-900 font-medium">
-                      <strong>Application Precaution:</strong> When applying for a government job, carefully check the official advertisement, eligibility requirements, education requirements, age limits, experience requirements, domicile requirements and application deadline. Do not rely on a social media post or forwarded message alone. Always verify the vacancy through the relevant official organization or government employment portal before submitting personal information or paying any fee.
-                    </p>
-                  </div>
-
-                  {/* Section 3: Private Jobs in Pakistan */}
-                  <div className="space-y-6 pt-6 border-t border-slate-100">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
-                      Private Jobs in Pakistan
-                    </h2>
-                    <p>
-                      The private sector offers opportunities across almost every major industry. Private companies recruit employees for technical, administrative, commercial and operational positions. Depending on the industry, candidates may find full-time, part-time, contract, internship, trainee and remote positions.
-                    </p>
-
-                    <div className="space-y-3 bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                      <h3 className="text-xl font-bold text-blue-700">Information Technology</h3>
-                      <p className="text-sm">IT remains an important career path for candidates with skills in:</p>
-                      <div className="flex flex-wrap gap-2 text-xs font-semibold">
-                        {['Software Development', 'Web Development', 'Mobile App Development', 'Cloud Computing', 'Cybersecurity', 'Data Analysis', 'Artificial Intelligence', 'UI/UX Design', 'Quality Assurance', 'Technical Support'].map(item => (
-                          <span key={item} className="px-2.5 py-1 bg-blue-100 text-blue-800 rounded-lg">{item}</span>
-                        ))}
-                      </div>
-                      <p className="text-xs text-slate-500 pt-1">
-                        Current job-search results in Pakistan show substantial demand for fresh-graduate and trainee opportunities in software engineering, network engineering, technology, sales and other professional areas.
-                      </p>
-                    </div>
-
-                    <div className="space-y-3 bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                      <h3 className="text-xl font-bold text-blue-700">Sales and Marketing</h3>
-                      <p className="text-sm">Companies frequently hire people for:</p>
-                      <div className="flex flex-wrap gap-2 text-xs font-semibold">
-                        {['Sales Executive', 'Business Development', 'Digital Marketing', 'Social Media Marketing', 'SEO Specialist', 'Content Marketing', 'Account Management', 'CRM'].map(item => (
-                          <span key={item} className="px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-lg">{item}</span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="space-y-3 bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                      <h3 className="text-xl font-bold text-blue-700">Banking and Finance</h3>
-                      <p className="text-sm">Career opportunities include Banking operations, Relationship management, Accounting, Finance, Audit, Taxation, Credit analysis, and Financial operations. Candidates with degrees in accounting, finance, or business administration can explore these areas.</p>
-                    </div>
-
-                    <div className="space-y-3 bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                      <h3 className="text-xl font-bold text-blue-700">Education</h3>
-                      <p className="text-sm">Schools, colleges, academies, universities, training institutes and online education businesses offer opportunities for Teachers, Lecturers, Teaching assistants, Academic coordinators, Admissions officers, Education consultants, and Trainers.</p>
-                    </div>
-
-                    <div className="space-y-3 bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                      <h3 className="text-xl font-bold text-blue-700">Healthcare</h3>
-                      <p className="text-sm">Healthcare organizations recruit Doctors, Nurses, Pharmacists, Medical technicians, Physiotherapists, Laboratory professionals, Hospital administrators, and Support staff. Candidates should confirm that the position and employer are legitimate and registration is valid.</p>
-                    </div>
-                  </div>
-
-                  {/* Section 4: Jobs for Fresh Graduates in Pakistan */}
-                  <div className="space-y-4 pt-6 border-t border-slate-100">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
-                      Jobs for Fresh Graduates in Pakistan
-                    </h2>
-                    <p className="text-base font-semibold text-slate-800 italic bg-amber-50/70 p-4 rounded-xl border border-amber-200">
-                      &quot;How can I get my first job when every company asks for experience?&quot;
-                    </p>
-                    <p>
-                      The answer is to broaden your search beyond permanent experienced positions. Look for:
-                    </p>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs font-bold text-slate-800">
-                      <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">• Graduate Trainee Programs</div>
-                      <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">• Management Trainees</div>
-                      <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">• Internships & Apprenticeships</div>
-                      <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">• Entry-level & Junior Roles</div>
-                      <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">• Customer Support Roles</div>
-                      <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">• Junior Technology Roles</div>
-                    </div>
-                    <p>
-                      A fresh graduate should build evidence of practical skills. For example:
-                    </p>
-                    <ul className="space-y-1 text-sm text-slate-700 pl-4 border-l-4 border-blue-600">
-                      <li>• <strong>Computer Science Graduates:</strong> Create GitHub projects, personal portfolio, web applications, and technical certifications.</li>
-                      <li>• <strong>Marketing Graduates:</strong> Create social media campaigns, SEO projects, content portfolios, and case studies.</li>
-                    </ul>
-                    <p>
-                      The goal is to show employers what you can actually do, rather than relying only on a degree.
-                    </p>
-                  </div>
-
-                  {/* Section 5: Online and Remote Jobs in Pakistan */}
-                  <div className="space-y-4 pt-6 border-t border-slate-100">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
-                      Online and Remote Jobs in Pakistan
-                    </h2>
-                    <p>
-                      Remote work has created another career path for Pakistani professionals. Workers may find opportunities in software development, graphic design, content writing, digital marketing, SEO, customer support, virtual assistance, video editing, UI/UX design, data entry, online teaching, and project management.
-                    </p>
-                    <div className="p-4 bg-red-50 rounded-xl border border-red-200 text-xs text-red-900 space-y-1">
-                      <strong className="block text-sm font-bold">Beware of Remote Job Scams:</strong>
-                      <p>A legitimate employer will never ask for large upfront payments simply to &quot;unlock&quot; a job or buy training kits. Always verify the employer website, registration details, and official presence before sharing sensitive data.</p>
-                    </div>
-                  </div>
-
-                  {/* Section 6: City-Wise Job Markets */}
-                  <div className="space-y-6 pt-6 border-t border-slate-100">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
-                      Jobs Across Major Pakistani Cities
-                    </h2>
-
-                    <div className="space-y-2 p-5 bg-slate-50 rounded-2xl border border-slate-200">
-                      <h3 className="text-xl font-bold text-slate-900">Jobs in Karachi</h3>
-                      <p className="text-sm">
-                        Karachi is Pakistan&apos;s commercial hub with opportunities in tech, banking, healthcare, education, retail, logistics, manufacturing, and shipping. Narrow your search by combining field and city, e.g., <Link href="/companies" className="text-blue-600 font-bold underline">IT jobs in Karachi</Link>, <em>Teaching jobs in Karachi</em>, or <em>Marketing jobs in Karachi</em>.
-                      </p>
-                    </div>
-
-                    <div className="space-y-2 p-5 bg-slate-50 rounded-2xl border border-slate-200">
-                      <h3 className="text-xl font-bold text-slate-900">Jobs in Lahore</h3>
-                      <p className="text-sm">
-                        Lahore has a large employment ecosystem covering technology, education, manufacturing, services, retail, media, and healthcare. Search specifically for <em>Software jobs in Lahore</em>, <em>Teaching jobs in Lahore</em>, or <em>Fresh graduate jobs in Lahore</em>.
-                      </p>
-                    </div>
-
-                    <div className="space-y-2 p-5 bg-slate-50 rounded-2xl border border-slate-200">
-                      <h3 className="text-xl font-bold text-slate-900">Jobs in Islamabad and Rawalpindi</h3>
-                      <p className="text-sm">
-                        Islamabad and Rawalpindi provide opportunities across government, technology, education, consulting, healthcare, telecom, and development organizations. Useful searches include <em>Government jobs in Islamabad</em>, <em>IT jobs in Islamabad</em>, and <em>Internships in Rawalpindi</em>.
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Section 7: How to Find Jobs & Prepare */}
-                  <div className="space-y-4 pt-6 border-t border-slate-100">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight">
-                      How to Find Jobs in Pakistan & Prepare
-                    </h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-slate-700">
-                      <div className="p-4 bg-blue-50/70 rounded-2xl border border-blue-100 space-y-1.5">
-                        <strong className="text-sm font-bold text-blue-900 block">1. Search Official Sources</strong>
-                        <p>Check the National Jobs Portal and official government recruitment websites for verified public sector vacancies.</p>
-                      </div>
-                      <div className="p-4 bg-blue-50/70 rounded-2xl border border-blue-100 space-y-1.5">
-                        <strong className="text-sm font-bold text-blue-900 block">2. Build a Professional Profile</strong>
-                        <p>Create a verified professional profile on <Link href="/add-professional" className="text-blue-600 font-bold underline">LocalePak Professionals</Link> to highlight your education, skills, and portfolio.</p>
-                      </div>
-                      <div className="p-4 bg-blue-50/70 rounded-2xl border border-blue-100 space-y-1.5">
-                        <strong className="text-sm font-bold text-blue-900 block">3. Search by Specific Skills</strong>
-                        <p>Instead of searching for broad terms, search for &quot;React developer jobs&quot; or &quot;SEO specialist jobs&quot;.</p>
-                      </div>
-                      <div className="p-4 bg-blue-50/70 rounded-2xl border border-blue-100 space-y-1.5">
-                        <strong className="text-sm font-bold text-blue-900 block">4. Prepare & Customize CV</strong>
-                        <p>Customize your resume for every application, tailoring skills to the specific job description.</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Section 8: Build Your Professional Profile on LocalePak */}
-                  <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white p-8 rounded-3xl space-y-4 border border-slate-800">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                      Build Your Professional Identity on LocalePak
-                    </h2>
-                    <p className="text-slate-300 text-sm leading-relaxed">
-                      Finding a job is not only about searching for vacancies. It is also about making yourself discoverable to top employers. LocalePak is developing a directory ecosystem connecting job seekers, professionals, local businesses, and hiring organizations.
-                    </p>
-                    <div className="pt-2 flex flex-wrap gap-3">
-                      <Link href="/add-professional" className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl shadow-md transition-all">
-                        Create Free Professional Profile
-                      </Link>
-                      <Link href="/companies" className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition-all">
-                        Explore Open Jobs
-                      </Link>
-                      <Link href="/companies" className="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold rounded-xl transition-all">
-                        Explore Hiring Companies
-                      </Link>
-                    </div>
-                  </div>
-
-                  {/* Frequently Asked Questions (FAQ) */}
-                  <div className="space-y-6 pt-6 border-t border-slate-200">
-                    <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight flex items-center gap-2">
-                      <HelpCircle className="w-6 h-6 text-blue-600" />
-                      <span>Frequently Asked Questions (FAQ)</span>
-                    </h2>
-
-                    <div className="space-y-4">
-                      {post?.faqs?.map((faq, i) => (
-                        <div key={i} className="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-2">
-                          <h3 className="font-bold text-[#0F172A] text-base sm:text-lg">{faq.question}</h3>
-                          <p className="text-sm text-slate-600 leading-relaxed">{faq.answer}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Internal Linking Suggestions Navigation Grid */}
-                  <div className="pt-8 border-t border-slate-200 space-y-4">
-                    <h3 className="text-xl font-extrabold text-[#0F172A]">Explore LocalePak Directory & Jobs Ecosystem</h3>
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
-                      <Link href="/companies" className="p-3 bg-purple-50 text-purple-700 hover:bg-purple-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-purple-200">Companies Directory</Link>
-                      <Link href="/post-job" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">Post a Job Opening</Link>
-                      <Link href="/companies" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Hiring Companies</Link>
-                      <Link href="/businesses" className="p-3 bg-amber-50 text-amber-700 hover:bg-amber-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-amber-200">Businesses Directory</Link>
-                      <Link href="/search" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Search Directory</Link>
-                      <Link href="/cities" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Cities Index</Link>
-                      <Link href="/add-business" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Add Business</Link>
-                      <Link href="/blog" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Latest Blogs</Link>
-                      <Link href="/faqs" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">FAQ Center</Link>
                       <Link href="/contact" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Contact Us</Link>
                     </div>
                   </div>
@@ -1563,29 +1119,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     </div>
                   </div>
                 </>
-              ) : (
-                <>
-                  <p className="text-lg font-normal text-slate-700 leading-relaxed">
-                    Listing your business free on LocalePak takes less than 5 minutes and puts your business on the city and category pages customers browse across Karachi, Lahore, Islamabad, Rawalpindi, Faisalabad, Multan, Peshawar, Quetta, and cities across Pakistan.
-                  </p>
-
-                  <h2 className="text-2xl font-bold text-[#0F172A] pt-4">1. Why Free Business Listing is Essential for Pakistani Businesses</h2>
-                  <p>
-                    In 2026, over 90% of Pakistani consumers search for local products and services on their smartphones before making a purchase or visiting a store.
-                  </p>
-
-                  <div className="mt-8 pt-8 border-t border-slate-200 text-center bg-[#F8FAFC] p-8 rounded-2xl border border-[#E2E8F0]">
-                    <h3 className="text-xl font-bold text-[#0F172A] mb-2">Ready to List Your Business Free?</h3>
-                    <p className="text-xs text-slate-600 mb-6">Join 10,000+ businesses already growing on Pakistan&apos;s #1 free directory.</p>
-                    <Link
-                      href="/add-business"
-                      className="px-8 py-3.5 bg-[#F97316] hover:bg-[#EA580C] text-white font-bold rounded-xl transition-colors shadow-md text-sm inline-block"
-                    >
-                      Create Your Free Business Listing Now
-                    </Link>
-                  </div>
-                </>
-              ))}
+              ) : null)}
 
               {post.relatedSlugs && post.relatedSlugs.length > 0 && (
                 <section className="pt-8 border-t border-slate-200 space-y-4">

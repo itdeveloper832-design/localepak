@@ -82,7 +82,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
       },
       {
         heading: 'Frequently asked questions',
-        paragraphs: ['Where can I find jobs in Pakistan? Start with reputable job portals, employer career pages, official government recruitment sites, professional networks, and directories that link clearly to the source.', 'Can fresh graduates find jobs? Yes — internships, trainee schemes, junior roles, and a practical portfolio are usually the most realistic doors in.', 'How do I find remote jobs from Pakistan? Search with remote or work-from-home terms, then verify the employer, contract, payment process, working hours, and legal requirements.', 'What should I do if a job asks for money? Treat any payment request as a serious red flag and verify the employer through an independent official channel.']
+        paragraphs: ['Where can I find jobs in Pakistan? Start with reputable job portals, employer career pages, official government recruitment sites, professional networks, and directories that link clearly to the source.', 'Can fresh graduates find jobs? Yes — internships, trainee schemes, junior roles, and a practical portfolio are usually the most realistic doors in.', 'How do I find remote jobs from Pakistan? Search with remote or work-from-home terms, then verify the employer, contract, payment process, working hours, and legal requirements.', 'What should I do if a job asks for money? Treat any payment request as a serious red flag and verify the employer through an independent official channel.', 'What kinds of jobs are most common in Pakistan? Employment is spread across IT, education, healthcare, banking and finance, sales and marketing, engineering, administration, retail, construction, hospitality and many other industries.', 'Where do I look for government jobs in Pakistan? The National Jobs Portal is the Government of Pakistan’s official platform for government vacancies, with searches by keyword and location across government departments — and any advert should still be traced back to the department or commission responsible for it.', 'Which skills help fresh graduates get hired? It varies by career: technology candidates should build programming and software skills, marketing candidates SEO, content and digital marketing experience — while communication, teamwork, problem-solving and practical experience help everywhere.']
       }
     ],
     sources: [
@@ -203,6 +203,12 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
         links: [{ label: 'Add a business', href: '/add-business' }, { label: 'Read local SEO guidance', href: '/blog/local-seo-pakistan-businesses-google-ranking' }]
       },
       {
+        heading: 'A verification checklist before you hire anyone',
+        paragraphs: ['Discovery is only step one — whether you are hiring a doctor, a lawyer, an accountant, a developer, a tutor or a tradesperson, run the same verification pass before you commit. A profile earns trust when it shows the person\u2019s role, specialisation, service area, public contact route, relevant experience, and supporting evidence — and regulated professionals should still be confirmed with the responsible authority, because a directory badge means only what the platform\u2019s verification policy says it means.'],
+        bullets: ['Identity: the profile uses the person\u2019s real professional name and a current photo or business identity where one is published.', 'Specialisation: the services listed match the exact outcome you need, not a long generic menu.', 'Credentials: education, certifications, licences or professional-body membership are stated where the field requires them — and can be checked with the issuing authority.', 'Contact route: a public, professional way to reach them, with a clear city or service area.', 'Evidence: published work, an official organisation page, or references you can inspect before deciding.', 'Before you hire, ask: what is included and excluded, what is the expected timeline, what evidence can you review first, and what privacy or confidentiality terms apply?'],
+        links: [{ label: 'Read LocalePak verification policy', href: '/verification-policy' }, { label: 'Browse professional profiles', href: '/professionals' }]
+      },
+      {
         heading: 'Frequently asked questions',
         paragraphs: ['How do I find a service near me in Pakistan? Search using the service, city, and area, then compare up-to-date contact details and service descriptions.', 'Which local services are most searched? Food, healthcare, home repair, education, automotive, beauty, real estate, and professional services are common, but real demand differs from city to city.', 'Should every business have a city page? Only when there are enough useful, current listings to satisfy what the searcher is looking for.', 'How can I report incorrect listing information? Use the site’s reporting or contact route and name the exact field that needs correcting.']
       }
@@ -211,46 +217,6 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
       { label: 'BusinessList.pk Lahore SEO category example', href: 'https://www.businesslist.pk/category/seo/city:lahore' },
       { label: 'Google helpful, reliable, people-first content', href: 'https://developers.google.com/search/docs/fundamentals/creating-helpful-content' },
       { label: 'LocalePak business search', href: '/search/' }
-    ]
-  },
-  'how-to-find-trusted-professionals-pakistan': {
-    intro: 'Hiring a professional in Pakistan takes more than a name and a phone number. Whether you need a doctor, a lawyer, an accountant, an engineer, a designer, a tutor, a marketer, or a technology specialist, work verification-first: separate what a public profile says from what actually proves qualifications and current practice.',
-    sections: [
-      {
-        heading: 'Define the outcome before you search',
-        paragraphs: ['Write down the result you need before you start comparing people. “Help with a tax return,” “a dermatologist consultation,” “a React developer,” and “an O-Level mathematics tutor” are four different needs, each demanding different evidence.', 'Use LocalePak’s professional directory to surface profiles by category and city, then read each person’s stated services, experience, education, credentials, and public links. Treat that as step one — independent checks still matter.'],
-        links: [{ label: 'Browse professional profiles', href: '/professionals' }, { label: 'Search businesses and services', href: '/search' }, { label: 'Browse cities', href: '/cities' }]
-      },
-      {
-        heading: 'What a professional profile should show',
-        paragraphs: ['A profile earns trust when it sets out the person’s role, specialisation, service area, public contact route, relevant experience, and supporting evidence. Regulated professionals may publish licensing or registration details, but you should still confirm them with the responsible authority.', 'Do not let testimonials, star ratings, or a “verified” badge stand in for qualifications. A badge should mean exactly what the platform’s verification policy says — nothing more.'],
-        bullets: ['Identity and current professional name.', 'Specialisation and services that match your need.', 'Education, certifications, licences, or professional-body membership where relevant.', 'City or service area and a safe, public contact route.', 'Clear date or context for experience claims.'],
-        links: [{ label: 'Read LocalePak verification policy', href: '/verification-policy' }, { label: 'Read community guidelines', href: '/community-guidelines' }]
-      },
-      {
-        heading: 'Professional categories people search for most',
-        paragraphs: ['Strong discovery intent exists across healthcare and medical, legal, finance and banking, technology and IT, education and training, media and advertising, construction and architecture, home services, and consulting. Each field needs its own evidence standards and content guidance.', 'The evidence differs by trade: a healthcare profile needs safe qualification and clinic information, a software profile needs skills and portfolio proof, and a home-services profile needs a clear service area and realistic availability.'],
-        links: [{ label: 'Find healthcare professionals', href: '/professionals?category=Healthcare%20%26%20Medical' }, { label: 'Find technology professionals', href: '/professionals?category=Technology%20%26%20IT' }, { label: 'Explore professional categories', href: '/categories' }]
-      },
-      {
-        heading: 'Questions to ask before you hire',
-        paragraphs: ['Ask how the professional would tackle your problem, what information they need from you, what you will receive, how long it is likely to take, what the fee covers, and what happens if the scope changes. When the decision touches health, legal rights, finances, or safety, press on credentials and on the limits of the service.', 'Agree the scope in writing and keep records of the engagement. Never hand over passwords, one-time codes, or personal documents that are not needed.'],
-        bullets: ['What is included and excluded?', 'What is the expected timeline and communication channel?', 'What evidence can you review before deciding?', 'What privacy, confidentiality, or data-handling terms apply?']
-      },
-      {
-        heading: 'Building a profile that inspires confidence',
-        paragraphs: ['Professionals should write a clear title, choose a specific category, state an accurate city or service area, keep the biography concise, list real services and relevant credentials, and link to a public website or portfolio. Copied bios, inflated claims, and fake reviews do the opposite of building trust.', 'Where the links are accurate and current, a complete profile can point to published work, official organisation pages, professional memberships, or a verified business listing.'],
-        links: [{ label: 'Add a professional profile', href: '/add-professional' }, { label: 'Browse companies', href: '/companies' }, { label: 'Explore jobs', href: '/jobs' }]
-      },
-      {
-        heading: 'Frequently asked questions',
-        paragraphs: ['How do I verify a professional in Pakistan? Cross-check the public profile against the official organisation or licensing source where one applies, look at references and current service details, and get the scope in writing.', 'Does a directory listing guarantee quality? No — a directory helps you discover and compare; the due diligence is still yours to do.', 'What information should a profile include? Role, specialisation, services, city or service area, experience, education or credentials where relevant, a public contact path, and accurate links.', 'Can remote professionals be listed? Yes, provided their service area and remote availability are described accurately.']
-      }
-    ],
-    sources: [
-      { label: 'LocalePak professional directory', href: '/professionals/' },
-      { label: 'LocalePak verification policy', href: '/verification-policy/' },
-      { label: 'Google people-first content guidance', href: 'https://developers.google.com/search/docs/fundamentals/creating-helpful-content' }
     ]
   },
   'best-startups-pakistan-2026': {
@@ -476,6 +442,209 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
       { label: 'LinkedIn Pakistan jobs and category discovery', href: 'https://pk.linkedin.com/jobs' },
       { label: 'Indeed Pakistan job search', href: 'https://pk.indeed.com/' },
       { label: 'Google JobPosting structured data guidance', href: 'https://developers.google.com/search/docs/appearance/structured-data/job-posting' }
+    ]
+  },
+  'how-to-register-a-company-in-pakistan': {
+    intro: 'Registering a company in Pakistan is a sequence, not a single form: choose the right structure, reserve the name with the Securities and Exchange Commission of Pakistan (SECP), file for incorporation, take the company\u2019s NTN from the Federal Board of Revenue (FBR), and only then open the bank account and the registrations your trade actually needs. This guide walks through each step in order, with the documents to prepare and the fee ranges that published registration guides cite — always confirm the live figures on SECP\u2019s own fee schedule before you pay.',
+    sections: [
+      {
+        heading: 'First, decide which structure actually fits',
+        paragraphs: ['The three routes most founders in Pakistan choose between are a sole proprietorship, an SMC-Private company, and a Private Limited company — and they are not interchangeable. A sole proprietorship is not an SECP company at all: you register yourself with FBR for tax and trade under your own name, which is simple and cheap, but the business has no separate legal identity, so its debts and liabilities are personally yours.', 'An SMC-Private (single-member company) gives one founder a separate legal identity with one director. A Private Limited company needs at least two directors and suits co-founded businesses, anyone planning to bring in investors, and anyone whose clients — banks, platforms, larger companies — expect a registered company on the contract.'],
+        bullets: ['Sole proprietor: fastest start, no SECP step, no separate legal identity, personal liability.', 'SMC-Private: one founder, separate legal identity, annual SECP filings apply.', 'Private Limited: two or more directors, easiest structure for partners, investors and tenders.', 'Whichever you choose, the tax registration (NTN) step in this guide still applies.']
+      },
+      {
+        heading: 'Step 1: Reserve the company name with SECP',
+        paragraphs: ['Create an account on SECP\u2019s eServices portal, then use the name-availability search to check your proposed name before reserving it. Names that clash with an existing company, use restricted words (such as bank, trust, foundation or a regulated profession\u2019s title without the relevant approval), or are judged deceptive will be rejected, so prepare two or three alternatives.', 'Published registration guides put the name-reservation fee at roughly PKR 200\u2013500; treat that as a range to verify against SECP\u2019s current fee schedule, not a fixed price. A reserved name is held for a limited period shown inside eServices, so file the incorporation while it is valid instead of reserving names speculatively.'],
+        links: [{ label: 'Create your LocalePak account', href: '/register' }, { label: 'Browse registered companies', href: '/companies' }]
+      },
+      {
+        heading: 'Step 2: File the incorporation application',
+        paragraphs: ['With the name reserved, submit the incorporation application through the same eServices account. You will need legible copies of the CNICs of every director and subscriber, the registered office address, the Memorandum of Association (what the company will do) and the Articles of Association (how it will be run) — SECP provides standard formats many small companies adopt — plus the declarations the portal generates for the directors to confirm.', 'Guides that rank for this process cite incorporation filing fees of roughly PKR 1,800\u20133,000 for a small private company, with the exact amount driven by your authorised capital and whether you file online — again, confirm the figure in eServices, which calculates it before payment. Pay through the payment channels the portal offers, and on approval SECP issues the certificate of incorporation digitally together with the company\u2019s unique incorporation number. That certificate is the document every later step asks for.'],
+        bullets: ['CNIC copies of all directors/subscribers, spelled exactly as on the CNIC.', 'Registered office address inside Pakistan.', 'Memorandum and Articles — object clauses that honestly cover what you will trade in.', 'Name reservation reference and the incorporation fee calculated by eServices.']
+      },
+      {
+        heading: 'Step 3: Take the company\u2019s NTN from FBR',
+        paragraphs: ['A company needs its own tax registration, separate from the directors\u2019 personal NTNs. Register through FBR\u2019s IRIS system using the company\u2019s SECP details — incorporation number, registered address, principal business activity and the particulars of the directors — and keep the particulars identical to what SECP holds, because mismatches surface later when banks and clients verify you.', 'If you are registering as an individual or freelancer alongside the company, the companion guide below walks through IRIS registration and filer status in full.'],
+        links: [{ label: 'Read the NTN & tax filer guide', href: '/blog/how-to-get-ntn-become-a-filer-pakistan' }, { label: 'Browse finance businesses', href: '/category/finance/' }]
+      },
+      {
+        heading: 'Step 4: Open the company bank account',
+        paragraphs: ['Banks open corporate accounts only after incorporation, and each bank runs its own compliance process. Expect to provide the certificate of incorporation, the Memorandum and Articles, the company NTN, CNICs of the directors and authorised signatories, and a board resolution naming who may operate the account. Start this step early: payment gateways, marketplace payouts and many corporate clients will not pay a personal account in the company\u2019s place.']
+      },
+      {
+        heading: 'Step 5: Add only the registrations your business triggers',
+        paragraphs: ['Not every registration applies to every company, and registering for everything wastes money. Sales tax registration matters when you sell taxable goods or the specific services your province taxes — services are largely a provincial subject, so check the provincial revenue authority where you operate. A chamber of commerce and industry membership is commonly needed for trade, exhibitions and import\u2013export work. EOBI and provincial social security registration arrive when you hire employees, a trade licence from the local authority when you operate physical premises, and PSEB registration is worth it for IT and IT-enabled services exporters.'],
+        bullets: ['Sales tax / provincial service tax: depends on what you sell and where.', 'Chamber of Commerce & Industry: common for trade, tenders and visas support letters.', 'EOBI + provincial social security: triggered by hiring employees.', 'Trade licence: physical shop, office or workshop premises.', 'PSEB: optional but useful for software and IT exporters.'],
+        links: [{ label: 'Browse businesses by category', href: '/categories' }, { label: 'Browse businesses by city', href: '/cities' }]
+      },
+      {
+        heading: 'Step 6: Get found — your first public profiles',
+        paragraphs: ['Registration makes you legal; it does not make you findable. The same week you incorporate, claim the two free profiles customers actually check: a Google Business Profile for Maps and search, and a business listing on LocalePak so your company appears on its city and category pages with your real name, address, phone and services. Keep the name, address and phone identical everywhere — inconsistent details are the most common reason new companies look unestablished online.'],
+        links: [{ label: 'Add your business free', href: '/add-business' }, { label: 'Read the free listing checklist', href: '/blog/free-business-listing-checklist-pakistan' }, { label: 'Add a company profile', href: '/add-company' }]
+      },
+      {
+        heading: 'Frequently asked questions',
+        paragraphs: ['How long does company registration take in Pakistan? When the name is available and the documents are clean, the SECP steps are typically a matter of working days; bank-account compliance and extra registrations are what stretch the overall timeline.', 'What does SECP registration cost? Published guides cite roughly PKR 200\u2013500 for name reservation and PKR 1,800\u20133,000 for incorporation of a small private company, but fees depend on authorised capital and filing route — SECP\u2019s eServices shows the exact payable amount before you pay.', 'Can one person register a company alone? Yes — the SMC-Private structure exists for a single founder; a Private Limited company needs at least two directors.', 'Is an NTN the same as company registration? No. SECP registration creates the company; the NTN is its tax registration with FBR. You need both, in that order.']
+      }
+    ],
+    sources: [
+      { label: 'SECP — Securities and Exchange Commission of Pakistan', href: 'https://www.secp.gov.pk/' },
+      { label: 'SECP eServices portal', href: 'https://eservices.secp.gov.pk/' },
+      { label: 'FBR IRIS portal', href: 'https://iris.fbr.gov.pk/' }
+    ]
+  },
+  'how-to-get-ntn-become-a-filer-pakistan': {
+    intro: 'An NTN and filer status are constantly confused in Pakistan, and the confusion costs people money: having an NTN simply means you are registered with the Federal Board of Revenue (FBR), while being a \u201cfiler\u201d means your name appears on the Active Taxpayer List because you filed your annual return. This guide covers both, step by step, inside FBR\u2019s IRIS system — for salaried individuals, freelancers and small business owners.',
+    sections: [
+      {
+        heading: 'NTN and \u201cfiler\u201d are two different things',
+        paragraphs: ['For an individual, your National Tax Number is your CNIC number — registration links that CNIC to a taxpayer profile in IRIS. Registration alone does not make you a filer. Filer status comes from submitting your annual income tax return by the deadline FBR notifies; FBR then places you on the Active Taxpayer List (ATL), which is the list banks, vehicle registration authorities and withholding agents check.', 'That distinction explains the two most common surprises: someone can hold an NTN for years and still be a non-filer, and a filer who misses one year\u2019s return falls off the ATL until the return is filed.']
+      },
+      {
+        heading: 'Before you start: what IRIS asks for',
+        paragraphs: ['Gather these first and the registration takes one sitting. The single most common failure is the mobile number: IRIS sends verification codes by SMS and email, and the mobile number should be registered in your own name against your CNIC, or the codes and later account recovery become a struggle.'],
+        bullets: ['Your CNIC number and its issue date.', 'A mobile number registered in your own name, and an email you control.', 'Your income picture: employer name for salaried work, or the nature of your business/freelance services.', 'Your current residential address, and a utility bill in case a document copy is requested for your category.'],
+        links: [{ label: 'Registering a company instead? Start with the SECP guide', href: '/blog/how-to-register-a-company-in-pakistan' }]
+      },
+      {
+        heading: 'Step-by-step: registering on FBR IRIS',
+        paragraphs: ['Open the IRIS portal and choose the option for registration of an unregistered person. Enter your CNIC, mobile number and email; IRIS sends verification codes to both — enter them to set your password and PIN, and store both safely, because every future interaction with FBR runs through this account.', 'Log in and complete the registration form (Form 181 — the registration form filed voluntarily). Fill the particulars exactly as they should appear on your tax record: personal details, contact and address, and your income sources — salary, business, profession/freelance, or other — with the start date that applies. Review before submitting: the RTO (tax office) assigned to you is derived from these particulars, and corrections later are slower than care now. On submission, your registration is confirmed in IRIS and the registration certificate is available inside the account.'],
+        bullets: ['Use \u201cRegistration for Unregistered Person\u201d on the IRIS home page — not a new account per family member on one CNIC.', 'Enter verification codes promptly; expired codes are a common reason registrations appear \u201cstuck.\u201d', 'In Form 181, declare every genuine income source; you can add sources later, but accuracy now prevents notices.', 'Download and keep the registration certificate and your IRIS login details somewhere safe.']
+      },
+      {
+        heading: 'Salaried, freelancer and business cases',
+        paragraphs: ['Salaried individuals: your employer already withholds tax from salary, but withholding is not filing — you still file the annual return to be a filer, declaring the salary and the tax already deducted (your employer\u2019s salary certificate gives you the figures). Freelancers earning from abroad: declare the export-of-services income in the return; registration with the Pakistan Software Export Board is a separate, optional step that supports banking channels for remittances. Business owners and sole proprietors: register the business income under your individual profile unless you incorporated a company, in which case the company files its own return through its own NTN.'],
+        links: [{ label: 'Browse accountant and tax professionals', href: '/professionals' }, { label: 'Read the accountant jobs city guide', href: '/blog/accountant-jobs-pakistan-city-guide' }]
+      },
+      {
+        heading: 'From registered to filer: filing the annual return',
+        paragraphs: ['Filer status is earned each year by filing the income tax return for the tax year by the deadline FBR notifies (in recent years, 30 September — always confirm the current year\u2019s notified date, including any extension FBR announces). Inside IRIS, the return forms open under the declarations section; salaried taxpayers get a guided salary return flow, while business and freelance income uses the fuller return with its income, deductions and wealth statement sections where they apply.', 'If tax is payable, IRIS generates a PSID (payment slip ID); pay it through a bank, ATM, mobile or internet banking using that PSID, and only then submit the return — an unpaid or unsubmitted draft does not count as filed. Keep the submitted return\u2019s acknowledgement and the paid PSID with your records.']
+      },
+      {
+        heading: 'How to confirm you are on the Active Taxpayer List',
+        paragraphs: ['After the return is processed, verify the result instead of assuming it. FBR publishes an Active Taxpayer List check on its website where you can search by CNIC, and an SMS check (text your CNIC to 9966) that FBR publishes for the same purpose. If your name is missing a reasonable time after filing, log back into IRIS and confirm the return shows as submitted for the correct tax year — a saved draft is the usual culprit.'],
+        links: [{ label: 'Open the FBR website', href: 'https://www.fbr.gov.pk/' }, { label: 'Open FBR IRIS', href: 'https://iris.fbr.gov.pk/' }]
+      },
+      {
+        heading: 'Mistakes that stall applications',
+        paragraphs: ['Most stuck registrations trace back to a short list of avoidable errors. Fixing them at the source is faster than visiting a tax office or paying an agent to untangle them.'],
+        bullets: ['Registering with a mobile SIM that is not in your own name, so codes and recovery fail.', 'Choosing the wrong income source or RTO particulars in Form 181.', 'Believing an NTN alone makes you a filer — only a filed return does.', 'Leaving the return as a draft, or paying the PSID but never pressing submit.', 'Missing the filing deadline and assuming last year\u2019s ATL status carries over.'],
+        callout: 'Agents can help prepare documents, but your IRIS account, password and PIN should stay under your control — anyone holding them can act on your tax record.'
+      },
+      {
+        heading: 'Frequently asked questions',
+        paragraphs: ['Is my CNIC really my NTN? For individuals, yes — the NTN is your CNIC number once the CNIC is registered in IRIS; companies and firms receive their own registration numbers.', 'Does FBR charge for IRIS registration? The registration itself is an FBR self-service process; if an agent or consultant charges you, that is their service fee, not an FBR filing fee — anyone quoting an \u201cofficial registration fee\u201d should be asked to show it on fbr.gov.pk.', 'I have an NTN but I am still a non-filer. Why? Because filer status comes from filing the annual return by the deadline, not from registration. File the return and then confirm your name on the ATL.', 'Do freelancers need an NTN? A freelancer earning income in Pakistan is a taxpayer like anyone else: register in IRIS, file annually, and declare local and foreign income under the heads that apply.']
+      }
+    ],
+    sources: [
+      { label: 'FBR IRIS portal', href: 'https://iris.fbr.gov.pk/' },
+      { label: 'Federal Board of Revenue (FBR) official website', href: 'https://www.fbr.gov.pk/' },
+      { label: 'LocalePak company registration guide', href: '/blog/how-to-register-a-company-in-pakistan' }
+    ]
+  },
+  'how-to-list-business-free-localepak-guide': {
+    intro: 'Listing your business on LocalePak costs nothing, and the process is built to be finished in one sitting: create a free owner account, sign in, and work through the eight-step Add Business wizard. Every new listing is reviewed by a person before it goes public — that review is what keeps fake, duplicate and keyword-stuffed listings out of the directory. This guide follows the real flow in order, explains what to prepare, what “pending” actually means, and how claiming an existing directory listing and the optional Featured and Verified upgrades work.',
+    sections: [
+      {
+        heading: 'Before you start: what to have ready',
+        paragraphs: ['The wizard is quick when the facts are in front of you and slow when you have to hunt for them. Gather the essentials first: the exact business name as customers know it, the email and phone number the business actually answers, your main category, your city and complete address, your opening hours, and a short honest description of what you do.', 'If you have them, also prepare your services list, main products (prices are optional), your website and social page links, your Google Maps location link, and a clear logo or shop photo. The companion checklist below walks through each item in more depth, including how to choose categories without guessing.'],
+        bullets: ['Real business name — not a name padded with keywords or city names that are not part of the brand.', 'A working business phone or WhatsApp number customers can actually reach.', 'Complete address and area/locality, written the way a customer would navigate to it.', 'Opening hours, including weekly off-days, exactly as you keep them.'],
+        links: [{ label: 'Read the free listing checklist first', href: '/blog/free-business-listing-checklist-pakistan' }, { label: 'Browse the categories', href: '/categories' }, { label: 'Create your free account', href: '/register' }]
+      },
+      {
+        heading: 'Step 1: Create your free owner account',
+        paragraphs: ['Open the registration page and fill in three things: your name as the owner, your email address, and your phone or WhatsApp number — the form checks that the number is a valid Pakistani mobile. Choose a password of at least eight characters with a mix of upper- and lower-case letters, a number and a special character; the form shows the requirements as you type.', 'Registration creates the account signed out, on purpose: you then sign in separately with the same email and password. Tying every listing to an owner account is what stops strangers from editing your business later — only the signed-in owner can change them from the dashboard.'],
+        links: [{ label: 'Register on LocalePak', href: '/register' }, { label: 'Already registered? Sign in', href: '/login' }]
+      },
+      {
+        heading: 'Step 2: Open Add Business from your dashboard',
+        paragraphs: ['After signing in, your dashboard gives you three clear actions — Add Business, Add Company and Add Job — alongside your existing listings and their status. Choose Add Business for a shop, office, service or trade you want customers to find. Companies (registered firms and organisations) have their own Add Company flow, and hiring goes through Add Job instead, so a business listing stays focused on what customers need: who you are, where you are, and how to reach you.'],
+        links: [{ label: 'Add a business', href: '/add-business' }, { label: 'Browse listed businesses', href: '/businesses' }]
+      },
+      {
+        heading: 'Step 3: Work through the eight wizard steps',
+        paragraphs: ['The wizard splits the listing into eight short steps, and a progress bar shows where you are. Step 1, Basic Info, takes the business name, business email, business phone and WhatsApp number. Step 2, Categories, asks for a main category and an optional secondary one — pick the category a customer would search for, because category plus city is how people browse the directory. Step 3, Location, takes your city, complete address, area or locality, and an optional Google Maps link.', 'Step 4 covers Business Hours, day by day. Steps 5 and 6 — Services and Products — are optional, but they are worth the two minutes: a services list written in the words customers use (“Home Delivery”, “AC Installation”, “24/7 Emergency Service”) is what your listing is matched against, and products can carry prices where that helps buyers. Step 7, Online Presence, takes your website, Facebook page, Instagram and YouTube links. Step 8, Description & Publish, is where you write the description and add tags — describe what you actually do, who you serve and where, in plain language. Keyword-stuffed descriptions and claims you cannot support are the most common reason a listing needs corrections at review.'],
+        bullets: ['Main category = the trade customers search for; secondary only if it genuinely applies.', 'Services in customer language, not internal jargon.', 'Description: what you do, who it is for, where you operate — no invented awards, rankings or guarantees.'],
+        links: [{ label: 'Start the Add Business wizard', href: '/add-business' }, { label: 'See how businesses are organised', href: '/businesses' }]
+      },
+      {
+        heading: 'Step 4: Submit — what pending and approval mean',
+        paragraphs: ['Submitting saves your listing with a “pending” status and sends it to the admin review queue; it is not public yet, and its status stays visible on your dashboard, badged Pending or Approved. Review checks that the business is real, the details are consistent, the category fits, and the listing is not a duplicate.', 'Once approved, the listing goes live on its own public page, appears in the businesses index, and is placed on its category and city pages where customers browse. If a listing is rejected, the reasons are recorded on it and shown in your dashboard — and an email is sent to your account address — so you can see exactly what to fix rather than guessing. Correct the issue and create the listing again with the details put right.']
+      },
+      {
+        heading: 'Already listed? Claim the listing instead of adding a new one',
+        paragraphs: ['LocalePak also carries directory listings compiled from public information; these are clearly marked as not yet claimed, and some details may be incomplete. If you find your business among them, do not create a second listing — duplicates split your presence and confuse customers. Open the listing and use the “Is this your business? Claim this listing” panel: create your free account (or sign in), and claiming connects the listing to your account.', 'A claimed listing is yours to keep accurate: you can add opening hours, services, products and photos, keep contact details current, and reply to customer reviews. Claiming is free, and it takes over the existing page rather than starting a competing one.'],
+        links: [{ label: 'Find your business in the directory', href: '/businesses' }, { label: 'Create the account used to claim', href: '/register' }]
+      },
+      {
+        heading: 'Featured and Verified upgrades — how they honestly work',
+        paragraphs: ['The free listing is the standard listing, and nothing in this guide requires paying anything. LocalePak also offers two optional upgrades, requested from your dashboard on each listing: a Featured Listing and a Verified Badge. To request one, choose the upgrade on the listing, pay using the payment details published on the Advertise page or shared by the team when you contact them, then upload your payment screenshot (an image file, up to 5MB) from the same dashboard panel. An admin verifies the payment proof, and the upgrade is recorded on your listing.', 'Two honest limits are worth stating plainly. First, Featured placement and the Verified Badge are being rolled out, so an approved upgrade is recorded on your listing now and displayed as each feature goes live — you are reserving the upgrade, not buying an instantly different page in every case. Second, an upgrade changes how your listing is presented on LocalePak itself; it is not a Google ranking and no listing — free or upgraded — can promise you one. What actually earns enquiries is a complete, accurate listing with reachable contact details.'],
+        callout: 'If anyone contacts you claiming to sell a LocalePak ranking, a review package or a guaranteed position on Google, that is not how this directory works — upgrades are only ever requested from inside your own dashboard.',
+        links: [{ label: 'See the Advertise page', href: '/advertise-with-us' }, { label: 'Read the verification policy', href: '/verification-policy' }]
+      },
+      {
+        heading: 'Frequently asked questions',
+        paragraphs: ['Is listing on LocalePak really free? Yes — registering an account and publishing a business listing costs nothing. Featured and Verified are optional paid upgrades requested from the dashboard; the basic listing never requires them.', 'Why does my listing say pending after I submit it? Every new listing is reviewed for accuracy, category fit and duplication before it goes public. The status is visible on your dashboard, and approval makes the listing live on its public page and in its category and city.', 'My listing was rejected — what now? The rejection reasons are shown on the listing in your dashboard and sent to your account email. Fix exactly those points and create the listing again.', 'Can I edit my listing after it is approved? Yes — sign in with the same owner account and update it from your dashboard. Keep the account email and password safe, because that account controls the listing.', 'Do I need a website to list my business? No. A reachable phone or WhatsApp number is enough to be contacted; add your website and social links in the Online Presence step if you have them.', 'I have two branches. One listing or two? Two — but only for genuinely separate locations, each with its own address and details. Duplicate listings for the same location are removed at review.']
+      }
+    ],
+    sources: [
+      { label: 'LocalePak registration page', href: '/register' },
+      { label: 'LocalePak free listing checklist', href: '/blog/free-business-listing-checklist-pakistan' },
+      { label: 'Google guidance on people-first content', href: 'https://developers.google.com/search/docs/fundamentals/creating-helpful-content' }
+    ]
+  },
+  'local-seo-pakistan-businesses-google-ranking': {
+    intro: 'When someone in Multan searches “AC repair near me” or a family in Karachi looks for “biryani in DHA”, Google answers with a map and a short list of local businesses. Which businesses appear is not luck and not a paid slot: it is built from signals the business itself largely controls — its Google Business Profile, the consistency of its name, address and phone, its categories, its reviews, and the local pages it appears on. This guide covers those signals in the order a Pakistani business should fix them, local realities included.',
+    sections: [
+      {
+        heading: 'How local results are actually chosen',
+        paragraphs: ['Google weighs three things for a local search: relevance (does this business match what was searched?), distance (how close is it to the searcher?), and prominence (how established and well-regarded does it look across the web?). You cannot move your shop closer to the searcher, but relevance and prominence are built from information you publish — your profile categories and services, your website and directory listings, and what customers say in reviews.', 'Notice the shape of real queries: they pair a service with a place. “Plumber in Gulberg”, “dentist near me”, “solar installer Faisalabad” — local search is city-by-category behaviour. Everything below is about becoming the clear, consistent answer to that pairing in the places you genuinely serve.'],
+        links: [{ label: 'Browse businesses by city', href: '/cities' }, { label: 'Browse businesses by category', href: '/categories' }]
+      },
+      {
+        heading: 'Google Business Profile first — including the Pakistan realities',
+        paragraphs: ['Your Google Business Profile is the single most important local asset, because it feeds Google Maps and the map results directly. Claim or create it with your real business name, your real address, and the phone number you actually answer. Choose the primary category that names your main trade — “Restaurant”, “Dental clinic”, “Plumber” — and add the secondary categories and services that genuinely apply. Fill in hours, photos of the premises and work, and your website or directory link.', 'The realities in Pakistan: verification is usually a video check or a postcard sent to your address, depending on the business type — so the address must be one that can actually receive the postcard or host the video check. Businesses that serve customers at their location — electricians, cleaners, delivery-based services — can register as a service-area business, hide the home or office address, and set the cities and areas they cover instead. And resist the most common local temptation: stuffing keywords or a city name into the business name field (“Best AC Repair Karachi Services”). That is against Google’s guidelines and can get the listing edited or suspended — and your real name is what customers use when they recommend you.'],
+        bullets: ['Real name, real address, one phone number you answer — no keyword stuffing anywhere.', 'Primary category = your main trade; services listed in the words customers search with.', 'Use special hours for Ramzan, Eid and public holidays instead of leaving wrong hours up.', 'Add genuine photos — shopfront, team at work, products — and refresh them when things change.'],
+        links: [{ label: 'Google Business Profile help', href: 'https://support.google.com/business' }, { label: 'Add the matching LocalePak listing', href: '/add-business' }]
+      },
+      {
+        heading: 'NAP consistency: the quiet signal that decides trust',
+        paragraphs: ['NAP means your Name, Address and Phone — and search engines cross-check them everywhere they appear: your Google profile, your website, your Facebook page, and directories like LocalePak. When the same business shows three different phone numbers and two spellings of its name across platforms, the signals scatter: the search engine is less sure which record is you, and customers call dead numbers and conclude you have closed.', 'Do a simple audit. Search your business name plus your city, open every result, and list the phone numbers and addresses shown. Then make them identical everywhere — same name spelling, same address wording, one phone format (+92 3XX XXXXXXX for mobiles). If you changed numbers recently, the old number lingering on directories is probably still taking your calls. Fixing these mismatches is unglamorous and free — and one of the highest-value hours you can spend.'],
+        links: [{ label: 'List your business with matching details', href: '/add-business' }, { label: 'Read the free listing checklist', href: '/blog/free-business-listing-checklist-pakistan' }]
+      },
+      {
+        heading: 'Categories, services and the city × category habit',
+        paragraphs: ['Customers do not search for “businesses” — they search for a trade in a place. Your categories and services are how you match that behaviour: the main category should be your core trade, the secondary category a real second line of work, and the services list written the way customers phrase the job — “Split AC installation”, “Home delivery”, “Bridal makeup”, “Emergency plumbing”.', 'LocalePak organises approved listings onto category pages and city pages, and those hub pages are what a “service + city” search lands on. Being present, complete and accurate on the pair of pages that match your trade and your city is the directory equivalent of a well-kept shopfront on the right street.'],
+        links: [{ label: 'Explore category pages', href: '/categories' }, { label: 'See a city page: Lahore', href: '/city/lahore/' }, { label: 'Read the listing guide', href: '/blog/how-to-list-business-free-localepak-guide' }]
+      },
+      {
+        heading: 'Reviews: earn them properly, answer all of them',
+        paragraphs: ['Reviews influence both whether you are chosen and how confidently search engines treat your business. The honest method is also the durable one: after a completed job, send the customer a short WhatsApp message thanking them and including your Google review link, and ask while the work is fresh. Never buy reviews, never offer a discount in exchange for one, and never have staff or family post them — purchased and incentivised reviews violate Google policy, get filtered, and can get a profile penalised.', 'Reply to every review. A brief thank-you for a good one, and for a negative one, a calm reply that acknowledges the issue and offers a way to resolve it offline — future customers judge your response more than the complaint. The same discipline applies to reviews on your directory listing: claim the listing so you can respond as the business.']
+      },
+      {
+        heading: 'WhatsApp is where the enquiry converts — treat it that way',
+        paragraphs: ['In Pakistan, a local search usually ends in a WhatsApp conversation, not a web form. That makes your WhatsApp number part of your SEO: the number on your Google profile, your LocalePak listing and your website should be the same number, answered during the hours you publish, and run on a WhatsApp Business profile carrying your address and hours.', 'Answer fast, and answer completely — price range, availability, location — because the customer who messaged you has two other tabs open with competitors one street away. A listing that wins the click and then goes unanswered for six hours has spent your visibility for nothing.']
+      },
+      {
+        heading: 'If you are a professional, a profile is your listing',
+        paragraphs: ['Freelancers, consultants, tutors, accountants and designers are searched for by name and trade, not by shop. For you, the “listing” is a professional profile: who you are, what you do, where you work, and evidence a client can check. Build it with the same discipline — consistent name and contact details, services in customer language, your city and service area, and credentials stated only where they can be verified.', 'Keep the profile and any business listing telling the same story. A client who finds a different phone number and service list on your directory page will simply move to the next name.'],
+        links: [{ label: 'Build a professional profile', href: '/blog/how-to-build-a-professional-profile-pakistan' }, { label: 'Browse professionals', href: '/professionals' }]
+      },
+      {
+        heading: 'Mistakes that quietly hold Pakistani businesses back',
+        paragraphs: ['Most local visibility problems are self-inflicted, and most are on this list. The pattern to notice is that none of them require money to fix — they require accuracy and follow-through.'],
+        bullets: ['Keyword-stuffed business names that risk suspension and look untrustworthy to customers.', 'A different phone number on every platform — and the old, dead number still listed somewhere.', 'Fake, bought or family-posted reviews instead of a steady ask after real jobs.', 'Claiming cities you do not actually serve, or a pin dropped at a fake address.', 'Duplicate listings for one location, splitting reviews and signals between them.', 'Hours never updated — the fastest way to earn a “they were closed” review during Ramzan or a local holiday.', 'Treating the listing as finished: details change, and stale listings decay.'],
+        callout: 'No one can honestly guarantee a ranking position or a timeline. Anyone selling you a guaranteed first position on Google is selling you the guarantee, not the result.'
+      },
+      {
+        heading: 'Frequently asked questions',
+        paragraphs: ['How long does local SEO take to show results? Profile and listing corrections can be reflected within days to a few weeks, while competitive positions build over a longer period of consistent information and real customer activity. There is no fixed timeline, and anyone quoting you one is guessing.', 'Do I need a website if I have a Google Business Profile? A profile plus a complete directory listing can carry a small business a long way. A website adds control — your own pages for each service, your own contact routes — and the two work best when the details on both are identical.', 'Is a LocalePak listing a substitute for a Google Business Profile? No — they do different jobs. Google’s profile feeds Maps and the map pack; directory listings corroborate your details across the web and put you on the category and city pages customers browse. Consistency across both is the point.', 'Can I rank in a city where I have no office? Only honestly — if you genuinely serve that city, present yourself as a service-area business there. A fake address or a mailbox pin risks suspension and misleads customers.']
+      }
+    ],
+    sources: [
+      { label: 'Google Business Profile help centre', href: 'https://support.google.com/business' },
+      { label: 'Google guidance on people-first content', href: 'https://developers.google.com/search/docs/fundamentals/creating-helpful-content' },
+      { label: 'LocalePak professional profile guide', href: '/blog/how-to-build-a-professional-profile-pakistan' }
     ]
   }
 }

@@ -24,15 +24,6 @@ const FEATURED_POSTS = [
     icon: Sparkles
   },
   {
-    slug: 'restaurants-in-pakistan',
-    title: 'Restaurants in Pakistan 2026: Food, Cuisines & Places to Eat',
-    excerpt: 'Explore restaurants in Pakistan by city, cuisine, budget and occasion. Learn how to find family restaurants, fine dining, affordable food and local places to eat.',
-    category: 'Restaurants & Food Pillar',
-    date: 'August 13, 2026',
-    readTime: '16 min read',
-    icon: Sparkles
-  },
-  {
     slug: 'best-universities-computer-science-pakistan',
     title: 'Best Universities for Computer Science, IT & Software Engineering in Pakistan',
     excerpt: 'Compare universities for Computer Science, IT and Software Engineering in Pakistan. Learn what to check for programs, accreditation, admissions, fees, facilities and careers.',
@@ -60,15 +51,6 @@ const FEATURED_POSTS = [
     icon: Sparkles
   },
   {
-    slug: 'jobs-in-pakistan',
-    title: 'Jobs in Pakistan 2026: Government, Private, Online & Career Opportunities',
-    excerpt: 'Find jobs in Pakistan in 2026, including government, private, IT, teaching, banking, healthcare, remote, part-time and graduate opportunities. Learn how to find and apply for jobs.',
-    category: 'Evergreen Pillar Guide',
-    date: 'August 13, 2026',
-    readTime: '12 min read',
-    icon: Briefcase
-  },
-  {
     slug: 'top-business-directory-websites-pakistan',
     title: 'Top Business Directory Websites in Pakistan: The Complete Guide to Finding Trusted Local Businesses (2026)',
     excerpt: 'Discover the best business directory websites in Pakistan to find trusted local businesses, improve your local SEO, reach more customers, and boost online visibility.',
@@ -88,7 +70,7 @@ const FEATURED_POSTS = [
   },
   {
     slug: 'local-seo-pakistan-businesses-google-ranking',
-    title: 'Local SEO for Pakistani Businesses – Rank #1 on Google in Your City',
+    title: 'Local SEO for Pakistani Businesses: Win Visibility in Your City',
     excerpt: 'Discover proven local SEO strategies to rank your business on page 1 of Google for searches like "best restaurant in Lahore" or "plumber in Karachi". Includes free listing optimization tips.',
     category: 'Local SEO Pakistan',
     date: 'July 28, 2026',
@@ -98,6 +80,38 @@ const FEATURED_POSTS = [
 ]
 
 const RECENT_POSTS = [
+  {
+    slug: 'how-to-register-a-company-in-pakistan',
+    title: 'How to Register a Company in Pakistan: SECP, NTN & FBR Steps',
+    excerpt: 'Choose a structure, reserve a name with SECP, incorporate, get the company NTN from FBR, and open your first bank account.',
+    category: 'Business Setup & Registration',
+    date: 'October 23, 2026',
+    readTime: '6 min read',
+  },
+  {
+    slug: 'how-to-get-ntn-become-a-filer-pakistan',
+    title: 'How to Become a Tax Filer & Get an NTN in Pakistan: IRIS Step-by-Step',
+    excerpt: 'Register on FBR IRIS, file the annual return, and confirm your name on the Active Taxpayer List — for salaried staff, freelancers and business owners.',
+    category: 'Tax & Finance Guide',
+    date: 'October 23, 2026',
+    readTime: '6 min read',
+  },
+  {
+    slug: 'free-business-listing-checklist-pakistan',
+    title: 'Free Business Listing Checklist for Pakistan: What to Prepare First',
+    excerpt: 'The details to gather, the category and city choices to make, and the upkeep habits that keep a free listing earning its place.',
+    category: 'Free Business Listing Guide',
+    date: 'October 23, 2026',
+    readTime: '3 min read',
+  },
+  {
+    slug: 'how-to-build-a-professional-profile-pakistan',
+    title: 'How to Build a Professional Profile in Pakistan That Clients Trust',
+    excerpt: 'Structure, biography, credentials and privacy — how to build a professional profile that answers who you are and why to get in touch.',
+    category: 'Professional Discovery',
+    date: 'October 23, 2026',
+    readTime: '3 min read',
+  },
   {
     slug: 'best-software-houses-pakistan-2026',
     title: 'Best Software Houses in Pakistan 2026: How to Compare IT Companies',
@@ -135,14 +149,6 @@ const RECENT_POSTS = [
     title: 'Local Services in Pakistan by City: How to Find Trusted Providers',
     excerpt: 'Find and compare plumbers, electricians, clinics, tutors, mechanics, agencies, and other providers.',
     category: 'Local Business Discovery',
-    date: 'August 23, 2026',
-    readTime: '10 min read',
-  },
-  {
-    slug: 'how-to-find-trusted-professionals-pakistan',
-    title: 'How to Find Trusted Professionals in Pakistan: Verification Guide',
-    excerpt: 'Compare Pakistani professionals using specialization, credentials, public evidence, and verification.',
-    category: 'Professional Discovery',
     date: 'August 23, 2026',
     readTime: '10 min read',
   },

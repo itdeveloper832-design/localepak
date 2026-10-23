@@ -10,6 +10,7 @@ import { BLOG_POSTS } from '@/lib/blog-data'
 import { db } from '@/lib/firebase'
 import { collection, query, where, getDocs } from 'firebase/firestore'
 import { SEED_BUSINESSES } from '@/lib/seed-businesses'
+import { isReleased } from '@/lib/release'
 import { Search, MapPin, LayoutGrid, BookOpen, Building2, Briefcase, ArrowRight } from 'lucide-react'
 
 type Result = {
@@ -82,6 +83,9 @@ function SearchResults() {
         bizSnap.forEach((d) => {
           const data = d.data() as any
           if (!data.name || !data.slug) return
+          // Weekly batch release (lib/release.ts): approved businesses go
+          // public at the next 7-day cycle boundary, not immediately.
+          if (!isReleased(data.approvedAt, Date.now())) return
           const label = data.category || data.mainCategory || 'Business'
           items.push({
             type: 'Business',

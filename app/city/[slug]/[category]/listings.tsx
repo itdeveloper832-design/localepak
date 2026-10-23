@@ -1,10 +1,12 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Link from 'next/link'
 import { Building2, MapPin, Phone, ArrowRight } from 'lucide-react'
 import { db } from '@/lib/firebase'
 import { collection, query, where, getDocs } from 'firebase/firestore'
+import { SEED_BUSINESSES } from '@/lib/seed-businesses'
+import { isReleased } from '@/lib/release'
 
 type Business = {
   id: string
@@ -35,8 +37,28 @@ export default function CityCategoryListings({
   categoryId: string
   categoryName: string
 }) {
-  const [businesses, setBusinesses] = useState<Business[]>([])
+  const [firestoreBusinesses, setFirestoreBusinesses] = useState<Business[]>([])
   const [loading, setLoading] = useState(true)
+
+  // Static seed listings for this city x category (build-time data from
+  // lib/seed-businesses.ts — zero Firestore reads). They render in the
+  // initial HTML of the page so these listings exist for crawlers, and
+  // merge with the approved Firestore results below.
+  const seedBusinesses = useMemo<Business[]>(
+    () =>
+      SEED_BUSINESSES.filter((s) => s.citySlug === citySlug && s.categorySlug === categoryId).map(
+        (s) => ({
+          id: `seed-${s.slug}`,
+          name: s.name,
+          slug: s.slug,
+          category: s.category,
+          city: s.city,
+          phone: s.phone || '',
+          description: s.description,
+        })
+      ),
+    [citySlug, categoryId]
+  )
 
   useEffect(() => {
     let cancelled = false
@@ -46,6 +68,9 @@ export default function CityCategoryListings({
         const items: Business[] = []
         snap.forEach((d) => {
           const data = d.data() as any
+          // Weekly batch release (lib/release.ts): approved businesses go
+          // public at the next 7-day cycle boundary, not immediately.
+          if (!isReleased(data.approvedAt, Date.now())) return
           const docCity = data.city || ''
           const docCategory = data.category || data.mainCategory || ''
           // Business docs store display names for city + category; category ids are accepted too.
@@ -65,9 +90,9 @@ export default function CityCategoryListings({
             description: data.description || '',
           })
         })
-        if (!cancelled) setBusinesses(items)
+        if (!cancelled) setFirestoreBusinesses(items)
       } catch {
-        if (!cancelled) setBusinesses([])
+        if (!cancelled) setFirestoreBusinesses([])
       } finally {
         if (!cancelled) setLoading(false)
       }
@@ -78,7 +103,15 @@ export default function CityCategoryListings({
     }
   }, [city, citySlug, categoryId, categoryName])
 
-  if (loading) {
+  // Firestore listings come first and win on slug clashes (same dedupe
+  // rule as /businesses, e.g. once a seed business is claimed and
+  // re-added by its owner); seed listings fill in behind them.
+  const businesses = useMemo<Business[]>(() => {
+    const seenSlugs = new Set(firestoreBusinesses.map((b) => b.slug))
+    return [...firestoreBusinesses, ...seedBusinesses.filter((s) => !seenSlugs.has(s.slug))]
+  }, [firestoreBusinesses, seedBusinesses])
+
+  if (loading && businesses.length === 0) {
     return (
       <div className="bg-white rounded-3xl border border-slate-200 p-10 text-center text-sm text-slate-500">
         Loading {categoryName} in {city}...

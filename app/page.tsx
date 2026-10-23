@@ -6,7 +6,7 @@ import {
   Search, MapPin, ChevronRight, ArrowRight, ShieldCheck, Globe,
   BookOpen, Sparkles, LayoutGrid, Compass, Building2, MessageCircle, ListChecks
 } from 'lucide-react'
-import { CATEGORIES, TOP_CITIES } from '@/lib/data'
+import { CATEGORIES, CITIES, TOP_CITIES } from '@/lib/data'
 import ListBusinessCta from '@/components/list-business-cta'
 import { BLOG_POSTS } from '@/lib/blog-data'
 
@@ -118,7 +118,7 @@ export default function HomePage() {
                     className="w-full bg-transparent text-slate-900 text-sm focus:outline-none cursor-pointer"
                   >
                     <option value="">All Cities in Pakistan</option>
-                    {TOP_CITIES.map(city => (
+                    {CITIES.map(city => (
                       <option key={city} value={city}>{city}</option>
                     ))}
                   </select>
@@ -155,13 +155,13 @@ export default function HomePage() {
                 </p>
                 <div className="flex items-center gap-2.5 shrink-0">
                   <Link
-                    href="/add-business"
+                    href="/add-business" prefetch={false}
                     className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors"
                   >
                     Add Your Business — Free
                   </Link>
                   <Link
-                    href="/register"
+                    href="/register" prefetch={false}
                     className="px-5 py-2.5 bg-white border border-slate-200 hover:border-blue-500 text-slate-700 font-bold text-xs rounded-xl transition-colors"
                   >
                     Create Free Account
@@ -250,7 +250,7 @@ export default function HomePage() {
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-3 text-xs">
-              {TOP_CITIES.map((city) => (
+              {CITIES.map((city) => (
                 <Link
                   key={city}
                   href={`/city/${cityToSlug(city)}`}
@@ -346,13 +346,13 @@ export default function HomePage() {
 
           <div className="flex items-center gap-3 justify-center flex-wrap">
             <Link
-              href="/register"
+              href="/register" prefetch={false}
               className="px-7 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-2xl shadow-lg shadow-blue-600/20 transition-all"
             >
               Create Free Account
             </Link>
             <Link
-              href="/add-business"
+              href="/add-business" prefetch={false}
               className="px-7 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-2xl transition-all"
             >
               Add Your Business
@@ -425,7 +425,7 @@ export default function HomePage() {
                 Browse Categories
               </Link>
               <Link
-                href="/add-business"
+                href="/add-business" prefetch={false}
                 className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors"
               >
                 List Your Business Free
@@ -495,14 +495,14 @@ export default function HomePage() {
 
             <div className="flex items-center gap-4 flex-wrap justify-center shrink-0">
               <Link
-                href="/add-business"
+                href="/add-business" prefetch={false}
                 className="px-8 py-4 bg-amber-500 hover:bg-amber-600 text-white font-extrabold text-sm rounded-2xl shadow-xl transition-all flex items-center gap-2"
               >
                 <span>Add Your Business — Free</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
-                href="/register"
+                href="/register" prefetch={false}
                 className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white font-extrabold text-sm rounded-2xl transition-all"
               >
                 Create Free Account

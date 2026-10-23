@@ -14,7 +14,7 @@ export default function HeroSection() {
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <p className="inline-flex items-center gap-2 text-red-500 font-semibold text-sm mb-2 tracking-wide uppercase">
           <span className="w-4 h-px bg-red-500" />
-          Pakistan&apos;s #1 Business Directory
+          Pakistan&apos;s Free Business Directory
           <span className="w-4 h-px bg-red-500" />
         </p>
 
@@ -35,7 +35,7 @@ export default function HeroSection() {
         <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
           <Link
             id="hero-list-business-btn"
-            href="/add-business"
+            href="/add-business" prefetch={false}
             className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 sm:px-8 py-3 sm:py-4 rounded-xl transition-all duration-200 text-sm sm:text-base shadow-lg shadow-red-600/30 hover:shadow-xl hover:shadow-red-600/40 transform hover:-translate-y-0.5 cursor-pointer text-center"
           >
             List Your Business for Free

@@ -116,7 +116,17 @@ const nextConfig = {
   },
 
   async redirects() {
-    return []
+    return [
+      // Blog posts removed 2026-10-23 (content audit) — send readers to the closest surviving post
+      { source: '/blog/restaurants-in-pakistan', destination: '/blog/restaurants-in-karachi/', permanent: true },
+      { source: '/blog/restaurants-in-pakistan/', destination: '/blog/restaurants-in-karachi/', permanent: true },
+      { source: '/blog/jobs-in-pakistan', destination: '/blog/how-to-find-jobs-in-pakistan-2026/', permanent: true },
+      { source: '/blog/jobs-in-pakistan/', destination: '/blog/how-to-find-jobs-in-pakistan-2026/', permanent: true },
+      { source: '/blog/free-job-posting-pakistan-hire-employees', destination: '/blog/how-to-find-jobs-in-pakistan-2026/', permanent: true },
+      { source: '/blog/free-job-posting-pakistan-hire-employees/', destination: '/blog/how-to-find-jobs-in-pakistan-2026/', permanent: true },
+      { source: '/blog/how-to-find-trusted-professionals-pakistan', destination: '/blog/local-services-pakistan-by-city/', permanent: true },
+      { source: '/blog/how-to-find-trusted-professionals-pakistan/', destination: '/blog/local-services-pakistan-by-city/', permanent: true },
+    ]
   },
 
 }
