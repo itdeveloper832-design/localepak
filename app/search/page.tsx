@@ -1,4 +1,3 @@
-import { Suspense } from 'react'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import SearchResults, { type Result } from '@/components/search-results'
@@ -54,9 +53,9 @@ export default async function SearchPage() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans">
       <Navbar />
-      <Suspense fallback={<main className="flex-1 py-20 text-center text-sm text-slate-500">Loading search...</main>}>
-        <SearchResults initialLiveItems={liveItems} />
-      </Suspense>
+      {/* No Suspense wrapper: the island must SSR its default view
+          into the initial HTML (Round 4 — see search-results.tsx). */}
+      <SearchResults initialLiveItems={liveItems} />
       <Footer />
     </div>
   )

@@ -42,7 +42,7 @@ export default async function BusinessesPage() {
             <p className="text-sm text-slate-500 max-w-sm mx-auto">
               Create a free account and add your business to appear here and in LocalePak search results.
             </p>
-            <Link href="/register" className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors">
+            <Link href="/register" prefetch={false} className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors">
               Add Your Business Free <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -71,6 +71,7 @@ export default async function BusinessesPage() {
                 )}
                 <Link
                   href={`/business/${biz.slug}`}
+                  prefetch={false}
                   className="mt-auto inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 hover:text-blue-700"
                 >
                   View Business <ArrowRight className="w-4 h-4" />

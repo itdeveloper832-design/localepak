@@ -1,8 +1,7 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
 import { CATEGORIES, CITIES, TOP_CITIES } from '@/lib/data'
 import { BLOG_POSTS } from '@/lib/blog-data'
 import { SEED_BUSINESSES } from '@/lib/seed-businesses'
@@ -65,12 +64,32 @@ const INDEX: Result[] = [
 // SERVER by app/search/page.tsx and passed in as `initialLiveItems` —
 // this component only filters/renders, and the browser runs no
 // Firestore list query for search anymore.
+//
+// Round 4: do NOT read the query with useSearchParams() here. On a
+// statically prerendered page that hook bails the whole subtree out
+// of SSR (Next renders the nearest Suspense fallback instead), so the
+// initial HTML contained only "Loading search..." and the results
+// popped in after hydration — a 0.702 layout shift that shoved the
+// footer. Instead the component SSRs the DEFAULT view (no query —
+// the full index) from its props, and syncs ?q=/?city= from
+// window.location once on mount. The search form submits with a full
+// GET navigation, so a submitted search re-runs this same sync on the
+// fresh page — the visible end state is identical to before.
 export default function SearchResults({ initialLiveItems }: { initialLiveItems: Result[] }) {
-  const searchParams = useSearchParams()
-  const q = (searchParams.get('q') || '').trim()
-  const city = (searchParams.get('city') || '').trim()
+  const [q, setQ] = useState('')
+  const [city, setCity] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
   const liveItems = initialLiveItems
   const [typeFilter, setTypeFilter] = useState<TypeFilter>('All')
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const urlQ = (params.get('q') || '').trim()
+    const urlCity = (params.get('city') || '').trim()
+    setQ(urlQ)
+    setCity(urlCity)
+    if (inputRef.current) inputRef.current.value = urlQ
+  }, [])
 
   const results = useMemo(() => {
     const query = q.toLowerCase()
@@ -108,10 +127,11 @@ export default function SearchResults({ initialLiveItems }: { initialLiveItems: 
               <Search className="w-5 h-5 text-slate-400 shrink-0" />
               <label htmlFor="search-page-q" className="sr-only">Search categories, cities and guides</label>
               <input
+                ref={inputRef}
                 id="search-page-q"
                 type="text"
                 name="q"
-                defaultValue={q}
+                defaultValue=""
                 placeholder="Search categories, cities and guides..."
                 className="w-full bg-transparent text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none"
               />
@@ -145,7 +165,7 @@ export default function SearchResults({ initialLiveItems }: { initialLiveItems: 
         </div>
       </section>
 
-      <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+      <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto w-full min-h-[480px]">
         {results.length === 0 ? (
           <div className="bg-white rounded-2xl border border-slate-200 p-10 text-center space-y-5">
             <div className="space-y-2">
@@ -190,6 +210,7 @@ export default function SearchResults({ initialLiveItems }: { initialLiveItems: 
               <li key={item.href + item.title}>
                 <Link
                   href={item.href}
+                  prefetch={false}
                   className="flex gap-4 bg-white rounded-2xl border border-slate-200 p-5 hover:border-blue-500 hover:shadow-md transition-all"
                 >
                   <div className="shrink-0 w-11 h-11 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center">

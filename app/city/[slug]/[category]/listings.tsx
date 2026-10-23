@@ -29,6 +29,7 @@ export default function CityCategoryListings({
         </p>
         <Link
           href="/add-business"
+          prefetch={false}
           className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors"
         >
           Add Your Business — Free <ArrowRight className="w-4 h-4" />
@@ -43,6 +44,7 @@ export default function CityCategoryListings({
         <Link
           key={business.id}
           href={`/business/${business.slug}`}
+          prefetch={false}
           className="bg-white rounded-3xl border border-slate-200 p-6 space-y-3 hover:border-blue-500 hover:shadow-md transition-all group"
         >
           <span className="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100 text-[11px] font-bold">

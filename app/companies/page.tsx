@@ -42,7 +42,7 @@ export default async function CompaniesPage() {
             <p className="text-sm text-slate-500 max-w-sm mx-auto">
               Create a free account and add your company profile to appear here and in LocalePak search results.
             </p>
-            <Link href="/register" className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors">
+            <Link href="/register" prefetch={false} className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors">
               Add Your Company Free <ArrowRight className="w-4 h-4" />
             </Link>
           </div>

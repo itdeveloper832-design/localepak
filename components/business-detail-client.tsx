@@ -5,9 +5,15 @@ import Link from 'next/link'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import { MapPin, Phone, MessageCircle, Globe, Facebook, Instagram, Youtube, ArrowLeft, Clock, Tag, Mail, Star, Send, Flag } from 'lucide-react'
-import { db } from '@/lib/firebase'
-import { collection, query, where, getDocs, addDoc, serverTimestamp } from 'firebase/firestore'
 import { toast } from 'sonner'
+
+// Round 4: Firebase/Firestore is loaded LAZILY via dynamic import()
+// inside the reviews effect and the submit handler below — never as a
+// static import of this module. The profile itself renders from server
+// props and needs no Firebase; keeping the SDK out of this island's
+// static graph means the /business/[slug] route's initial JS carries
+// no Firebase, and router prefetch of this route from listing pages
+// no longer drags the ~116 KiB Firebase chunk into them.
 
 type DayKey = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun'
 
@@ -163,11 +169,12 @@ export default function BusinessDetailPage({
     let cancelled = false
     const loadReviews = async () => {
       try {
-        const snap = await getDocs(
-          query(
-            collection(db, 'reviews'),
-            where('businessId', '==', business.id),
-            where('status', '==', 'approved')
+        const [{ db }, fs] = await Promise.all([import('@/lib/firebase'), import('firebase/firestore')])
+        const snap = await fs.getDocs(
+          fs.query(
+            fs.collection(db, 'reviews'),
+            fs.where('businessId', '==', business.id),
+            fs.where('status', '==', 'approved')
           )
         )
         const items: Review[] = []
@@ -206,14 +213,15 @@ export default function BusinessDetailPage({
     }
     setSubmittingReview(true)
     try {
-      await addDoc(collection(db, 'reviews'), {
+      const [{ db }, fs] = await Promise.all([import('@/lib/firebase'), import('firebase/firestore')])
+      await fs.addDoc(fs.collection(db, 'reviews'), {
         businessId: business.id,
         businessSlug: business.slug || slug,
         authorName: reviewForm.name.trim(),
         rating: reviewForm.rating,
         text: reviewForm.text.trim(),
         status: 'pending',
-        createdAt: serverTimestamp(),
+        createdAt: fs.serverTimestamp(),
       })
       toast.success('Review submitted — it will appear after moderation.')
       setReviewForm({ name: '', rating: 0, text: '' })
