@@ -7,6 +7,7 @@ import Footer from '@/components/footer'
 import { Building2, MapPin, Phone, ArrowRight } from 'lucide-react'
 import { db } from '@/lib/firebase'
 import { collection, query, where, getDocs } from 'firebase/firestore'
+import { SEED_BUSINESSES } from '@/lib/seed-businesses'
 
 type Business = {
   id: string
@@ -25,9 +26,9 @@ export default function BusinessesPage() {
   useEffect(() => {
     let cancelled = false
     const load = async () => {
+      const items: Business[] = []
       try {
         const snap = await getDocs(query(collection(db, 'businesses'), where('status', '==', 'approved')))
-        const items: Business[] = []
         snap.forEach((d) => {
           const data = d.data() as any
           items.push({
@@ -40,12 +41,28 @@ export default function BusinessesPage() {
             description: data.description || '',
           })
         })
-        if (!cancelled) setBusinesses(items)
       } catch {
-        if (!cancelled) setBusinesses([])
-      } finally {
-        if (!cancelled) setLoading(false)
+        // Firestore inventory is an enhancement; the static seed listings
+        // below still render if it is unavailable.
       }
+      // Merge in the static seed listings (directory-created pages in
+      // lib/seed-businesses.ts). A Firestore listing wins on slug clashes
+      // (e.g. once the owner claims and re-adds the business).
+      const seenSlugs = new Set(items.map((b) => b.slug))
+      for (const seed of SEED_BUSINESSES) {
+        if (seenSlugs.has(seed.slug)) continue
+        items.push({
+          id: `seed-${seed.slug}`,
+          name: seed.name,
+          slug: seed.slug,
+          category: seed.category,
+          city: seed.city,
+          phone: seed.phone || '',
+          description: seed.description,
+        })
+      }
+      if (!cancelled) setBusinesses(items)
+      if (!cancelled) setLoading(false)
     }
     load()
     return () => {

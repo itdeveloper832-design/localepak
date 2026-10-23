@@ -9,6 +9,7 @@ import { CATEGORIES, CITIES, TOP_CITIES } from '@/lib/data'
 import { BLOG_POSTS } from '@/lib/blog-data'
 import { db } from '@/lib/firebase'
 import { collection, query, where, getDocs } from 'firebase/firestore'
+import { SEED_BUSINESSES } from '@/lib/seed-businesses'
 import { Search, MapPin, LayoutGrid, BookOpen, Building2, Briefcase, ArrowRight } from 'lucide-react'
 
 type Result = {
@@ -35,6 +36,15 @@ function cityToSlug(name: string): string {
 }
 
 const INDEX: Result[] = [
+  // Static seed listings (lib/seed-businesses.ts) — always searchable,
+  // even before any Firestore listing exists. Live Firestore results are
+  // merged ahead of these and win href clashes via dedupe below.
+  ...SEED_BUSINESSES.map(biz => ({
+    type: 'Business' as const,
+    title: biz.name,
+    snippet: `${biz.category} in ${biz.city} — view contact details and listing information.`,
+    href: `/business/${biz.slug}`,
+  })),
   ...CATEGORIES.map(cat => ({
     type: 'Category' as const,
     title: cat.name,
@@ -110,7 +120,12 @@ function SearchResults() {
   const results = useMemo(() => {
     const query = q.toLowerCase()
     const cityQuery = city.toLowerCase()
+    const seenHrefs = new Set<string>()
     return [...liveItems, ...INDEX].filter(item => {
+      // First occurrence of an href wins, so a live Firestore listing
+      // shadows the static seed entry for the same business.
+      if (seenHrefs.has(item.href)) return false
+      seenHrefs.add(item.href)
       const matchesQuery = !query ||
         item.title.toLowerCase().includes(query) ||
         item.snippet.toLowerCase().includes(query)
