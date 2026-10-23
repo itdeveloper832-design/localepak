@@ -12,6 +12,7 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { User as UserIcon, Mail, ShieldCheck, LogOut, LayoutGrid, MapPin, HelpCircle, Building2, Factory, Briefcase, PlusCircle, ClipboardList, Crown, BadgeCheck, X, Upload, ShieldAlert } from 'lucide-react'
 import { toast } from 'sonner'
 import { isReleased, releaseDateLabel } from '@/lib/release'
+import { notifyAdminNewPaymentProof } from '@/lib/mail'
 
 type ListingItem = {
   id: string
@@ -150,6 +151,8 @@ export default function DashboardPage() {
         createdAt: serverTimestamp(),
       })
       setProofs((prev) => ({ ...prev, [item.id]: { status: 'pending', plan: upgradePlan } }))
+      // Admin notification — queued into `mail`, fire-and-forget, never throws.
+      void notifyAdminNewPaymentProof({ listingName: item.name, plan: upgradePlan })
       setUpgradeFor(null)
       setUpgradeFile(null)
       toast.success('Payment proof submitted — our admin will verify it shortly.')

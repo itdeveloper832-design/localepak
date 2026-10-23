@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { auth, db } from '@/lib/firebase'
 import { onAuthStateChanged, signOut, User } from 'firebase/auth'
-import { doc, getDoc } from 'firebase/firestore'
+import { doc, getDoc, collection, query, where, getCountFromServer } from 'firebase/firestore'
 import {
   LayoutDashboard, Building2, Factory, Briefcase, Star, CreditCard,
   Mail, FileText, Users, Home, LayoutGrid, LogOut, ShieldAlert,
@@ -29,6 +29,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const router = useRouter()
   const [state, setState] = useState<'loading' | 'denied' | 'ok'>('loading')
   const [user, setUser] = useState<User | null>(null)
+  const [pendingTotal, setPendingTotal] = useState(0)
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, async (u) => {
@@ -47,6 +48,29 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     })
     return () => unsub()
   }, [])
+
+  // Total pending badge: businesses + companies + jobs + reviews + payment
+  // proofs waiting for review. Aggregation counts only (getCountFromServer)
+  // — no documents are read. Refreshed whenever the admin moves between
+  // pages, so working through a queue drops the number.
+  useEffect(() => {
+    if (state !== 'ok') return
+    let cancelled = false
+    const load = async () => {
+      const cols = ['businesses', 'companies', 'jobs', 'reviews', 'payment_proofs']
+      const snaps = await Promise.all(
+        cols.map((c) =>
+          getCountFromServer(query(collection(db, c), where('status', '==', 'pending'))).catch(() => null)
+        )
+      )
+      if (cancelled) return
+      setPendingTotal(snaps.reduce((sum, s) => sum + (s ? s.data().count : 0), 0))
+    }
+    load()
+    return () => {
+      cancelled = true
+    }
+  }, [state, pathname])
 
   const handleSignOut = async () => {
     try {
@@ -112,6 +136,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               >
                 <Icon className="w-4 h-4 shrink-0" />
                 {label}
+                {href === '/admin' && pendingTotal > 0 && (
+                  <span
+                    className="ml-auto inline-flex items-center justify-center min-w-5 h-5 px-1.5 rounded-full bg-red-500 text-white text-[11px] font-extrabold"
+                    aria-label={`${pendingTotal} items pending review`}
+                  >
+                    {pendingTotal}
+                  </span>
+                )}
               </Link>
             )
           })}

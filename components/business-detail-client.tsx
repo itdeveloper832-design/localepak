@@ -223,6 +223,22 @@ export default function BusinessDetailPage({
         status: 'pending',
         createdAt: fs.serverTimestamp(),
       })
+      // Admin notification — queued into `mail` like every other email.
+      // Dynamically imported (same pattern as firebase above) so the mail
+      // helper stays out of this page's initial bundle. It never throws;
+      // for signed-out visitors the Firestore rules simply decline the
+      // queue write and the review itself is unaffected.
+      try {
+        const { notifyAdminNewReview } = await import('@/lib/mail')
+        void notifyAdminNewReview({
+          businessName: business.name || 'a business',
+          city: business.city || '',
+          authorName: reviewForm.name.trim(),
+          rating: reviewForm.rating,
+        })
+      } catch {
+        // best effort only
+      }
       toast.success('Review submitted — it will appear after moderation.')
       setReviewForm({ name: '', rating: 0, text: '' })
     } catch (err: any) {

@@ -11,6 +11,7 @@ import { auth, db } from '@/lib/firebase'
 import { isValidPakistaniPhone, normalizePakistaniPhone, sanitizePhoneInput } from '@/lib/validation'
 import { createUserWithEmailAndPassword, updateProfile, signOut } from 'firebase/auth'
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
+import { queueWelcomeEmail } from '@/lib/mail'
 
 const PASSWORD_RULES = [
   { key: 'length', label: 'At least 8 characters', test: (p: string) => p.length >= 8 },
@@ -82,6 +83,11 @@ export default function RegisterPage() {
       })
 
       await updateProfile(cred.user, { displayName: ownerName.trim() })
+
+      // Welcome email — queued into the `mail` collection (delivered by the
+      // Trigger Email extension once SMTP is connected). queueWelcomeEmail
+      // never throws, so it cannot break registration.
+      await queueWelcomeEmail(email.trim(), ownerName.trim())
 
       // Owner flow: account is created signed-out; the user signs in separately.
       await signOut(auth)

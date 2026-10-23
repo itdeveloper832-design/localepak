@@ -1,0 +1,327 @@
+import { queueOwnerEmail } from '@/lib/owner-mail'
+import { loadOwnerEmail } from '@/lib/owner-contact'
+import { releaseDateLabel } from '@/lib/release'
+
+// ============================================================
+// LocalePak — transactional mail queue (welcome / received /
+// approved / payment + admin notifications)
+// ------------------------------------------------------------
+// Every email the site sends is a document in the Firestore
+// `mail` collection, written by queueOwnerEmail() (lib/owner-mail.ts)
+// in the Trigger Email shape: { to, message: { subject, text, html } }.
+// The Firebase Trigger Email extension delivers them once SMTP is
+// connected; until then they simply queue — nothing is lost.
+//
+// queueOwnerEmail NEVER throws (it returns false on failure), so
+// calling these helpers can never break the user action that
+// triggered the email. Callers may await them or fire-and-forget.
+// ============================================================
+
+/** Where admin notification emails go. One place only — change here. */
+export const ADMIN_EMAIL = 'admin@localepak.com'
+
+const SITE = 'https://www.localepak.com'
+const SUPPORT_LINE = 'Questions? Contact our team at https://www.localepak.com/contact and we will be happy to help.'
+
+function esc(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+}
+
+/** Same branded shell the rejection/deletion emails use. */
+function shell(innerHtml: string): string {
+  return `
+<div style="font-family:Arial,Helvetica,sans-serif;color:#0f172a;line-height:1.6;max-width:600px;margin:0 auto">
+  <div style="background:#0f172a;color:#ffffff;padding:20px 24px;border-radius:12px 12px 0 0">
+    <strong style="font-size:18px">LocalePak</strong>
+  </div>
+  <div style="border:1px solid #e2e8f0;border-top:none;padding:24px;border-radius:0 0 12px 12px">
+    ${innerHtml}
+    <p>— The LocalePak Team</p>
+  </div>
+</div>`.trim()
+}
+
+function greeting(ownerName?: string): string {
+  return ownerName ? `Dear ${ownerName},` : 'Hello,'
+}
+
+// ------------------------------------------------------------
+// (a) Welcome — queued right after a successful registration.
+// ------------------------------------------------------------
+export async function queueWelcomeEmail(to: string, ownerName?: string): Promise<boolean> {
+  const subject = 'Welcome to LocalePak — your account is ready'
+  const text = [
+    greeting(ownerName),
+    '',
+    'Welcome to LocalePak, and thank you for creating your account.',
+    '',
+    'From your dashboard you can now:',
+    '- Add a business listing (free) and get found by customers across Pakistan',
+    '- Add a company profile',
+    '- Post a job and reach candidates',
+    '',
+    'Every listing is reviewed by our team before it goes public, and we will email you at each step — received, approved, or if anything needs fixing.',
+    '',
+    `Your dashboard: ${SITE}/dashboard`,
+    '',
+    SUPPORT_LINE,
+    '',
+    '— The LocalePak Team',
+  ].join('\n')
+  const html = shell(`
+    <p>${esc(greeting(ownerName))}</p>
+    <p>Welcome to <strong>LocalePak</strong>, and thank you for creating your account.</p>
+    <p>From your dashboard you can now:</p>
+    <ul>
+      <li>Add a <strong>business listing</strong> (free) and get found by customers across Pakistan</li>
+      <li>Add a <strong>company profile</strong></li>
+      <li><strong>Post a job</strong> and reach candidates</li>
+    </ul>
+    <p>Every listing is reviewed by our team before it goes public, and we will email you at each step — received, approved, or if anything needs fixing.</p>
+    <p><a href="${SITE}/dashboard">Open your dashboard</a></p>
+    <p>Questions? <a href="${SITE}/contact">Contact our team</a> and we will be happy to help.</p>
+  `)
+  return queueOwnerEmail(to, subject, text, html)
+}
+
+// ------------------------------------------------------------
+// (b) Submission received — owner confirmation for add-flows,
+// plus the admin notification for the same submission.
+// kind: 'business' | 'company' | 'job'
+// ------------------------------------------------------------
+export type SubmissionKind = 'business' | 'company' | 'job'
+
+const KIND_LABEL: Record<SubmissionKind, string> = {
+  business: 'business listing',
+  company: 'company profile',
+  job: 'job post',
+}
+
+const KIND_ADMIN_PATH: Record<SubmissionKind, string> = {
+  business: '/admin/businesses',
+  company: '/admin/companies',
+  job: '/admin/jobs',
+}
+
+export async function queueSubmissionEmails(args: {
+  kind: SubmissionKind
+  name: string
+  city?: string
+  ownerEmail: string
+  ownerName?: string
+}): Promise<void> {
+  const { kind, name, city, ownerEmail, ownerName } = args
+  const label = KIND_LABEL[kind]
+
+  // Owner: "received, under review".
+  const subject = `We received your ${label} '${name}' — it is under review`
+  const releaseNote =
+    kind === 'business'
+      ? ' Once approved, business listings are published in our weekly release batch, and we will email you the date yours goes live.'
+      : ' Once approved, it goes live on LocalePak straight away.'
+  const text = [
+    greeting(ownerName),
+    '',
+    `Thank you — we have received your ${label} '${name}'${city ? ` (${city})` : ''} and it is now waiting for review.`,
+    '',
+    `Our team checks every submission by hand. You do not need to do anything else: we will email you when it is approved, or if something needs fixing first.${releaseNote}`,
+    '',
+    `Track its status any time in your dashboard: ${SITE}/dashboard`,
+    '',
+    SUPPORT_LINE,
+    '',
+    '— The LocalePak Team',
+  ].join('\n')
+  const html = shell(`
+    <p>${esc(greeting(ownerName))}</p>
+    <p>Thank you — we have received your ${label} <strong>${esc(name)}</strong>${city ? ` (${esc(city)})` : ''} and it is now waiting for review.</p>
+    <p>Our team checks every submission by hand. You do not need to do anything else: we will email you when it is approved, or if something needs fixing first.${esc(releaseNote)}</p>
+    <p>Track its status any time in <a href="${SITE}/dashboard">your dashboard</a>.</p>
+    <p>Questions? <a href="${SITE}/contact">Contact our team</a> and we will be happy to help.</p>
+  `)
+  await queueOwnerEmail(ownerEmail, subject, text, html)
+
+  // Admin: new submission waiting in the queue.
+  await notifyAdmin({
+    type: label,
+    name,
+    city,
+    adminPath: KIND_ADMIN_PATH[kind],
+    lines: [`Submitted by: ${ownerName || '—'} <${ownerEmail || 'no email'}>`],
+  })
+}
+
+// ------------------------------------------------------------
+// Admin notifications. Subject pattern:
+//   [LocalePak Admin] New <type>: <name> — <city>
+// (city suffix omitted when the source flow has no city.)
+// ------------------------------------------------------------
+export async function notifyAdmin(args: {
+  type: string
+  name: string
+  city?: string
+  adminPath: string
+  lines?: string[]
+}): Promise<boolean> {
+  const { type, name, city, adminPath, lines = [] } = args
+  const subject = `[LocalePak Admin] New ${type}: ${name}${city ? ` — ${city}` : ''}`
+  const url = `${SITE}${adminPath}`
+  const text = [
+    `A new ${type} is waiting for review on LocalePak.`,
+    '',
+    `Name: ${name}`,
+    ...(city ? [`City: ${city}`] : []),
+    ...lines,
+    '',
+    `Review it here: ${url}`,
+  ].join('\n')
+  const html = shell(`
+    <p>A new <strong>${esc(type)}</strong> is waiting for review on LocalePak.</p>
+    <p><strong>Name:</strong> ${esc(name)}${city ? `<br /><strong>City:</strong> ${esc(city)}` : ''}</p>
+    ${lines.length ? `<p>${lines.map((l) => esc(l)).join('<br />')}</p>` : ''}
+    <p><a href="${url}">Review it in the admin panel</a></p>
+  `)
+  return queueOwnerEmail(ADMIN_EMAIL, subject, text, html)
+}
+
+/** Admin notification: a visitor submitted a review. */
+export async function notifyAdminNewReview(args: {
+  businessName: string
+  city?: string
+  authorName: string
+  rating: number
+}): Promise<boolean> {
+  return notifyAdmin({
+    type: 'review',
+    name: args.businessName,
+    city: args.city,
+    adminPath: '/admin/reviews',
+    lines: [`Reviewer: ${args.authorName}`, `Rating: ${args.rating}/5`],
+  })
+}
+
+/** Admin notification: an owner submitted a payment proof. */
+export async function notifyAdminNewPaymentProof(args: {
+  listingName: string
+  plan: string
+}): Promise<boolean> {
+  return notifyAdmin({
+    type: 'payment proof',
+    name: args.listingName,
+    adminPath: '/admin/payments',
+    lines: [`Upgrade requested: ${args.plan === 'verified' ? 'Verified' : 'Featured'}`],
+  })
+}
+
+// ------------------------------------------------------------
+// (c) Approval — queued by the admin businesses/companies/jobs
+// pages after a successful approve. Businesses join the weekly
+// release (lib/release.ts) and the email states the actual date;
+// companies and jobs are live immediately.
+// ------------------------------------------------------------
+export async function queueListingApprovedEmail(
+  col: 'businesses' | 'companies' | 'jobs',
+  item: { id: string; data: any }
+): Promise<boolean> {
+  const data = item.data || {}
+  const name = data.name || data.title || 'your listing'
+  const ownerName = data.ownerName || ''
+  const ownerEmail = data.ownerEmail || (await loadOwnerEmail(col, item.id))
+  if (!ownerEmail) return false
+
+  if (col === 'businesses') {
+    const dateLabel = releaseDateLabel(Date.now())
+    const subject = `Good news — '${name}' is approved and goes live on ${dateLabel}`
+    const text = [
+      greeting(ownerName),
+      '',
+      `Great news: your business listing '${name}' has been approved by our review team.`,
+      '',
+      `LocalePak publishes newly approved businesses in a weekly batch, so your listing will go live on ${dateLabel}. There is nothing else you need to do — from that date it will appear in search results and in its city and category pages.`,
+      ...(data.slug ? ['', `Your listing page: ${SITE}/business/${data.slug}`] : []),
+      '',
+      'Want more customers? Ask your happy customers to leave a review on your listing page — reviews help you rank higher.',
+      '',
+      SUPPORT_LINE,
+      '',
+      '— The LocalePak Team',
+    ].join('\n')
+    const html = shell(`
+      <p>${esc(greeting(ownerName))}</p>
+      <p>Great news: your business listing <strong>${esc(name)}</strong> has been approved by our review team.</p>
+      <p>LocalePak publishes newly approved businesses in a weekly batch, so your listing will go live on <strong>${esc(dateLabel)}</strong>. There is nothing else you need to do — from that date it will appear in search results and in its city and category pages.</p>
+      ${data.slug ? `<p><a href="${SITE}/business/${esc(data.slug)}">Preview your listing page</a></p>` : ''}
+      <p>Want more customers? Ask your happy customers to leave a review on your listing page — reviews help you rank higher.</p>
+      <p>Questions? <a href="${SITE}/contact">Contact our team</a> and we will be happy to help.</p>
+    `)
+    return queueOwnerEmail(ownerEmail, subject, text, html)
+  }
+
+  const isCompany = col === 'companies'
+  const label = isCompany ? 'company profile' : 'job post'
+  const publicUrl = isCompany && data.slug ? `${SITE}/company/${data.slug}` : ''
+  const subject = `Good news — your ${label} '${name}' is now live`
+  const text = [
+    greeting(ownerName),
+    '',
+    `Great news: your ${label} '${name}' has been approved by our review team and is now live on LocalePak.`,
+    ...(publicUrl ? ['', `See it here: ${publicUrl}`] : []),
+    '',
+    `You can update its details any time from your dashboard: ${SITE}/dashboard`,
+    '',
+    SUPPORT_LINE,
+    '',
+    '— The LocalePak Team',
+  ].join('\n')
+  const html = shell(`
+    <p>${esc(greeting(ownerName))}</p>
+    <p>Great news: your ${label} <strong>${esc(name)}</strong> has been approved by our review team and is <strong>now live</strong> on LocalePak.</p>
+    ${publicUrl ? `<p><a href="${publicUrl}">See your live profile</a></p>` : ''}
+    <p>You can update its details any time from <a href="${SITE}/dashboard">your dashboard</a>.</p>
+    <p>Questions? <a href="${SITE}/contact">Contact our team</a> and we will be happy to help.</p>
+  `)
+  return queueOwnerEmail(ownerEmail, subject, text, html)
+}
+
+// ------------------------------------------------------------
+// (d) Payment-proof approval — the listing's Featured / Verified
+// upgrade has been switched on. Owner email comes from the proof
+// document itself (it carries ownerEmail by design), with the
+// listing's private contact document as fallback.
+// ------------------------------------------------------------
+export async function queuePaymentApprovedEmail(item: { id: string; data: any }): Promise<boolean> {
+  const data = item.data || {}
+  const listingName = data.listingName || 'your listing'
+  const planLabel = data.plan === 'verified' ? 'Verified' : 'Featured'
+  const listingCol = data.listingType === 'company' ? 'companies' : 'businesses'
+  const ownerEmail =
+    data.ownerEmail || (data.listingId ? await loadOwnerEmail(listingCol, data.listingId) : '')
+  if (!ownerEmail) return false
+
+  const benefit =
+    planLabel === 'Verified'
+      ? 'Your listing now carries the blue Verified badge, which tells customers your business has been checked by our team.'
+      : 'Your listing now carries the Featured badge and is highlighted ahead of ordinary listings in its city and category.'
+  const subject = `Payment approved — '${listingName}' is now ${planLabel}`
+  const text = [
+    'Hello,',
+    '',
+    `We have verified your payment, and your listing '${listingName}' is now ${planLabel} on LocalePak.`,
+    '',
+    benefit,
+    '',
+    `Manage your listing any time from your dashboard: ${SITE}/dashboard`,
+    '',
+    SUPPORT_LINE,
+    '',
+    '— The LocalePak Team',
+  ].join('\n')
+  const html = shell(`
+    <p>Hello,</p>
+    <p>We have verified your payment, and your listing <strong>${esc(listingName)}</strong> is now <strong>${planLabel}</strong> on LocalePak.</p>
+    <p>${esc(benefit)}</p>
+    <p>Manage your listing any time from <a href="${SITE}/dashboard">your dashboard</a>.</p>
+    <p>Questions? <a href="${SITE}/contact">Contact our team</a> and we will be happy to help.</p>
+  `)
+  return queueOwnerEmail(ownerEmail, subject, text, html)
+}

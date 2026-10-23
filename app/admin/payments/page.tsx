@@ -6,6 +6,7 @@ import { collection, getDocs, doc, updateDoc, serverTimestamp } from 'firebase/f
 import { toast } from 'sonner'
 import { ExternalLink } from 'lucide-react'
 import { StatusBadge, AdminLoading, AdminEmpty, formatDate, approveBtn, rejectBtn } from '@/components/admin-shared'
+import { queuePaymentApprovedEmail } from '@/lib/mail'
 
 type Item = { id: string; data: any }
 
@@ -52,6 +53,8 @@ export default function AdminPaymentsPage() {
         reviewedAt: serverTimestamp(),
       })
       setItems((prev) => prev.map((it) => (it.id === id ? { ...it, data: { ...it.data, status: 'approved' } } : it)))
+      // Owner email: the listing is now Featured/Verified — queued only.
+      await queuePaymentApprovedEmail(item)
       toast.success(`Proof approved — ${data.listingName || 'listing'} is now ${data.plan === 'verified' ? 'Verified' : 'Featured'}.`)
     } catch {
       toast.error('Approval failed — check the listing id and permissions, then try again.')

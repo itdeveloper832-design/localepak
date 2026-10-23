@@ -9,6 +9,7 @@ import { Pencil } from 'lucide-react'
 import { StatusBadge, AdminLoading, AdminEmpty, formatDate, approveBtn, rejectBtn, neutralBtn, dangerBtn } from '@/components/admin-shared'
 import { RejectPanel, DeletePanel, moderateReject, moderateDelete } from '@/components/admin-moderation'
 import { resolveOwnerEmails } from '@/lib/owner-contact'
+import { queueListingApprovedEmail } from '@/lib/mail'
 
 type Item = { id: string; data: any }
 const TABS = ['all', 'pending', 'approved', 'rejected'] as const
@@ -49,6 +50,8 @@ export default function AdminJobsPage() {
       const fields = { status: 'approved', rejectionReasons: [] as string[], rejectionNote: '', rejectedAt: null as null }
       await updateDoc(doc(db, COL, item.id), fields)
       setItems((prev) => prev.map((it) => (it.id === item.id ? { ...it, data: { ...it.data, ...fields } } : it)))
+      // Owner approval email ("live now") — queued only, never throws.
+      await queueListingApprovedEmail(COL, item)
       toast.success('Job approved (any previous rejection cleared).')
     } catch {
       toast.error('Action failed — check permissions and try again.')

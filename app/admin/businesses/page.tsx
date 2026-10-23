@@ -9,6 +9,7 @@ import { Eye, Star, BadgeCheck, Pencil } from 'lucide-react'
 import { StatusBadge, AdminLoading, AdminEmpty, formatDate, approveBtn, rejectBtn, neutralBtn, dangerBtn } from '@/components/admin-shared'
 import { RejectPanel, DeletePanel, moderateReject, moderateDelete } from '@/components/admin-moderation'
 import { resolveOwnerEmails } from '@/lib/owner-contact'
+import { queueListingApprovedEmail } from '@/lib/mail'
 
 type Item = { id: string; data: any }
 const TABS = ['all', 'pending', 'approved', 'rejected'] as const
@@ -43,11 +44,20 @@ export default function AdminBusinessesPage() {
     load()
   }, [])
 
-  const patch = async (id: string, fields: Record<string, any>, msg: string) => {
+  const patch = async (id: string, fields: Record<string, any>, msg: string, afterSuccess?: () => Promise<unknown>) => {
     setBusy(id)
     try {
       await updateDoc(doc(db, COL, id), fields)
       setItems((prev) => prev.map((it) => (it.id === id ? { ...it, data: { ...it.data, ...fields } } : it)))
+      // Optional follow-up (e.g. queueing the owner approval email). It runs
+      // only after the update succeeds and can never fail the action itself.
+      if (afterSuccess) {
+        try {
+          await afterSuccess()
+        } catch {
+          // ignore — follow-ups are best effort
+        }
+      }
       toast.success(msg)
     } catch {
       toast.error('Action failed — check permissions and try again.')
@@ -63,7 +73,9 @@ export default function AdminBusinessesPage() {
       // follows the weekly release cycle (see lib/release.ts) — an approved
       // business goes live at the next cycle boundary, not immediately.
       { status: 'approved', approvedAt: serverTimestamp(), rejectionReasons: [], rejectionNote: '', rejectedAt: null },
-      'Business approved (any previous rejection cleared). It goes live at the next weekly release.'
+      'Business approved (any previous rejection cleared). It goes live at the next weekly release.',
+      // Owner approval email (states the actual release date) — queued only.
+      () => queueListingApprovedEmail(COL, item)
     )
 
   const confirmReject = async (item: Item, reasons: string[], note: string) => {

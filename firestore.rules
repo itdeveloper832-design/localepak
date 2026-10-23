@@ -167,11 +167,31 @@ service cloud.firestore {
     }
 
     // ---------- Mail Queue (Firebase "Trigger Email" extension ke liye) ----------
-    // Admin koi action (reject/delete waghera) par owner ko email queue karta hai.
-    // Email sirf admin bana sakta hai; parhna/delete bhi sirf admin.
+    // Admin kisi bhi action (approve/reject/delete waghera) par email queue kar sakta hai.
+    // Signed-in user bhi queue kar sakta hai — LEKIN sirf (1) apni khud ki login
+    // email par, ya (2) admin ki notification email (admin@localepak.com) par;
+    // aur document mein sirf to + message ho sakta hai, message mein sirf
+    // subject/text/html strings, size ki sakht had ke saath. Is se koi user
+    // kisi teesre bande ko email/spam nahi bhej sakta.
+    // Parhna/update/delete sirf admin.
     match /mail/{mailId} {
-      allow create: if isAdmin()
-        && request.resource.data.to is string;
+      allow create: if (isAdmin()
+          && request.resource.data.to is string)
+        || (isSignedIn()
+          && request.resource.data.keys().hasAll(['to', 'message'])
+          && request.resource.data.keys().hasOnly(['to', 'message'])
+          && request.resource.data.to is string
+          && (request.resource.data.to == request.auth.token.email
+              || request.resource.data.to == 'admin@localepak.com')
+          && request.resource.data.message is map
+          && request.resource.data.message.keys().hasAll(['subject', 'text', 'html'])
+          && request.resource.data.message.keys().hasOnly(['subject', 'text', 'html'])
+          && request.resource.data.message.subject is string
+          && request.resource.data.message.subject.size() <= 200
+          && request.resource.data.message.text is string
+          && request.resource.data.message.text.size() <= 5000
+          && request.resource.data.message.html is string
+          && request.resource.data.message.html.size() <= 20000);
       allow read, update, delete: if isAdmin();
     }
 

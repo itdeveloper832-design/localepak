@@ -14,6 +14,7 @@ import { CATEGORIES, CITIES } from '@/lib/data'
 import CityCombobox from '@/components/city-combobox'
 import { isValidPakistaniPhone, normalizePakistaniPhone, sanitizePhoneInput, isValidPrice } from '@/lib/validation'
 import { writeOwnerContact } from '@/lib/owner-contact'
+import { queueSubmissionEmails } from '@/lib/mail'
 
 function slugify(value: string): string {
   return value
@@ -287,6 +288,15 @@ export default function AddBusinessPage() {
       // owner/admin-only subcollection, never into the main document
       // (see lib/owner-contact.ts).
       await writeOwnerContact('businesses', ref.id, user.uid, user.email || '')
+      // Emails: owner gets "received, under review", admin gets a new-
+      // submission notification. Both only queue into `mail` and never throw.
+      await queueSubmissionEmails({
+        kind: 'business',
+        name: form.name.trim(),
+        city: form.city,
+        ownerEmail: user.email || '',
+        ownerName: user.displayName || '',
+      })
       toast.success('Business submitted for review.')
       router.push('/dashboard')
     } catch (err: any) {

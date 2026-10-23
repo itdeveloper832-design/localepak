@@ -11,6 +11,7 @@ import { onAuthStateChanged, User } from 'firebase/auth'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { CITIES } from '@/lib/data'
 import { writeOwnerContact } from '@/lib/owner-contact'
+import { queueSubmissionEmails } from '@/lib/mail'
 import CityCombobox from '@/components/city-combobox'
 
 function slugify(value: string): string {
@@ -75,6 +76,15 @@ export default function AddJobPage() {
       // owner/admin-only subcollection, never into the main document
       // (see lib/owner-contact.ts).
       await writeOwnerContact('jobs', ref.id, user.uid, user.email || '')
+      // Emails: owner gets "received, under review", admin gets a new-
+      // submission notification. Both only queue into `mail` and never throw.
+      await queueSubmissionEmails({
+        kind: 'job',
+        name: title.trim(),
+        city,
+        ownerEmail: user.email || '',
+        ownerName: user.displayName || '',
+      })
       toast.success('Job submitted for review.')
       router.push('/dashboard')
     } catch (err: any) {
