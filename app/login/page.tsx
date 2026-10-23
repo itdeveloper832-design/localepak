@@ -24,7 +24,7 @@ function mapLoginError(err: any): string {
     case 'auth/network-request-failed':
       return 'Network error. Please check your connection and try again.'
     default:
-      return `Sign-in failed: ${err?.message || 'Unknown error'}. If this keeps happening, Firebase may not be configured yet.`
+      return `Sign-in failed: ${err?.message || 'Unknown error'}. The sign-in service is not configured yet. Please try again later.`
   }
 }
 

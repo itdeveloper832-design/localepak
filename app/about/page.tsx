@@ -97,12 +97,12 @@ const STATS = [
 
 const FOUNDER_SKILLS = [
   'Full-Stack Web Architecture',
-  'Next.js & React Ecosystem',
-  'Node.js & MERN Stack',
+  'Modern Web Technologies',
+  'JavaScript Backend Development',
   'Artificial Intelligence & Agentic AI',
   'Technical SEO & Core Web Vitals',
   'Generative Engine Optimization (GEO)',
-  'Cloud Database Architecture (PostgreSQL & Firebase)',
+  'Cloud Database Architecture',
   'Local Search Engineering',
   'High-Performance PWA Development',
   'REST & GraphQL API Design',
@@ -130,7 +130,7 @@ const CORE_VALUES = [
   {
     title: 'Continuous Technical Innovation',
     description:
-      'A modern Next.js foundation, fast search, structured data and local SEO architecture help business information stay discoverable and easy to use.',
+      'A modern web foundation, fast search, structured data and local SEO architecture help business information stay discoverable and easy to use.',
     icon: Cpu,
   },
   {
@@ -681,7 +681,7 @@ export default function AboutPage() {
                 </p>
                 <p>
                   LocalePak was founded in 2026 as the answer. It was engineered from the ground up
-                  with Next.js and cloud databases, organised around cities and categories, and built
+                  with modern web technologies and secure cloud infrastructure, organised around cities and categories, and built
                   with a review step before listings go public. Customers can discover a business and
                   reach it through direct phone and WhatsApp details; owners can create visibility
                   without paying to reveal their own contact information.
@@ -796,7 +796,7 @@ export default function AboutPage() {
                   Founder, Owner & CEO
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-slate-600">
-                  Responsible for the platform vision, software architecture, Next.js development, AI
+                  Responsible for the platform vision, software architecture, web development, AI
                   integration and local SEO strategy.
                 </p>
                 <div className="mt-5 flex gap-4 border-t border-blue-100 pt-4 text-sm font-bold">

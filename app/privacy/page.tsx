@@ -96,7 +96,7 @@ export default function PrivacyPage() {
 
           <h2 className="text-xl font-bold text-[#0f2b3d] pt-4">7. Data Security Safeguards</h2>
           <p>
-            We implement administrative, technical, and physical security measures—including TLS encryption, role-based Firestore database rules, and strict administrative authentication—to safeguard your information. While no internet transmission is 100% immune, we regularly update our infrastructure to prevent unauthorized access or disclosure.
+            We implement administrative, technical, and physical security measures—including TLS encryption, role-based database security rules, and strict administrative authentication—to safeguard your information. While no internet transmission is 100% immune, we regularly update our infrastructure to prevent unauthorized access or disclosure.
           </p>
 
           <h2 className="text-xl font-bold text-[#0f2b3d] pt-4">8. Policy for Children</h2>
