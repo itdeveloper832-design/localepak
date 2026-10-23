@@ -103,17 +103,33 @@ export default function CityCategoryListings({
     }
   }, [city, citySlug, categoryId, categoryName])
 
-  // Firestore listings come first and win on slug clashes (same dedupe
-  // rule as /businesses, e.g. once a seed business is claimed and
-  // re-added by its owner); seed listings fill in behind them.
+  // Merge Firestore results into the seed listings WITHOUT moving them
+  // (a prepend merge shoves the rendered seed cards down when the fetch
+  // lands = layout shift / CLS): a Firestore listing wins on a slug clash
+  // by replacing the seed in its existing slot (keeping the seed's
+  // element id so React updates the card in place, same dedupe rule as
+  // /businesses, e.g. once a seed business is claimed and re-added by its
+  // owner); genuinely new listings append after the seeds.
   const businesses = useMemo<Business[]>(() => {
-    const seenSlugs = new Set(firestoreBusinesses.map((b) => b.slug))
-    return [...firestoreBusinesses, ...seedBusinesses.filter((s) => !seenSlugs.has(s.slug))]
+    const seedIndexBySlug = new Map(seedBusinesses.map((s, i) => [s.slug, i] as const))
+    const merged = [...seedBusinesses]
+    const replacedSlugs = new Set<string>()
+    const extras: Business[] = []
+    for (const item of firestoreBusinesses) {
+      const idx = seedIndexBySlug.get(item.slug)
+      if (idx !== undefined && !replacedSlugs.has(item.slug)) {
+        merged[idx] = { ...item, id: seedBusinesses[idx].id }
+        replacedSlugs.add(item.slug)
+      } else {
+        extras.push(item)
+      }
+    }
+    return [...merged, ...extras]
   }, [firestoreBusinesses, seedBusinesses])
 
   if (loading && businesses.length === 0) {
     return (
-      <div className="bg-white rounded-3xl border border-slate-200 p-10 text-center text-sm text-slate-500">
+      <div className="bg-white rounded-3xl border border-slate-200 p-10 text-center text-sm text-slate-500 min-h-[300px] flex items-center justify-center">
         Loading {categoryName} in {city}...
       </div>
     )
@@ -141,7 +157,7 @@ export default function CityCategoryListings({
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 min-h-[300px]">
       {businesses.map((business) => (
         <Link
           key={business.id}

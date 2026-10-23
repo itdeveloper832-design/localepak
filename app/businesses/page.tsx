@@ -8,6 +8,7 @@ import { Building2, MapPin, Phone, ArrowRight } from 'lucide-react'
 import { db } from '@/lib/firebase'
 import { collection, query, where, getDocs } from 'firebase/firestore'
 import { SEED_BUSINESSES } from '@/lib/seed-businesses'
+import { isReleased } from '@/lib/release'
 
 type Business = {
   id: string
@@ -44,6 +45,9 @@ export default function BusinessesPage() {
         const snap = await getDocs(query(collection(db, 'businesses'), where('status', '==', 'approved')))
         snap.forEach((d) => {
           const data = d.data() as any
+          // Weekly batch release (lib/release.ts): approved businesses go
+          // public at the next 7-day cycle boundary, not immediately.
+          if (!isReleased(data.approvedAt, Date.now())) return
           items.push({
             id: d.id,
             name: data.name || 'Unnamed Business',
@@ -58,11 +62,26 @@ export default function BusinessesPage() {
         // Firestore inventory is an enhancement; the static seed listings
         // below still render if it is unavailable.
       }
-      // Merge the Firestore results with the static seed listings that are
-      // already rendered. A Firestore listing wins on slug clashes (e.g.
-      // once the owner claims and re-adds the business).
-      const seenSlugs = new Set(items.map((b) => b.slug))
-      const merged = [...items, ...SEED_ITEMS.filter((s) => !seenSlugs.has(s.slug))]
+      // Merge the Firestore results into the static seed listings that are
+      // already rendered, WITHOUT moving them (a prepend merge shoves the
+      // whole seed grid down when the fetch lands = layout shift / CLS):
+      // a Firestore listing wins on a slug clash by replacing the seed in
+      // its existing slot (keeping the seed's element id so React updates
+      // the card in place), and genuinely new listings append after.
+      const seedIndexBySlug = new Map(SEED_ITEMS.map((s, i) => [s.slug, i] as const))
+      const merged = [...SEED_ITEMS]
+      const replacedSlugs = new Set<string>()
+      const extras: Business[] = []
+      for (const item of items) {
+        const idx = seedIndexBySlug.get(item.slug)
+        if (idx !== undefined && !replacedSlugs.has(item.slug)) {
+          merged[idx] = { ...item, id: SEED_ITEMS[idx].id }
+          replacedSlugs.add(item.slug)
+        } else {
+          extras.push(item)
+        }
+      }
+      merged.push(...extras)
       if (!cancelled) setBusinesses(merged)
       if (!cancelled) setLoading(false)
     }
@@ -106,7 +125,7 @@ export default function BusinessesPage() {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 min-h-[480px]">
             {businesses.map((biz) => (
               <article key={biz.id} className="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs hover:shadow-lg transition-all flex flex-col gap-3">
                 <div className="flex items-start justify-between gap-3">
