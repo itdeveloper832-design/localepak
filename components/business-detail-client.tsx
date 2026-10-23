@@ -207,8 +207,16 @@ export default function BusinessDetailPage({
   const handleReviewSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!business?.id) return
-    if (!reviewForm.name.trim() || reviewForm.rating < 1 || !reviewForm.text.trim()) {
-      toast.error('Please add your name, a star rating and your review.')
+    // Owner's rule: no nameless reviews — the reviewer's name is
+    // mandatory (at least 3 characters) for everyone, logged in or not,
+    // and is stored on the doc as authorName. The Firestore rules
+    // enforce the same requirement server-side.
+    if (reviewForm.name.trim().length < 3) {
+      toast.error('Please enter your name (at least 3 characters) — every review must show who wrote it.')
+      return
+    }
+    if (reviewForm.rating < 1 || !reviewForm.text.trim()) {
+      toast.error('Please add a star rating and your review.')
       return
     }
     setSubmittingReview(true)
@@ -503,6 +511,8 @@ export default function BusinessDetailPage({
                       id="review-name"
                       type="text"
                       required
+                      minLength={3}
+                      maxLength={80}
                       value={reviewForm.name}
                       onChange={(e) => setReviewForm({ ...reviewForm, name: e.target.value })}
                       placeholder="Your full name"
