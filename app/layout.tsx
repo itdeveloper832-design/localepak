@@ -3,6 +3,7 @@ import Script from 'next/script'
 import { Plus_Jakarta_Sans } from 'next/font/google'
 import './globals.css'
 import ClientProviders from '@/components/client-providers'
+import { founderPersonSchema, organizationSchema } from '@/lib/organization-schema'
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -68,26 +69,8 @@ export default function RootLayout({
     }
   }
 
-  const organizationSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'LocalePak',
-    url: 'https://www.localepak.com/',
-    logo: 'https://www.localepak.com/logo.svg',
-    telephone: '+92 334 5636230',
-    email: 'admin@localepak.com',
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'PK',
-    },
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: '+92 334 5636230',
-      contactType: 'customer service',
-      areaServed: 'PK',
-      availableLanguage: ['en', 'ur'],
-    },
-  }
+  // Canonical Organization + founder Person nodes live in
+  // lib/organization-schema.ts so every page references one entity.
 
   return (
     <html lang="en" className={plusJakartaSans.variable}>
@@ -96,7 +79,7 @@ export default function RootLayout({
         <link rel="help" href="/llms.txt" type="text/plain" title="LLM Context" />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationSchema, websiteSchema]) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationSchema, founderPersonSchema, websiteSchema]) }}
         />
       </head>
       <body className="font-sans antialiased bg-[#FAFAFA] text-[#09090B] pb-16 md:pb-0 min-h-screen selection:bg-blue-600 selection:text-white">

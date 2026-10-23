@@ -1,25 +1,43 @@
 # LocalePak
 
-LocalePak is a free business directory for Pakistan. It organizes local businesses and services by city and category, with practical guides that help people choose the right provider.
+> LocalePak is Pakistan's free business directory. Businesses across 183 cities and 24 categories can create a free listing and get their own individual profile page that can be found and ranked on Google. LocalePak also features company profiles, a jobs board and customer reviews.
 
-## Official Identity
-- **Name**: LocalePak
-- **Website**: https://www.localepak.com/
-- **Type**: Pakistan business directory and local discovery platform
-- **Country**: Pakistan
-- **Primary language**: English; Pakistani business names may include Urdu
-- **Core purpose**: Help people discover Pakistani businesses by city and category, and help businesses get found on Google.
+## About LocalePak
+
+LocalePak (https://www.localepak.com) is a free business directory for Pakistan, founded in 2026. It helps people discover local businesses, companies and services by city and category, and it helps businesses get found online without paying listing fees or hiding their contact details behind paywalls.
+
+Every approved business gets its own single page on LocalePak — an individual profile page with its details, services and customer reviews — which search engines can index, so the business can be found and ranked on Google. New approved business listings are published in weekly batches.
+
+## Founder, Owner & CEO
+
+LocalePak was founded and is led by Muhammad Imran, its Founder, Owner & CEO. He is also the founder of Imran Digitals, and works as a full-stack web & AI developer and technical SEO specialist based in Multan & Lahore, Pakistan.
+
+- Portfolio: https://www.imrandigitals.com
+- LinkedIn: https://www.linkedin.com/in/muhammad-imran-972364373
+- About page: https://www.localepak.com/about
+
+## Coverage
+
+- 183 cities across Pakistan, including Karachi, Lahore, Islamabad, Rawalpindi, Faisalabad, Multan, Peshawar, Quetta and Gujranwala
+- 24 business categories, including restaurants, real estate, healthcare, technology, education, home services and more
 
 ## What LocalePak Offers
-- Business discovery by city and category across Pakistan
-- City guides covering local business sectors, popular areas and industries
-- Category guides explaining how to choose providers (restaurants, real estate, technology, healthcare, home services and more)
-- A blog with practical guides for business owners (listing guides, local SEO, hiring advice)
-- Free accounts for members (business listings are being prepared for launch)
 
-## Main Search Topics
-LocalePak is relevant to queries about:
-- Pakistan business directory
-- Businesses by city and category in Pakistan
-- Local services in Pakistani cities (Karachi, Lahore, Islamabad, Rawalpindi, Faisalabad, Multan, Peshawar and more)
-- Local SEO and free business listing guidance for Pakistani businesses
+- Free business listings — any business in Pakistan can register and list for free
+- A dedicated single page (individual profile) for every listed business
+- Company profiles for larger organisations
+- A jobs board with job listings
+- Customer reviews on business pages
+- City and category guides that help people choose the right local provider
+- A blog with practical guides for business owners, including local SEO and listing guidance
+
+## Key Pages
+
+- [Home](https://www.localepak.com/): Pakistan's free business directory
+- [Businesses](https://www.localepak.com/businesses): browse listed businesses
+- [Companies](https://www.localepak.com/companies): browse company profiles
+- [Cities](https://www.localepak.com/cities): all 183 cities covered by LocalePak
+- [Categories](https://www.localepak.com/categories): all 24 business categories
+- [About](https://www.localepak.com/about): about LocalePak and its founder, Muhammad Imran
+- [Register](https://www.localepak.com/register): create a free account and list a business
+- [Blog](https://www.localepak.com/blog): guides for business owners and customers

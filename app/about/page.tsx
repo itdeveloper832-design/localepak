@@ -27,8 +27,19 @@ import {
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 
-const FOUNDER_PORTFOLIO_URL = 'https://www.imrandigitals.com'
-const FOUNDER_LINKEDIN_URL = 'https://www.linkedin.com/in/muhammad-imran-972364373/'
+import {
+  FOUNDER_LINKEDIN_URL,
+  FOUNDER_PORTFOLIO_URL,
+  LOCALEPAK_ORGANIZATION_ID,
+} from '@/lib/organization-schema'
+
+// Public, stack-free expertise list used only in structured data.
+const FOUNDER_SCHEMA_KNOWS_ABOUT = [
+  'Full-Stack Web Development',
+  'Artificial Intelligence',
+  'Technical SEO',
+  'Local Search',
+]
 
 export function generateMetadata(): Metadata {
   const title = 'About LocalePak – Founder & CEO Muhammad Imran | LocalePak'
@@ -210,7 +221,7 @@ const ABOUT_FAQS = [
   {
     question: 'What technology is LocalePak built on?',
     answer:
-      'LocalePak is built with Next.js, React, TypeScript, Tailwind CSS and Firebase Firestore, with Schema.org structured data used to describe the site and its content clearly for search engines.',
+      'LocalePak is built as a fast, mobile-first web platform designed for local search, with Schema.org structured data used to describe the site and its content clearly for search engines and AI assistants.',
   },
 ]
 
@@ -219,10 +230,18 @@ export default function AboutPage() {
     '@context': 'https://schema.org',
     '@graph': [
       {
+        '@type': 'AboutPage',
+        '@id': 'https://www.localepak.com/about/#webpage',
+        url: 'https://www.localepak.com/about',
+        name: 'About LocalePak – Founder & CEO Muhammad Imran',
+        about: { '@id': LOCALEPAK_ORGANIZATION_ID },
+        mainEntity: { '@id': 'https://www.localepak.com/about/#muhammad-imran' },
+      },
+      {
         '@type': 'Person',
         '@id': 'https://www.localepak.com/about/#muhammad-imran',
         name: 'Muhammad Imran',
-        jobTitle: 'Founder & CEO',
+        jobTitle: 'Founder, Owner & CEO',
         description:
           'Muhammad Imran is the Founder, Owner and CEO of LocalePak, a Pakistani full-stack web and AI developer, software architect and technical SEO specialist, and the founder of Imran Digitals.',
         url: FOUNDER_PORTFOLIO_URL,
@@ -233,24 +252,16 @@ export default function AboutPage() {
           addressRegion: 'Punjab',
           addressCountry: 'PK',
         },
-        worksFor: {
-          '@type': 'Organization',
-          name: 'LocalePak',
-          url: 'https://www.localepak.com',
-        },
+        worksFor: { '@id': LOCALEPAK_ORGANIZATION_ID },
         founderOf: [
-          {
-            '@type': 'Organization',
-            name: 'LocalePak',
-            url: 'https://www.localepak.com',
-          },
+          { '@id': LOCALEPAK_ORGANIZATION_ID },
           {
             '@type': 'Organization',
             name: 'Imran Digitals',
             url: FOUNDER_PORTFOLIO_URL,
           },
         ],
-        knowsAbout: FOUNDER_SKILLS,
+        knowsAbout: FOUNDER_SCHEMA_KNOWS_ABOUT,
       },
       {
         '@type': 'FAQPage',
