@@ -11,6 +11,7 @@ import { onAuthStateChanged, User } from 'firebase/auth'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { CATEGORIES, CITIES } from '@/lib/data'
 import CityCombobox from '@/components/city-combobox'
+import { isValidPakistaniPhone, normalizePakistaniPhone, sanitizePhoneInput } from '@/lib/validation'
 
 function slugify(value: string): string {
   return value
@@ -53,6 +54,10 @@ export default function AddCompanyPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!user) return
+    if (!isValidPakistaniPhone(phone)) {
+      toast.error('Please enter a valid Pakistani mobile number (e.g. 0300 1234567 or +92 300 1234567).')
+      return
+    }
     setIsSubmitting(true)
     try {
       await addDoc(collection(db, 'companies'), {
@@ -60,7 +65,7 @@ export default function AddCompanyPage() {
         slug: `${slugify(name)}-${slugify(city)}`,
         industry,
         city,
-        phone: phone.trim(),
+        phone: normalizePakistaniPhone(phone),
         email: email.trim(),
         website: website.trim(),
         address: address.trim(),
@@ -130,7 +135,7 @@ export default function AddCompanyPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className={labelClass}>Phone *</label>
-                <input type="tel" required value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="+92 300 1234567" className={inputClass} />
+                <input type="tel" inputMode="tel" required value={phone} onChange={(e) => setPhone(sanitizePhoneInput(e.target.value))} placeholder="+92 300 1234567" className={inputClass} />
               </div>
               <div>
                 <label className={labelClass}>Email</label>

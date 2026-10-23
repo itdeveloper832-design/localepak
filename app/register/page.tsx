@@ -8,6 +8,7 @@ import Footer from '@/components/footer'
 import { Mail, Lock, UserPlus, Building2, Phone, User, ArrowRight, Eye, EyeOff, AlertCircle, Check, X } from 'lucide-react'
 import { toast } from 'sonner'
 import { auth, db } from '@/lib/firebase'
+import { isValidPakistaniPhone, normalizePakistaniPhone, sanitizePhoneInput } from '@/lib/validation'
 import { createUserWithEmailAndPassword, updateProfile, signOut } from 'firebase/auth'
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
 
@@ -49,10 +50,7 @@ export default function RegisterPage() {
   const passwordChecks = PASSWORD_RULES.map((rule) => ({ ...rule, passed: rule.test(password) }))
   const passwordValid = passwordChecks.every((c) => c.passed)
 
-  const validatePhone = (value: string): boolean => {
-    const normalized = value.replace(/[\s-]/g, '')
-    return /^(\+92|0)?3\d{9}$/.test(normalized) || normalized.replace(/\D/g, '').length >= 10
-  }
+  const validatePhone = (value: string): boolean => isValidPakistaniPhone(value)
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -77,7 +75,7 @@ export default function RegisterPage() {
       await setDoc(doc(db, 'users', uid), {
         ownerName: ownerName.trim(),
         email: email.trim(),
-        phone: phone.trim(),
+        phone: normalizePakistaniPhone(phone),
         company: company.trim() || '',
         role: 'member',
         createdAt: serverTimestamp(),
@@ -156,9 +154,11 @@ export default function RegisterPage() {
                 <Phone className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                 <input
                   type="tel"
+                  inputMode="tel"
+                  autoComplete="tel"
                   required
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  onChange={(e) => setPhone(sanitizePhoneInput(e.target.value))}
                   placeholder="+92 300 1234567"
                   className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600"
                 />

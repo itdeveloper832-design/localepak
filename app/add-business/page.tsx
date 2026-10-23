@@ -12,6 +12,7 @@ import { onAuthStateChanged, User } from 'firebase/auth'
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { CATEGORIES, CITIES } from '@/lib/data'
 import CityCombobox from '@/components/city-combobox'
+import { isValidPakistaniPhone, normalizePakistaniPhone, sanitizePhoneInput, isValidPrice } from '@/lib/validation'
 
 function slugify(value: string): string {
   return value
@@ -108,11 +109,6 @@ const inputClass =
   'w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600'
 const labelClass = 'block text-xs font-bold text-slate-700 mb-1'
 
-function isValidPakistaniPhone(value: string): boolean {
-  const normalized = value.replace(/[\s-]/g, '')
-  return /^(\+92|0)?3\d{9}$/.test(normalized) || normalized.replace(/\D/g, '').length >= 10
-}
-
 function isValidEmail(value: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())
 }
@@ -188,6 +184,13 @@ export default function AddBusinessPage() {
           if (!d.closed && (!d.open || !d.close)) return `Please set open and close times for ${DAY_LABELS[key]}, or mark it closed.`
         }
         return ''
+      case 6:
+        if (productPrice.trim() && !isValidPrice(productPrice))
+          return 'Product price must be a number (e.g. 350) — letters or text like "abc" are not allowed. Fix the price, or clear it and press Next.'
+        for (const p of form.products) {
+          if (!isValidPrice(p.price)) return `The price for "${p.name}" is not a valid number. Remove that product and add it again with a numeric price.`
+        }
+        return ''
       case 8:
         if (form.description.trim().length < 30) return 'Description must be at least 30 characters so customers understand your business.'
         return ''
@@ -225,6 +228,10 @@ export default function AddBusinessPage() {
   const addProduct = () => {
     const name = productName.trim()
     if (!name) return
+    if (!isValidPrice(productPrice)) {
+      setStepError('Product price must be a number (e.g. 350) — letters or text like "abc" are not allowed.')
+      return
+    }
     set('products', [...form.products, { name, price: productPrice.trim() }])
     setProductName('')
     setProductPrice('')
@@ -252,8 +259,8 @@ export default function AddBusinessPage() {
         name: form.name.trim(),
         slug: `${slugify(form.name)}-${slugify(form.city)}`,
         email: form.email.trim(),
-        phone: form.phone.trim(),
-        whatsapp: form.whatsapp.trim() || form.phone.trim(),
+        phone: normalizePakistaniPhone(form.phone),
+        whatsapp: form.whatsapp.trim() ? normalizePakistaniPhone(form.whatsapp) : normalizePakistaniPhone(form.phone),
         category: form.mainCategory,
         mainCategory: form.mainCategory,
         secondaryCategory: form.secondaryCategory,
@@ -358,11 +365,11 @@ export default function AddBusinessPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className={labelClass}>Business Phone *</label>
-                    <input type="tel" required value={form.phone} onChange={(e) => set('phone', e.target.value)} placeholder="+92 300 1234567" className={inputClass} />
+                    <input type="tel" inputMode="tel" required value={form.phone} onChange={(e) => set('phone', sanitizePhoneInput(e.target.value))} placeholder="+92 300 1234567" className={inputClass} />
                   </div>
                   <div>
                     <label className={labelClass}>WhatsApp</label>
-                    <input type="tel" value={form.whatsapp} onChange={(e) => set('whatsapp', e.target.value)} placeholder="Same as phone if empty" className={inputClass} />
+                    <input type="tel" inputMode="tel" value={form.whatsapp} onChange={(e) => set('whatsapp', sanitizePhoneInput(e.target.value))} placeholder="Same as phone if empty" className={inputClass} />
                   </div>
                 </div>
               </div>
@@ -510,7 +517,7 @@ export default function AddBusinessPage() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-2">
                   <input type="text" value={productName} onChange={(e) => setProductName(e.target.value)} placeholder="Product name" className={inputClass} />
-                  <input type="text" value={productPrice} onChange={(e) => setProductPrice(e.target.value)} placeholder="Price (e.g. Rs 350)" className="w-full sm:w-44 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600" />
+                  <input type="text" inputMode="decimal" value={productPrice} onChange={(e) => setProductPrice(e.target.value)} placeholder="Price in Rs (numbers only, e.g. 350)" className="w-full sm:w-44 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600" />
                   <button type="button" onClick={addProduct} className="shrink-0 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl flex items-center justify-center gap-1.5 cursor-pointer">
                     <Plus className="w-4 h-4" /> Add
                   </button>
