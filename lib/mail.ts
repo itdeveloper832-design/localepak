@@ -3,14 +3,14 @@ import { loadOwnerEmail } from '@/lib/owner-contact'
 import { releaseDateLabel } from '@/lib/release'
 
 // ============================================================
-// LocalePak — transactional mail queue (welcome / received /
+// LocalePak — transactional mail (welcome / received /
 // approved / payment + admin notifications)
 // ------------------------------------------------------------
-// Every email the site sends is a document in the Firestore
-// `mail` collection, written by queueOwnerEmail() (lib/owner-mail.ts)
-// in the Trigger Email shape: { to, message: { subject, text, html } }.
-// The Firebase Trigger Email extension delivers them once SMTP is
-// connected; until then they simply queue — nothing is lost.
+// Every email the site sends goes through queueOwnerEmail()
+// (lib/owner-mail.ts), which POSTs { to, message: { subject,
+// text, html } } to the site's own /api/send-mail route. That
+// route verifies the caller and delivers via Brevo — no
+// Firebase extension or Blaze plan is involved.
 //
 // queueOwnerEmail NEVER throws (it returns false on failure), so
 // calling these helpers can never break the user action that

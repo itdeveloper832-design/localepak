@@ -84,9 +84,8 @@ export default function RegisterPage() {
 
       await updateProfile(cred.user, { displayName: ownerName.trim() })
 
-      // Welcome email — queued into the `mail` collection (delivered by the
-      // Trigger Email extension once SMTP is connected). queueWelcomeEmail
-      // never throws, so it cannot break registration.
+      // Welcome email — sent via the site's /api/send-mail route (Brevo).
+      // queueWelcomeEmail never throws, so it cannot break registration.
       await queueWelcomeEmail(email.trim(), ownerName.trim())
 
       // Owner flow: account is created signed-out; the user signs in separately.

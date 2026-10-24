@@ -1,20 +1,33 @@
-import { db } from '@/lib/firebase'
-import { collection, addDoc } from 'firebase/firestore'
+import { auth } from '@/lib/firebase'
 
 /**
- * Owner notification emails use the Firestore "Trigger Email" pattern:
- * documents added to the `mail` collection are picked up by the Firebase
- * Trigger Email extension once it is installed with SMTP credentials.
- * Until then they simply queue in Firestore — nothing is lost.
+ * Owner notification emails are sent through the site's own mail route
+ * (app/api/send-mail) which delivers via Brevo — no Firebase extension
+ * and no Blaze plan needed. The route verifies the caller's sign-in
+ * token (when signed in) and enforces who may mail whom; signed-out
+ * callers can only trigger notifications to the admin inbox.
+ *
+ * NEVER throws — returns false on failure so an email problem can
+ * never break the user action that triggered it.
  */
 export async function queueOwnerEmail(to: string, subject: string, text: string, html: string): Promise<boolean> {
   if (!to) return false
   try {
-    await addDoc(collection(db, 'mail'), {
-      to,
-      message: { subject, text, html },
+    const headers: Record<string, string> = { 'Content-Type': 'application/json' }
+    const current = auth.currentUser
+    if (current) {
+      try {
+        headers.Authorization = `Bearer ${await current.getIdToken()}`
+      } catch {
+        // token unavailable — route still allows admin-inbox notifications
+      }
+    }
+    const res = await fetch('/api/send-mail', {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({ to, message: { subject, text, html } }),
     })
-    return true
+    return res.ok
   } catch {
     return false
   }
