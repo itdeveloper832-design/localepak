@@ -40,7 +40,7 @@ export default function CommunityGuidelinesPage() {
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">3. Reporting Violations</h2>
             <p>
-              To report suspicious behavior or policy violations, please use our <a href="/report-abuse" className="text-blue-600 underline">Report Abuse Portal</a>.
+              To report suspicious behavior or policy violations, please use our <a href="/report-abuse" className="text-emerald-600 underline">Report Abuse Portal</a>.
             </p>
           </div>
         </div>

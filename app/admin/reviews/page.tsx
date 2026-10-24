@@ -44,7 +44,7 @@ function ReviewCard({
       <p className="text-[11px] text-slate-400">
         Business:{' '}
         {data.businessSlug ? (
-          <Link href={`/business/${data.businessSlug}`} target="_blank" className="text-blue-600 font-semibold hover:underline">
+          <Link href={`/business/${data.businessSlug}`} target="_blank" className="text-emerald-600 font-semibold hover:underline">
             {data.businessSlug}
           </Link>
         ) : (

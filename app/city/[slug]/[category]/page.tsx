@@ -111,12 +111,12 @@ export default async function CityCategoryPage(props: {
         {/* Hero */}
         <section className="bg-slate-900 text-white py-14 px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto space-y-4">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold border border-blue-500/30">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30">
               <Building2 className="w-3.5 h-3.5" />
               {city} · {info ? info.province : 'Pakistan'}
             </span>
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
-              {cat.name} <span className="text-blue-400">in {city}</span>
+              {cat.name} <span className="text-emerald-400">in {city}</span>
             </h1>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-3xl">
               {cat.desc}. Browse the approved {cat.name.toLowerCase()} businesses listed in {city} so far,
@@ -156,10 +156,10 @@ export default async function CityCategoryPage(props: {
               <Link
                 key={c.id}
                 href={`/city/${citySlug}/${c.id}`}
-                className="bg-white rounded-2xl p-5 border border-slate-200/80 hover:border-blue-500 hover:shadow-md transition-all group"
+                className="bg-white rounded-2xl p-5 border border-slate-200/80 hover:border-emerald-500 hover:shadow-md transition-all group"
               >
-                <Building2 className="w-6 h-6 text-blue-600 mb-2" />
-                <h3 className="font-bold text-slate-900 text-sm group-hover:text-blue-600">{c.name} in {city}</h3>
+                <Building2 className="w-6 h-6 text-emerald-600 mb-2" />
+                <h3 className="font-bold text-slate-900 text-sm group-hover:text-emerald-600">{c.name} in {city}</h3>
                 <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">{c.desc}</p>
               </Link>
             ))}
@@ -176,13 +176,13 @@ export default async function CityCategoryPage(props: {
               <Link
                 key={c}
                 href={`/city/${cityToSlug(c)}/${cat.id}`}
-                className="px-3.5 py-2 bg-white border border-slate-200 rounded-xl hover:border-blue-500 text-xs font-medium inline-flex items-center gap-1"
+                className="px-3.5 py-2 bg-white border border-slate-200 rounded-xl hover:border-emerald-500 text-xs font-medium inline-flex items-center gap-1"
               >
                 {cat.name} in {c}
                 <ArrowRight className="w-3 h-3" />
               </Link>
             ))}
-            <Link href={`/category/${cat.id}`} className="px-3.5 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 text-xs font-bold">
+            <Link href={`/category/${cat.id}`} className="px-3.5 py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 text-xs font-bold">
               {cat.name} Across Pakistan
             </Link>
           </div>

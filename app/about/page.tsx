@@ -310,7 +310,7 @@ export default function AboutPage() {
         <section className="relative overflow-hidden bg-[#0F172A] text-white">
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -left-32 top-0 h-96 w-96 rounded-full bg-blue-600/20 blur-3xl"
+            className="pointer-events-none absolute -left-32 top-0 h-96 w-96 rounded-full bg-emerald-600/20 blur-3xl"
           />
           <div
             aria-hidden="true"
@@ -335,7 +335,7 @@ export default function AboutPage() {
             </nav>
 
             <div className="max-w-4xl">
-              <span className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-blue-200">
+              <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-200">
                 <Sparkles className="h-4 w-4" />
                 Founded by Muhammad Imran
               </span>
@@ -362,7 +362,7 @@ export default function AboutPage() {
               <div className="mt-9 flex flex-wrap gap-3">
                 <a
                   href="#founder"
-                  className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-blue-950/30 transition-colors hover:bg-blue-500"
+                  className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-emerald-950/30 transition-colors hover:bg-emerald-500"
                 >
                   Meet the Founder
                   <ArrowRight className="h-4 w-4" />
@@ -397,7 +397,7 @@ export default function AboutPage() {
                       <h2 className="mt-2 text-sm font-bold text-slate-900">{stat.label}</h2>
                       <p className="mt-1 text-sm leading-relaxed text-slate-500">{stat.detail}</p>
                     </div>
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600">
                       <Icon className="h-5 w-5" />
                     </div>
                   </div>
@@ -411,7 +411,7 @@ export default function AboutPage() {
         <section id="founder" className="scroll-mt-24 px-4 pb-20 pt-4 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="mb-10 max-w-3xl">
-              <span className="text-xs font-bold uppercase tracking-wider text-blue-600">
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">
                 Founder Spotlight
               </span>
               <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
@@ -431,7 +431,7 @@ export default function AboutPage() {
                   <div className="relative mx-auto w-fit lg:mx-0">
                     <div
                       aria-hidden="true"
-                      className="flex h-36 w-36 items-center justify-center rounded-full bg-gradient-to-br from-blue-600 via-blue-700 to-emerald-500 text-5xl font-extrabold tracking-tight text-white shadow-xl shadow-blue-600/20 ring-8 ring-white"
+                      className="flex h-36 w-36 items-center justify-center rounded-full bg-gradient-to-br from-emerald-600 via-emerald-700 to-emerald-500 text-5xl font-extrabold tracking-tight text-white shadow-xl shadow-emerald-600/20 ring-8 ring-white"
                     >
                       MI
                     </div>
@@ -445,7 +445,7 @@ export default function AboutPage() {
                     <h3 className="text-3xl font-extrabold tracking-tight text-slate-900">
                       Muhammad Imran
                     </h3>
-                    <p className="mt-2 font-bold text-blue-700">
+                    <p className="mt-2 font-bold text-emerald-700">
                       Founder & Chief Executive Officer (CEO)
                     </p>
                     <p className="mt-1 text-sm font-medium text-slate-500">
@@ -463,7 +463,7 @@ export default function AboutPage() {
                     </h4>
                     <ul className="mt-4 space-y-3 text-sm font-semibold text-slate-700">
                       <li className="flex items-start gap-3">
-                        <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-blue-600" />
+                        <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-600" />
                         Founder & CEO @ LocalePak
                       </li>
                       <li className="flex items-start gap-3">
@@ -478,7 +478,7 @@ export default function AboutPage() {
                       href={FOUNDER_PORTFOLIO_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-blue-700"
+                      className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-emerald-700"
                     >
                       <Globe className="h-4 w-4" />
                       Visit Portfolio
@@ -488,7 +488,7 @@ export default function AboutPage() {
                       href={FOUNDER_LINKEDIN_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-slate-800 transition-colors hover:border-blue-300 hover:text-blue-700"
+                      className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-bold text-slate-800 transition-colors hover:border-emerald-300 hover:text-emerald-700"
                     >
                       <Linkedin className="h-4 w-4 text-[#0A66C2]" />
                       LinkedIn
@@ -517,7 +517,7 @@ export default function AboutPage() {
                         href={FOUNDER_PORTFOLIO_URL}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="font-semibold text-blue-700 underline decoration-blue-300 underline-offset-4 hover:text-blue-800"
+                        className="font-semibold text-emerald-700 underline decoration-emerald-300 underline-offset-4 hover:text-emerald-800"
                       >
                         Imran Digitals
                       </a>
@@ -541,7 +541,7 @@ export default function AboutPage() {
 
                   <div className="mt-9 border-t border-slate-200 pt-8">
                     <h4 className="flex items-center gap-2 text-sm font-extrabold uppercase tracking-wider text-slate-900">
-                      <Cpu className="h-5 w-5 text-blue-600" />
+                      <Cpu className="h-5 w-5 text-emerald-600" />
                       Founder’s Core Engineering & SEO Competencies
                     </h4>
                     <ul className="mt-5 flex flex-wrap gap-2" aria-label="Muhammad Imran skills">
@@ -556,9 +556,9 @@ export default function AboutPage() {
                     </ul>
                   </div>
 
-                  <div className="mt-8 flex items-start gap-3 rounded-2xl border border-blue-100 bg-blue-50 p-5">
-                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-blue-700" />
-                    <p className="text-sm leading-relaxed text-blue-950">
+                  <div className="mt-8 flex items-start gap-3 rounded-2xl border border-emerald-100 bg-emerald-50 p-5">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-emerald-700" />
+                    <p className="text-sm leading-relaxed text-emerald-950">
                       <strong className="font-bold">Founder fact:</strong> Muhammad Imran is the
                       founder, owner and CEO of LocalePak and the founder of Imran Digitals, his
                       digital agency and engineering consultancy.
@@ -574,7 +574,7 @@ export default function AboutPage() {
         <section className="border-y border-slate-200 bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="mb-10 max-w-3xl">
-              <span className="text-xs font-bold uppercase tracking-wider text-blue-600">
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">
                 Purpose
               </span>
               <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
@@ -584,7 +584,7 @@ export default function AboutPage() {
 
             <div className="grid gap-6 md:grid-cols-2">
               <article className="rounded-3xl border border-slate-200 bg-[#F8FAFC] p-7 shadow-sm sm:p-9">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-lg shadow-blue-600/20">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-emerald-600 text-white shadow-lg shadow-emerald-600/20">
                   <Target className="h-6 w-6" />
                 </div>
                 <h3 className="mt-6 text-2xl font-extrabold text-slate-900">Our Mission</h3>
@@ -612,7 +612,7 @@ export default function AboutPage() {
         {/* Core values */}
         <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="mb-10 max-w-3xl">
-            <span className="text-xs font-bold uppercase tracking-wider text-blue-600">
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">
               How We Work
             </span>
             <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
@@ -632,7 +632,7 @@ export default function AboutPage() {
                   key={value.title}
                   className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm transition-shadow hover:shadow-md"
                 >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-600">
                     <Icon className="h-5 w-5" />
                   </div>
                   <h3 className="mt-5 text-lg font-extrabold text-slate-900">{value.title}</h3>
@@ -644,11 +644,11 @@ export default function AboutPage() {
 
           <p className="mt-8 text-sm leading-relaxed text-slate-500">
             Read more about our standards in the{' '}
-            <Link href="/editorial-policy" className="font-bold text-blue-700 hover:text-blue-800">
+            <Link href="/editorial-policy" className="font-bold text-emerald-700 hover:text-emerald-800">
               Editorial Policy
             </Link>{' '}
             and{' '}
-            <Link href="/verification-policy" className="font-bold text-blue-700 hover:text-blue-800">
+            <Link href="/verification-policy" className="font-bold text-emerald-700 hover:text-emerald-800">
               Verification Policy
             </Link>
             .
@@ -659,7 +659,7 @@ export default function AboutPage() {
         <section className="border-y border-slate-200 bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="mx-auto grid max-w-7xl items-start gap-10 lg:grid-cols-[1.35fr_0.85fr]">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-blue-600">
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">
                 Our Story
               </span>
               <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
@@ -771,7 +771,7 @@ export default function AboutPage() {
         <section className="border-y border-slate-200 bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <div className="mb-10 max-w-3xl">
-              <span className="text-xs font-bold uppercase tracking-wider text-blue-600">
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">
                 People & Expertise
               </span>
               <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
@@ -784,27 +784,27 @@ export default function AboutPage() {
             </div>
 
             <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-              <article className="rounded-3xl border border-blue-200 bg-blue-50/60 p-7 shadow-sm">
+              <article className="rounded-3xl border border-emerald-200 bg-emerald-50/60 p-7 shadow-sm">
                 <div
                   aria-hidden="true"
-                  className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-600 to-emerald-500 text-lg font-extrabold text-white"
+                  className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-600 to-emerald-500 text-lg font-extrabold text-white"
                 >
                   MI
                 </div>
                 <h3 className="mt-5 text-lg font-extrabold text-slate-900">Muhammad Imran</h3>
-                <p className="mt-1 text-sm font-bold text-blue-700">
+                <p className="mt-1 text-sm font-bold text-emerald-700">
                   Founder, Owner & CEO
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-slate-600">
                   Responsible for the platform vision, software architecture, web development, AI
                   integration and local SEO strategy.
                 </p>
-                <div className="mt-5 flex gap-4 border-t border-blue-100 pt-4 text-sm font-bold">
+                <div className="mt-5 flex gap-4 border-t border-emerald-100 pt-4 text-sm font-bold">
                   <a
                     href={FOUNDER_PORTFOLIO_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-blue-700 hover:text-blue-900"
+                    className="inline-flex items-center gap-1.5 text-emerald-700 hover:text-emerald-900"
                   >
                     Portfolio
                     <ExternalLink className="h-3.5 w-3.5" />
@@ -813,7 +813,7 @@ export default function AboutPage() {
                     href={FOUNDER_LINKEDIN_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-slate-700 hover:text-blue-700"
+                    className="inline-flex items-center gap-1.5 text-slate-700 hover:text-emerald-700"
                   >
                     LinkedIn
                     <ExternalLink className="h-3.5 w-3.5" />
@@ -828,13 +828,13 @@ export default function AboutPage() {
                     key={team.name}
                     className="rounded-3xl border border-slate-200 bg-[#F8FAFC] p-7 shadow-sm"
                   >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-blue-600 shadow-sm">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-emerald-600 shadow-sm">
                       <Icon className="h-6 w-6" />
                     </div>
                     <h3 className="mt-5 text-lg font-extrabold leading-snug text-slate-900">
                       {team.name}
                     </h3>
-                    <p className="mt-1 text-sm font-bold text-blue-700">{team.role}</p>
+                    <p className="mt-1 text-sm font-bold text-emerald-700">{team.role}</p>
                     <p className="mt-3 text-sm leading-relaxed text-slate-600">
                       {team.description}
                     </p>
@@ -848,7 +848,7 @@ export default function AboutPage() {
         {/* Founder FAQs */}
         <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="mb-10 text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-blue-700">
+            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-emerald-700">
               <HelpCircle className="h-4 w-4" />
               Founder FAQs
             </span>
@@ -870,7 +870,7 @@ export default function AboutPage() {
               >
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 p-6 font-extrabold text-slate-900 marker:hidden [&::-webkit-details-marker]:hidden">
                   <span>{faq.question}</span>
-                  <ChevronRight className="h-5 w-5 shrink-0 text-blue-600 transition-transform group-open:rotate-90" />
+                  <ChevronRight className="h-5 w-5 shrink-0 text-emerald-600 transition-transform group-open:rotate-90" />
                 </summary>
                 <p className="border-t border-slate-100 px-6 pb-6 pt-4 leading-relaxed text-slate-600">
                   {faq.answer}
@@ -885,7 +885,7 @@ export default function AboutPage() {
           <div className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl bg-[#0F172A] px-6 py-14 text-center text-white shadow-sm sm:px-10 sm:py-16">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute left-1/2 top-0 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-blue-600/20 blur-3xl"
+              className="pointer-events-none absolute left-1/2 top-0 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-emerald-600/20 blur-3xl"
             />
             <div className="relative mx-auto max-w-3xl">
               <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
@@ -897,7 +897,7 @@ export default function AboutPage() {
               <div className="mt-8 flex flex-wrap justify-center gap-3">
                 <Link
                   href="/register"
-                  className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-blue-500"
+                  className="inline-flex items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3.5 text-sm font-bold text-white transition-colors hover:bg-emerald-500"
                 >
                   Create Free Account
                   <ArrowRight className="h-4 w-4" />

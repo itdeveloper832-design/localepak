@@ -28,19 +28,19 @@ export interface BlogContentDocument {
 function ArticleLink({ link }: { link: BlogContentLink }) {
   if (link.external) {
     return (
-      <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-blue-700 font-bold underline">
+      <a href={link.href} target="_blank" rel="noopener noreferrer" className="text-emerald-700 font-bold underline">
         {link.label}
       </a>
     )
   }
 
-  return <Link href={link.href} className="text-blue-700 font-bold underline">{link.label}</Link>
+  return <Link href={link.href} className="text-emerald-700 font-bold underline">{link.label}</Link>
 }
 
 export default function ArticleContent({ content }: { content: BlogContentDocument }) {
   return (
     <>
-      <p className="text-lg font-medium text-slate-800 leading-relaxed bg-gradient-to-r from-blue-50 to-indigo-50/60 p-6 rounded-2xl border border-blue-100/80 shadow-xs">
+      <p className="text-lg font-medium text-slate-800 leading-relaxed bg-gradient-to-r from-emerald-50 to-indigo-50/60 p-6 rounded-2xl border border-emerald-100/80 shadow-xs">
         {content.intro}
       </p>
 
@@ -58,7 +58,7 @@ export default function ArticleContent({ content }: { content: BlogContentDocume
             </div>
           )}
           {section.bullets && (
-            <ul className="space-y-2 text-sm text-slate-700 pl-5 border-l-4 border-blue-500">
+            <ul className="space-y-2 text-sm text-slate-700 pl-5 border-l-4 border-emerald-500">
               {section.bullets.map((bullet) => <li key={bullet}>• {bullet}</li>)}
             </ul>
           )}
@@ -76,7 +76,7 @@ export default function ArticleContent({ content }: { content: BlogContentDocume
           <p className="text-sm text-slate-600">The sources below support the factual and methodological parts of this guide. Readers should check the linked pages for the latest updates.</p>
           <ol className="space-y-2 text-sm text-slate-700 list-decimal pl-5">
             {content.sources.map((source) => (
-              <li key={source.href}><a href={source.href} target="_blank" rel="noopener noreferrer" className="text-blue-700 underline">{source.label}</a></li>
+              <li key={source.href}><a href={source.href} target="_blank" rel="noopener noreferrer" className="text-emerald-700 underline">{source.label}</a></li>
             ))}
           </ol>
         </section>

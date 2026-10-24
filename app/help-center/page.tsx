@@ -31,7 +31,7 @@ export default function HelpCenterPage() {
       <main id="main-content" className="flex-1">
         <section className="bg-[#0F172A] text-white py-16 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center space-y-4">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
               <LifeBuoy className="w-3.5 h-3.5" /> Help Center
             </span>
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">How Can We Help?</h1>
@@ -46,22 +46,22 @@ export default function HelpCenterPage() {
           {/* Getting started */}
           <section className="space-y-4">
             <h2 className="text-2xl font-extrabold text-slate-900 flex items-center gap-2.5">
-              <UserPlus className="w-6 h-6 text-blue-600" /> Getting Started
+              <UserPlus className="w-6 h-6 text-emerald-600" /> Getting Started
             </h2>
             <div className="bg-white rounded-3xl border border-slate-200 p-7 space-y-3 text-sm text-slate-600 leading-relaxed">
               <p>
                 <strong className="text-slate-900">Finding a business needs no account.</strong> Browse by{' '}
-                <Link href="/categories" className="text-blue-600 font-semibold hover:underline">category</Link> or{' '}
-                <Link href="/cities" className="text-blue-600 font-semibold hover:underline">city</Link>, open a profile,
+                <Link href="/categories" className="text-emerald-600 font-semibold hover:underline">category</Link> or{' '}
+                <Link href="/cities" className="text-emerald-600 font-semibold hover:underline">city</Link>, open a profile,
                 and call or WhatsApp the business directly — LocalePak never sits between you and the business,
                 and never charges you for an enquiry.
               </p>
               <p>
                 <strong className="text-slate-900">Listing a business starts with a free account.</strong>{' '}
-                <Link href="/register" className="text-blue-600 font-semibold hover:underline">Register</Link> with your
+                <Link href="/register" className="text-emerald-600 font-semibold hover:underline">Register</Link> with your
                 owner name, email and a Pakistani mobile number, and choose a password of at least eight characters
                 mixing letters, numbers and a special character. Then{' '}
-                <Link href="/login" className="text-blue-600 font-semibold hover:underline">log in</Link> to reach your
+                <Link href="/login" className="text-emerald-600 font-semibold hover:underline">log in</Link> to reach your
                 personal dashboard. Your dashboard is private to your account and shows only your own listings.
               </p>
             </div>
@@ -70,7 +70,7 @@ export default function HelpCenterPage() {
           {/* Adding a business */}
           <section className="space-y-4">
             <h2 className="text-2xl font-extrabold text-slate-900 flex items-center gap-2.5">
-              <ClipboardList className="w-6 h-6 text-blue-600" /> Adding a Business — The 8 Steps
+              <ClipboardList className="w-6 h-6 text-emerald-600" /> Adding a Business — The 8 Steps
             </h2>
             <p className="text-sm text-slate-600 leading-relaxed">
               From your dashboard, choose <strong className="text-slate-900">Add Business</strong>. The form walks you
@@ -80,7 +80,7 @@ export default function HelpCenterPage() {
               {steps.map((step) => (
                 <li key={step.n} className="bg-white rounded-2xl border border-slate-200 p-5 space-y-1.5">
                   <h3 className="font-bold text-slate-900 text-sm">
-                    <span className="text-blue-600">Step {step.n}:</span> {step.title}
+                    <span className="text-emerald-600">Step {step.n}:</span> {step.title}
                   </h3>
                   <p className="text-xs text-slate-600 leading-relaxed">{step.text}</p>
                 </li>
@@ -88,7 +88,7 @@ export default function HelpCenterPage() {
             </ol>
             <p className="text-sm text-slate-600 leading-relaxed">
               After you submit, the listing is marked <em>pending</em> in your dashboard. Read the{' '}
-              <Link href="/business-listing-guidelines" className="text-blue-600 font-semibold hover:underline">listing guidelines</Link>{' '}
+              <Link href="/business-listing-guidelines" className="text-emerald-600 font-semibold hover:underline">listing guidelines</Link>{' '}
               before submitting to give your listing the smoothest path through review.
             </p>
           </section>
@@ -96,13 +96,13 @@ export default function HelpCenterPage() {
           {/* Companies & jobs */}
           <section className="space-y-4">
             <h2 className="text-2xl font-extrabold text-slate-900 flex items-center gap-2.5">
-              <Building2 className="w-6 h-6 text-blue-600" /> Companies &amp; Jobs
+              <Building2 className="w-6 h-6 text-emerald-600" /> Companies &amp; Jobs
             </h2>
             <div className="bg-white rounded-3xl border border-slate-200 p-7 space-y-3 text-sm text-slate-600 leading-relaxed">
               <p>
                 <strong className="text-slate-900">Add Company</strong> creates a company profile — suited to
                 registered firms, agencies and larger organisations. Approved companies appear in the{' '}
-                <Link href="/companies" className="text-blue-600 font-semibold hover:underline">companies directory</Link>{' '}
+                <Link href="/companies" className="text-emerald-600 font-semibold hover:underline">companies directory</Link>{' '}
                 with their industry, city and contact details.
               </p>
               <p>
@@ -112,7 +112,7 @@ export default function HelpCenterPage() {
                 candidates a fee to apply.
               </p>
               <p className="flex items-start gap-2">
-                <Briefcase className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                <Briefcase className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                 <span>Your dashboard groups everything you have submitted — businesses, companies and jobs — each with its current status.</span>
               </p>
             </div>
@@ -121,7 +121,7 @@ export default function HelpCenterPage() {
           {/* Verification & approval */}
           <section className="space-y-4">
             <h2 className="text-2xl font-extrabold text-slate-900 flex items-center gap-2.5">
-              <ShieldCheck className="w-6 h-6 text-blue-600" /> Verification &amp; Approval
+              <ShieldCheck className="w-6 h-6 text-emerald-600" /> Verification &amp; Approval
             </h2>
             <div className="bg-white rounded-3xl border border-slate-200 p-7 space-y-3 text-sm text-slate-600 leading-relaxed">
               <p>
@@ -135,9 +135,9 @@ export default function HelpCenterPage() {
                 If a submission is not approved, it usually needs a fixable correction — a wrong category, an
                 unreachable phone number, or details that do not match. Correct the issue and resubmit, or contact
                 us and we will explain what we found. Our full standards are in the{' '}
-                <Link href="/verification-policy" className="text-blue-600 font-semibold hover:underline">verification policy</Link>{' '}
+                <Link href="/verification-policy" className="text-emerald-600 font-semibold hover:underline">verification policy</Link>{' '}
                 and{' '}
-                <Link href="/editorial-policy" className="text-blue-600 font-semibold hover:underline">editorial policy</Link>.
+                <Link href="/editorial-policy" className="text-emerald-600 font-semibold hover:underline">editorial policy</Link>.
               </p>
               <p className="flex items-start gap-2">
                 <Star className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
@@ -152,24 +152,24 @@ export default function HelpCenterPage() {
           {/* Contact support */}
           <section className="space-y-4">
             <h2 className="text-2xl font-extrabold text-slate-900 flex items-center gap-2.5">
-              <Mail className="w-6 h-6 text-blue-600" /> Contact Support
+              <Mail className="w-6 h-6 text-emerald-600" /> Contact Support
             </h2>
             <div className="bg-white rounded-3xl border border-slate-200 p-7 space-y-3 text-sm text-slate-600 leading-relaxed">
               <p>
                 Still stuck? Message us through the{' '}
-                <Link href="/contact" className="text-blue-600 font-semibold hover:underline">contact page</Link> or the{' '}
-                <Link href="/support" className="text-blue-600 font-semibold hover:underline">support page</Link>.
+                <Link href="/contact" className="text-emerald-600 font-semibold hover:underline">contact page</Link> or the{' '}
+                <Link href="/support" className="text-emerald-600 font-semibold hover:underline">support page</Link>.
                 Include the page URL and the name of the listing involved — that one detail saves a full round
                 of back-and-forth. To report a listing that looks fake, closed or abusive, use{' '}
-                <Link href="/report-abuse" className="text-blue-600 font-semibold hover:underline">Report Abuse</Link>{' '}
+                <Link href="/report-abuse" className="text-emerald-600 font-semibold hover:underline">Report Abuse</Link>{' '}
                 so it reaches the review queue directly.
               </p>
               <p>
                 Common questions are answered faster in the{' '}
-                <Link href="/faqs" className="text-blue-600 font-semibold hover:underline">FAQs</Link> — check there
+                <Link href="/faqs" className="text-emerald-600 font-semibold hover:underline">FAQs</Link> — check there
                 first for approval timing, the verified badge, and how reviews work.
               </p>
-              <Link href="/contact" className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl transition-colors">
+              <Link href="/contact" className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors">
                 Contact Support <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>

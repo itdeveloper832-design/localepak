@@ -113,9 +113,9 @@ export default function SearchResults({ initialLiveItems }: { initialLiveItems: 
   const iconFor = (type: Result['type']) =>
     type === 'City' ? <MapPin className="w-5 h-5 text-emerald-600" />
     : type === 'Guide' ? <BookOpen className="w-5 h-5 text-amber-600" />
-    : type === 'Business' ? <Building2 className="w-5 h-5 text-blue-600" />
+    : type === 'Business' ? <Building2 className="w-5 h-5 text-emerald-600" />
     : type === 'Company' ? <Briefcase className="w-5 h-5 text-indigo-600" />
-    : <LayoutGrid className="w-5 h-5 text-blue-600" />
+    : <LayoutGrid className="w-5 h-5 text-emerald-600" />
 
   return (
     <main id="main-content" className="flex-1">
@@ -136,7 +136,7 @@ export default function SearchResults({ initialLiveItems }: { initialLiveItems: 
                 className="w-full bg-transparent text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none"
               />
             </div>
-            <button type="submit" className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-2xl transition-colors">
+            <button type="submit" className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-2xl transition-colors">
               Search
             </button>
           </form>
@@ -154,7 +154,7 @@ export default function SearchResults({ initialLiveItems }: { initialLiveItems: 
                 aria-pressed={typeFilter === filter}
                 className={`px-3.5 py-1.5 rounded-full text-xs font-bold border transition-colors cursor-pointer ${
                   typeFilter === filter
-                    ? 'bg-blue-600 border-blue-600 text-white'
+                    ? 'bg-emerald-600 border-emerald-600 text-white'
                     : 'bg-white/10 border-white/20 text-slate-200 hover:bg-white/20'
                 }`}
               >
@@ -185,7 +185,7 @@ export default function SearchResults({ initialLiveItems }: { initialLiveItems: 
               <p className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Popular categories</p>
               <div className="flex flex-wrap justify-center gap-2">
                 {CATEGORIES.slice(0, 6).map((cat) => (
-                  <Link key={cat.id} href={`/category/${cat.id}`} className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs font-semibold text-slate-700 hover:border-blue-500">
+                  <Link key={cat.id} href={`/category/${cat.id}`} className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs font-semibold text-slate-700 hover:border-emerald-500">
                     {cat.name}
                   </Link>
                 ))}
@@ -193,14 +193,14 @@ export default function SearchResults({ initialLiveItems }: { initialLiveItems: 
               <p className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Popular cities</p>
               <div className="flex flex-wrap justify-center gap-2">
                 {TOP_CITIES.slice(0, 8).map((c) => (
-                  <Link key={c} href={`/city/${cityToSlug(c)}`} className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs font-semibold text-slate-700 hover:border-blue-500">
+                  <Link key={c} href={`/city/${cityToSlug(c)}`} className="px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-full text-xs font-semibold text-slate-700 hover:border-emerald-500">
                     {c}
                   </Link>
                 ))}
               </div>
               <p className="text-xs text-slate-500">
-                Or browse all <Link href="/categories" className="text-blue-600 font-semibold hover:underline">categories</Link> and{' '}
-                <Link href="/cities" className="text-blue-600 font-semibold hover:underline">cities</Link> directly.
+                Or browse all <Link href="/categories" className="text-emerald-600 font-semibold hover:underline">categories</Link> and{' '}
+                <Link href="/cities" className="text-emerald-600 font-semibold hover:underline">cities</Link> directly.
               </p>
             </div>
           </div>
@@ -211,7 +211,7 @@ export default function SearchResults({ initialLiveItems }: { initialLiveItems: 
                 <Link
                   href={item.href}
                   prefetch={false}
-                  className="flex gap-4 bg-white rounded-2xl border border-slate-200 p-5 hover:border-blue-500 hover:shadow-md transition-all"
+                  className="flex gap-4 bg-white rounded-2xl border border-slate-200 p-5 hover:border-emerald-500 hover:shadow-md transition-all"
                 >
                   <div className="shrink-0 w-11 h-11 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center">
                     {iconFor(item.type)}

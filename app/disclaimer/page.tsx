@@ -25,7 +25,7 @@ export default function DisclaimerPage() {
 
           <div className="space-y-6 text-sm text-slate-600 leading-relaxed">
             <p>
-              The information provided by <strong>LocalePak</strong> (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) on <a href="https://www.localepak.com/" className="text-blue-600 underline">https://www.localepak.com/</a> is for general informational and commercial directory purposes only.
+              The information provided by <strong>LocalePak</strong> (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) on <a href="https://www.localepak.com/" className="text-emerald-600 underline">https://www.localepak.com/</a> is for general informational and commercial directory purposes only.
             </p>
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">1. Information Accuracy</h2>

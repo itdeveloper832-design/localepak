@@ -172,8 +172,8 @@ export default function AddCompanyPage() {
               <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={4} placeholder="Tell buyers what your company does, your products or services, and your track record." className={inputClass} />
             </div>
 
-            <div className="flex gap-2.5 p-3.5 bg-blue-50 border border-blue-100 rounded-xl text-xs text-slate-600">
-              <Info className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+            <div className="flex gap-2.5 p-3.5 bg-emerald-50 border border-emerald-100 rounded-xl text-xs text-slate-600">
+              <Info className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
               <span>Your company profile goes through a quick review and appears publicly on LocalePak after approval.</span>
             </div>
 

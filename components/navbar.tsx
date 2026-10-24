@@ -45,7 +45,7 @@ export default function Navbar() {
                   href={link.href}
                   className={`text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 px-3 py-2 rounded-lg ${
                     isActive
-                      ? 'text-blue-400 bg-zinc-850/80'
+                      ? 'text-emerald-400 bg-zinc-850/80'
                       : 'text-zinc-300 hover:text-white hover:bg-zinc-800/40'
                   }`}
                 >
@@ -74,13 +74,13 @@ export default function Navbar() {
               className="px-3.5 py-2 rounded-xl text-zinc-300 hover:text-white hover:bg-zinc-800/70 transition-colors flex items-center gap-1.5 text-sm font-medium"
               title="Business & Profile Dashboard"
             >
-              <Building2 className="w-4 h-4 text-blue-400" />
+              <Building2 className="w-4 h-4 text-emerald-400" />
               <span>Dashboard</span>
             </Link>
 
             <Link
               href="/register" prefetch={false}
-              className="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-md shadow-blue-600/25 transition-all duration-200 inline-flex items-center gap-2"
+              className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold shadow-md shadow-emerald-600/25 transition-all duration-200 inline-flex items-center gap-2"
             >
               <Plus className="w-4 h-4" />
               <span>Get Started</span>
@@ -119,12 +119,12 @@ export default function Navbar() {
                 onClick={() => setOpen(false)}
                 className={`text-sm font-semibold py-3 px-4 rounded-xl transition-colors flex items-center justify-between ${
                   isActive
-                    ? 'bg-zinc-800 text-blue-400'
+                    ? 'bg-zinc-800 text-emerald-400'
                     : 'text-zinc-300 hover:bg-zinc-800 hover:text-white'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  {link.icon && <link.icon className="w-4 h-4 text-blue-400" />}
+                  {link.icon && <link.icon className="w-4 h-4 text-emerald-400" />}
                   <span>{link.label}</span>
                 </div>
               </Link>
@@ -137,7 +137,7 @@ export default function Navbar() {
               onClick={() => setOpen(false)}
               className="text-sm font-semibold py-3 px-4 rounded-xl text-zinc-300 hover:bg-zinc-800 flex items-center gap-3"
             >
-              <Building2 className="w-4 h-4 text-blue-400" />
+              <Building2 className="w-4 h-4 text-emerald-400" />
               <span>Business Dashboard</span>
             </Link>
 
@@ -145,7 +145,7 @@ export default function Navbar() {
             <Link
               href="/register" prefetch={false}
               onClick={() => setOpen(false)}
-              className="mt-2 px-4 py-3 rounded-xl bg-blue-600 text-white text-sm font-bold text-center shadow-md shadow-blue-600/30 flex items-center justify-center gap-2"
+              className="mt-2 px-4 py-3 rounded-xl bg-emerald-600 text-white text-sm font-bold text-center shadow-md shadow-emerald-600/30 flex items-center justify-center gap-2"
             >
               <Plus className="w-4 h-4" />
               <span>Get Started Free</span>

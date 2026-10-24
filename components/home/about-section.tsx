@@ -43,8 +43,8 @@ export default function AboutSection() {
           </div>
           
           <div className="flex items-start gap-4 p-4 sm:p-5 rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md hover:border-primary/20 transition-all">
-            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center">
-              <MapPin className="w-5 h-5 text-blue-500" />
+            <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+              <MapPin className="w-5 h-5 text-emerald-500" />
             </div>
             <div>
               <h3 className="font-semibold text-gray-900 mb-1">Pakistan Wide</h3>

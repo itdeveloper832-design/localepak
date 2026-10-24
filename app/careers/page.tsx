@@ -35,7 +35,7 @@ export default function CareersPage() {
           
           <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div>
-              <span className="text-xs font-bold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md">Engineering</span>
+              <span className="text-xs font-bold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">Engineering</span>
               <h3 className="font-bold text-slate-900 text-lg mt-2">Senior Full Stack Engineer</h3>
               <p className="text-xs text-slate-500 flex items-center gap-3 mt-1">
                 <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-slate-400" /> Islamabad / Remote</span>
@@ -62,7 +62,7 @@ export default function CareersPage() {
           </div>
 
           <div className="pt-8 text-center text-xs text-slate-500">
-            Don&apos;t see your role? Submit your resume to <a href="mailto:careers@localepak.com" className="text-blue-600 underline font-medium">careers@localepak.com</a> for future consideration.
+            Don&apos;t see your role? Submit your resume to <a href="mailto:careers@localepak.com" className="text-emerald-600 underline font-medium">careers@localepak.com</a> for future consideration.
           </div>
         </section>
       </main>

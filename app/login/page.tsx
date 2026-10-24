@@ -69,7 +69,7 @@ function LoginForm() {
   return (
     <div className="max-w-md w-full bg-white border border-slate-200 rounded-3xl p-8 sm:p-10 shadow-xl space-y-6">
       <div className="text-center space-y-2">
-        <div className="inline-flex p-3.5 rounded-2xl bg-blue-50 text-blue-600 shadow-inner">
+        <div className="inline-flex p-3.5 rounded-2xl bg-emerald-50 text-emerald-600 shadow-inner">
           <LogIn className="w-8 h-8" />
         </div>
         <h1 className="text-2xl font-extrabold text-slate-900">Sign In to LocalePak</h1>
@@ -103,7 +103,7 @@ function LoginForm() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-600"
+              className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600"
             />
           </div>
         </div>
@@ -118,7 +118,7 @@ function LoginForm() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="w-full pl-10 pr-11 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-600"
+              className="w-full pl-10 pr-11 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600"
             />
             <button
               type="button"
@@ -146,7 +146,7 @@ function LoginForm() {
           Don&apos;t have an account yet?{' '}
           <Link
             href="/register"
-            className="text-blue-600 font-bold hover:underline"
+            className="text-emerald-600 font-bold hover:underline"
           >
             Create Account
           </Link>

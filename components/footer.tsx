@@ -61,16 +61,16 @@ export default function Footer() {
           
           {/* Section 1: Directory & Explore */}
           <div>
-            <h3 className="font-bold text-white text-sm tracking-wider uppercase mb-4 text-blue-400 flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-blue-400" />
+            <h3 className="font-bold text-white text-sm tracking-wider uppercase mb-4 text-emerald-400 flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-emerald-400" />
               <span>Directory</span>
             </h3>
             <ul className="space-y-2 text-xs text-slate-300">
-              <li><Link href="/categories" className="hover:text-blue-400 transition-colors">All Categories</Link></li>
-              <li><Link href="/cities" className="hover:text-blue-400 transition-colors">All Cities</Link></li>
-              <li><Link href="/businesses" prefetch={false} className="hover:text-blue-400 transition-colors">Businesses</Link></li>
-              <li><Link href="/companies" prefetch={false} className="hover:text-blue-400 transition-colors">Companies</Link></li>
-              <li><Link href="/search" prefetch={false} className="hover:text-blue-400 transition-colors">Search</Link></li>
+              <li><Link href="/categories" className="hover:text-emerald-400 transition-colors">All Categories</Link></li>
+              <li><Link href="/cities" className="hover:text-emerald-400 transition-colors">All Cities</Link></li>
+              <li><Link href="/businesses" prefetch={false} className="hover:text-emerald-400 transition-colors">Businesses</Link></li>
+              <li><Link href="/companies" prefetch={false} className="hover:text-emerald-400 transition-colors">Companies</Link></li>
+              <li><Link href="/search" prefetch={false} className="hover:text-emerald-400 transition-colors">Search</Link></li>
             </ul>
           </div>
 

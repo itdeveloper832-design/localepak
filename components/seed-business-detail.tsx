@@ -48,7 +48,7 @@ export default function SeedBusinessDetail({ business }: { business: SeedBusines
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1 w-full">
-        <Link href="/businesses" className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 hover:text-blue-700 mb-6">
+        <Link href="/businesses" className="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-600 hover:text-emerald-700 mb-6">
           <ArrowLeft className="w-4 h-4" /> Back to Businesses
         </Link>
 
@@ -57,7 +57,7 @@ export default function SeedBusinessDetail({ business }: { business: SeedBusines
             <div className="flex flex-wrap items-center gap-2">
               <Link
                 href={`/category/${business.categorySlug}`}
-                className="px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100 text-[11px] font-bold hover:border-blue-300"
+                className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100 text-[11px] font-bold hover:border-emerald-300"
               >
                 {business.category}
               </Link>
@@ -74,7 +74,7 @@ export default function SeedBusinessDetail({ business }: { business: SeedBusines
               </span>
               {business.phone && (
                 <span className="flex items-center gap-1.5">
-                  <Phone className="w-4 h-4 text-blue-600" /> {business.phone}
+                  <Phone className="w-4 h-4 text-emerald-600" /> {business.phone}
                 </span>
               )}
             </div>
@@ -85,7 +85,7 @@ export default function SeedBusinessDetail({ business }: { business: SeedBusines
               <div className="flex flex-wrap gap-3 pt-2">
                 <a
                   href={telHref(business.phone)}
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors"
                 >
                   <Phone className="w-4 h-4" /> Call Now
                 </a>
@@ -104,15 +104,15 @@ export default function SeedBusinessDetail({ business }: { business: SeedBusines
 
             <p className="text-xs text-slate-400 pt-1">
               Looking for more {business.category} options nearby? Browse{' '}
-              <Link href={`/city/${business.citySlug}/${business.categorySlug}`} className="text-blue-600 font-semibold hover:underline">
+              <Link href={`/city/${business.citySlug}/${business.categorySlug}`} className="text-emerald-600 font-semibold hover:underline">
                 {business.category} in {business.city}
               </Link>
               .
             </p>
           </section>
 
-          <section className="bg-blue-50 rounded-3xl border border-blue-100 p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-            <Info className="w-6 h-6 text-blue-500 shrink-0" />
+          <section className="bg-emerald-50 rounded-3xl border border-emerald-100 p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+            <Info className="w-6 h-6 text-emerald-500 shrink-0" />
             <div className="space-y-1">
               <h2 className="font-bold text-slate-900 text-sm">About this directory listing</h2>
               <p className="text-xs text-slate-600 leading-relaxed">

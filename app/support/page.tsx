@@ -19,7 +19,7 @@ export default function SupportPage() {
       <main className="bg-[#F8FAFC] text-slate-800 font-sans min-h-screen pb-16">
         <section className="bg-gradient-to-b from-[#0F172A] via-[#1E293B] to-[#0F172A] text-white py-16 text-center border-b border-slate-800">
           <div className="max-w-4xl mx-auto px-4">
-            <Headphones className="w-12 h-12 text-blue-400 mx-auto mb-4" />
+            <Headphones className="w-12 h-12 text-emerald-400 mx-auto mb-4" />
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
               LocalePak Customer Support Desk
             </h1>
@@ -42,7 +42,7 @@ export default function SupportPage() {
               </div>
 
               <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200">
-                <Mail className="w-6 h-6 text-blue-600 mx-auto mb-2" />
+                <Mail className="w-6 h-6 text-emerald-600 mx-auto mb-2" />
                 <h4 className="font-bold text-slate-900 text-sm">Email Support</h4>
                 <p className="text-xs text-slate-500 mt-1">admin@localepak.com</p>
               </div>
@@ -56,7 +56,7 @@ export default function SupportPage() {
 
             <Link
               href="/contact"
-              className="inline-flex items-center gap-2 px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors shadow-md"
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors shadow-md"
             >
               Open Support Ticket
             </Link>

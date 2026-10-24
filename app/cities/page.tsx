@@ -40,7 +40,7 @@ export default function CitiesIndexPage() {
         {/* Top Metropolitan Hubs */}
         <div className="space-y-4">
           <h2 className="text-xl font-extrabold text-slate-900 flex items-center gap-2">
-            <MapPin className="w-5 h-5 text-blue-600" />
+            <MapPin className="w-5 h-5 text-emerald-600" />
             <span>Top Metropolitan Business Hubs</span>
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -50,10 +50,10 @@ export default function CitiesIndexPage() {
                 href={`/city/${city.toLowerCase().replace(/\s+/g, '-')}`}
                 className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs hover:shadow-lg transition-all text-center space-y-2 group"
               >
-                <div className="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center mx-auto group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                <div className="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto group-hover:bg-emerald-600 group-hover:text-white transition-colors">
                   <Building2 className="w-5 h-5" />
                 </div>
-                <h3 className="font-extrabold text-slate-900 text-sm group-hover:text-blue-600 transition-colors">
+                <h3 className="font-extrabold text-slate-900 text-sm group-hover:text-emerald-600 transition-colors">
                   {city}
                 </h3>
                 <span className="text-[11px] font-semibold text-emerald-600 block">Explore listings</span>
@@ -72,7 +72,7 @@ export default function CitiesIndexPage() {
               <Link
                 key={city}
                 href={`/city/${city.toLowerCase().replace(/\s+/g, '-')}`}
-                className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/60 text-slate-700 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 font-semibold transition-colors flex items-center justify-between"
+                className="p-2.5 rounded-xl bg-slate-50 border border-slate-200/60 text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 hover:border-emerald-200 font-semibold transition-colors flex items-center justify-between"
               >
                 <span>{city}</span>
                 <ArrowRight className="w-3 h-3 text-slate-400 opacity-60" />

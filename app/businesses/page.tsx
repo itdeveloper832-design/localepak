@@ -42,7 +42,7 @@ export default async function BusinessesPage() {
             <p className="text-sm text-slate-500 max-w-sm mx-auto">
               Create a free account and add your business to appear here and in LocalePak search results.
             </p>
-            <Link href="/register" prefetch={false} className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors">
+            <Link href="/register" prefetch={false} className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors">
               Add Your Business Free <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -52,7 +52,7 @@ export default async function BusinessesPage() {
               <article key={biz.id} className="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs hover:shadow-lg transition-all flex flex-col gap-3">
                 <div className="flex items-start justify-between gap-3">
                   <h2 className="font-extrabold text-slate-900 leading-snug">{biz.name}</h2>
-                  <span className="shrink-0 px-2.5 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100 text-[11px] font-bold">
+                  <span className="shrink-0 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100 text-[11px] font-bold">
                     {biz.category}
                   </span>
                 </div>
@@ -63,7 +63,7 @@ export default async function BusinessesPage() {
                 )}
                 {biz.phone && (
                   <p className="text-xs text-slate-500 flex items-center gap-1.5 font-medium">
-                    <Phone className="w-3.5 h-3.5 text-blue-600" /> {biz.phone}
+                    <Phone className="w-3.5 h-3.5 text-emerald-600" /> {biz.phone}
                   </p>
                 )}
                 {biz.description && (
@@ -72,7 +72,7 @@ export default async function BusinessesPage() {
                 <Link
                   href={`/business/${biz.slug}`}
                   prefetch={false}
-                  className="mt-auto inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 hover:text-blue-700"
+                  className="mt-auto inline-flex items-center gap-1.5 text-sm font-bold text-emerald-600 hover:text-emerald-700"
                 >
                   View Business <ArrowRight className="w-4 h-4" />
                 </Link>

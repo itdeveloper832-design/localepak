@@ -73,16 +73,16 @@ export default function AdminMessagesPage() {
       ) : (
         <div className="space-y-3">
           {items.map(({ id, data }) => (
-            <article key={id} className={`bg-white rounded-2xl border p-5 space-y-2 ${data.read ? 'border-slate-200' : 'border-blue-300 bg-blue-50/30'}`}>
+            <article key={id} className={`bg-white rounded-2xl border p-5 space-y-2 ${data.read ? 'border-slate-200' : 'border-emerald-300 bg-emerald-50/30'}`}>
               <div className="flex flex-wrap items-center gap-2">
                 <h2 className="font-extrabold text-slate-900 text-sm">{data.name || 'No name'}</h2>
                 {data.email && (
-                  <a href={`mailto:${data.email}`} className="text-xs text-blue-600 font-semibold hover:underline">
+                  <a href={`mailto:${data.email}`} className="text-xs text-emerald-600 font-semibold hover:underline">
                     {data.email}
                   </a>
                 )}
                 {!data.read && (
-                  <span className="px-2 py-0.5 rounded-full bg-blue-600 text-white text-[10px] font-bold">Unread</span>
+                  <span className="px-2 py-0.5 rounded-full bg-emerald-600 text-white text-[10px] font-bold">Unread</span>
                 )}
                 <span className="text-[11px] text-slate-400 ml-auto">{formatDate(data.createdAt)}</span>
               </div>

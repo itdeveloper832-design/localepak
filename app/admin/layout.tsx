@@ -174,7 +174,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   value={loginEmail}
                   onChange={(e) => setLoginEmail(e.target.value)}
                   placeholder="admin@localepak.com"
-                  className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-600"
+                  className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600"
                 />
               </div>
             </div>
@@ -190,7 +190,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                   value={loginPassword}
                   onChange={(e) => setLoginPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-11 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-600"
+                  className="w-full pl-10 pr-11 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600"
                 />
                 <button
                   type="button"
@@ -206,14 +206,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <button
               type="submit"
               disabled={loginBusy}
-              className="w-full py-3 bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-bold text-sm rounded-xl transition-colors cursor-pointer"
+              className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-60 text-white font-bold text-sm rounded-xl transition-colors cursor-pointer"
             >
               {loginBusy ? 'Signing in...' : 'Sign In to Admin Panel'}
             </button>
           </form>
 
           <div className="text-center">
-            <Link href="/" className="text-xs font-semibold text-slate-500 hover:text-blue-600">
+            <Link href="/" className="text-xs font-semibold text-slate-500 hover:text-emerald-600">
               ← Back to Home
             </Link>
           </div>
@@ -232,13 +232,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             This area is for LocalePak administrators only. Your account does not have the admin role.
           </p>
           <div className="flex gap-3 justify-center pt-2">
-            <Link href="/" className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors">
+            <Link href="/" className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors">
               Back to Home
             </Link>
             <button
               type="button"
               onClick={handleSignOutStay}
-              className="px-6 py-3 bg-white border border-slate-200 hover:border-blue-500 font-bold text-sm rounded-xl transition-colors cursor-pointer"
+              className="px-6 py-3 bg-white border border-slate-200 hover:border-emerald-500 font-bold text-sm rounded-xl transition-colors cursor-pointer"
             >
               Sign Out
             </button>
@@ -264,7 +264,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
                 key={href}
                 href={href}
                 className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-colors ${
-                  active ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-white/10 hover:text-white'
+                  active ? 'bg-emerald-600 text-white' : 'text-slate-300 hover:bg-white/10 hover:text-white'
                 }`}
               >
                 <Icon className="w-4 h-4 shrink-0" />

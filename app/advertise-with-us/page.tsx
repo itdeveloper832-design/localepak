@@ -47,7 +47,7 @@ export default function AdvertiseWithUsPage() {
       <main id="main-content" className="flex-1">
         <section className="bg-[#0F172A] text-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center space-y-5">
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
               <Megaphone className="w-3.5 h-3.5" /> Advertise on LocalePak
             </span>
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
@@ -130,14 +130,14 @@ export default function AdvertiseWithUsPage() {
                   <Clock className="w-3.5 h-3.5" /> Launching soon
                 </span>
                 <h3 className="text-xl font-extrabold text-slate-900 flex items-center gap-2">
-                  <BadgeCheck className="w-5 h-5 text-blue-600" /> Verified Badge
+                  <BadgeCheck className="w-5 h-5 text-emerald-600" /> Verified Badge
                 </h3>
                 <p className="text-sm font-bold text-slate-500">Pricing announced at launch</p>
               </div>
               <ul className="space-y-2.5 text-sm text-slate-600 flex-1">
-                <li className="flex gap-2"><ShieldCheck className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /><span>A document check of your business registration</span></li>
-                <li className="flex gap-2"><ShieldCheck className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /><span>A verified badge shown on your profile</span></li>
-                <li className="flex gap-2"><ShieldCheck className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" /><span>Extra trust signals for customers comparing providers</span></li>
+                <li className="flex gap-2"><ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" /><span>A document check of your business registration</span></li>
+                <li className="flex gap-2"><ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" /><span>A verified badge shown on your profile</span></li>
+                <li className="flex gap-2"><ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" /><span>Extra trust signals for customers comparing providers</span></li>
               </ul>
               <Link href="/contact" className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm rounded-xl transition-colors">
                 Join the Waitlist <ArrowRight className="w-4 h-4" />
@@ -152,34 +152,34 @@ export default function AdvertiseWithUsPage() {
             <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight text-center">How It Works</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="rounded-3xl border border-slate-200 p-7 space-y-3">
-                <UserPlus className="w-8 h-8 text-blue-600" />
+                <UserPlus className="w-8 h-8 text-emerald-600" />
                 <h3 className="font-extrabold text-slate-900">1. Register</h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
                   Create your free LocalePak account with your name, email and a Pakistani phone number.
                 </p>
-                <Link href="/register" className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 hover:underline">
+                <Link href="/register" className="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-600 hover:underline">
                   Create free account <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
               <div className="rounded-3xl border border-slate-200 p-7 space-y-3">
-                <ClipboardList className="w-8 h-8 text-blue-600" />
+                <ClipboardList className="w-8 h-8 text-emerald-600" />
                 <h3 className="font-extrabold text-slate-900">2. Add your business</h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
                   Complete the eight-step form — contact details, category, location, hours, services
                   and products. It takes a few minutes and you can update it later.
                 </p>
-                <Link href="/add-business" className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 hover:underline">
+                <Link href="/add-business" className="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-600 hover:underline">
                   Start the form <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
               <div className="rounded-3xl border border-slate-200 p-7 space-y-3">
-                <SearchCheck className="w-8 h-8 text-blue-600" />
+                <SearchCheck className="w-8 h-8 text-emerald-600" />
                 <h3 className="font-extrabold text-slate-900">3. Get discovered</h3>
                 <p className="text-sm text-slate-600 leading-relaxed">
                   Our team reviews your submission. Once approved, your profile is public in your
                   category, your city and search — customers call or WhatsApp you directly.
                 </p>
-                <Link href="/business-listing-guidelines" className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 hover:underline">
+                <Link href="/business-listing-guidelines" className="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-600 hover:underline">
                   Read the listing guidelines <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
@@ -200,9 +200,9 @@ export default function AdvertiseWithUsPage() {
           </div>
           <p className="text-center text-xs text-slate-500">
             Questions about how listings are checked? Read our{' '}
-            <Link href="/verification-policy" className="text-blue-600 font-semibold hover:underline">verification policy</Link>{' '}
+            <Link href="/verification-policy" className="text-emerald-600 font-semibold hover:underline">verification policy</Link>{' '}
             and{' '}
-            <Link href="/editorial-policy" className="text-blue-600 font-semibold hover:underline">editorial policy</Link>.
+            <Link href="/editorial-policy" className="text-emerald-600 font-semibold hover:underline">editorial policy</Link>.
           </p>
         </section>
 

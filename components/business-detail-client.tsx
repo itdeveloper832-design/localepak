@@ -276,7 +276,7 @@ export default function BusinessDetailPage({
       <Navbar />
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1 w-full">
-        <Link href="/businesses" className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 hover:text-blue-700 mb-6">
+        <Link href="/businesses" className="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-600 hover:text-emerald-700 mb-6">
           <ArrowLeft className="w-4 h-4" /> Back to Businesses
         </Link>
 
@@ -289,7 +289,7 @@ export default function BusinessDetailPage({
               {unreleased.name} has been approved — LocalePak publishes newly approved listings together
               in a weekly release, so its full profile will appear here on {unreleased.releaseLabel}.
             </p>
-            <Link href="/businesses" className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors">
+            <Link href="/businesses" className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors">
               <ArrowLeft className="w-4 h-4" /> Browse Businesses
             </Link>
           </div>
@@ -299,7 +299,7 @@ export default function BusinessDetailPage({
             <p className="text-sm text-slate-500 max-w-sm mx-auto">
               This business may have been removed, or the link is incorrect.
             </p>
-            <Link href="/businesses" className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors">
+            <Link href="/businesses" className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors">
               <ArrowLeft className="w-4 h-4" /> Browse Businesses
             </Link>
           </div>
@@ -308,7 +308,7 @@ export default function BusinessDetailPage({
             <section className="bg-white rounded-3xl border border-slate-200 p-8 space-y-5">
               <div className="flex flex-wrap items-center gap-2">
                 {business.category && (
-                  <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100 text-[11px] font-bold">
+                  <span className="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100 text-[11px] font-bold">
                     {business.category}
                   </span>
                 )}
@@ -328,7 +328,7 @@ export default function BusinessDetailPage({
                 )}
                 {business.phone && (
                   <span className="flex items-center gap-1.5">
-                    <Phone className="w-4 h-4 text-blue-600" /> {business.phone}
+                    <Phone className="w-4 h-4 text-emerald-600" /> {business.phone}
                   </span>
                 )}
                 {business.email && (
@@ -348,7 +348,7 @@ export default function BusinessDetailPage({
                   {business.mapsUrl && (
                     <>
                       {' · '}
-                      <a href={business.mapsUrl} target="_blank" rel="noopener noreferrer" className="text-blue-600 font-semibold hover:underline">
+                      <a href={business.mapsUrl} target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-semibold hover:underline">
                         View on Google Maps
                       </a>
                     </>
@@ -370,7 +370,7 @@ export default function BusinessDetailPage({
                 {business.phone && (
                   <a
                     href={`tel:${business.phone}`}
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors"
                   >
                     <Phone className="w-4 h-4" /> Call Now
                   </a>
@@ -390,7 +390,7 @@ export default function BusinessDetailPage({
                     href={business.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 hover:border-blue-500 text-slate-700 font-bold text-sm rounded-xl transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 hover:border-emerald-500 text-slate-700 font-bold text-sm rounded-xl transition-colors"
                   >
                     <Globe className="w-4 h-4" /> Visit Website
                   </a>
@@ -401,7 +401,7 @@ export default function BusinessDetailPage({
             {hasHours && (
               <section className="bg-white rounded-3xl border border-slate-200 p-8 space-y-4">
                 <h2 className="font-extrabold text-slate-900 text-lg flex items-center gap-2">
-                  <Clock className="w-5 h-5 text-blue-600" /> Business Hours
+                  <Clock className="w-5 h-5 text-emerald-600" /> Business Hours
                 </h2>
                 <table className="w-full text-sm">
                   <tbody className="divide-y divide-slate-100">
@@ -431,7 +431,7 @@ export default function BusinessDetailPage({
                 <h2 className="font-extrabold text-slate-900 text-lg">Services</h2>
                 <div className="flex flex-wrap gap-2">
                   {services.map((service) => (
-                    <span key={service} className="px-3.5 py-2 bg-blue-50 text-blue-700 border border-blue-100 rounded-full text-xs font-semibold">
+                    <span key={service} className="px-3.5 py-2 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full text-xs font-semibold">
                       {service}
                     </span>
                   ))}
@@ -463,9 +463,9 @@ export default function BusinessDetailPage({
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-50 border border-slate-200 hover:border-blue-500 rounded-xl text-sm font-bold text-slate-700 transition-colors"
+                      className="inline-flex items-center gap-2 px-4 py-2.5 bg-slate-50 border border-slate-200 hover:border-emerald-500 rounded-xl text-sm font-bold text-slate-700 transition-colors"
                     >
-                      <Icon className="w-4 h-4 text-blue-600" /> {label}
+                      <Icon className="w-4 h-4 text-emerald-600" /> {label}
                     </a>
                   ))}
                 </div>
@@ -516,7 +516,7 @@ export default function BusinessDetailPage({
                       value={reviewForm.name}
                       onChange={(e) => setReviewForm({ ...reviewForm, name: e.target.value })}
                       placeholder="Your full name"
-                      className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-600"
+                      className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600"
                     />
                   </div>
                   <div>
@@ -547,13 +547,13 @@ export default function BusinessDetailPage({
                     value={reviewForm.text}
                     onChange={(e) => setReviewForm({ ...reviewForm, text: e.target.value })}
                     placeholder="How was the service? What should other customers know?"
-                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-600"
+                    className="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600"
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={submittingReview}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer disabled:opacity-50"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer disabled:opacity-50"
                 >
                   <Send className="w-3.5 h-3.5" />
                   {submittingReview ? 'Submitting...' : 'Submit Review'}
@@ -573,7 +573,7 @@ export default function BusinessDetailPage({
               </div>
               <Link
                 href="/contact"
-                className="px-5 py-2.5 bg-white border border-slate-200 hover:border-blue-500 text-slate-700 font-bold text-xs rounded-xl transition-colors shrink-0"
+                className="px-5 py-2.5 bg-white border border-slate-200 hover:border-emerald-500 text-slate-700 font-bold text-xs rounded-xl transition-colors shrink-0"
               >
                 Claim This Listing
               </Link>

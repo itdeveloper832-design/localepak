@@ -24,7 +24,7 @@ export default function CategoriesIndexPage() {
 
       <section className="bg-[#0F172A] text-white py-14 px-4 sm:px-6 lg:px-8 border-b border-slate-800 text-center">
         <div className="max-w-3xl mx-auto space-y-4">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold border border-blue-500/30">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold border border-emerald-500/30">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Category Taxonomy Hub</span>
           </span>
@@ -45,7 +45,7 @@ export default function CategoriesIndexPage() {
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                  <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:bg-emerald-600 group-hover:text-white transition-colors">
                     <Building2 className="w-6 h-6" />
                   </div>
                   <span className="text-xs font-extrabold text-slate-400 bg-slate-100 px-2.5 py-1 rounded-full">
@@ -53,7 +53,7 @@ export default function CategoriesIndexPage() {
                   </span>
                 </div>
 
-                <h3 className="font-extrabold text-slate-900 text-lg group-hover:text-blue-600 transition-colors">
+                <h3 className="font-extrabold text-slate-900 text-lg group-hover:text-emerald-600 transition-colors">
                   {cat.name}
                 </h3>
                 <p className="text-xs text-slate-500 leading-relaxed">
@@ -61,7 +61,7 @@ export default function CategoriesIndexPage() {
                 </p>
               </div>
 
-              <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-blue-600">
+              <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-emerald-600">
                 <span>Explore Category</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </div>

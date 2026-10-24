@@ -74,9 +74,9 @@ export default function BusinessListingGuidelinesPage() {
               Listings are owner-submitted and reviewed by our team before they appear. Approval means the
               submission passed these checks — it is not an endorsement, and LocalePak does not guarantee
               rankings, enquiries or sales for any listing. Read the full{' '}
-              <Link href="/verification-policy" className="text-blue-600 font-semibold hover:underline">verification policy</Link>{' '}
+              <Link href="/verification-policy" className="text-emerald-600 font-semibold hover:underline">verification policy</Link>{' '}
               for how checks work, and the{' '}
-              <Link href="/help-center" className="text-blue-600 font-semibold hover:underline">help center</Link>{' '}
+              <Link href="/help-center" className="text-emerald-600 font-semibold hover:underline">help center</Link>{' '}
               for a step-by-step walkthrough.
             </p>
           </div>

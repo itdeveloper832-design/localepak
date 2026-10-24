@@ -127,9 +127,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
       <main className="bg-[#F8FAFC] text-[#0F172A] font-sans pb-16">
         <nav aria-label="Breadcrumb" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 text-xs text-slate-500">
-          <Link href="/" className="hover:text-blue-700 underline">Home</Link>
+          <Link href="/" className="hover:text-emerald-700 underline">Home</Link>
           <span className="mx-2">/</span>
-          <Link href="/blog" className="hover:text-blue-700 underline">Blog</Link>
+          <Link href="/blog" className="hover:text-emerald-700 underline">Blog</Link>
           <span className="mx-2">/</span>
           <span>{category}</span>
         </nav>
@@ -137,7 +137,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         {/* HERO SECTION */}
         <section className="bg-white border-b border-[#E2E8F0] py-12 sm:py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <Link href="/blog" aria-label="Back to All Blog Posts" className="inline-flex items-center gap-2 text-xs font-bold text-[#2563EB] hover:underline mb-6">
+            <Link href="/blog" aria-label="Back to All Blog Posts" className="inline-flex items-center gap-2 text-xs font-bold text-[#059669] hover:underline mb-6">
               <ArrowLeft className="w-4 h-4" />
               <span>Back to All Blog Posts</span>
             </Link>
@@ -152,7 +152,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </h1>
 
             <div className="flex items-center gap-6 text-xs text-slate-500 font-medium pt-4 border-t border-slate-100 flex-wrap">
-              <span className="flex items-center gap-1.5"><User className="w-4 h-4 text-[#2563EB]" /> LocalePak Editorial Team</span>
+              <span className="flex items-center gap-1.5"><User className="w-4 h-4 text-[#059669]" /> LocalePak Editorial Team</span>
               <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4 text-slate-400" /> {publishDate}</span>
               <span className="flex items-center gap-1.5"><Clock className="w-4 h-4 text-slate-400" /> {readTime}</span>
             </div>
@@ -177,8 +177,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     This guide explains how to find <strong>restaurants in Karachi</strong> by cuisine, area, budget and occasion, while also showing how LocalePak can make local restaurant discovery easier.
                   </p>
 
-                  <p className="p-4 bg-blue-50 rounded-xl border border-blue-100 text-sm font-semibold text-blue-950">
-                    💡 <strong>Start with the directory:</strong> Comparing places in other cities too? Browse <Link href="/category/restaurants/" className="text-blue-700 font-extrabold underline">restaurants and food businesses</Link> by city and cuisine on LocalePak, and check each listing&apos;s hours and contact details before you set out.
+                  <p className="p-4 bg-emerald-50 rounded-xl border border-emerald-100 text-sm font-semibold text-emerald-950">
+                    💡 <strong>Start with the directory:</strong> Comparing places in other cities too? Browse <Link href="/category/restaurants/" className="text-emerald-700 font-extrabold underline">restaurants and food businesses</Link> by city and cuisine on LocalePak, and check each listing&apos;s hours and contact details before you set out.
                   </p>
 
                   {/* Section 1: Restaurants by Cuisine */}
@@ -245,8 +245,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       Choosing the Right Karachi Restaurant for Your Occasion
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                      <div className="p-5 bg-blue-50/70 rounded-2xl border border-blue-100 space-y-2">
-                        <strong className="text-sm font-bold text-blue-900 block">Family Gatherings</strong>
+                      <div className="p-5 bg-emerald-50/70 rounded-2xl border border-emerald-100 space-y-2">
+                        <strong className="text-sm font-bold text-emerald-900 block">Family Gatherings</strong>
                         <p className="text-slate-700">Check for large table arrangements, family halls, child-friendly menus, and convenient parking in DHA, Clifton, or Gulshan.</p>
                       </div>
                       <div className="p-5 bg-amber-50/70 rounded-2xl border border-amber-100 space-y-2">
@@ -272,7 +272,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       <Link href="/add-business" className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl shadow-md transition-all">
                         List Your Karachi Restaurant
                       </Link>
-                      <Link href="/categories" className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition-all">
+                      <Link href="/categories" className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-all">
                         Browse Food Categories
                       </Link>
                     </div>
@@ -281,7 +281,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   {/* Frequently Asked Questions (FAQ) */}
                   <div className="space-y-6 pt-6 border-t border-slate-200">
                     <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight flex items-center gap-2">
-                      <HelpCircle className="w-6 h-6 text-blue-600" />
+                      <HelpCircle className="w-6 h-6 text-emerald-600" />
                       <span>Frequently Asked Questions (FAQ)</span>
                     </h2>
 
@@ -300,7 +300,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     <h3 className="text-xl font-extrabold text-[#0F172A]">Explore LocalePak Directory & Guides</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
                       <Link href="/blog/businesses-in-lahore-by-category" className="p-3 bg-amber-50 text-amber-700 hover:bg-amber-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-amber-200">Lahore Businesses Guide</Link>
-                      <Link href="/blog/how-to-find-jobs-in-pakistan-2026" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Jobs in Pakistan</Link>
+                      <Link href="/blog/how-to-find-jobs-in-pakistan-2026" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">Jobs in Pakistan</Link>
                       <Link href="/blog/it-jobs-in-pakistan" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">IT Jobs in Pakistan</Link>
                       <Link href="/blog/universities-in-pakistan" className="p-3 bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-indigo-200">Universities Guide</Link>
                       <Link href="/blog/best-universities-computer-science-pakistan" className="p-3 bg-purple-50 text-purple-700 hover:bg-purple-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-purple-200">CS Universities</Link>
@@ -315,7 +315,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               ) : slug === 'best-universities-computer-science-pakistan' ? (
                 <>
                   {/* Article Intro */}
-                  <p className="text-lg font-medium text-slate-800 leading-relaxed bg-gradient-to-r from-blue-50 to-indigo-50/50 p-6 rounded-2xl border border-blue-100/80 shadow-xs">
+                  <p className="text-lg font-medium text-slate-800 leading-relaxed bg-gradient-to-r from-emerald-50 to-indigo-50/50 p-6 rounded-2xl border border-emerald-100/80 shadow-xs">
                     Computer Science, Information Technology and Software Engineering are among the most attractive degree paths for students who want to build careers in technology. Students in Pakistan can choose from universities offering undergraduate and graduate programs in CS, software engineering, IT, AI, data science, cybersecurity and related fields.
                   </p>
 
@@ -340,8 +340,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       Before choosing a university, understand the difference between these three related technology degrees:
                     </p>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                      <div className="p-5 bg-blue-50/70 rounded-2xl border border-blue-100 space-y-2">
-                        <strong className="text-sm font-bold text-blue-900 block">Computer Science (BS CS)</strong>
+                      <div className="p-5 bg-emerald-50/70 rounded-2xl border border-emerald-100 space-y-2">
+                        <strong className="text-sm font-bold text-emerald-900 block">Computer Science (BS CS)</strong>
                         <p className="text-slate-700">Focuses on computing algorithms, programming concepts, data structures, artificial intelligence, and theoretical foundations. Flexible path for developers, data scientists, and AI engineers.</p>
                       </div>
                       <div className="p-5 bg-purple-50/70 rounded-2xl border border-purple-100 space-y-2">
@@ -365,19 +365,19 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
                       <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <strong className="text-blue-900 font-bold block text-sm">1. Official HEC Recognition</strong>
-                        <p className="text-slate-600">Verify status via the official <a href="https://www.hec.gov.pk/english/universities/Pages/default.aspx" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold underline">Higher Education Commission (HEC) portal</a>.</p>
+                        <strong className="text-emerald-900 font-bold block text-sm">1. Official HEC Recognition</strong>
+                        <p className="text-slate-600">Verify status via the official <a href="https://www.hec.gov.pk/english/universities/Pages/default.aspx" target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-bold underline">Higher Education Commission (HEC) portal</a>.</p>
                       </div>
                       <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <strong className="text-blue-900 font-bold block text-sm">2. Modern Curriculum</strong>
+                        <strong className="text-emerald-900 font-bold block text-sm">2. Modern Curriculum</strong>
                         <p className="text-slate-600">Ensure coverage of Data Structures, Algorithms, Databases, Web & Mobile Dev, AI, and Cybersecurity.</p>
                       </div>
                       <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <strong className="text-blue-900 font-bold block text-sm">3. Computing Facilities</strong>
+                        <strong className="text-emerald-900 font-bold block text-sm">3. Computing Facilities</strong>
                         <p className="text-slate-600">High-performance computer labs, cloud environments, networking labs, and project spaces.</p>
                       </div>
                       <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <strong className="text-blue-900 font-bold block text-sm">4. Industry & Internship Support</strong>
+                        <strong className="text-emerald-900 font-bold block text-sm">4. Industry & Internship Support</strong>
                         <p className="text-slate-600">Active placement offices, job fairs, tech company tie-ups, and alumni networks.</p>
                       </div>
                     </div>
@@ -412,7 +412,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     <p>
                       University education alone does not guarantee employment. The strongest formula for tech career success is:
                     </p>
-                    <p className="text-sm font-bold text-blue-900 bg-blue-50 p-4 rounded-xl border border-blue-100 text-center">
+                    <p className="text-sm font-bold text-emerald-900 bg-emerald-50 p-4 rounded-xl border border-emerald-100 text-center">
                       Degree + Practical Projects + GitHub Portfolio + Internships + Verified Professional Profile
                     </p>
                     <div className="flex flex-wrap gap-2 text-xs font-semibold">
@@ -430,8 +430,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     <p>
                       A CS degree opens doors to careers as a software engineer, web developer, AI specialist, data analyst, QA engineer, or cybersecurity analyst.
                     </p>
-                    <p className="p-4 bg-blue-50 rounded-xl border border-blue-100 text-xs font-semibold text-blue-950">
-                      💼 Ready to explore tech vacancies and fresh-graduate internships? See our detailed guide to <Link href="/blog/it-jobs-in-pakistan" className="text-blue-700 font-extrabold underline">IT Jobs in Pakistan</Link>.
+                    <p className="p-4 bg-emerald-50 rounded-xl border border-emerald-100 text-xs font-semibold text-emerald-950">
+                      💼 Ready to explore tech vacancies and fresh-graduate internships? See our detailed guide to <Link href="/blog/it-jobs-in-pakistan" className="text-emerald-700 font-extrabold underline">IT Jobs in Pakistan</Link>.
                     </p>
                   </div>
 
@@ -444,7 +444,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       LocalePak organizes educational institutions, coding academies, and tech training centers across Pakistan by city and category. Explore verified institutes or list your educational organization.
                     </p>
                     <div className="pt-2 flex flex-wrap gap-3">
-                      <Link href="/categories" className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition-all">
+                      <Link href="/categories" className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-all">
                         Browse Education Categories
                       </Link>
                       <Link href="/add-business" className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl shadow-md transition-all">
@@ -456,7 +456,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   {/* Frequently Asked Questions (FAQ) */}
                   <div className="space-y-6 pt-6 border-t border-slate-200">
                     <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight flex items-center gap-2">
-                      <HelpCircle className="w-6 h-6 text-blue-600" />
+                      <HelpCircle className="w-6 h-6 text-emerald-600" />
                       <span>Frequently Asked Questions (FAQ)</span>
                     </h2>
 
@@ -475,10 +475,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     <h3 className="text-xl font-extrabold text-[#0F172A]">Explore LocalePak Directory & Education Ecosystem</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
                       <Link href="/blog/universities-in-pakistan" className="p-3 bg-indigo-50 text-indigo-700 hover:bg-indigo-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-indigo-200">Universities Guide</Link>
-                      <Link href="/blog/how-to-find-jobs-in-pakistan-2026" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Jobs in Pakistan</Link>
+                      <Link href="/blog/how-to-find-jobs-in-pakistan-2026" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">Jobs in Pakistan</Link>
                       <Link href="/blog/it-jobs-in-pakistan" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">IT Jobs in Pakistan</Link>
                       <Link href="/companies" className="p-3 bg-purple-50 text-purple-700 hover:bg-purple-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-purple-200">Job Vacancies</Link>
-                      <Link href="/companies" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Hiring Companies</Link>
+                      <Link href="/companies" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">Hiring Companies</Link>
                       <Link href="/businesses" className="p-3 bg-amber-50 text-amber-700 hover:bg-amber-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-amber-200">Professionals</Link>
                       <Link href="/search" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Search Directory</Link>
                       <Link href="/cities" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Cities Index</Link>
@@ -490,7 +490,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               ) : slug === 'universities-in-pakistan' ? (
                 <>
                   {/* Article Intro */}
-                  <p className="text-lg font-medium text-slate-800 leading-relaxed bg-gradient-to-r from-indigo-50 to-blue-50/50 p-6 rounded-2xl border border-indigo-100/80 shadow-xs">
+                  <p className="text-lg font-medium text-slate-800 leading-relaxed bg-gradient-to-r from-indigo-50 to-emerald-50/50 p-6 rounded-2xl border border-indigo-100/80 shadow-xs">
                     Choosing a university is one of the most important decisions a student can make. With universities, degree programs and campuses available across Pakistan, students often have many questions before applying: Which university should I choose? Which degree is right for me? Should I study at a public or private university? Which city offers better opportunities? What should I check before applying?
                   </p>
 
@@ -499,7 +499,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   </p>
 
                   <p>
-                    Pakistan has universities and degree-awarding institutions offering programs in fields ranging from computer science and engineering to medicine, business, law, education, social sciences and the arts. The <a href="https://www.hec.gov.pk/english/universities/Pages/default.aspx" target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold underline">Higher Education Commission (HEC)</a> maintains information about recognized higher education institutions, making recognition and accreditation an important consideration when comparing universities.
+                    Pakistan has universities and degree-awarding institutions offering programs in fields ranging from computer science and engineering to medicine, business, law, education, social sciences and the arts. The <a href="https://www.hec.gov.pk/english/universities/Pages/default.aspx" target="_blank" rel="noopener noreferrer" className="text-emerald-600 font-bold underline">Higher Education Commission (HEC)</a> maintains information about recognized higher education institutions, making recognition and accreditation an important consideration when comparing universities.
                   </p>
 
                   <p className="p-4 bg-emerald-50 rounded-xl border border-emerald-200 text-sm font-semibold text-emerald-950">
@@ -528,8 +528,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       Public vs Private Universities in Pakistan
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-                      <div className="p-5 bg-blue-50/70 rounded-2xl border border-blue-100 space-y-2">
-                        <strong className="text-sm font-bold text-blue-900 block">Public-Sector Universities</strong>
+                      <div className="p-5 bg-emerald-50/70 rounded-2xl border border-emerald-100 space-y-2">
+                        <strong className="text-sm font-bold text-emerald-900 block">Public-Sector Universities</strong>
                         <p className="text-slate-700">Established under government frameworks. Main advantages include comparatively affordable tuition and government funding, though admission competition for merit seats is very high.</p>
                       </div>
                       <div className="p-5 bg-purple-50/70 rounded-2xl border border-purple-100 space-y-2">
@@ -573,27 +573,27 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     </h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
                       <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <strong className="text-blue-700 font-bold block text-sm">Computer Science & IT</strong>
+                        <strong className="text-emerald-700 font-bold block text-sm">Computer Science & IT</strong>
                         <p className="text-slate-600">Software development, AI, cybersecurity, cloud computing, data science, and web development.</p>
                       </div>
                       <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <strong className="text-blue-700 font-bold block text-sm">Engineering</strong>
+                        <strong className="text-emerald-700 font-bold block text-sm">Engineering</strong>
                         <p className="text-slate-600">Electrical, mechanical, civil, chemical, software, and mechatronics engineering.</p>
                       </div>
                       <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <strong className="text-blue-700 font-bold block text-sm">Business & Management</strong>
+                        <strong className="text-emerald-700 font-bold block text-sm">Business & Management</strong>
                         <p className="text-slate-600">BBA, MBA, Accounting & Finance, Marketing, Supply Chain, and HR.</p>
                       </div>
                       <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <strong className="text-blue-700 font-bold block text-sm">Medicine & Health Sciences</strong>
+                        <strong className="text-emerald-700 font-bold block text-sm">Medicine & Health Sciences</strong>
                         <p className="text-slate-600">MBBS, BDS, Pharmacy (Pharm-D), Nursing, DPT, and Allied Health Sciences.</p>
                       </div>
                       <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <strong className="text-blue-700 font-bold block text-sm">Law & Social Sciences</strong>
+                        <strong className="text-emerald-700 font-bold block text-sm">Law & Social Sciences</strong>
                         <p className="text-slate-600">LLB, International Relations, Psychology, Economics, and Mass Communication.</p>
                       </div>
                       <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-                        <strong className="text-blue-700 font-bold block text-sm">Education & Teaching</strong>
+                        <strong className="text-emerald-700 font-bold block text-sm">Education & Teaching</strong>
                         <p className="text-slate-600">B.Ed, M.Ed, Educational Leadership, and Special Education.</p>
                       </div>
                     </div>
@@ -622,7 +622,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       LocalePak connects students across Pakistan with verified educational institutions, universities, colleges, computer institutes, tuition academies, and skill development centers organized by city and category.
                     </p>
                     <div className="pt-2 flex flex-wrap gap-3">
-                      <Link href="/categories" className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition-all">
+                      <Link href="/categories" className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-all">
                         Browse Education Categories
                       </Link>
                       <Link href="/add-business" className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl shadow-md transition-all">
@@ -634,7 +634,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   {/* Frequently Asked Questions (FAQ) */}
                   <div className="space-y-6 pt-6 border-t border-slate-200">
                     <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight flex items-center gap-2">
-                      <HelpCircle className="w-6 h-6 text-blue-600" />
+                      <HelpCircle className="w-6 h-6 text-emerald-600" />
                       <span>Frequently Asked Questions (FAQ)</span>
                     </h2>
 
@@ -652,10 +652,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <div className="pt-8 border-t border-slate-200 space-y-4">
                     <h3 className="text-xl font-extrabold text-[#0F172A]">Explore LocalePak Directory & Education Ecosystem</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
-                      <Link href="/blog/how-to-find-jobs-in-pakistan-2026" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Jobs in Pakistan</Link>
+                      <Link href="/blog/how-to-find-jobs-in-pakistan-2026" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">Jobs in Pakistan</Link>
                       <Link href="/blog/it-jobs-in-pakistan" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">IT Jobs in Pakistan</Link>
                       <Link href="/companies" className="p-3 bg-purple-50 text-purple-700 hover:bg-purple-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-purple-200">Job Vacancies</Link>
-                      <Link href="/companies" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Hiring Companies</Link>
+                      <Link href="/companies" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">Hiring Companies</Link>
                       <Link href="/businesses" className="p-3 bg-amber-50 text-amber-700 hover:bg-amber-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-amber-200">Professionals</Link>
                       <Link href="/search" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Search Directory</Link>
                       <Link href="/cities" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Cities Index</Link>
@@ -680,8 +680,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     This guide explains how to find <strong>IT jobs in Pakistan</strong>, which technology careers are available, what skills employers look for, how fresh graduates can enter the industry, where to search for opportunities and how professionals can make themselves easier for companies to discover.
                   </p>
 
-                  <p className="p-4 bg-blue-50 rounded-xl border border-blue-100 text-sm font-medium text-blue-900">
-                    💡 If you are also exploring employment opportunities outside technology, see our broader guide to <Link href="/blog/how-to-find-jobs-in-pakistan-2026" className="text-blue-700 font-bold underline">Jobs in Pakistan</Link>, which covers government, private, graduate, remote and other career opportunities.
+                  <p className="p-4 bg-emerald-50 rounded-xl border border-emerald-100 text-sm font-medium text-emerald-900">
+                    💡 If you are also exploring employment opportunities outside technology, see our broader guide to <Link href="/blog/how-to-find-jobs-in-pakistan-2026" className="text-emerald-700 font-bold underline">Jobs in Pakistan</Link>, which covers government, private, graduate, remote and other career opportunities.
                   </p>
 
                   {/* Section 1: What Types of IT Jobs Are Available in Pakistan? */}
@@ -740,7 +740,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       Software developers create and maintain applications, websites, systems and digital products. Popular technologies include JavaScript, TypeScript, Python, Java, C#, PHP, SQL, React, Next.js, Node.js, .NET, Laravel, and Django.
                     </p>
                     <div className="space-y-3 bg-slate-50 p-6 rounded-2xl border border-slate-200">
-                      <h3 className="text-lg font-bold text-blue-700">Front-End vs Back-End vs Full-Stack</h3>
+                      <h3 className="text-lg font-bold text-emerald-700">Front-End vs Back-End vs Full-Stack</h3>
                       <ul className="space-y-2 text-xs text-slate-700">
                         <li>• <strong>Front-end:</strong> HTML, CSS, JavaScript, React, Next.js, Vue, Angular</li>
                         <li>• <strong>Back-end:</strong> Node.js, Python, PHP, Java, .NET, SQL, PostgreSQL, MongoDB</li>
@@ -766,8 +766,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                         <strong className="text-sm font-bold text-emerald-900 block">Cybersecurity</strong>
                         <p className="text-slate-700">Roles include Security Analyst, Penetration Tester, and Network Security Specialist. Key skills: Linux, Networking, Web Security, and Incident Response.</p>
                       </div>
-                      <div className="p-5 bg-blue-50/70 rounded-2xl border border-blue-100 space-y-2">
-                        <strong className="text-sm font-bold text-blue-900 block">Digital Marketing & SEO</strong>
+                      <div className="p-5 bg-emerald-50/70 rounded-2xl border border-emerald-100 space-y-2">
+                        <strong className="text-sm font-bold text-emerald-900 block">Digital Marketing & SEO</strong>
                         <p className="text-slate-700">Roles include SEO Specialist, Digital Marketer, and Content Strategist. Key skills: Search Engine Optimization, Analytics, Search Console, and Keyword Strategy.</p>
                       </div>
                     </div>
@@ -820,7 +820,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       <Link href="/add-professional" className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl shadow-md transition-all">
                         Create Free Developer / IT Profile
                       </Link>
-                      <Link href="/companies" className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl transition-all">
+                      <Link href="/companies" className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-all">
                         Browse Open IT Jobs
                       </Link>
                       <Link href="/companies" className="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-white text-xs font-bold rounded-xl transition-all">
@@ -832,7 +832,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   {/* Frequently Asked Questions (FAQ) */}
                   <div className="space-y-6 pt-6 border-t border-slate-200">
                     <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight flex items-center gap-2">
-                      <HelpCircle className="w-6 h-6 text-blue-600" />
+                      <HelpCircle className="w-6 h-6 text-emerald-600" />
                       <span>Frequently Asked Questions (FAQ)</span>
                     </h2>
 
@@ -850,10 +850,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <div className="pt-8 border-t border-slate-200 space-y-4">
                     <h3 className="text-xl font-extrabold text-[#0F172A]">Explore LocalePak Directory & Tech Jobs Ecosystem</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
-                      <Link href="/blog/how-to-find-jobs-in-pakistan-2026" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Jobs in Pakistan Guide</Link>
+                      <Link href="/blog/how-to-find-jobs-in-pakistan-2026" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">Jobs in Pakistan Guide</Link>
                       <Link href="/companies" className="p-3 bg-purple-50 text-purple-700 hover:bg-purple-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-purple-200">Companies Directory</Link>
                       <Link href="/post-job" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">Post a Job Opening</Link>
-                      <Link href="/companies" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Hiring Companies</Link>
+                      <Link href="/companies" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">Hiring Companies</Link>
                       <Link href="/businesses" className="p-3 bg-amber-50 text-amber-700 hover:bg-amber-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-amber-200">Businesses Directory</Link>
                       <Link href="/search" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Search Directory</Link>
                       <Link href="/cities" className="p-3 bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white rounded-xl font-bold transition-colors text-center border border-slate-200">Cities Index</Link>
@@ -866,7 +866,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               ) : slug === 'top-business-directory-websites-pakistan' ? (
                 <>
                   {/* Article Intro */}
-                  <p className="text-lg font-medium text-slate-800 leading-relaxed bg-blue-50/50 p-6 rounded-2xl border border-blue-100">
+                  <p className="text-lg font-medium text-slate-800 leading-relaxed bg-emerald-50/50 p-6 rounded-2xl border border-emerald-100">
                     Finding trustworthy businesses online has become more important than ever. Whether you are looking for a nearby restaurant, hospital, software company, real estate agency, electrician, plumber, freelancer, or any other service, a reliable business directory can save time and help you make informed decisions.
                   </p>
 
@@ -916,7 +916,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       For customers, they make it easier to discover trusted local services. For businesses, they improve online visibility and help generate qualified leads.
                     </p>
                     <p className="font-bold text-[#0F172A]">Some of the biggest advantages include:</p>
-                    <ul className="space-y-2 text-sm text-slate-700 pl-4 border-l-4 border-blue-600">
+                    <ul className="space-y-2 text-sm text-slate-700 pl-4 border-l-4 border-emerald-600">
                       <li>• Better local search visibility on Google and search engines</li>
                       <li>• Increased website traffic and direct phone inquiries</li>
                       <li>• More customer inquiries via WhatsApp and call buttons</li>
@@ -936,35 +936,35 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     </h2>
                     
                     <div className="space-y-2">
-                      <h3 className="text-xl font-bold text-blue-700">Improve Local SEO</h3>
+                      <h3 className="text-xl font-bold text-emerald-700">Improve Local SEO</h3>
                       <p>
                         Business directories help search engines verify business information, making it easier for customers to find businesses in local search results. Consistent business information (NAP: Name, Address, Phone) across multiple platforms improves search engine trust.
                       </p>
                     </div>
 
                     <div className="space-y-2">
-                      <h3 className="text-xl font-bold text-blue-700">Reach More Customers</h3>
+                      <h3 className="text-xl font-bold text-emerald-700">Reach More Customers</h3>
                       <p>
                         People search online before purchasing products or hiring services. A business directory increases the chances of being discovered by new customers actively searching in your city.
                       </p>
                     </div>
 
                     <div className="space-y-2">
-                      <h3 className="text-xl font-bold text-blue-700">Build Trust</h3>
+                      <h3 className="text-xl font-bold text-emerald-700">Build Trust</h3>
                       <p>
                         Detailed business profiles with contact information, descriptions, photos, and customer reviews create confidence among potential customers.
                       </p>
                     </div>
 
                     <div className="space-y-2">
-                      <h3 className="text-xl font-bold text-blue-700">Generate Quality Leads</h3>
+                      <h3 className="text-xl font-bold text-emerald-700">Generate Quality Leads</h3>
                       <p>
                         Visitors searching a business directory already have buying intent. This means businesses receive highly targeted traffic that is more likely to convert into paying customers.
                       </p>
                     </div>
 
                     <div className="space-y-2">
-                      <h3 className="text-xl font-bold text-blue-700">Increase Brand Visibility</h3>
+                      <h3 className="text-xl font-bold text-emerald-700">Increase Brand Visibility</h3>
                       <p>
                         Every business profile acts as an additional online presence that can appear in Google Search and AI-powered search engines like ChatGPT, Gemini, and Perplexity.
                       </p>
@@ -1088,7 +1088,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   {/* Frequently Asked Questions (FAQ) */}
                   <div className="space-y-6 pt-6 border-t border-slate-200">
                     <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0F172A] tracking-tight flex items-center gap-2">
-                      <HelpCircle className="w-6 h-6 text-blue-600" />
+                      <HelpCircle className="w-6 h-6 text-emerald-600" />
                       <span>Frequently Asked Questions (FAQ)</span>
                     </h2>
 
@@ -1106,8 +1106,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                   <div className="pt-8 border-t border-slate-200 space-y-4">
                     <h3 className="text-xl font-extrabold text-[#0F172A]">Explore LocalePak Directory</h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 text-xs">
-                      <Link href="/categories" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Business Categories</Link>
-                      <Link href="/search" className="p-3 bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-blue-200">Browse Businesses</Link>
+                      <Link href="/categories" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">Business Categories</Link>
+                      <Link href="/search" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">Browse Businesses</Link>
                       <Link href="/add-business" className="p-3 bg-amber-50 text-amber-700 hover:bg-amber-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-amber-200">Add Your Business</Link>
                       <Link href="/businesses" className="p-3 bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-emerald-200">Professional Directory</Link>
                       <Link href="/companies" className="p-3 bg-purple-50 text-purple-700 hover:bg-purple-600 hover:text-white rounded-xl font-bold transition-colors text-center border border-purple-200">Hiring Companies</Link>
@@ -1129,7 +1129,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       const relatedPost = BLOG_POSTS[relatedSlug]
                       if (!relatedPost) return null
                       return (
-                        <Link key={relatedSlug} href={`/blog/${relatedSlug}`} className="p-4 rounded-xl bg-blue-50 border border-blue-100 text-blue-800 font-bold hover:bg-blue-100">
+                        <Link key={relatedSlug} href={`/blog/${relatedSlug}`} className="p-4 rounded-xl bg-emerald-50 border border-emerald-100 text-emerald-800 font-bold hover:bg-emerald-100">
                           {relatedPost.title}
                         </Link>
                       )
@@ -1147,23 +1147,23 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 This guide is published by the <strong className="text-slate-900">LocalePak Editorial Team</strong>,
                 the content team behind LocalePak — the free business directory founded by{' '}
                 <strong className="text-slate-900">Muhammad Imran</strong> of{' '}
-                <a href="https://www.imrandigitals.com" target="_blank" rel="noopener noreferrer" className="text-blue-700 font-semibold hover:underline">Imran Digitals</a>.
+                <a href="https://www.imrandigitals.com" target="_blank" rel="noopener noreferrer" className="text-emerald-700 font-semibold hover:underline">Imran Digitals</a>.
                 We write practical guides for Pakistani customers and business owners, and we update them
                 when the directory changes. Read more{' '}
-                <Link href="/about" className="text-blue-700 font-semibold hover:underline">about LocalePak</Link>,
+                <Link href="/about" className="text-emerald-700 font-semibold hover:underline">about LocalePak</Link>,
                 our{' '}
-                <Link href="/editorial-policy" className="text-blue-700 font-semibold hover:underline">editorial policy</Link>{' '}
+                <Link href="/editorial-policy" className="text-emerald-700 font-semibold hover:underline">editorial policy</Link>{' '}
                 and how{' '}
-                <Link href="/verification-policy" className="text-blue-700 font-semibold hover:underline">listing verification</Link>{' '}
+                <Link href="/verification-policy" className="text-emerald-700 font-semibold hover:underline">listing verification</Link>{' '}
                 works. Spotted something out of date?{' '}
-                <Link href="/contact" className="text-blue-700 font-semibold hover:underline">Tell us</Link> and we will check it.
+                <Link href="/contact" className="text-emerald-700 font-semibold hover:underline">Tell us</Link> and we will check it.
               </p>
               <p className="text-sm text-slate-600 leading-relaxed">
                 Run a business this guide mentions?{' '}
-                <Link href="/add-business" className="text-blue-700 font-semibold hover:underline">Add it to LocalePak free</Link>{' '}
+                <Link href="/add-business" className="text-emerald-700 font-semibold hover:underline">Add it to LocalePak free</Link>{' '}
                 — or browse{' '}
-                <Link href="/businesses" className="text-blue-700 font-semibold hover:underline">listed businesses</Link> and{' '}
-                <Link href="/companies" className="text-blue-700 font-semibold hover:underline">companies</Link>.
+                <Link href="/businesses" className="text-emerald-700 font-semibold hover:underline">listed businesses</Link> and{' '}
+                <Link href="/companies" className="text-emerald-700 font-semibold hover:underline">companies</Link>.
               </p>
             </aside>
           </div>

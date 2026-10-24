@@ -10,13 +10,13 @@ const perks = [
 
 export default function CTASection() {
   return (
-    <section className="py-20 bg-[#0f2b3d]" aria-labelledby="cta-heading">
+    <section className="py-20 bg-[#0F172A]" aria-labelledby="cta-heading">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2
           id="cta-heading"
           className="text-3xl md:text-4xl font-bold text-white text-balance"
         >
-          List Your Company <span className="text-[#60a5fa]">Free</span> Today
+          List Your Company <span className="text-[#34D399]">Free</span> Today
         </h2>
         <p className="mt-4 text-white/65 text-lg max-w-xl mx-auto text-pretty">
           List your business on LocalePak, the free Pakistan business directory built for local discovery.
@@ -26,7 +26,7 @@ export default function CTASection() {
         <ul className="mt-8 flex flex-col sm:flex-row flex-wrap justify-center gap-4 text-sm text-white/80">
           {perks.map((perk) => (
             <li key={perk} className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-[#60a5fa] shrink-0" aria-hidden="true" />
+              <CheckCircle className="w-4 h-4 text-[#34D399] shrink-0" aria-hidden="true" />
               {perk}
             </li>
           ))}
@@ -35,7 +35,7 @@ export default function CTASection() {
         <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/add-business" prefetch={false}
-            className="px-8 py-4 bg-[#60a5fa] hover:bg-blue-400 text-white font-bold rounded-xl transition-colors duration-200 text-base shadow-lg"
+            className="px-8 py-4 bg-[#34D399] hover:bg-emerald-400 text-white font-bold rounded-xl transition-colors duration-200 text-base shadow-lg"
           >
             Add Your Business – It&apos;s Free
           </Link>

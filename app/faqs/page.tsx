@@ -84,7 +84,7 @@ export default function FAQsPage() {
             {faqs.map((faq, i) => (
               <div key={i} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
                 <h3 className="font-bold text-slate-900 text-base flex items-start gap-2">
-                  <HelpCircle className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
+                  <HelpCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                   <span>{faq.q}</span>
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-600 mt-2.5 pl-7 leading-relaxed">

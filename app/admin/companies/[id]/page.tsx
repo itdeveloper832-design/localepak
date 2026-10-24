@@ -11,7 +11,7 @@ import { CITIES, CATEGORIES } from '@/lib/data'
 import { StatusBadge } from '@/components/admin-shared'
 
 const inputClass =
-  'w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-600'
+  'w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600'
 const labelClass = 'block text-xs font-bold text-slate-700 mb-1'
 
 export default function AdminEditCompanyPage() {
@@ -90,7 +90,7 @@ export default function AdminEditCompanyPage() {
     return (
       <div className="space-y-4">
         <p className="text-sm text-slate-600">This company no longer exists.</p>
-        <Link href="/admin/companies" className="text-sm font-bold text-blue-600 hover:underline">← Back to Companies</Link>
+        <Link href="/admin/companies" className="text-sm font-bold text-emerald-600 hover:underline">← Back to Companies</Link>
       </div>
     )
   }
@@ -100,13 +100,13 @@ export default function AdminEditCompanyPage() {
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center gap-3">
-        <Link href="/admin/companies" className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 hover:underline">
+        <Link href="/admin/companies" className="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-600 hover:underline">
           <ArrowLeft className="w-4 h-4" /> Companies
         </Link>
         <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Edit Company</h1>
         <StatusBadge status={status} />
         {slug && (
-          <Link href={`/company/${slug}`} target="_blank" className="text-xs font-semibold text-blue-600 hover:underline">
+          <Link href={`/company/${slug}`} target="_blank" className="text-xs font-semibold text-emerald-600 hover:underline">
             View public page
           </Link>
         )}
@@ -142,10 +142,10 @@ export default function AdminEditCompanyPage() {
           <textarea id="f-description" rows={5} className={inputClass} value={form.description} onChange={set('description')} />
         </div>
         <div className="flex gap-3 pt-2">
-          <button type="submit" disabled={saving} className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors cursor-pointer disabled:opacity-50">
+          <button type="submit" disabled={saving} className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors cursor-pointer disabled:opacity-50">
             {saving ? 'Saving...' : 'Save Changes'}
           </button>
-          <Link href="/admin/companies" className="px-6 py-3 bg-white border border-slate-200 hover:border-blue-500 font-bold text-sm rounded-xl transition-colors">
+          <Link href="/admin/companies" className="px-6 py-3 bg-white border border-slate-200 hover:border-emerald-500 font-bold text-sm rounded-xl transition-colors">
             Cancel
           </Link>
         </div>

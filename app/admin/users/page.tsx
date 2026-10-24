@@ -85,7 +85,7 @@ export default function AdminUsersPage() {
                     <span
                       className={`px-2.5 py-1 rounded-full text-[11px] font-bold border ${
                         isAdmin
-                          ? 'bg-blue-600 text-white border-blue-600'
+                          ? 'bg-emerald-600 text-white border-emerald-600'
                           : isTester
                             ? 'bg-amber-100 text-amber-800 border-amber-300'
                             : 'bg-slate-50 text-slate-600 border-slate-200'

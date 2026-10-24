@@ -326,7 +326,7 @@ export default function AddBusinessPage() {
       <main className="bg-[#F8FAFC] text-slate-800 font-sans min-h-screen py-16 px-4">
         <div className="max-w-2xl mx-auto bg-white border border-slate-200 rounded-3xl p-8 shadow-xl">
           <div className="text-center mb-6">
-            <div className="inline-flex p-3 rounded-2xl bg-blue-50 text-blue-600 mb-3">
+            <div className="inline-flex p-3 rounded-2xl bg-emerald-50 text-emerald-600 mb-3">
               <Building2 className="w-8 h-8" />
             </div>
             <h1 className="text-2xl font-bold text-slate-900">Add Your Business</h1>
@@ -337,13 +337,13 @@ export default function AddBusinessPage() {
           <div className="mb-8">
             <div className="flex items-center justify-between text-xs font-bold mb-2">
               <span className="text-slate-700">
-                Step {step} of 8 — <span className="text-blue-600">{STEP_TITLES[step - 1]}</span>
+                Step {step} of 8 — <span className="text-emerald-600">{STEP_TITLES[step - 1]}</span>
               </span>
               <span className="text-slate-400">{Math.round(progressPct)}%</span>
             </div>
             <div className="h-2.5 bg-slate-100 rounded-full overflow-hidden">
               <div
-                className="h-full bg-blue-600 rounded-full transition-all duration-300"
+                className="h-full bg-emerald-600 rounded-full transition-all duration-300"
                 style={{ width: `${progressPct}%` }}
               />
             </div>
@@ -351,7 +351,7 @@ export default function AddBusinessPage() {
               {STEP_TITLES.map((title, i) => (
                 <span
                   key={title}
-                  className={`text-[10px] font-semibold ${i + 1 === step ? 'text-blue-600' : i + 1 < step ? 'text-emerald-600' : 'text-slate-300'}`}
+                  className={`text-[10px] font-semibold ${i + 1 === step ? 'text-emerald-600' : i + 1 < step ? 'text-emerald-600' : 'text-slate-300'}`}
                 >
                   {title}
                 </span>
@@ -440,7 +440,7 @@ export default function AddBusinessPage() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <p className="text-xs text-slate-500">Set opening hours for each day, or mark a day closed.</p>
-                  <button type="button" onClick={applyMondayToWeek} className="text-xs font-bold text-blue-600 hover:underline cursor-pointer whitespace-nowrap ml-3">
+                  <button type="button" onClick={applyMondayToWeek} className="text-xs font-bold text-emerald-600 hover:underline cursor-pointer whitespace-nowrap ml-3">
                     Same hours all week
                   </button>
                 </div>
@@ -498,19 +498,19 @@ export default function AddBusinessPage() {
                     placeholder="e.g. Home Delivery"
                     className={inputClass}
                   />
-                  <button type="button" onClick={addService} className="shrink-0 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl flex items-center gap-1.5 cursor-pointer">
+                  <button type="button" onClick={addService} className="shrink-0 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl flex items-center gap-1.5 cursor-pointer">
                     <Plus className="w-4 h-4" /> Add
                   </button>
                 </div>
                 {form.services.length > 0 ? (
                   <div className="flex flex-wrap gap-2">
                     {form.services.map((service) => (
-                      <span key={service} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-700 border border-blue-100 rounded-full text-xs font-semibold">
+                      <span key={service} className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full text-xs font-semibold">
                         {service}
                         <button
                           type="button"
                           onClick={() => set('services', form.services.filter((s) => s !== service))}
-                          className="text-blue-400 hover:text-red-500 cursor-pointer"
+                          className="text-emerald-400 hover:text-red-500 cursor-pointer"
                           aria-label={`Remove ${service}`}
                         >
                           <X className="w-3.5 h-3.5" />
@@ -532,7 +532,7 @@ export default function AddBusinessPage() {
                 <div className="flex flex-col sm:flex-row gap-2">
                   <input type="text" value={productName} onChange={(e) => setProductName(e.target.value)} placeholder="Product name" className={inputClass} />
                   <input type="text" inputMode="decimal" value={productPrice} onChange={(e) => setProductPrice(e.target.value)} placeholder="Price in Rs (numbers only, e.g. 350)" className="w-full sm:w-44 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600" />
-                  <button type="button" onClick={addProduct} className="shrink-0 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl flex items-center justify-center gap-1.5 cursor-pointer">
+                  <button type="button" onClick={addProduct} className="shrink-0 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl flex items-center justify-center gap-1.5 cursor-pointer">
                     <Plus className="w-4 h-4" /> Add
                   </button>
                 </div>
@@ -660,8 +660,8 @@ export default function AddBusinessPage() {
                   )}
                 </div>
 
-                <div className="flex gap-2.5 p-3.5 bg-blue-50 border border-blue-100 rounded-xl text-xs text-slate-600">
-                  <Info className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+                <div className="flex gap-2.5 p-3.5 bg-emerald-50 border border-emerald-100 rounded-xl text-xs text-slate-600">
+                  <Info className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
                   <span>Your listing goes through a quick review and appears publicly on LocalePak after approval.</span>
                 </div>
               </div>
@@ -673,7 +673,7 @@ export default function AddBusinessPage() {
                 <button
                   type="button"
                   onClick={goBack}
-                  className="px-5 py-2.5 bg-white border border-slate-200 hover:border-blue-500 text-slate-700 font-bold text-sm rounded-xl flex items-center gap-2 cursor-pointer transition-colors"
+                  className="px-5 py-2.5 bg-white border border-slate-200 hover:border-emerald-500 text-slate-700 font-bold text-sm rounded-xl flex items-center gap-2 cursor-pointer transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4" /> Back
                 </button>
@@ -685,7 +685,7 @@ export default function AddBusinessPage() {
                 <button
                   type="button"
                   onClick={goNext}
-                  className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl flex items-center gap-2 cursor-pointer transition-colors shadow-md"
+                  className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl flex items-center gap-2 cursor-pointer transition-colors shadow-md"
                 >
                   Next <ArrowRight className="w-4 h-4" />
                 </button>
@@ -702,7 +702,7 @@ export default function AddBusinessPage() {
             </div>
 
             <p className="text-center text-[11px] text-slate-400">
-              Need help? See the <Link href="/business-listing-guidelines" className="text-blue-600 font-semibold hover:underline">listing guidelines</Link>.
+              Need help? See the <Link href="/business-listing-guidelines" className="text-emerald-600 font-semibold hover:underline">listing guidelines</Link>.
             </p>
           </form>
         </div>

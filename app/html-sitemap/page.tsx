@@ -55,7 +55,7 @@ function LinkList({ items }: { items: { label: string; href: string }[] }) {
     <ul className="space-y-2">
       {items.map(item => (
         <li key={item.href}>
-          <Link href={item.href} className="text-sm text-blue-700 hover:underline font-medium">
+          <Link href={item.href} className="text-sm text-emerald-700 hover:underline font-medium">
             {item.label}
           </Link>
         </li>

@@ -62,7 +62,7 @@ export default function AdminApplicationsPage() {
               <div className="flex flex-wrap items-center gap-2">
                 <h2 className="font-extrabold text-slate-900 text-sm">{data.applicantName || data.name || 'No name'}</h2>
                 {(data.applicantEmail || data.email) && (
-                  <a href={`mailto:${data.applicantEmail || data.email}`} className="text-xs text-blue-600 font-semibold hover:underline">
+                  <a href={`mailto:${data.applicantEmail || data.email}`} className="text-xs text-emerald-600 font-semibold hover:underline">
                     {data.applicantEmail || data.email}
                   </a>
                 )}

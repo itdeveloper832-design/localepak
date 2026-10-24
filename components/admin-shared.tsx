@@ -41,5 +41,5 @@ export const adminBtn =
   'px-3 py-1.5 rounded-lg text-[11px] font-bold border transition-colors cursor-pointer disabled:opacity-50'
 export const approveBtn = `${adminBtn} bg-emerald-600 border-emerald-600 text-white hover:bg-emerald-700`
 export const rejectBtn = `${adminBtn} bg-white border-red-200 text-red-600 hover:bg-red-50`
-export const neutralBtn = `${adminBtn} bg-white border-slate-200 text-slate-700 hover:border-blue-500`
+export const neutralBtn = `${adminBtn} bg-white border-slate-200 text-slate-700 hover:border-emerald-500`
 export const dangerBtn = `${adminBtn} bg-white border-slate-200 text-slate-500 hover:border-red-300 hover:text-red-600`

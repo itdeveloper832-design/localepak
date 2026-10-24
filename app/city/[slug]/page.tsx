@@ -78,7 +78,7 @@ export default async function CityPage(props: {
               {info ? `${info.province}, Pakistan` : 'Pakistan'}
             </span>
             <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight">
-              Businesses in <span className="text-blue-400">{city}</span>
+              Businesses in <span className="text-emerald-400">{city}</span>
             </h1>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-3xl">
               {copy?.intro || (info
@@ -99,7 +99,7 @@ export default async function CityPage(props: {
             <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">
               Browse Categories in {city}
             </h2>
-            <Link href="/categories" className="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 shrink-0">
+            <Link href="/categories" className="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 shrink-0">
               <span>All Categories</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -109,10 +109,10 @@ export default async function CityPage(props: {
               <Link
                 key={cat.id}
                 href={`/city/${slug}/${cat.id}`}
-                className="bg-white rounded-2xl p-5 border border-slate-200/80 hover:border-blue-500 hover:shadow-md transition-all group"
+                className="bg-white rounded-2xl p-5 border border-slate-200/80 hover:border-emerald-500 hover:shadow-md transition-all group"
               >
-                <Building2 className="w-6 h-6 text-blue-600 mb-2" />
-                <h3 className="font-bold text-slate-900 text-sm group-hover:text-blue-600">{cat.name} in {city}</h3>
+                <Building2 className="w-6 h-6 text-emerald-600 mb-2" />
+                <h3 className="font-bold text-slate-900 text-sm group-hover:text-emerald-600">{cat.name} in {city}</h3>
                 <p className="text-[11px] text-slate-500 mt-1 line-clamp-2">{cat.desc}</p>
               </Link>
             ))}
@@ -137,12 +137,12 @@ export default async function CityPage(props: {
               <Link
                 key={c}
                 href={`/city/${cityToSlug(c)}`}
-                className="px-3.5 py-2 bg-white border border-slate-200 rounded-xl hover:border-blue-500 text-xs font-medium"
+                className="px-3.5 py-2 bg-white border border-slate-200 rounded-xl hover:border-emerald-500 text-xs font-medium"
               >
                 Businesses in {c}
               </Link>
             ))}
-            <Link href="/cities" className="px-3.5 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 text-xs font-bold">
+            <Link href="/cities" className="px-3.5 py-2 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 text-xs font-bold">
               View All Cities
             </Link>
           </div>
@@ -154,7 +154,7 @@ export default async function CityPage(props: {
                   <Link
                     key={c}
                     href={`/city/${cityToSlug(c)}`}
-                    className="px-3.5 py-2 bg-white border border-slate-200 rounded-xl hover:border-blue-500 text-xs font-medium"
+                    className="px-3.5 py-2 bg-white border border-slate-200 rounded-xl hover:border-emerald-500 text-xs font-medium"
                   >
                     Businesses in {c}
                   </Link>

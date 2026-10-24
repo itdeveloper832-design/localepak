@@ -161,8 +161,8 @@ export default function AddJobPage() {
               <textarea required value={description} onChange={(e) => setDescription(e.target.value)} rows={5} placeholder="Describe the role, responsibilities, required experience, and how to apply." className={inputClass} />
             </div>
 
-            <div className="flex gap-2.5 p-3.5 bg-blue-50 border border-blue-100 rounded-xl text-xs text-slate-600">
-              <Info className="w-4 h-4 text-blue-600 shrink-0 mt-0.5" />
+            <div className="flex gap-2.5 p-3.5 bg-emerald-50 border border-emerald-100 rounded-xl text-xs text-slate-600">
+              <Info className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
               <span>Your job post goes through a quick review and appears publicly on LocalePak after approval.</span>
             </div>
 

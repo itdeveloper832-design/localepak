@@ -105,11 +105,11 @@ export default function AdminOverviewPage() {
             <Link
               key={label}
               href={href}
-              className="bg-white rounded-3xl border border-slate-200 p-6 space-y-3 hover:border-blue-500 hover:shadow-md transition-all group"
+              className="bg-white rounded-3xl border border-slate-200 p-6 space-y-3 hover:border-emerald-500 hover:shadow-md transition-all group"
             >
               <div className="flex items-center justify-between">
-                <Icon className="w-6 h-6 text-blue-600" />
-                <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-blue-600 transition-colors" />
+                <Icon className="w-6 h-6 text-emerald-600" />
+                <ArrowRight className="w-4 h-4 text-slate-300 group-hover:text-emerald-600 transition-colors" />
               </div>
               <p className="text-3xl font-extrabold text-slate-900">{value}</p>
               <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">{label}</p>
@@ -121,10 +121,10 @@ export default function AdminOverviewPage() {
       <section className="bg-white rounded-3xl border border-slate-200 p-6 space-y-3">
         <h2 className="font-extrabold text-slate-900">Daily routine</h2>
         <ol className="list-decimal pl-5 text-sm text-slate-600 space-y-1.5">
-          <li>Clear the <Link href="/admin/businesses" className="text-blue-600 font-semibold hover:underline">businesses</Link> and <Link href="/admin/companies" className="text-blue-600 font-semibold hover:underline">companies</Link> queues — approve genuine listings, reject spam.</li>
-          <li>Check <Link href="/admin/payments" className="text-blue-600 font-semibold hover:underline">payment proofs</Link> — approving one activates the Featured or Verified upgrade on the listing.</li>
-          <li>Moderate <Link href="/admin/reviews" className="text-blue-600 font-semibold hover:underline">reviews</Link> so only genuine customer feedback goes public.</li>
-          <li>Answer <Link href="/admin/messages" className="text-blue-600 font-semibold hover:underline">messages</Link> and glance at new <Link href="/admin/applications" className="text-blue-600 font-semibold hover:underline">job applications</Link>.</li>
+          <li>Clear the <Link href="/admin/businesses" className="text-emerald-600 font-semibold hover:underline">businesses</Link> and <Link href="/admin/companies" className="text-emerald-600 font-semibold hover:underline">companies</Link> queues — approve genuine listings, reject spam.</li>
+          <li>Check <Link href="/admin/payments" className="text-emerald-600 font-semibold hover:underline">payment proofs</Link> — approving one activates the Featured or Verified upgrade on the listing.</li>
+          <li>Moderate <Link href="/admin/reviews" className="text-emerald-600 font-semibold hover:underline">reviews</Link> so only genuine customer feedback goes public.</li>
+          <li>Answer <Link href="/admin/messages" className="text-emerald-600 font-semibold hover:underline">messages</Link> and glance at new <Link href="/admin/applications" className="text-emerald-600 font-semibold hover:underline">job applications</Link>.</li>
         </ol>
       </section>
     </div>

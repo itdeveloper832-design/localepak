@@ -198,10 +198,10 @@ export default function DashboardPage() {
                 Sign in to view your account details. Browsing the directory is always free and does not need an account.
               </p>
               <div className="flex gap-3 justify-center pt-2">
-                <Link href="/login" className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors">
+                <Link href="/login" className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors">
                   Sign In
                 </Link>
-                <Link href="/register" className="px-6 py-3 bg-white border border-slate-200 hover:border-blue-500 font-bold text-sm rounded-xl transition-colors">
+                <Link href="/register" className="px-6 py-3 bg-white border border-slate-200 hover:border-emerald-500 font-bold text-sm rounded-xl transition-colors">
                   Create Account
                 </Link>
               </div>
@@ -210,7 +210,7 @@ export default function DashboardPage() {
             <>
               <section className="bg-white rounded-3xl border border-slate-200 p-8 space-y-5" aria-label="Account details">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-extrabold text-xl">
+                  <div className="w-14 h-14 rounded-2xl bg-emerald-600 text-white flex items-center justify-center font-extrabold text-xl">
                     {(user.displayName || user.email || 'U').charAt(0).toUpperCase()}
                   </div>
                   <div>
@@ -238,7 +238,7 @@ export default function DashboardPage() {
                   {role === 'admin' && (
                     <Link
                       href="/admin"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl transition-colors"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors"
                     >
                       <ShieldAlert className="w-4 h-4" />
                       Admin Panel
@@ -256,17 +256,17 @@ export default function DashboardPage() {
               </section>
 
               <section className="grid grid-cols-1 sm:grid-cols-3 gap-4" aria-label="Quick links">
-                <Link href="/categories" className="bg-white rounded-2xl border border-slate-200 p-5 hover:border-blue-500 transition-colors space-y-2">
-                  <LayoutGrid className="w-6 h-6 text-blue-600" />
+                <Link href="/categories" className="bg-white rounded-2xl border border-slate-200 p-5 hover:border-emerald-500 transition-colors space-y-2">
+                  <LayoutGrid className="w-6 h-6 text-emerald-600" />
                   <h3 className="font-bold text-slate-900 text-sm">Browse Categories</h3>
                   <p className="text-xs text-slate-500">Explore all 24 business categories.</p>
                 </Link>
-                <Link href="/cities" className="bg-white rounded-2xl border border-slate-200 p-5 hover:border-blue-500 transition-colors space-y-2">
+                <Link href="/cities" className="bg-white rounded-2xl border border-slate-200 p-5 hover:border-emerald-500 transition-colors space-y-2">
                   <MapPin className="w-6 h-6 text-emerald-600" />
                   <h3 className="font-bold text-slate-900 text-sm">Explore Cities</h3>
                   <p className="text-xs text-slate-500">City guides from across Pakistan.</p>
                 </Link>
-                <Link href="/help-center" className="bg-white rounded-2xl border border-slate-200 p-5 hover:border-blue-500 transition-colors space-y-2">
+                <Link href="/help-center" className="bg-white rounded-2xl border border-slate-200 p-5 hover:border-emerald-500 transition-colors space-y-2">
                   <HelpCircle className="w-6 h-6 text-amber-600" />
                   <h3 className="font-bold text-slate-900 text-sm">Help Center</h3>
                   <p className="text-xs text-slate-500">Answers and support options.</p>
@@ -274,13 +274,13 @@ export default function DashboardPage() {
               </section>
 
               <section className="grid grid-cols-1 sm:grid-cols-3 gap-4" aria-label="Add a listing">
-                <Link href="/add-business" className="bg-white rounded-3xl border-2 border-blue-100 p-6 hover:border-blue-500 hover:shadow-lg transition-all space-y-3 group">
-                  <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center group-hover:scale-105 transition-transform">
+                <Link href="/add-business" className="bg-white rounded-3xl border-2 border-emerald-100 p-6 hover:border-emerald-500 hover:shadow-lg transition-all space-y-3 group">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center group-hover:scale-105 transition-transform">
                     <Building2 className="w-6 h-6" />
                   </div>
                   <h3 className="font-extrabold text-slate-900">Add Business</h3>
                   <p className="text-xs text-slate-500 leading-relaxed">Free listing — appear in search and get customer calls directly.</p>
-                  <span className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600">
                     <PlusCircle className="w-4 h-4" /> Add now
                   </span>
                 </Link>
@@ -308,7 +308,7 @@ export default function DashboardPage() {
 
               <section className="bg-white rounded-3xl border border-slate-200 p-8 space-y-5" aria-label="My listings">
                 <h2 className="font-extrabold text-slate-900 text-lg flex items-center gap-2">
-                  <ClipboardList className="w-5 h-5 text-blue-600" />
+                  <ClipboardList className="w-5 h-5 text-emerald-600" />
                   My Listings
                 </h2>
                 {listingsLoading ? (
@@ -316,7 +316,7 @@ export default function DashboardPage() {
                 ) : listings.length === 0 ? (
                   <div className="text-center py-6 space-y-3">
                     <p className="text-sm text-slate-500">No listings yet — add your first business</p>
-                    <Link href="/add-business" className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl transition-colors">
+                    <Link href="/add-business" className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors">
                       <PlusCircle className="w-4 h-4" /> Add Business
                     </Link>
                   </div>
@@ -343,7 +343,7 @@ export default function DashboardPage() {
                                 <span
                                   className={`px-2.5 py-1 rounded-full text-[11px] font-bold border ${
                                     proof.status === 'approved'
-                                      ? 'bg-blue-50 text-blue-700 border-blue-200'
+                                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
                                       : proof.status === 'rejected'
                                         ? 'bg-red-50 text-red-700 border-red-200'
                                         : 'bg-slate-100 text-slate-600 border-slate-200'
@@ -417,7 +417,7 @@ export default function DashboardPage() {
                             <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4">
                               <div className="flex items-start justify-between gap-3">
                                 <h3 className="font-extrabold text-slate-900 text-sm flex items-center gap-2">
-                                  <BadgeCheck className="w-4 h-4 text-blue-600" />
+                                  <BadgeCheck className="w-4 h-4 text-emerald-600" />
                                   Upgrade “{item.name}”
                                 </h3>
                                 <button
@@ -437,7 +437,7 @@ export default function DashboardPage() {
                                   id={`plan-${item.id}`}
                                   value={upgradePlan}
                                   onChange={(e) => setUpgradePlan(e.target.value as 'featured' | 'verified')}
-                                  className="w-full sm:w-64 px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-600"
+                                  className="w-full sm:w-64 px-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600"
                                 >
                                   <option value="featured">Featured Listing</option>
                                   <option value="verified">Verified Badge</option>
@@ -445,7 +445,7 @@ export default function DashboardPage() {
                               </div>
                               <p className="text-xs text-slate-500 leading-relaxed">
                                 Pay via the details shared by our team on the{' '}
-                                <Link href="/advertise-with-us" className="text-blue-600 font-semibold hover:underline">Advertise page</Link>{' '}
+                                <Link href="/advertise-with-us" className="text-emerald-600 font-semibold hover:underline">Advertise page</Link>{' '}
                                 or by contacting us, then upload your payment screenshot here — our admin will verify it.
                                 Featured placement and the Verified Badge are rolling out, so an approved upgrade is
                                 recorded on your listing now and displayed as each feature goes live.

@@ -235,19 +235,19 @@ export default function BlogPage() {
               {FEATURED_POSTS.map((post, idx) => {
                 const IconComp = post.icon
                 return (
-                  <div key={idx} className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-8 shadow-sm hover:border-[#2563EB] hover:shadow-xl transition-all flex flex-col justify-between group">
+                  <div key={idx} className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-8 shadow-sm hover:border-[#059669] hover:shadow-xl transition-all flex flex-col justify-between group">
                     <div>
                       <div className="flex items-center justify-between mb-4">
-                        <span className="text-xs font-bold text-[#2563EB] bg-blue-50 px-3 py-1 rounded-full">{post.category}</span>
+                        <span className="text-xs font-bold text-[#059669] bg-emerald-50 px-3 py-1 rounded-full">{post.category}</span>
                         <span className="text-xs text-slate-400 font-medium flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {post.readTime}</span>
                       </div>
-                      <h3 className="text-xl font-bold text-[#0F172A] mb-3 group-hover:text-[#2563EB] transition-colors leading-snug">{post.title}</h3>
+                      <h3 className="text-xl font-bold text-[#0F172A] mb-3 group-hover:text-[#059669] transition-colors leading-snug">{post.title}</h3>
                       <p className="text-xs text-slate-600 leading-relaxed mb-6">{post.excerpt}</p>
                     </div>
 
                     <Link
                       href={`/blog/${post.slug}`}
-                      className="text-xs font-bold text-[#2563EB] hover:underline inline-flex items-center gap-1.5 pt-4 border-t border-slate-200"
+                      className="text-xs font-bold text-[#059669] hover:underline inline-flex items-center gap-1.5 pt-4 border-t border-slate-200"
                     >
                       <span>Read Full Guide</span>
                       <ArrowRight className="w-4 h-4" />
@@ -260,7 +260,7 @@ export default function BlogPage() {
         </section>
 
         {/* CATEGORIES CHIPS */}
-        <section className="py-12 bg-[#EEF4FF] border-b border-[#E2E8F0]">
+        <section className="py-12 bg-[#ECFDF5] border-b border-[#E2E8F0]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8">
               <h2 className="text-2xl font-bold text-[#0F172A]">Browse Blog Categories</h2>
@@ -268,9 +268,9 @@ export default function BlogPage() {
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 text-center">
               {CATEGORIES.map((cat, idx) => (
-                <div key={idx} className="bg-white border border-[#E2E8F0] rounded-xl p-4 shadow-sm hover:border-[#2563EB] transition-all">
+                <div key={idx} className="bg-white border border-[#E2E8F0] rounded-xl p-4 shadow-sm hover:border-[#059669] transition-all">
                   <div className="font-bold text-[#0F172A] text-xs sm:text-sm mb-1">{cat.name}</div>
-                  <div className="text-[10px] text-[#2563EB] font-semibold">{cat.count}</div>
+                  <div className="text-[10px] text-[#059669] font-semibold">{cat.count}</div>
                 </div>
               ))}
             </div>
@@ -290,7 +290,7 @@ export default function BlogPage() {
                 <div key={idx} className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
                   <div>
                     <div className="flex items-center justify-between mb-3 text-xs">
-                      <span className="font-bold text-[#2563EB]">{post.category}</span>
+                      <span className="font-bold text-[#059669]">{post.category}</span>
                       <span className="text-slate-400 font-medium">{post.readTime}</span>
                     </div>
                     <h3 className="font-bold text-[#0F172A] text-base mb-2 leading-snug">{post.title}</h3>
@@ -299,7 +299,7 @@ export default function BlogPage() {
 
                   <div className="flex justify-between items-center pt-4 border-t border-slate-200 text-xs">
                     <span className="text-slate-400">{post.date}</span>
-                    <Link href={`/blog/${post.slug}`} className="font-bold text-[#2563EB] hover:underline inline-flex items-center gap-1">
+                    <Link href={`/blog/${post.slug}`} className="font-bold text-[#059669] hover:underline inline-flex items-center gap-1">
                       <span>Read More</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
@@ -321,12 +321,12 @@ export default function BlogPage() {
                 <input
                   type="email"
                   placeholder="Enter your email address..."
-                  className="flex-1 px-4 py-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl text-sm focus:outline-none focus:border-[#2563EB]"
+                  className="flex-1 px-4 py-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl text-sm focus:outline-none focus:border-[#059669]"
                   required
                 />
                 <button
                   type="submit"
-                  className="px-6 py-3 bg-[#F97316] hover:bg-[#EA580C] text-white font-bold rounded-xl transition-colors shadow-md text-sm shrink-0"
+                  className="px-6 py-3 bg-[#F59E0B] hover:bg-[#D97706] text-white font-bold rounded-xl transition-colors shadow-md text-sm shrink-0"
                 >
                   Subscribe Free
                 </button>

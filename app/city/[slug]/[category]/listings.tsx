@@ -45,12 +45,12 @@ export default function CityCategoryListings({
           key={business.id}
           href={`/business/${business.slug}`}
           prefetch={false}
-          className="bg-white rounded-3xl border border-slate-200 p-6 space-y-3 hover:border-blue-500 hover:shadow-md transition-all group"
+          className="bg-white rounded-3xl border border-slate-200 p-6 space-y-3 hover:border-emerald-500 hover:shadow-md transition-all group"
         >
-          <span className="inline-block px-3 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100 text-[11px] font-bold">
+          <span className="inline-block px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100 text-[11px] font-bold">
             {business.category}
           </span>
-          <h3 className="font-extrabold text-slate-900 text-lg group-hover:text-blue-700">{business.name}</h3>
+          <h3 className="font-extrabold text-slate-900 text-lg group-hover:text-emerald-700">{business.name}</h3>
           {business.city && (
             <p className="flex items-center gap-1.5 text-xs font-semibold text-slate-500">
               <MapPin className="w-3.5 h-3.5 text-emerald-600" /> {business.city}
@@ -61,7 +61,7 @@ export default function CityCategoryListings({
           )}
           {business.phone && (
             <p className="flex items-center gap-1.5 text-xs font-bold text-slate-700 pt-1">
-              <Phone className="w-3.5 h-3.5 text-blue-600" /> {business.phone}
+              <Phone className="w-3.5 h-3.5 text-emerald-600" /> {business.phone}
             </p>
           )}
         </Link>

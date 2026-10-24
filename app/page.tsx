@@ -80,13 +80,13 @@ export default function HomePage() {
         <section className="bg-slate-50 text-slate-900 pt-16 pb-20 px-4 sm:px-6 lg:px-8 border-b border-slate-200/80">
           <div className="max-w-7xl mx-auto space-y-8 text-center">
             <div className="max-w-3xl mx-auto space-y-4">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-100/80 text-blue-700 border border-blue-200 text-xs font-bold tracking-wide uppercase">
-                <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-100/80 text-emerald-700 border border-emerald-200 text-xs font-bold tracking-wide uppercase">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
                 <span>Pakistan's Local Business Directory</span>
               </span>
 
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                Find Local Businesses & Services Across <span className="text-blue-700">Pakistan</span>
+                Find Local Businesses & Services Across <span className="text-emerald-700">Pakistan</span>
               </h1>
 
               <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-medium">
@@ -128,7 +128,7 @@ export default function HomePage() {
                   <button
                     type="submit"
                     aria-label="Search LocalePak Directory"
-                    className="w-full h-full py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold text-sm rounded-2xl shadow-lg shadow-blue-600/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full h-full py-3.5 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-bold text-sm rounded-2xl shadow-lg shadow-emerald-600/20 transition-all flex items-center justify-center gap-2 cursor-pointer"
                   >
                     <Search className="w-4 h-4" />
                     <span>Search</span>
@@ -138,13 +138,13 @@ export default function HomePage() {
 
               <div className="pt-3 px-2 flex items-center gap-2 flex-wrap text-xs text-slate-500">
                 <span className="font-bold text-slate-400">Popular:</span>
-                <Link href="/category/restaurants" className="hover:text-blue-600 font-semibold">Restaurants</Link>
+                <Link href="/category/restaurants" className="hover:text-emerald-600 font-semibold">Restaurants</Link>
                 <span>•</span>
-                <Link href="/category/real-estate" className="hover:text-blue-600 font-semibold">Real Estate</Link>
+                <Link href="/category/real-estate" className="hover:text-emerald-600 font-semibold">Real Estate</Link>
                 <span>•</span>
-                <Link href="/category/technology" className="hover:text-blue-600 font-semibold">Software Houses</Link>
+                <Link href="/category/technology" className="hover:text-emerald-600 font-semibold">Software Houses</Link>
                 <span>•</span>
-                <Link href="/category/healthcare" className="hover:text-blue-600 font-semibold">Healthcare</Link>
+                <Link href="/category/healthcare" className="hover:text-emerald-600 font-semibold">Healthcare</Link>
                 <span>•</span>
                 <Link href="/blog" className="hover:text-emerald-600 font-bold">Business Guides &rarr;</Link>
               </div>
@@ -162,7 +162,7 @@ export default function HomePage() {
                   </Link>
                   <Link
                     href="/register" prefetch={false}
-                    className="px-5 py-2.5 bg-white border border-slate-200 hover:border-blue-500 text-slate-700 font-bold text-xs rounded-xl transition-colors"
+                    className="px-5 py-2.5 bg-white border border-slate-200 hover:border-emerald-500 text-slate-700 font-bold text-xs rounded-xl transition-colors"
                   >
                     Create Free Account
                   </Link>
@@ -185,7 +185,7 @@ export default function HomePage() {
                 <p className="text-xs font-semibold text-slate-500 mt-1">Karachi · Lahore · Islamabad & more</p>
               </div>
               <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                <span className="text-3xl font-extrabold text-blue-600">24 categories</span>
+                <span className="text-3xl font-extrabold text-emerald-600">24 categories</span>
                 <p className="text-xs font-semibold text-slate-500 mt-1">From food to technology</p>
               </div>
               <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100">
@@ -200,12 +200,12 @@ export default function HomePage() {
         <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-blue-600">Browse by Industry</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">Browse by Industry</span>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                 What Are You Looking For?
               </h2>
             </div>
-            <Link href="/categories" className="text-xs font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1">
+            <Link href="/categories" className="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1">
               <span>View All 24 Categories</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
@@ -218,10 +218,10 @@ export default function HomePage() {
                 href={`/category/${cat.id}`}
                 className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs hover:shadow-lg transition-all text-center space-y-2 group"
               >
-                <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto group-hover:bg-emerald-600 group-hover:text-white transition-colors">
                   <LayoutGrid className="w-6 h-6" />
                 </div>
-                <h3 className="font-bold text-slate-900 text-xs line-clamp-1 group-hover:text-blue-600">
+                <h3 className="font-bold text-slate-900 text-xs line-clamp-1 group-hover:text-emerald-600">
                   {cat.name}
                 </h3>
                 <p className="text-[11px] font-semibold text-emerald-600">
@@ -254,7 +254,7 @@ export default function HomePage() {
                 <Link
                   key={city}
                   href={`/city/${cityToSlug(city)}`}
-                  className="p-3.5 bg-slate-800/80 hover:bg-blue-600 rounded-xl border border-slate-700 text-slate-200 hover:text-white transition-all flex items-center justify-between font-semibold group"
+                  className="p-3.5 bg-slate-800/80 hover:bg-emerald-600 rounded-xl border border-slate-700 text-slate-200 hover:text-white transition-all flex items-center justify-between font-semibold group"
                 >
                   <div className="flex items-center gap-2">
                     <MapPin className="w-3.5 h-3.5 text-emerald-400 group-hover:text-white" />
@@ -271,7 +271,7 @@ export default function HomePage() {
         <section className="bg-white py-16 px-4 sm:px-6 lg:px-8 border-y border-slate-200/80">
           <div className="max-w-7xl mx-auto space-y-8">
             <div className="text-center max-w-3xl mx-auto space-y-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-blue-600">Why LocalePak</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-emerald-600">Why LocalePak</span>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                 A Directory Built for Local Search
               </h2>
@@ -280,7 +280,7 @@ export default function HomePage() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <div className="bg-[#F8FAFC] p-6 rounded-2xl border border-slate-200/80 space-y-3">
-                <Compass className="w-8 h-8 text-blue-600" />
+                <Compass className="w-8 h-8 text-emerald-600" />
                 <h3 className="font-bold text-slate-900 text-base">Made for Local Search</h3>
                 <p className="text-xs text-slate-600 leading-relaxed">Pages are organized by city and category, matching how people actually search: a service, in a place, near them.</p>
               </div>
@@ -320,7 +320,7 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-white p-6 rounded-2xl border border-slate-200/80 space-y-3">
-              <Building2 className="w-8 h-8 text-blue-600" />
+              <Building2 className="w-8 h-8 text-emerald-600" />
               <h3 className="font-bold text-slate-900 text-base">Your Own Profile Page</h3>
               <p className="text-xs text-slate-600 leading-relaxed">A dedicated page for your business with your name, description, address and contact details — built to be read properly by Google.</p>
             </div>
@@ -347,7 +347,7 @@ export default function HomePage() {
           <div className="flex items-center gap-3 justify-center flex-wrap">
             <Link
               href="/register" prefetch={false}
-              className="px-7 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-2xl shadow-lg shadow-blue-600/20 transition-all"
+              className="px-7 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-2xl shadow-lg shadow-emerald-600/20 transition-all"
             >
               Create Free Account
             </Link>
@@ -376,8 +376,8 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {latestPosts.map((post) => (
-              <Link key={post.slug} href={`/blog/${post.slug}`} className="bg-white p-6 rounded-2xl border border-slate-200/80 space-y-3 hover:border-blue-500 transition-colors">
-                <span className="text-[11px] font-bold text-blue-600">{post.category}</span>
+              <Link key={post.slug} href={`/blog/${post.slug}`} className="bg-white p-6 rounded-2xl border border-slate-200/80 space-y-3 hover:border-emerald-500 transition-colors">
+                <span className="text-[11px] font-bold text-emerald-600">{post.category}</span>
                 <h3 className="font-bold text-slate-900 text-sm">{post.title}</h3>
                 <p className="text-xs text-slate-500 line-clamp-2">{post.excerpt}</p>
                 <p className="text-[11px] text-slate-400 pt-1">{post.readTime}</p>
@@ -410,7 +410,7 @@ export default function HomePage() {
         {/* DIRECTORY CTA */}
         <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           <div className="bg-slate-900 rounded-3xl p-8 sm:p-12 text-white text-center max-w-4xl mx-auto space-y-6">
-            <Building2 className="w-10 h-10 text-blue-400 mx-auto" />
+            <Building2 className="w-10 h-10 text-emerald-400 mx-auto" />
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
               Explore the Directory — or Put Your Business on It
             </h2>
@@ -420,7 +420,7 @@ export default function HomePage() {
             <div className="flex items-center gap-3 justify-center flex-wrap">
               <Link
                 href="/categories"
-                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs rounded-xl transition-colors"
+                className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors"
               >
                 Browse Categories
               </Link>
@@ -447,7 +447,7 @@ export default function HomePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             <div className="bg-white rounded-3xl border border-slate-200 p-7 space-y-3">
-              <ListChecks className="w-8 h-8 text-blue-600" />
+              <ListChecks className="w-8 h-8 text-emerald-600" />
               <h3 className="font-extrabold text-slate-900">1. The owner submits</h3>
               <p className="text-sm text-slate-600 leading-relaxed">
                 The business owner creates a free account and completes the eight-step form —
@@ -455,7 +455,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="bg-white rounded-3xl border border-slate-200 p-7 space-y-3">
-              <ShieldCheck className="w-8 h-8 text-blue-600" />
+              <ShieldCheck className="w-8 h-8 text-emerald-600" />
               <h3 className="font-extrabold text-slate-900">2. Our team reviews</h3>
               <p className="text-sm text-slate-600 leading-relaxed">
                 We check the essentials before approving: a genuine business name, a working phone
@@ -463,7 +463,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="bg-white rounded-3xl border border-slate-200 p-7 space-y-3">
-              <MessageCircle className="w-8 h-8 text-blue-600" />
+              <MessageCircle className="w-8 h-8 text-emerald-600" />
               <h3 className="font-extrabold text-slate-900">3. Customers connect directly</h3>
               <p className="text-sm text-slate-600 leading-relaxed">
                 Approved profiles go public in their category, city and search. Customers call or
@@ -473,22 +473,22 @@ export default function HomePage() {
           </div>
           <p className="text-center text-xs text-slate-500">
             Read the full standards in our{' '}
-            <Link href="/verification-policy" className="text-blue-600 font-semibold hover:underline">verification policy</Link>{' '}
+            <Link href="/verification-policy" className="text-emerald-600 font-semibold hover:underline">verification policy</Link>{' '}
             and{' '}
-            <Link href="/editorial-policy" className="text-blue-600 font-semibold hover:underline">editorial policy</Link>,
+            <Link href="/editorial-policy" className="text-emerald-600 font-semibold hover:underline">editorial policy</Link>,
             or report a problem listing via{' '}
-            <Link href="/report-abuse" className="text-blue-600 font-semibold hover:underline">Report Abuse</Link>.
+            <Link href="/report-abuse" className="text-emerald-600 font-semibold hover:underline">Report Abuse</Link>.
           </p>
         </section>
 
         {/* FINAL CTA */}
         <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-          <div className="bg-gradient-to-r from-blue-700 via-blue-800 to-indigo-900 rounded-3xl p-8 sm:p-12 text-white shadow-2xl flex flex-col lg:flex-row justify-between items-center gap-8">
+          <div className="bg-gradient-to-r from-emerald-700 via-emerald-800 to-indigo-900 rounded-3xl p-8 sm:p-12 text-white shadow-2xl flex flex-col lg:flex-row justify-between items-center gap-8">
             <div className="space-y-3 max-w-2xl text-center lg:text-left">
               <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
                 Your Customers Are Searching. Be There.
               </h2>
-              <p className="text-blue-100 text-xs sm:text-sm leading-relaxed">
+              <p className="text-emerald-100 text-xs sm:text-sm leading-relaxed">
                 Create a free account and add your business in eight short steps. After a quick review, your profile appears in your category, your city and search.
               </p>
             </div>

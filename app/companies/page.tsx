@@ -42,7 +42,7 @@ export default async function CompaniesPage() {
             <p className="text-sm text-slate-500 max-w-sm mx-auto">
               Create a free account and add your company profile to appear here and in LocalePak search results.
             </p>
-            <Link href="/register" prefetch={false} className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors">
+            <Link href="/register" prefetch={false} className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors">
               Add Your Company Free <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -63,7 +63,7 @@ export default async function CompaniesPage() {
                 )}
                 {company.phone && (
                   <p className="text-xs text-slate-500 flex items-center gap-1.5 font-medium">
-                    <Phone className="w-3.5 h-3.5 text-blue-600" /> {company.phone}
+                    <Phone className="w-3.5 h-3.5 text-emerald-600" /> {company.phone}
                   </p>
                 )}
                 {company.description && (
@@ -71,7 +71,7 @@ export default async function CompaniesPage() {
                 )}
                 <Link
                   href={`/company/${company.slug}`}
-                  className="mt-auto inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 hover:text-blue-700"
+                  className="mt-auto inline-flex items-center gap-1.5 text-sm font-bold text-emerald-600 hover:text-emerald-700"
                 >
                   View Company <ArrowRight className="w-4 h-4" />
                 </Link>

@@ -40,7 +40,7 @@ export default function EditorialPolicyPage() {
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">3. Corrections & Updates</h2>
             <p>
-              If a business listing or published guide contains factual errors, users and owners can submit correction requests through our <a href="/contact" className="text-blue-600 underline">Contact Portal</a> for immediate audit.
+              If a business listing or published guide contains factual errors, users and owners can submit correction requests through our <a href="/contact" className="text-emerald-600 underline">Contact Portal</a> for immediate audit.
             </p>
           </div>
         </div>

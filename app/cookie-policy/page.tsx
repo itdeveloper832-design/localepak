@@ -27,7 +27,7 @@ export default function CookiePolicyPage() {
 
           <div className="space-y-6 text-sm text-slate-600 leading-relaxed">
             <p>
-              This Cookie Policy explains how <strong>LocalePak</strong> (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) uses cookies, web beacons, and similar tracking technologies when you visit our website at <a href="https://www.localepak.com/" className="text-blue-600 underline">https://www.localepak.com/</a>. It outlines the specific types of cookies used, why they are deployed, and how you can manage your preferences at any time.
+              This Cookie Policy explains how <strong>LocalePak</strong> (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) uses cookies, web beacons, and similar tracking technologies when you visit our website at <a href="https://www.localepak.com/" className="text-emerald-600 underline">https://www.localepak.com/</a>. It outlines the specific types of cookies used, why they are deployed, and how you can manage your preferences at any time.
             </p>
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">1. What Are Cookies?</h2>
@@ -75,13 +75,13 @@ export default function CookiePolicyPage() {
                 <strong>On-Site Consent Manager:</strong> You can manage or revoke cookie consent directly on LocalePak using our interactive cookie preferences banner.
               </li>
               <li>
-                <strong>Google Ads Settings:</strong> You can opt out of personalized advertising from Google by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">Google Ads Settings</a>.
+                <strong>Google Ads Settings:</strong> You can opt out of personalized advertising from Google by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-emerald-600 underline font-semibold">Google Ads Settings</a>.
               </li>
               <li>
-                <strong>Digital Advertising Alliance (DAA):</strong> You can opt out of targeted advertising from participating companies via <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">www.aboutads.info</a>.
+                <strong>Digital Advertising Alliance (DAA):</strong> You can opt out of targeted advertising from participating companies via <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 underline font-semibold">www.aboutads.info</a>.
               </li>
               <li>
-                <strong>European Interactive Digital Advertising Alliance (EDAA):</strong> Visitors in Europe can manage ad cookies at <a href="https://www.youronlinechoices.com/" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline font-semibold">Your Online Choices</a>.
+                <strong>European Interactive Digital Advertising Alliance (EDAA):</strong> Visitors in Europe can manage ad cookies at <a href="https://www.youronlinechoices.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 underline font-semibold">Your Online Choices</a>.
               </li>
               <li>
                 <strong>Browser Settings:</strong> You can configure your browser (Google Chrome, Mozilla Firefox, Apple Safari, Microsoft Edge) to reject cookies, clear cache, or notify you when a cookie is placed.
@@ -95,7 +95,7 @@ export default function CookiePolicyPage() {
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">5. Contact Our Data Desk</h2>
             <p>
-              If you have any questions or require further clarification regarding our use of cookies or tracking technologies, please consult our <Link href="/privacy" className="text-blue-600 underline">Privacy Policy</Link> or email our support desk directly at <a href="mailto:admin@localepak.com" className="text-blue-600 underline">admin@localepak.com</a>.
+              If you have any questions or require further clarification regarding our use of cookies or tracking technologies, please consult our <Link href="/privacy" className="text-emerald-600 underline">Privacy Policy</Link> or email our support desk directly at <a href="mailto:admin@localepak.com" className="text-emerald-600 underline">admin@localepak.com</a>.
             </p>
           </div>
         </div>

@@ -97,7 +97,7 @@ export default async function CompanyDetailPage({
       )}
 
       <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-1 w-full">
-        <Link href="/companies" className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 hover:text-blue-700 mb-6">
+        <Link href="/companies" className="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-600 hover:text-emerald-700 mb-6">
           <ArrowLeft className="w-4 h-4" /> Back to Companies
         </Link>
 
@@ -107,7 +107,7 @@ export default async function CompanyDetailPage({
             <p className="text-sm text-slate-500 max-w-sm mx-auto">
               This company may have been removed, or the link is incorrect.
             </p>
-            <Link href="/companies" className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors">
+            <Link href="/companies" className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors">
               <ArrowLeft className="w-4 h-4" /> Browse Companies
             </Link>
           </div>
@@ -129,7 +129,7 @@ export default async function CompanyDetailPage({
               )}
               {company.phone && (
                 <span className="flex items-center gap-1.5">
-                  <Phone className="w-4 h-4 text-blue-600" /> {company.phone}
+                  <Phone className="w-4 h-4 text-emerald-600" /> {company.phone}
                 </span>
               )}
               {company.email && (
@@ -154,7 +154,7 @@ export default async function CompanyDetailPage({
               {company.phone && (
                 <a
                   href={`tel:${company.phone}`}
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors"
                 >
                   <Phone className="w-4 h-4" /> Call Now
                 </a>
@@ -172,7 +172,7 @@ export default async function CompanyDetailPage({
                   href={company.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 hover:border-blue-500 text-slate-700 font-bold text-sm rounded-xl transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-slate-200 hover:border-emerald-500 text-slate-700 font-bold text-sm rounded-xl transition-colors"
                 >
                   <Globe className="w-4 h-4" /> Visit Website
                 </a>

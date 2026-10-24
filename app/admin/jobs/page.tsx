@@ -107,7 +107,7 @@ export default function AdminJobsPage() {
             onClick={() => setTab(t)}
             aria-pressed={tab === t}
             className={`px-4 py-2 rounded-full text-xs font-bold border capitalize cursor-pointer transition-colors ${
-              tab === t ? 'bg-blue-600 border-blue-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-blue-500'
+              tab === t ? 'bg-emerald-600 border-emerald-600 text-white' : 'bg-white border-slate-200 text-slate-600 hover:border-emerald-500'
             }`}
           >
             {t} ({t === 'all' ? items.length : items.filter((it) => (it.data.status || 'pending') === t).length})
