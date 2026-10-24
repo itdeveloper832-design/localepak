@@ -100,7 +100,8 @@ export default function ContactPage() {
                 </div>
                 <ul className="space-y-2 text-xs sm:text-sm text-[#475569] mb-4">
                   <li><strong>Official Email:</strong> admin@localepak.com</li>
-                  <li><strong>Listing Support:</strong> admin@localepak.com</li>
+                  <li><strong>Support Email:</strong> support@localepak.com</li>
+                  <li><strong>Listing Support:</strong> support@localepak.com</li>
                   <li><strong>Job Portal:</strong> admin@localepak.com</li>
                 </ul>
                 <p className="text-xs text-[#64748B] leading-relaxed">Include the page URL, listing name, and a clear description of the issue when relevant.</p>
