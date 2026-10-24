@@ -29,14 +29,25 @@ export function ownerContactRef(col: string, listingId: string) {
   return doc(db, col, listingId, 'private', 'contact')
 }
 
-/** Write the owner's private contact right after a listing is created. */
+/** Write the owner's private contact right after a listing is created.
+ * NEVER throws: the private-contact write must never break the submission
+ * itself (or the mail step that follows it). If live rules deny this write,
+ * the listing is still created and the submission emails still go out; the
+ * admin can still resolve the owner via the listing's ownerId. Returns true
+ * when the private document was written. */
 export async function writeOwnerContact(
   col: string,
   listingId: string,
   ownerId: string,
   ownerEmail: string
-): Promise<void> {
-  await setDoc(ownerContactRef(col, listingId), { ownerEmail, ownerId })
+): Promise<boolean> {
+  try {
+    await setDoc(ownerContactRef(col, listingId), { ownerEmail, ownerId })
+    return true
+  } catch (err) {
+    console.warn('Owner private contact write failed (non-fatal):', err)
+    return false
+  }
 }
 
 /**
