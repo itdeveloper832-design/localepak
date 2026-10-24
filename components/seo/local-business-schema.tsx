@@ -1,5 +1,15 @@
 'use client'
 
+// Deprecated shim — the canonical structured data for LocalePak lives in
+// lib/organization-schema.ts (Organization + founder Person under one
+// canonical @id). This module previously defined a second, conflicting
+// Organization schema; it now delegates to the canonical graph so no
+// duplicate entity can ever be emitted from here.
+import {
+  organizationSchema,
+  founderPersonSchema,
+} from '@/lib/organization-schema'
+
 interface BusinessData {
   name: string
   phone: string
@@ -11,74 +21,19 @@ interface BusinessData {
   logo?: string
 }
 
-export function LocalBusinessSchema({ business }: { business: BusinessData }) {
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'LocalBusiness',
-    name: business.name,
-    description: business.description || `${business.name} - ${business.category} in ${business.city}`,
-    url: business.website || `https://www.localepak.com/`,
-    telephone: business.phone,
-    address: {
-      '@type': 'PostalAddress',
-      addressCountry: 'PK',
-      addressLocality: business.city,
-      streetAddress: business.address
-    },
-    category: business.category,
-    serviceType: business.category,
-    areaServed: {
-      '@type': 'Country',
-      name: 'Pakistan'
-    },
-    logo: business.logo || 'https://www.localepak.com/logo.svg',
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: business.phone,
-      contactType: 'customer service',
-      areaServed: business.city
-    }
-  }
-
+export function DirectorySchema() {
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify([organizationSchema, founderPersonSchema]),
+      }}
     />
   )
 }
 
-export function DirectorySchema() {
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'LocalePak',
-    description: 'Pakistan Free Business Directory - Find and list local businesses',
-    url: 'https://www.localepak.com/',
-    mainEntity: {
-      '@type': 'Organization',
-      name: 'LocalePak',
-      url: 'https://www.localepak.com/',
-      description: 'Pakistan Free Business Directory',
-      areaServed: {
-        '@type': 'Country',
-        name: 'Pakistan'
-      }
-    },
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: 'https://www.localepak.com/categories/?q={search_term_string}'
-      },
-      'query-input': 'required name=search_term_string'
-    }
-  }
-
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  )
+// Business detail pages emit their own per-business schema. The legacy
+// per-business component is retired and renders nothing.
+export function LocalBusinessSchema(_props: { business: BusinessData }) {
+  return null
 }
