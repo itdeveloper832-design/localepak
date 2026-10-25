@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { cache } from 'react'
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -37,6 +37,23 @@ export function generateStaticParams() {
   )
 }
 
+// Shared between generateMetadata and the page component so the
+// merged city x category listings are fetched once per render.
+const getCachedCityCategoryCards = cache((
+  city: string,
+  citySlug: string,
+  categoryId: string,
+  categoryName: string
+) => getCityCategoryCards({ city, citySlug, categoryId, categoryName }))
+
+function cityCategoryTitle(categoryName: string, city: string): string {
+  const long = `${categoryName} in ${city}: Find Contacts & Services | LocalePak`
+  if (long.length <= 65) return long
+  const mid = `${categoryName} in ${city}: Contacts & Services | LocalePak`
+  if (mid.length <= 65) return mid
+  return `${categoryName} in ${city}: Contacts | LocalePak`
+}
+
 function metaDescription(city: string, categoryId: string, categoryName: string): string {
   const md = generateCityCategoryContent(city, categoryId)
   const firstPara = md
@@ -47,7 +64,10 @@ function metaDescription(city: string, categoryId: string, categoryName: string)
     .replace(/[#*_]/g, '')
     .replace(/\s+/g, ' ')
     .trim()
-  return text.length > 160 ? `${text.slice(0, 157).trimEnd()}...` : text
+  if (text.length <= 158) return text
+  const cut = text.slice(0, 155)
+  const lastSpace = cut.lastIndexOf(' ')
+  return (lastSpace > 0 ? cut.slice(0, lastSpace) : cut).trimEnd()
 }
 
 export async function generateMetadata(props: {
@@ -59,12 +79,14 @@ export async function generateMetadata(props: {
   if (!city || !cat) {
     return { title: 'Page Not Found | LocalePak', robots: { index: false, follow: false } }
   }
-  const title = `${cat.name} in ${city} | LocalePak`
+  const title = cityCategoryTitle(cat.name, city)
   const description = metaDescription(city, cat.id, cat.name)
+  const listings = await getCachedCityCategoryCards(city, cityToSlug(city), cat.id, cat.name)
   const canonical = `https://www.localepak.com/city/${cityToSlug(city)}/${cat.id}`
   return {
     title,
     description,
+    ...(listings.length === 0 ? { robots: { index: false, follow: false } } : {}),
     alternates: { canonical },
     openGraph: { title, description, url: canonical, siteName: 'LocalePak', locale: 'en_PK', type: 'website' },
     twitter: { card: 'summary_large_image', title, description },
@@ -80,12 +102,7 @@ export default async function CityCategoryPage(props: {
   if (!city || !cat) notFound()
 
   const citySlug = cityToSlug(city)
-  const listings = await getCityCategoryCards({
-    city,
-    citySlug,
-    categoryId: cat.id,
-    categoryName: cat.name,
-  })
+  const listings = await getCachedCityCategoryCards(city, citySlug, cat.id, cat.name)
   const info = CITY_INFO[city]
   const guide = generateCityCategoryContent(city, cat.id)
   const otherCategories = CATEGORIES.filter(c => c.id !== cat.id).slice(0, 8)
@@ -190,7 +207,7 @@ export default async function CityCategoryPage(props: {
 
         <OwnerCtaBand
           title={`Run a ${cat.name.toLowerCase()} business in ${city}?`}
-          text={`List it free on this page: register, complete the eight-step form, and after review your profile appears here with call and WhatsApp buttons customers can use directly.`}
+          text={`List it free on this page: register, complete the eight-step form, and once approved, your profile goes public with the next weekly release, and then appears here with call and WhatsApp buttons customers can use directly.`}
           links={[
             { label: `All businesses in ${city}`, href: `/city/${citySlug}` },
             { label: `${cat.name} across Pakistan`, href: `/category/${cat.id}` },

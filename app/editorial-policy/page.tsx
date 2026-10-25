@@ -30,12 +30,12 @@ export default function EditorialPolicyPage() {
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">1. Content Verification</h2>
             <p>
-              Every business submission and blog article undergoes strict human review and algorithmic validation to prevent misleading, fraudulent, or outdated business information.
+              Every business submission is reviewed by our team before it goes public. We check that the business name is genuine, the phone number is a real, working number in the right format, and the category and city match what the business actually does.
             </p>
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">2. Independence & Objectivity</h2>
             <p>
-              Paid listings or advertising partnerships do not influence our editorial ratings or consumer reviews. Featured badges require verification of business registration credentials.
+              Paid listings or advertising partnerships, when they launch, will not influence which listings are approved or which reviews are shown. Featured placement and the Verified Badge are launching soon; when they open, the Verified Badge will involve a document check of the business.
             </p>
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">3. Corrections & Updates</h2>

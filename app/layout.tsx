@@ -5,6 +5,11 @@ import './globals.css'
 import ClientProviders from '@/components/client-providers'
 import { founderPersonSchema, organizationSchema } from '@/lib/organization-schema'
 
+// Google Analytics measurement ID, owner-supplied 2026-10-25. Defined
+// once and referenced by both the loader URL and the gtag config call, so
+// the tag exists in exactly one place (one Google tag per page).
+const GA_MEASUREMENT_ID = 'G-77B4J5JX5F'
+
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ['latin'],
   display: 'swap',
@@ -14,7 +19,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   title: "Pakistan Business Directory – Find & List Businesses Free | LocalePak",
-  description: "LocalePak is Pakistan's free business directory. Find local businesses by city & category — or add your business listing free and get found on Google.",
+  description: "LocalePak is Pakistan's free business directory. Find local businesses by city & category — or add your business listing free and get a public profile page that search engines can read.",
   metadataBase: new URL('https://www.localepak.com'),
   keywords: [
     'business directory Pakistan',
@@ -31,7 +36,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Pakistan Business Directory – Find & List Businesses Free | LocalePak",
-    description: "LocalePak is Pakistan's free business directory. Find local businesses by city & category — or add your business listing free and get found on Google.",
+    description: "LocalePak is Pakistan's free business directory. Find local businesses by city & category — or add your business listing free and get a public profile page that search engines can read.",
     url: 'https://www.localepak.com/',
     siteName: 'LocalePak',
     locale: 'en_PK',
@@ -40,7 +45,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Pakistan Business Directory – Find & List Businesses Free | LocalePak",
-    description: "LocalePak is Pakistan's free business directory. Find local businesses by city & category — or add your business listing free and get found on Google.",
+    description: "LocalePak is Pakistan's free business directory. Find local businesses by city & category — or add your business listing free and get a public profile page that search engines can read.",
   },
   robots: {
     index: true,
@@ -75,6 +80,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={plusJakartaSans.variable}>
       <head>
+        {/* Google tag (gtag.js) — owner-supplied; first in <head> on every page via the root layout. */}
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '${GA_MEASUREMENT_ID}');`,
+          }}
+        />
         <link rel="preconnect" href="https://images.unsplash.com" crossOrigin="anonymous" />
         <link rel="help" href="/llms.txt" type="text/plain" title="LLM Context" />
         <script

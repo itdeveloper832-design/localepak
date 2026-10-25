@@ -662,7 +662,7 @@ export default function AddBusinessPage() {
 
                 <div className="flex gap-2.5 p-3.5 bg-emerald-50 border border-emerald-100 rounded-xl text-xs text-slate-600">
                   <Info className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span>Your listing goes through a quick review and appears publicly on LocalePak after approval.</span>
+                  <span>Your listing goes through a quick review; once approved, it goes public with the next weekly release.</span>
                 </div>
               </div>
             )}

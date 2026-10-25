@@ -44,7 +44,7 @@ const FOUNDER_SCHEMA_KNOWS_ABOUT = [
 export function generateMetadata(): Metadata {
   const title = 'About LocalePak – Founder & CEO Muhammad Imran | LocalePak'
   const description =
-    'Meet Muhammad Imran, Founder & CEO of LocalePak, a Pakistani full-stack web & AI developer, technical SEO specialist and founder of Imran Digitals. LocalePak is Pakistan’s free business directory, built to help local businesses get discovered without listing fees or paywalls.'
+    'Meet Muhammad Imran, Founder & CEO of LocalePak, Pakistan’s free business directory — built to help local businesses get discovered, with no listing fees.'
 
   return {
     title,
@@ -355,7 +355,7 @@ export default function AboutPage() {
                 >
                   Imran Digitals
                 </a>
-                . It connects local businesses with customers across 183 cities through free listings,
+                . It connects local businesses with customers through free listings on 183 city pages across Pakistan,
                 while keeping phone and WhatsApp details visible instead of hiding them behind paywalls.
               </p>
 
@@ -590,7 +590,7 @@ export default function AboutPage() {
                 <h3 className="mt-6 text-2xl font-extrabold text-slate-900">Our Mission</h3>
                 <p className="mt-4 leading-relaxed text-slate-600">
                   To eliminate digital entry barriers for Pakistani entrepreneurs by providing a
-                  completely free, reviewed business directory across all of Pakistan’s cities.
+                  completely free, reviewed business directory across its 183 city pages.
                 </p>
               </article>
 

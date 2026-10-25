@@ -131,6 +131,14 @@ export default function Navbar() {
             )
           })}
           
+          <Link
+            href="/search" prefetch={false}
+            onClick={() => setOpen(false)}
+            className="text-sm font-semibold py-3 px-4 rounded-xl text-zinc-300 hover:bg-zinc-800 flex items-center gap-3"
+          >
+            <Search className="w-4 h-4 text-emerald-400" />
+            <span>Search</span>
+          </Link>
           <div className="pt-3 border-t border-zinc-800 flex flex-col gap-2">
             <Link
               href="/dashboard" prefetch={false}

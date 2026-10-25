@@ -5,8 +5,8 @@ import Link from 'next/link'
 import { BookOpen, Clock, ArrowRight, Sparkles, TrendingUp, ShieldCheck, Briefcase, FileText, CheckCircle2 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'LocalePak Blog – Free Business Listing Tips, SEO Guides & Pakistan Business News',
-  description: 'Read LocalePak blog for free business listing tips, local SEO guides, job posting strategies, and Pakistan business news. Expert advice for businesses in Karachi, Lahore, Islamabad.',
+  title: 'LocalePak Blog: Free Listing Tips & Pakistan Business Guides',
+  description: 'Practical guides for Pakistani businesses: free listing tips, local SEO, job posting and company research — plus news for Karachi, Lahore and Islamabad.',
   keywords: 'LocalePak blog, free business listing tips, local SEO Pakistan, business directory guide, job posting tips Pakistan, Pakistan business news, online business marketing',
   alternates: {
     canonical: 'https://www.localepak.com/blog/',

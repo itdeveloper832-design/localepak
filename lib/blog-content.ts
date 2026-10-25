@@ -8,25 +8,25 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
         heading: 'A smarter way to compare software houses in Pakistan',
         paragraphs: ['Every comparison should begin with the job you need done. A firm that excels at enterprise resource planning may be a poor match for a startup’s first MVP, and an agency built around e-commerce stores may lack the controls a banking platform demands.', 'Go through each company’s service pages, case studies, technical strengths, delivery locations, security approach, and published contact details. Give more weight to demonstrated work than to awards, logo walls, or promotional adjectives.'],
         bullets: ['Keep product engineering, web and mobile development, cloud, data, AI, QA, and managed services as separate categories when you compare.', 'Weigh the delivery model, how the team communicates, time-zone overlap, who owns the project, and what support looks like after launch.', 'When judging the depth of a team, look at its live careers pages and the public profiles of its leadership.'],
-        links: [{ label: 'Browse technology businesses on LocalePak', href: '/category/technology/' }, { label: 'Explore Pakistani companies', href: '/companies' }, { label: 'Find technology jobs', href: '/jobs?category=Technology%20%26%20IT' }]
+        links: [{ label: 'Browse technology businesses on LocalePak', href: '/category/technology/' }, { label: 'Explore Pakistani companies', href: '/companies' }]
       },
       {
         heading: 'Software houses and IT companies in Karachi',
         paragraphs: ['When readers narrow their research to a single city, Karachi is one of the markets they explore for software houses, IT firms, web development providers, and technology employers. The point of comparing at city level is not to crown a winner; it is to inspect each profile’s services, industry background, public website, office or service location, portfolio proof, and current hiring activity.', 'Where an approved listing exists, combine LocalePak’s city and technology pages. If a provider does not appear in the directory, check its own website and other trustworthy public sources — an empty directory result does not mean the company does not exist.'],
         bullets: ['Commercial software and enterprise systems: compare the platform itself plus integration, support, and delivery capability.', 'Web and product development: look at technical scope, case studies, ownership, maintenance terms, and how the team communicates.', 'Technology careers: confirm the vacancy, the employer’s identity, the location, the employment type, and how to apply before you send anything.'],
-        links: [{ label: 'Browse Karachi businesses', href: '/city/karachi/' }, { label: 'Browse technology listings', href: '/category/technology/' }, { label: 'Explore current jobs', href: '/jobs/' }]
+        links: [{ label: 'Browse Karachi businesses', href: '/city/karachi/' }, { label: 'Browse technology listings', href: '/category/technology/' }]
       },
       {
         heading: 'Technology hubs and capability clusters',
         paragraphs: ['Lahore, Karachi, and Islamabad anchor Pakistan’s technology scene, yet capable teams also work from many other cities, so the market should never be treated as one uniform block. A directory earns its keep when it lets users compare companies by city, service, industry, and hiring activity.', 'The capability clusters you will see most often include enterprise software, bespoke web applications, mobile products, cloud and DevOps, data engineering, AI and machine learning, cybersecurity, health technology, fintech, and business-process automation.'],
         bullets: ['Enterprise and digital transformation: judge firms such as Systems Limited, Techlogix, and Confiz by their official service and case-study pages.', 'Product and platform engineering: compare who owns the product, how often releases ship, the support model, and the engineering specialism.', 'Narrow specialisms: when the project is focused, assess firms on cloud, AI, cybersecurity, QA, or sector expertise first.'],
-        links: [{ label: 'Browse LocalePak cities', href: '/cities' }, { label: 'Find professionals', href: '/professionals' }, { label: 'Search the directory', href: '/search' }]
+        links: [{ label: 'Browse LocalePak cities', href: '/cities' }, { label: 'Search the directory', href: '/search' }]
       },
       {
         heading: 'Names worth researching in Pakistan’s tech ecosystem',
         paragraphs: ['Names that come up again and again in current search results include Systems Limited, NetSol Technologies, 10Pearls, Tkxel, Arbisoft, Devsinc, Contour Software, Confiz, CureMD, and Nextbridge. Treat that list as a research starting point rather than a definitive ranking, because company size, services, locations, and hiring needs shift over time.', 'Verify the present-day facts for each firm through its official website, careers page, leadership information, and public professional sources. LocalePak adds value when it links a company profile to its city page, its people, and its live vacancies.'],
         bullets: ['Systems Limited: known for enterprise transformation and technology services; confirm current offices and service lines.', 'NetSol Technologies: known for asset-finance and enterprise software; confirm current leadership and careers information.', 'Arbisoft, Confiz, CureMD, Tkxel, Devsinc, Contour Software, 10Pearls, and Nextbridge: compare official services, industries served, offices, and open roles.'],
-        links: [{ label: 'Explore hiring companies', href: '/companies' }, { label: 'Read IT jobs in Pakistan', href: '/blog/it-jobs-in-pakistan' }, { label: 'Browse current jobs', href: '/jobs' }]
+        links: [{ label: 'Explore hiring companies', href: '/companies' }, { label: 'Read IT jobs in Pakistan', href: '/blog/it-jobs-in-pakistan' }]
       },
       {
         heading: 'Choosing a software company for your project',
@@ -37,7 +37,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
       {
         heading: 'Using company research as a job seeker',
         paragraphs: ['Candidates can apply the same research in reverse, comparing technology employers by engineering roles, internships, tech stacks, city, remote policy, learning opportunities, and public information about their teams. The homework that helps a buyer pick a vendor also helps an applicant pick an employer.', 'On LocalePak, this article should sit alongside live job pages and professional profiles, with company information kept clearly separate from individual claims.'],
-        links: [{ label: 'Browse software and IT jobs', href: '/jobs' }, { label: 'Find Pakistani professionals', href: '/professionals' }, { label: 'Explore company profiles', href: '/companies' }]
+        links: [{ label: 'Explore company profiles', href: '/companies' }]
       },
       {
         heading: 'Frequently asked questions',
@@ -57,13 +57,13 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
         heading: 'Begin with a precise role and location',
         paragraphs: ['Searching “jobs in Pakistan” is fine for a first look, but it is far too broad for everyday applications. Add your profession, level, and preferred location: “junior developer jobs Lahore,” “accountant jobs Karachi,” “teacher jobs Islamabad,” or “remote customer support jobs Pakistan.”', 'Combine LocalePak’s jobs, company, professional, and city sections. A company page tells you who the employer is, a professional profile helps you understand the field, and a job page gives you the route to apply.'],
         bullets: ['Pin down your target role, the cities you would accept, work arrangement, experience level, salary range, and earliest start date.', 'Shortlist employers you actually want instead of spraying applications at every vacancy.', 'Note the publication date and deadline of each opening you pursue.'],
-        links: [{ label: 'Open LocalePak jobs', href: '/jobs' }, { label: 'Browse companies', href: '/companies' }, { label: 'Browse cities', href: '/cities' }]
+        links: [{ label: 'Browse companies', href: '/companies' }, { label: 'Browse cities', href: '/cities' }]
       },
       {
         heading: 'Search several sources — and verify every vacancy',
         paragraphs: ['LinkedIn, Indeed, Rozee.pk, Mustakbil, employer career pages, and official government portals each expose a different slice of the market. A vacancy reshared in a social-media post may be months old or may not lead to the employer’s real application channel.', 'Before you apply, confirm the employer’s domain, the job title, location, employment type, closing date, and documents required. Never pay a recruiter for an interview, and never send sensitive identity documents to an unverified contact.'],
         bullets: ['Government roles should be traced back to the department, commission, or official recruitment portal responsible for them.', 'Private roles should be confirmed on the employer’s own careers page or a reputable job platform.', 'Remote roles need extra checks: who the employer is, the contract, how you are paid, and the hours expected.'],
-        links: [{ label: 'Read IT jobs in Pakistan', href: '/blog/it-jobs-in-pakistan' }, { label: 'Browse current vacancies', href: '/jobs' }]
+        links: [{ label: 'Read IT jobs in Pakistan', href: '/blog/it-jobs-in-pakistan' }]
       },
       {
         heading: 'Prepare an application that fits Pakistan’s market',
@@ -73,7 +73,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
       {
         heading: 'Job families worth watching',
         paragraphs: ['Public job-search surfaces keep signalling demand for software development, data entry, customer support, virtual assistance, digital marketing, accounting, teaching, internships, and sales. A demand signal is not a promise of employment, so the real value lies in a repeatable process for finding and checking genuine openings.', 'Build skills for the market you are targeting and follow employers instead of fixating on one title. Widen the net with adjacent roles: React developers can look at frontend and full-stack posts, and customer-support candidates can look at chat support, call-center, and customer-success roles.'],
-        links: [{ label: 'Find technology jobs', href: '/jobs' }, { label: 'Explore professional profiles', href: '/professionals' }, { label: 'Browse hiring companies', href: '/companies' }]
+        links: [{ label: 'Browse hiring companies', href: '/companies' }]
       },
       {
         heading: 'Run your search on a weekly rhythm',
@@ -99,7 +99,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
         heading: 'Entry-level remote roles worth exploring',
         paragraphs: ['Fresh graduates can realistically target junior software development, QA testing, virtual assistance, customer support, digital marketing, content work, online tutoring, design, data entry, and administrative internships. Which one suits you depends on how well you communicate, the evidence you can show, your schedule, your equipment, and your subject knowledge.', 'Remember that “remote” describes how a job is done, not what the job is. Search for the actual role first, then confirm the employer supports working remotely from Pakistan.'],
         bullets: ['Technology: React, Node.js, Python, QA, support, and junior full-stack openings.', 'Operations: virtual assistant, data entry, scheduling, research, and customer support work.', 'Education and creative fields: online tutoring, content, design, and social-media roles.'],
-        links: [{ label: 'Browse remote-capable jobs', href: '/jobs' }, { label: 'Read IT jobs in Pakistan', href: '/blog/it-jobs-in-pakistan' }]
+        links: [{ label: 'Read IT jobs in Pakistan', href: '/blog/it-jobs-in-pakistan' }]
       },
       {
         heading: 'How to check whether a remote employer is genuine',
@@ -115,7 +115,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
       {
         heading: 'Search phrases that surface remote roles in Pakistan',
         paragraphs: ['Pair the role with seniority and work arrangement to get useful results — for example “remote frontend developer Pakistan,” “work from home customer support Pakistan,” “virtual assistant Lahore remote,” “online tutor Pakistan,” and “remote digital marketing internship Pakistan.”', 'Save a separate alert for each role family instead of one catch-all alert; a mixed feed of unrelated jobs makes it easy to miss the right opening.'],
-        links: [{ label: 'Open LocalePak jobs', href: '/jobs' }, { label: 'Explore Pakistani companies', href: '/companies' }, { label: 'Find professionals for career context', href: '/professionals' }]
+        links: [{ label: 'Explore Pakistani companies', href: '/companies' }]
       },
       {
         heading: 'Interview and onboarding: a remote checklist',
@@ -140,12 +140,12 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
         heading: 'Accounting job titles to search in Pakistan',
         paragraphs: ['“Accountant” is an umbrella for several distinct jobs. Run separate searches for junior accountant, accounts officer, bookkeeper, senior accountant, tax associate, audit associate, finance executive, payroll officer, and management-accounting positions.', 'Titles differ from one employer to the next, so read the duties and the systems named in the advert. A small business might fold bookkeeping, tax support, and office admin into one post, while a large company splits payables, receivables, reporting, audit, and planning across separate teams.'],
         bullets: ['Getting started: accounts assistant, junior accountant, finance intern, and bookkeeping posts.', 'Mid-level: accountant, accounts officer, payroll, tax, and audit roles.', 'Seasoned: senior accountant, finance manager, controller, FP&A, and advisory positions.'],
-        links: [{ label: 'Browse finance jobs', href: '/jobs' }, { label: 'Explore finance professionals', href: '/professionals' }]
+        links: []
       },
       {
         heading: 'Accountant jobs across Pakistan’s major cities',
         paragraphs: ['Karachi offers the widest employer mix, spanning banking, trade, manufacturing, logistics, and corporate services. Lahore shows heavy demand from services, manufacturing, education, retail, real estate, and agencies, while Islamabad and Rawalpindi add government, development-sector, technology, education, and service employers.', 'Treat the city filter as a first pass, then weigh the commute, exact office location, hybrid policy, shift pattern, and notice period. The headline city is a starting point — the employer’s actual work location is what counts.'],
-        links: [{ label: 'Browse LocalePak cities', href: '/cities' }, { label: 'Search jobs by city', href: '/jobs' }, { label: 'Find hiring companies', href: '/companies' }]
+        links: [{ label: 'Browse LocalePak cities', href: '/cities' }, { label: 'Find hiring companies', href: '/companies' }]
       },
       {
         heading: 'Skills that accounting employers ask for',
@@ -185,7 +185,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
         heading: 'Local-service categories with strong intent',
         paragraphs: ['Demand for local services tends to cluster around needs that are urgent or recurring. Home repairs, healthcare, education, automotive work, beauty, restaurants, real estate, legal help, accounting, construction, and digital services can all justify city-and-category discovery — as long as verified listings exist to back the page up.', 'Never build a city/category page just because a keyword looks attractive. A page earns its place when it presents real providers, correct locations, clear descriptions of services, and a way to compare or contact them.'],
         bullets: ['Home services: electricians, plumbers, solar technicians, AC and appliance repair.', 'Health and personal services: clinics, dentists, pharmacies, salons, gyms, and therapists.', 'Professional and business services: lawyers, accountants, agencies, software houses, consultants, and real-estate companies.'],
-        links: [{ label: 'Find professionals', href: '/professionals' }, { label: 'Browse business categories', href: '/categories' }]
+        links: [{ label: 'Browse business categories', href: '/categories' }]
       },
       {
         heading: 'Signs that a local listing can be trusted',
@@ -206,7 +206,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
         heading: 'A verification checklist before you hire anyone',
         paragraphs: ['Discovery is only step one — whether you are hiring a doctor, a lawyer, an accountant, a developer, a tutor or a tradesperson, run the same verification pass before you commit. A profile earns trust when it shows the person\u2019s role, specialisation, service area, public contact route, relevant experience, and supporting evidence — and regulated professionals should still be confirmed with the responsible authority, because a directory badge means only what the platform\u2019s verification policy says it means.'],
         bullets: ['Identity: the profile uses the person\u2019s real professional name and a current photo or business identity where one is published.', 'Specialisation: the services listed match the exact outcome you need, not a long generic menu.', 'Credentials: education, certifications, licences or professional-body membership are stated where the field requires them — and can be checked with the issuing authority.', 'Contact route: a public, professional way to reach them, with a clear city or service area.', 'Evidence: published work, an official organisation page, or references you can inspect before deciding.', 'Before you hire, ask: what is included and excluded, what is the expected timeline, what evidence can you review first, and what privacy or confidentiality terms apply?'],
-        links: [{ label: 'Read LocalePak verification policy', href: '/verification-policy' }, { label: 'Browse professional profiles', href: '/professionals' }]
+        links: [{ label: 'Read LocalePak verification policy', href: '/verification-policy' }]
       },
       {
         heading: 'Frequently asked questions',
@@ -226,7 +226,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
         heading: 'How to judge any “best startups” list',
         paragraphs: ['“Best” might mean the most visible, the fastest growing, the best funded, the most innovative, or simply the most useful within one sector. A responsible article states its criteria before it names names, and it shows the research date — because funding, products, leadership, and even whether a company still operates can all change.', 'Readers should rely on official company websites, product pages, careers pages, regulatory information where it applies, and reputable ecosystem datasets. Being popular in search results is a discovery signal; it proves nothing about business quality or financial health.'],
         bullets: ['State inclusion criteria and research date.', 'Separate startups by sector and business model.', 'Avoid presenting funding, valuation, or user counts without a primary or high-authority source.'],
-        links: [{ label: 'Explore LocalePak companies', href: '/companies' }, { label: 'Find startup professionals', href: '/professionals' }, { label: 'Browse startup jobs', href: '/jobs' }]
+        links: [{ label: 'Explore LocalePak companies', href: '/companies' }]
       },
       {
         heading: 'Pakistani startup sectors to keep an eye on',
@@ -242,7 +242,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
       {
         heading: 'How startups generate jobs and careers',
         paragraphs: ['Startup hiring stretches across engineering, product, design, sales, customer success, operations, finance, and growth. A good company guide doubles as a career resource when it connects each sector to the skills, job families, and professional profiles behind it.', 'Candidates should look past the brand and weigh role scope, claims about runway, compensation structure, learning opportunities, and written employment terms.'],
-        links: [{ label: 'Browse LocalePak jobs', href: '/jobs' }, { label: 'Find professionals', href: '/professionals' }, { label: 'Explore companies', href: '/companies' }]
+        links: [{ label: 'Explore companies', href: '/companies' }]
       },
       {
         heading: 'Frequently asked questions',
@@ -297,7 +297,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
         heading: 'Job titles to include in your Lahore search',
         paragraphs: ['Employers name the same work differently, so search widely: digital marketing executive, SEO specialist, content writer, social media manager, performance marketer, paid-media specialist, email marketing intern, e-commerce specialist, marketing coordinator, and growth manager are all worth trying.', 'The title alone will not tell you what the job is. Read closely to see whether the work is really content, analytics, paid acquisition, client handling, sales — or a generalist mix of everything.'],
         bullets: ['Entry level: marketing intern, SEO intern, content assistant, and social-media coordinator.', 'Intermediate: SEO specialist, digital marketing executive, performance marketer, and e-commerce specialist.', 'Senior: digital marketing manager, head of growth, performance lead, and marketing strategist.'],
-        links: [{ label: 'Browse LocalePak jobs', href: '/jobs' }, { label: 'Explore Lahore businesses', href: '/city/lahore' }, { label: 'Find marketing professionals', href: '/professionals' }]
+        links: [{ label: 'Explore Lahore businesses', href: '/city/lahore' }]
       },
       {
         heading: 'Skills Lahore employers keep asking for',
@@ -307,7 +307,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
       {
         heading: 'Reading a digital marketing vacancy properly',
         paragraphs: ['Work out whether the employer wants strategy, execution, client communication, sales, or all four at once. Clarify the channels, the tools, how reporting works, the hours, the client portfolio, the salary basis, and who you would report to.', 'Be careful with roles promising unrealistic income, or asking for “assessment work” that is really a full unpaid campaign. A short, relevant task is fair; a complete campaign plan for a real client, for free, is not.'],
-        links: [{ label: 'Search current jobs', href: '/jobs' }, { label: 'Browse companies hiring in Lahore', href: '/companies' }]
+        links: [{ label: 'Browse companies hiring in Lahore', href: '/companies' }]
       },
       {
         heading: 'Building a portfolio with a Lahore flavour',
@@ -331,7 +331,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
       {
         heading: 'Position yourself clearly',
         paragraphs: ['Lead with the title clients and employers actually type into search. “Frontend developer,” “chartered accountant,” “consultant dermatologist,” “O-Level mathematics tutor,” and “licensed electrician” each say something concrete; “professional services expert” says almost nothing.', 'Choose one primary category and only a few specialisations you can genuinely back up. A focused profile is easier to understand and far less likely to be mistaken for unrelated services.'],
-        links: [{ label: 'Browse professionals', href: '/professionals' }, { label: 'Explore categories', href: '/categories' }, { label: 'Browse jobs', href: '/jobs' }]
+        links: [{ label: 'Explore categories', href: '/categories' }]
       },
       {
         heading: 'Writing a biography people can trust',
@@ -346,7 +346,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
       {
         heading: 'Link the profile to companies and jobs',
         paragraphs: ['Many professionals work through a business, agency, hospital, university, or startup. Where that relationship is public and current, connect the profile to the organisation, the relevant city, its services, and its current vacancies — a genuinely useful discovery path that never invents an affiliation.', 'Job seekers can use the same profile to surface skills and availability, while employers can use professional pages to find relevant talent.'],
-        links: [{ label: 'Explore companies', href: '/companies' }, { label: 'Find jobs', href: '/jobs' }, { label: 'Search local businesses', href: '/search' }]
+        links: [{ label: 'Explore companies', href: '/companies' }, { label: 'Search local businesses', href: '/search' }]
       },
       {
         heading: 'Privacy and upkeep checklist',
@@ -359,7 +359,6 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
       }
     ],
     sources: [
-      { label: 'LocalePak professional directory', href: '/professionals/' },
       { label: 'LocalePak verification policy', href: '/verification-policy/' },
       { label: 'Google author markup guidance', href: 'https://developers.google.com/search/docs/appearance/structured-data/article' }
     ]
@@ -410,7 +409,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
       {
         heading: 'Why city-plus-category searches work so well',
         paragraphs: ['A query that pairs a city with a category says far more about intent than a generic jobs search. It lets a candidate filter by the local employer market, the work arrangement on offer, transport realities, salary expectations, and the professional networks that matter in that place.', 'LocalePak can serve this intent by connecting the jobs hub to city pages, company profiles, professional profiles, and category pages. The catch: the page has to surface genuine current vacancies — when it cannot, a concise guide beats a hollow index page every time.'],
-        links: [{ label: 'Open jobs', href: '/jobs' }, { label: 'Browse cities', href: '/cities' }, { label: 'Browse companies', href: '/companies' }]
+        links: [{ label: 'Browse cities', href: '/cities' }, { label: 'Browse companies', href: '/companies' }]
       },
       {
         heading: 'Category searches with high intent',
@@ -421,7 +420,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
       {
         heading: 'City hubs — and the remote alternative',
         paragraphs: ['Karachi, Lahore, Islamabad, and Rawalpindi dominate job searches, but Faisalabad, Multan, Peshawar, Sialkot, Gujranwala, Hyderabad, and other cities run employer markets of their own. Remote roles widen the field further — just make sure “remote” is confirmed by the employer or the current listing, not assumed.', 'A good city page names the categories and employers actually present in its inventory instead of repeating one generic paragraph across every location.'],
-        links: [{ label: 'Explore city index', href: '/cities' }, { label: 'Find current jobs', href: '/jobs' }, { label: 'Search professionals', href: '/professionals' }]
+        links: [{ label: 'Explore city index', href: '/cities' }]
       },
       {
         heading: 'Judging a vacancy in a specific city',
@@ -431,7 +430,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
       {
         heading: 'How LocalePak can own long-tail job searches',
         paragraphs: ['The prize is not hundreds of empty city-and-category pages. It is the combination of dependable live jobs with solid guides, employer profiles, professional profiles, and clean internal linking. Every job page should carry a real vacancy, a working application path, an honest freshness state, and JobPosting data only when the required information genuinely exists.', 'When a city-and-category pairing has thin inventory, link onward to the wider city or category hub and say so openly. That protects trust and keeps the site clear of near-duplicate pages.'],
-        links: [{ label: 'Browse companies', href: '/companies' }, { label: 'Find professionals', href: '/professionals' }, { label: 'Open jobs', href: '/jobs' }]
+        links: [{ label: 'Browse companies', href: '/companies' }]
       },
       {
         heading: 'Frequently asked questions',
@@ -514,7 +513,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
       {
         heading: 'Salaried, freelancer and business cases',
         paragraphs: ['Salaried individuals: your employer already withholds tax from salary, but withholding is not filing — you still file the annual return to be a filer, declaring the salary and the tax already deducted (your employer\u2019s salary certificate gives you the figures). Freelancers earning from abroad: declare the export-of-services income in the return; registration with the Pakistan Software Export Board is a separate, optional step that supports banking channels for remittances. Business owners and sole proprietors: register the business income under your individual profile unless you incorporated a company, in which case the company files its own return through its own NTN.'],
-        links: [{ label: 'Browse accountant and tax professionals', href: '/professionals' }, { label: 'Read the accountant jobs city guide', href: '/blog/accountant-jobs-pakistan-city-guide' }]
+        links: [{ label: 'Read the accountant jobs city guide', href: '/blog/accountant-jobs-pakistan-city-guide' }]
       },
       {
         heading: 'From registered to filer: filing the annual return',
@@ -569,7 +568,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
       },
       {
         heading: 'Step 4: Submit — what pending and approval mean',
-        paragraphs: ['Submitting saves your listing with a “pending” status and sends it to the admin review queue; it is not public yet, and its status stays visible on your dashboard, badged Pending or Approved. Review checks that the business is real, the details are consistent, the category fits, and the listing is not a duplicate.', 'Once approved, the listing goes live on its own public page, appears in the businesses index, and is placed on its category and city pages where customers browse. If a listing is rejected, the reasons are recorded on it and shown in your dashboard — and an email is sent to your account address — so you can see exactly what to fix rather than guessing. Correct the issue and create the listing again with the details put right.']
+        paragraphs: ['Submitting saves your listing with a “pending” status and sends it to the admin review queue; it is not public yet, and its status stays visible on your dashboard, badged Pending or Approved. Review checks that the business is real, the details are consistent, the category fits, and the listing is not a duplicate.', 'Once approved, the listing goes public with the next weekly release, and then appears on its own public page, in the businesses index, and on its category and city pages where customers browse. If a listing is rejected, the reasons are recorded on it and shown in your dashboard — and an email is sent to your account address — so you can see exactly what to fix rather than guessing. Correct the issue and create the listing again with the details put right.']
       },
       {
         heading: 'Already listed? Claim the listing instead of adding a new one',
@@ -578,13 +577,13 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
       },
       {
         heading: 'Featured and Verified upgrades — how they honestly work',
-        paragraphs: ['The free listing is the standard listing, and nothing in this guide requires paying anything. LocalePak also offers two optional upgrades, requested from your dashboard on each listing: a Featured Listing and a Verified Badge. To request one, choose the upgrade on the listing, pay using the payment details published on the Advertise page or shared by the team when you contact them, then upload your payment screenshot (an image file, up to 5MB) from the same dashboard panel. An admin verifies the payment proof, and the upgrade is recorded on your listing.', 'Two honest limits are worth stating plainly. First, Featured placement and the Verified Badge are being rolled out, so an approved upgrade is recorded on your listing now and displayed as each feature goes live — you are reserving the upgrade, not buying an instantly different page in every case. Second, an upgrade changes how your listing is presented on LocalePak itself; it is not a Google ranking and no listing — free or upgraded — can promise you one. What actually earns enquiries is a complete, accurate listing with reachable contact details.'],
+        paragraphs: ['The free listing is the standard listing, and nothing in this guide requires paying anything. LocalePak also offers two optional upgrades, requested from your dashboard on each listing: a Featured Listing and a Verified Badge. To request one, choose the upgrade on the listing, contact the team for payment details, then upload your payment screenshot (an image file, up to 5MB) from the same dashboard panel. An admin verifies the payment proof, and the upgrade is recorded on your listing.', 'Two honest limits are worth stating plainly. First, Featured placement and the Verified Badge are being rolled out, so an approved upgrade is recorded on your listing now and displayed as each feature goes live — you are reserving the upgrade, not buying an instantly different page in every case. Second, an upgrade changes how your listing is presented on LocalePak itself; it is not a Google ranking and no listing — free or upgraded — can promise you one. What actually earns enquiries is a complete, accurate listing with reachable contact details.'],
         callout: 'If anyone contacts you claiming to sell a LocalePak ranking, a review package or a guaranteed position on Google, that is not how this directory works — upgrades are only ever requested from inside your own dashboard.',
         links: [{ label: 'See the Advertise page', href: '/advertise-with-us' }, { label: 'Read the verification policy', href: '/verification-policy' }]
       },
       {
         heading: 'Frequently asked questions',
-        paragraphs: ['Is listing on LocalePak really free? Yes — registering an account and publishing a business listing costs nothing. Featured and Verified are optional paid upgrades requested from the dashboard; the basic listing never requires them.', 'Why does my listing say pending after I submit it? Every new listing is reviewed for accuracy, category fit and duplication before it goes public. The status is visible on your dashboard, and approval makes the listing live on its public page and in its category and city.', 'My listing was rejected — what now? The rejection reasons are shown on the listing in your dashboard and sent to your account email. Fix exactly those points and create the listing again.', 'Can I edit my listing after it is approved? Yes — sign in with the same owner account and update it from your dashboard. Keep the account email and password safe, because that account controls the listing.', 'Do I need a website to list my business? No. A reachable phone or WhatsApp number is enough to be contacted; add your website and social links in the Online Presence step if you have them.', 'I have two branches. One listing or two? Two — but only for genuinely separate locations, each with its own address and details. Duplicate listings for the same location are removed at review.']
+        paragraphs: ['Is listing on LocalePak really free? Yes — registering an account and publishing a business listing costs nothing. Featured and Verified are optional paid upgrades requested from the dashboard; the basic listing never requires them.', 'Why does my listing say pending after I submit it? Every new listing is reviewed for accuracy, category fit and duplication before it goes public. The status is visible on your dashboard, and once approved, the listing goes public with the next weekly release, and then appears on its public page and in its category and city.', 'My listing was rejected — what now? The rejection reasons are shown on the listing in your dashboard and sent to your account email. Fix exactly those points and create the listing again.', 'Can I edit my listing after it is approved? Yes — sign in with the same owner account and update it from your dashboard. Keep the account email and password safe, because that account controls the listing.', 'Do I need a website to list my business? No. A reachable phone or WhatsApp number is enough to be contacted; add your website and social links in the Online Presence step if you have them.', 'I have two branches. One listing or two? Two — but only for genuinely separate locations, each with its own address and details. Duplicate listings for the same location are removed at review.']
       }
     ],
     sources: [
@@ -628,7 +627,7 @@ export const NEW_BLOG_CONTENT: Record<string, BlogContentDocument> = {
       {
         heading: 'If you are a professional, a profile is your listing',
         paragraphs: ['Freelancers, consultants, tutors, accountants and designers are searched for by name and trade, not by shop. For you, the “listing” is a professional profile: who you are, what you do, where you work, and evidence a client can check. Build it with the same discipline — consistent name and contact details, services in customer language, your city and service area, and credentials stated only where they can be verified.', 'Keep the profile and any business listing telling the same story. A client who finds a different phone number and service list on your directory page will simply move to the next name.'],
-        links: [{ label: 'Build a professional profile', href: '/blog/how-to-build-a-professional-profile-pakistan' }, { label: 'Browse professionals', href: '/professionals' }]
+        links: [{ label: 'Build a professional profile', href: '/blog/how-to-build-a-professional-profile-pakistan' }]
       },
       {
         heading: 'Mistakes that quietly hold Pakistani businesses back',

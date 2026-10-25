@@ -27,7 +27,7 @@ export default function BusinessListingGuidelinesPage() {
 
           <div className="space-y-6 text-sm text-slate-600 leading-relaxed">
             <p>
-              To ensure high search quality and fast indexing for all Pakistani enterprises, business owners must adhere to the following listing criteria when submitting their profile to LocalePak.
+              To keep search quality high for Pakistani enterprises, business owners must adhere to the following listing criteria when submitting their profile to LocalePak.
             </p>
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">1. Eligible Businesses</h2>

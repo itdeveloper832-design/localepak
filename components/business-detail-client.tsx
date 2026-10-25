@@ -52,16 +52,6 @@ const DAY_NAMES: Record<DayKey, string> = {
   sun: 'Sunday',
 }
 
-function upsertMetaDescription(content: string) {
-  let tag = document.querySelector('meta[name="description"]') as HTMLMetaElement | null
-  if (!tag) {
-    tag = document.createElement('meta')
-    tag.setAttribute('name', 'description')
-    document.head.appendChild(tag)
-  }
-  tag.setAttribute('content', content)
-}
-
 function Stars({ value, className = 'w-4 h-4' }: { value: number; className?: string }) {
   return (
     <span className="inline-flex items-center gap-0.5" aria-label={`${value} out of 5 stars`}>
@@ -107,18 +97,11 @@ export default function BusinessDetailPage({
   const [reviewForm, setReviewForm] = useState({ name: '', rating: 0, text: '' })
   const [submittingReview, setSubmittingReview] = useState(false)
 
-  // Per-listing SEO: real title, meta description and LocalBusiness JSON-LD
+  // LocalBusiness JSON-LD only. Title and meta description are now
+  // owned by server metadata (app/business/[slug]/page.tsx), so this
+  // effect no longer touches document.title or the meta description.
   useEffect(() => {
     if (!business) return
-    const categoryLabel = business.category || business.mainCategory || 'Business'
-    document.title = `${business.name} — ${categoryLabel} in ${business.city || 'Pakistan'} | LocalePak`
-    const rawDesc = (business.description || '').replace(/\s+/g, ' ').trim()
-    upsertMetaDescription(
-      rawDesc
-        ? `${rawDesc.slice(0, 150)}${rawDesc.length > 150 ? '...' : ''}`
-        : `${business.name} is a ${categoryLabel} business in ${business.city || 'Pakistan'}. Contact details, opening hours, services and customer reviews on LocalePak.`
-    )
-
     const sameAs = [business.website, business.facebook, business.instagram, business.youtube].filter(Boolean)
     const openingHoursSpecification = DAY_ORDER
       .map(({ key }) => {

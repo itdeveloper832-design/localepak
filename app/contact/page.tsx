@@ -140,7 +140,7 @@ export default function ContactPage() {
                   <strong>WhatsApp Helpline:</strong> +92 334 5636230
                 </p>
                 <p className="text-xs text-[#64748B] leading-relaxed">
-                  Send us screenshots and business details directly for rapid verification.
+                  Send us screenshots and business details directly for a quick review of your listing.
                 </p>
               </div>
 

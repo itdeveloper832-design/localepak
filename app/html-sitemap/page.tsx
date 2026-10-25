@@ -28,6 +28,8 @@ const CORE_LINKS: { label: string; href: string }[] = [
   { label: 'All Businesses', href: '/businesses' },
   { label: 'All Companies', href: '/companies' },
   { label: 'Add Your Business — Free', href: '/add-business' },
+  { label: 'Add Your Company — Free', href: '/add-company' },
+  { label: 'Post a Job — Free', href: '/add-job' },
   { label: 'Blog', href: '/blog' },
   { label: 'Careers', href: '/careers' },
   { label: 'Advertise With Us', href: '/advertise-with-us' },
@@ -75,7 +77,7 @@ export default function HtmlSitemapPage() {
         <div className="max-w-6xl mx-auto space-y-12">
           <div className="space-y-2">
             <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">LocalePak Sitemap</h1>
-            <p className="text-sm text-slate-500">Every page on LocalePak, organized by section.</p>
+            <p className="text-sm text-slate-500">LocalePak's core pages, business categories, city guides and blog articles, organized by section.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -106,7 +108,7 @@ export default function HtmlSitemapPage() {
             <h2 className="font-extrabold text-slate-900 text-lg mb-4">Top Cities by Category</h2>
             <p className="text-xs text-slate-500 mb-4">
               Every category has a dedicated page in each of our {TOP_CITIES.length} top cities —{' '}
-              {TOP_CITIES.length * CATEGORIES.length} pages in total. A selection:
+              {TOP_CITIES.length * CATEGORIES.length} pages exist in total; a selection of 30 is shown below:
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10">
               <LinkList

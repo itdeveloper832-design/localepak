@@ -51,7 +51,7 @@ export default function Footer() {
             </div>
             <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-medium">
               <Briefcase className="w-4 h-4 text-amber-400" />
-              <span>Active Job Portal</span>
+              <span>Free Job Postings</span>
             </div>
           </div>
         </div>

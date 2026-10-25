@@ -13,6 +13,41 @@ import { BLOG_POSTS } from '@/lib/blog-data'
 
 export const revalidate = 86400
 
+// Meta spec: titles 50-65 chars, descriptions 120-158 chars.
+// BLOG_POSTS metaTitles (51-77 chars) and metaDescriptions (137-199 chars)
+// live in lib/blog-data.ts, so the template adapts them here instead of
+// editing the data: keep the brand suffix when it fits, drop it when the
+// title already fills the range, drop a decorative ' 2026' next, and only
+// then shorten at a segment boundary (never mid-word) so the topic phrase
+// stays intact. Over-long descriptions are trimmed at the last word
+// boundary with an ellipsis; in-spec ones pass through untouched.
+const META_TITLE_SUFFIX = ' | LocalePak'
+
+function fitMetaTitle(metaTitle: string): string {
+  const inSpec = (s: string) => s.length >= 50 && s.length <= 65
+  if (inSpec(metaTitle + META_TITLE_SUFFIX)) return metaTitle + META_TITLE_SUFFIX
+  if (inSpec(metaTitle)) return metaTitle
+  const noYear = metaTitle.replace(' 2026', '')
+  if (inSpec(noYear + META_TITLE_SUFFIX)) return noYear + META_TITLE_SUFFIX
+  if (inSpec(noYear)) return noYear
+  for (const sep of [' & ', ': ', ' – ', ', ']) {
+    const idx = noYear.lastIndexOf(sep)
+    if (idx > 0) {
+      const head = noYear.slice(0, idx)
+      if (inSpec(head + META_TITLE_SUFFIX)) return head + META_TITLE_SUFFIX
+      if (inSpec(head)) return head
+    }
+  }
+  return metaTitle + META_TITLE_SUFFIX
+}
+
+function fitMetaDescription(metaDescription: string): string {
+  if (metaDescription.length <= 158) return metaDescription
+  const cut = metaDescription.slice(0, 157)
+  const lastSpace = cut.lastIndexOf(' ')
+  return `${cut.slice(0, lastSpace)}…`
+}
+
 export async function generateStaticParams() {
   return Object.keys(BLOG_POSTS).map((slug) => ({ slug }))
 }
@@ -21,12 +56,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params
   const post = BLOG_POSTS[slug]
   const cleanTitle = post ? post.metaTitle : slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
-  const description = post ? post.metaDescription : `Read ${cleanTitle} on LocalePak Blog.`
+  const title = post ? fitMetaTitle(post.metaTitle) : `${cleanTitle} | LocalePak`
+  const description = post ? fitMetaDescription(post.metaDescription) : `Read ${cleanTitle} on LocalePak Blog.`
   const publishedDate = post?.date ? new Date(post.date).toISOString() : undefined
   const modifiedDate = post?.dateModified ? new Date(post.dateModified).toISOString() : publishedDate
 
   return {
-    title: `${cleanTitle} | LocalePak Business Directory`,
+    title,
     description,
     keywords: post ? [post.focusKeyword, 'Business Directory Pakistan', 'Pakistan Business Directory', 'Local Business Directory', 'Company Directory Pakistan'] : [],
     alternates: {
@@ -34,7 +70,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     authors: post?.authorName ? [{ name: post.authorName, url: post.authorUrl }] : [{ name: 'LocalePak Editorial Team', url: 'https://www.localepak.com/about/' }],
     openGraph: {
-      title: `${cleanTitle} | LocalePak`,
+      title,
       description,
       url: `https://www.localepak.com/blog/${slug}/`,
       siteName: 'LocalePak',
@@ -46,7 +82,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${cleanTitle} | LocalePak`,
+      title,
       description,
       images: post?.image ? [post.image] : undefined,
     },
@@ -79,7 +115,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: title,
-    description: post ? post.metaDescription : `Guide on ${title}`,
+    description: post ? fitMetaDescription(post.metaDescription) : `Guide on ${title}`,
     author: {
       '@type': post.authorName ? 'Person' : 'Organization',
       name: post.authorName || 'LocalePak Editorial Team',
@@ -441,7 +477,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       Discover CS Universities & Training Providers on LocalePak
                     </h2>
                     <p className="text-slate-300 text-sm leading-relaxed">
-                      LocalePak organizes educational institutions, coding academies, and tech training centers across Pakistan by city and category. Explore verified institutes or list your educational organization.
+                      LocalePak organizes educational institutions, coding academies, and tech training centers across Pakistan by city and category. Explore listed institutes or list your educational organization.
                     </p>
                     <div className="pt-2 flex flex-wrap gap-3">
                       <Link href="/categories" className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-all">
@@ -619,7 +655,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       Discover Educational Institutes on LocalePak
                     </h2>
                     <p className="text-slate-300 text-sm leading-relaxed">
-                      LocalePak connects students across Pakistan with verified educational institutions, universities, colleges, computer institutes, tuition academies, and skill development centers organized by city and category.
+                      LocalePak lists educational institutions, universities, colleges, computer institutes, tuition academies, and skill development centers by city and category, where owners have added them.
                     </p>
                     <div className="pt-2 flex flex-wrap gap-3">
                       <Link href="/categories" className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-all">
@@ -814,10 +850,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       Make Your IT Skills Discoverable on LocalePak
                     </h2>
                     <p className="text-slate-300 text-sm leading-relaxed">
-                      Instead of relying solely on cold job applications, build a verified professional identity on LocalePak. Show your technical skills, GitHub repositories, portfolio links, and education to hiring managers across Pakistan.
+                      Instead of relying solely on cold job applications, build a free professional listing on LocalePak. Show your technical skills, GitHub repositories, portfolio links, and education to hiring managers across Pakistan.
                     </p>
                     <div className="pt-2 flex flex-wrap gap-3">
-                      <Link href="/add-professional" className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl shadow-md transition-all">
+                      <Link href="/add-business" className="px-5 py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl shadow-md transition-all">
                         Create Free Developer / IT Profile
                       </Link>
                       <Link href="/companies" className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-all">
@@ -921,9 +957,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                       <li>• Increased website traffic and direct phone inquiries</li>
                       <li>• More customer inquiries via WhatsApp and call buttons</li>
                       <li>• Stronger online presence and digital entity trust</li>
-                      <li>• Higher brand credibility with verified badges</li>
+                      <li>• Higher brand credibility with a complete, reviewed listing</li>
                       <li>• Improved trust through authentic customer reviews</li>
-                      <li>• Easier customer discovery across 150+ Pakistani cities</li>
+                      <li>• Easier customer discovery on a directory that covers your city</li>
                       <li>• More authoritative citations and backlinks for local SEO</li>
                       <li>• Greater exposure in search engines and AI engines</li>
                     </ul>

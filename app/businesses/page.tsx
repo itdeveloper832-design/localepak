@@ -1,8 +1,25 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import { Building2, MapPin, Phone, ArrowRight } from 'lucide-react'
 import { getMergedBusinessCards } from '@/lib/public-listings'
+
+export const metadata: Metadata = {
+  title: 'Businesses in Pakistan – Browse, Call & Compare | LocalePak',
+  description: 'Browse approved businesses across Pakistan by city and category, compare services, then call or WhatsApp them directly — no middleman, free to use.',
+  alternates: {
+    canonical: 'https://www.localepak.com/businesses/',
+  },
+  openGraph: {
+    title: 'Businesses in Pakistan – Browse, Call & Compare | LocalePak',
+    description: 'Browse approved businesses across Pakistan by city and category, compare services, then call or WhatsApp them directly — no middleman, free to use.',
+    url: 'https://www.localepak.com/businesses/',
+    siteName: 'LocalePak',
+    locale: 'en_PK',
+    type: 'website',
+  },
+}
 
 // SERVER component (Round 3): the approved + released Firestore
 // listings are fetched on the server and merged with the static seed

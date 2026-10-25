@@ -34,30 +34,30 @@ export default function VerificationPolicyPage() {
             <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-5 text-emerald-950 font-medium space-y-1">
               <strong className="block text-emerald-900 font-bold">Important Verification Notice:</strong>
               <p>
-                LocalePak verification indicates that the listing or profile completed LocalePak&apos;s verification process. Verification does not independently guarantee every claim made by the business or individual.
+                When the Verified Badge launches, LocalePak verification will indicate that the listing or profile completed LocalePak&apos;s verification process. Verification does not independently guarantee every claim made by the business or individual.
               </p>
             </div>
 
             <p>
-              The <strong>Verified Badge</strong> on LocalePak indicates that a business listing or professional profile has undergone structured verification to confirm primary identity, operational contact details, and administrative legitimacy.
+              The <strong>Verified Badge</strong> on LocalePak is launching soon and is not available yet. When it opens, it will indicate that a business listing or professional profile has undergone a document check to confirm primary identity, operational contact details, and administrative legitimacy.
             </p>
 
-            <h2 className="text-xl font-bold text-slate-900 pt-4">1. Business Verification Steps</h2>
+            <h2 className="text-xl font-bold text-slate-900 pt-4">1. Business Verification Steps (When the Badge Launches)</h2>
             <ul className="list-disc pl-5 space-y-2">
-              <li><strong>Phone & WhatsApp Confirmation:</strong> Direct contact confirmation with authorized business representatives.</li>
-              <li><strong>Physical Address Validation:</strong> Geolocation check and mapping to verified Pakistani commercial areas.</li>
-              <li><strong>Official Documentation (Optional/Enterprise):</strong> Review of FBR NTN certificate, SECP corporate incorporation, or commercial utility bills.</li>
+              <li><strong>Phone & WhatsApp Confirmation:</strong> Will involve direct contact confirmation with authorized business representatives.</li>
+              <li><strong>Physical Address Validation:</strong> Will involve a geolocation check and mapping to verified Pakistani commercial areas.</li>
+              <li><strong>Official Documentation (Optional/Enterprise):</strong> May involve review of FBR NTN certificate, SECP corporate incorporation, or commercial utility bills.</li>
             </ul>
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">2. Professional Profile Verification</h2>
             <ul className="list-disc pl-5 space-y-2">
-              <li><strong>Identity & Role Confirmation:</strong> Verification of public work, official website, portfolio, or verified LinkedIn presence.</li>
-              <li><strong>Direct Contact Routes:</strong> Validation that listed phone, email, and WhatsApp channels reach the individual professional.</li>
+              <li><strong>Identity & Role Confirmation:</strong> Will involve verification of public work, official website, portfolio, or verified LinkedIn presence.</li>
+              <li><strong>Direct Contact Routes:</strong> Will involve validation that listed phone, email, and WhatsApp channels reach the individual professional.</li>
             </ul>
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">3. Revocation of Verified Status</h2>
             <p>
-              LocalePak reserves the right to suspend or revoke verification status if an entity changes contact information without notification, provides misleading information, or receives substantiated unresolved user complaints.
+              When the badge launches, LocalePak will reserve the right to suspend or revoke verification status if an entity changes contact information without notification, provides misleading information, or receives substantiated unresolved user complaints.
             </p>
           </div>
         </div>

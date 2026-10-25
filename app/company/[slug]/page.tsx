@@ -1,5 +1,6 @@
 import { cache } from 'react'
 import { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
@@ -46,7 +47,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params
   const company = await loadCompany(slug)
-  if (!company) return {}
+  // The page calls notFound(); noindex keeps this slug out of the
+  // index instead of inheriting the homepage meta.
+  if (!company) return { robots: { index: false, follow: false } }
   const industryLabel = company.industry || company.category || 'Company'
   return {
     title: `${company.name} — ${industryLabel} in ${company.city || 'Pakistan'} | LocalePak`,
@@ -61,6 +64,7 @@ export default async function CompanyDetailPage({
 }) {
   const { slug } = await params
   const company = await loadCompany(slug)
+  if (!company) notFound()
 
   // Organization JSON-LD — same fields the old client page injected.
   let jsonLd: Record<string, any> | null = null
@@ -101,17 +105,7 @@ export default async function CompanyDetailPage({
           <ArrowLeft className="w-4 h-4" /> Back to Companies
         </Link>
 
-        {!company ? (
-          <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center space-y-4">
-            <h1 className="font-extrabold text-slate-900 text-lg">Company not found</h1>
-            <p className="text-sm text-slate-500 max-w-sm mx-auto">
-              This company may have been removed, or the link is incorrect.
-            </p>
-            <Link href="/companies" className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors">
-              <ArrowLeft className="w-4 h-4" /> Browse Companies
-            </Link>
-          </div>
-        ) : (
+        {company && (
           <section className="bg-white rounded-3xl border border-slate-200 p-8 space-y-5">
             <div className="flex flex-wrap items-center gap-2">
               {(company.industry || company.category) && (

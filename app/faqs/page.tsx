@@ -4,8 +4,8 @@ import Footer from '@/components/footer'
 import { HelpCircle, ChevronDown } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Frequently Asked Questions (FAQs) | LocalePak',
-  description: 'Find answers to common questions about listing your business free, how approval works, posting jobs from your dashboard, reviews, and searching companies on LocalePak.',
+  title: 'LocalePak FAQs – Free Listings, Jobs, Reviews & Companies',
+  description: 'Answers about listing free on LocalePak, how approval works, posting jobs from your dashboard, reviews, and searching companies — all in one place.',
   alternates: {
     canonical: 'https://www.localepak.com/faqs/',
   },
@@ -22,7 +22,7 @@ const faqs = [
   },
   {
     q: "How long does business approval take?",
-    a: "Every submission is reviewed by our team before it appears publicly. We aim to check most submissions within a few working days, but that is an aim, not a guarantee — it can take longer when volume is high or when we need to clarify details with the owner. Once approved, your listing appears on your city page, your category page and in search."
+    a: "Every submission is reviewed by our team before it appears publicly. We aim to check most submissions within a few working days, but that is an aim, not a guarantee — it can take longer when volume is high or when we need to clarify details with the owner. Once approved, your listing goes public with the next weekly release, and then appears on your city page, your category page and in search."
   },
   {
     q: "How do I get a Verified Business Badge on LocalePak?",

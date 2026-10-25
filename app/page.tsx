@@ -11,14 +11,14 @@ import ListBusinessCta from '@/components/list-business-cta'
 import { BLOG_POSTS } from '@/lib/blog-data'
 
 export const metadata: Metadata = {
-  title: "Pakistan Business Directory – Find & List Businesses Free | LocalePak",
-  description: "LocalePak is Pakistan's free business directory. Find local businesses by city & category — or add your business listing free and get found on Google.",
+  title: "Pakistan Business Directory – Find & List Free | LocalePak",
+  description: "LocalePak is Pakistan's free business directory. Find local businesses by city & category — or add your business listing free and get a public profile page that search engines can read.",
   alternates: {
     canonical: 'https://www.localepak.com/',
   },
   openGraph: {
-    title: "Pakistan Business Directory – Find & List Businesses Free | LocalePak",
-    description: "LocalePak is Pakistan's free business directory. Find local businesses by city & category — or add your business listing free and get found on Google.",
+    title: "Pakistan Business Directory – Find & List Free | LocalePak",
+    description: "LocalePak is Pakistan's free business directory. Find local businesses by city & category — or add your business listing free and get a public profile page that search engines can read.",
     url: 'https://www.localepak.com/',
     siteName: 'LocalePak',
     locale: 'en_PK',
@@ -26,15 +26,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Pakistan Business Directory – Find & List Businesses Free | LocalePak",
-    description: "LocalePak is Pakistan's free business directory. Find local businesses by city & category — or add your business listing free and get found on Google.",
+    title: "Pakistan Business Directory – Find & List Free | LocalePak",
+    description: "LocalePak is Pakistan's free business directory. Find local businesses by city & category — or add your business listing free and get a public profile page that search engines can read.",
   },
 }
 
 const FAQS = [
   {
     question: 'What is LocalePak?',
-    answer: 'LocalePak is a free business directory for Pakistan. It organizes local businesses and services by city and category, with guides that help you choose the right provider — and it helps business owners get discovered on Google.'
+    answer: 'LocalePak is a free business directory for Pakistan. It organizes local businesses and services by city and category, with guides that help you choose the right provider — and it gives business owners a public profile page that search engines can read.'
   },
   {
     question: 'Is LocalePak free to use?',
@@ -46,7 +46,7 @@ const FAQS = [
   },
   {
     question: 'I run a business. How can I get listed?',
-    answer: 'Create a free account, then complete the Add Business form — eight short steps covering your contact details, category, city, opening hours, services and products. Our team reviews every submission, and once it is approved your business gets its own profile page and appears in its category, city and search results.'
+    answer: 'Create a free account, then complete the Add Business form — eight short steps covering your contact details, category, city, opening hours, services and products. Our team reviews every submission, and once approved, your listing goes public with the next weekly release, and then appears on your city page, your category page and in search.'
   }
 ]
 
@@ -299,7 +299,7 @@ export default function HomePage() {
 
               <div className="bg-[#F8FAFC] p-6 rounded-2xl border border-slate-200/80 space-y-3">
                 <Globe className="w-8 h-8 text-purple-600" />
-                <h3 className="font-bold text-slate-900 text-base">Built to Rank on Google</h3>
+                <h3 className="font-bold text-slate-900 text-base">Built to Be Read by Search Engines</h3>
                 <p className="text-xs text-slate-600 leading-relaxed">Fast, server-rendered pages with structured data — so listed businesses get profile pages that search engines can properly read.</p>
               </div>
             </div>
@@ -314,7 +314,7 @@ export default function HomePage() {
               Put Your Business on LocalePak — Free
             </h2>
             <p className="text-slate-500 text-xs sm:text-sm">
-              Register in minutes, complete the eight-step Add Business form, and after a quick review your business gets its own page on Pakistan's business directory.
+              Register in minutes, complete the eight-step Add Business form, and once approved, your listing goes public with the next weekly release, and then appears on your city page, your category page and in search.
             </p>
           </div>
 
@@ -489,7 +489,7 @@ export default function HomePage() {
                 Your Customers Are Searching. Be There.
               </h2>
               <p className="text-emerald-100 text-xs sm:text-sm leading-relaxed">
-                Create a free account and add your business in eight short steps. After a quick review, your profile appears in your category, your city and search.
+                Create a free account and add your business in eight short steps. Once approved, your listing goes public with the next weekly release, and then appears in your category, your city and search.
               </p>
             </div>
 

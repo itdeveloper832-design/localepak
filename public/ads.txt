@@ -1,2 +1,0 @@
-# Authorized Digital Sellers (ads.txt)
-# Add your verified advertising network records below

@@ -10,7 +10,6 @@ export const COOKIE_PREFS_KEY = 'localepak_cookie_preferences'
 export interface CookiePreferences {
   essential: boolean
   analytics: boolean
-  marketing: boolean
 }
 
 export default function CookieConsentBanner() {
@@ -20,7 +19,6 @@ export default function CookieConsentBanner() {
   const [prefs, setPrefs] = useState<CookiePreferences>({
     essential: true,
     analytics: true,
-    marketing: true,
   })
 
   useEffect(() => {
@@ -69,23 +67,20 @@ export default function CookieConsentBanner() {
 
   const applyConsent = (decision: 'accepted' | 'declined' | 'customized', customPrefs?: CookiePreferences) => {
     try {
-      const finalPrefs: CookiePreferences = customPrefs || (decision === 'accepted' 
-        ? { essential: true, analytics: true, marketing: true }
-        : { essential: true, analytics: false, marketing: false }
+      const finalPrefs: CookiePreferences = customPrefs || (decision === 'accepted'
+        ? { essential: true, analytics: true }
+        : { essential: true, analytics: false }
       )
 
       localStorage.setItem(COOKIE_CONSENT_KEY, decision)
       localStorage.setItem(COOKIE_PREFS_KEY, JSON.stringify(finalPrefs))
       setPrefs(finalPrefs)
 
-      // Notify Google Consent Mode v2 if dataLayer is present
+      // Notify consent listeners if a data layer is present
       if (typeof window !== 'undefined' && (window as any).dataLayer) {
         ;(window as any).dataLayer.push({
           event: 'cookie_consent_update',
           analytics_storage: finalPrefs.analytics ? 'granted' : 'denied',
-          ad_storage: finalPrefs.marketing ? 'granted' : 'denied',
-          ad_user_data: finalPrefs.marketing ? 'granted' : 'denied',
-          ad_personalization: finalPrefs.marketing ? 'granted' : 'denied',
         })
       }
     } catch (_) {}
@@ -113,7 +108,7 @@ export default function CookieConsentBanner() {
                 <span>Cookie &amp; Privacy Preferences</span>
               </h2>
               <p className="text-xs text-slate-300 leading-relaxed">
-                LocalePak and verified advertising partners (including <strong>Google AdSense</strong>) use cookies to guarantee platform security, analyze search trends, and deliver relevant advertisements. You can accept all or customize preferences at any time. Read our{' '}
+                LocalePak uses cookies to guarantee platform security and analyze search trends. You can accept all or customize preferences at any time. Read our{' '}
                 <Link href="/cookie-policy" className="text-emerald-400 underline hover:text-emerald-300">
                   Cookie Policy
                 </Link>{' '}
@@ -209,22 +204,6 @@ export default function CookieConsentBanner() {
                 </label>
               </div>
 
-              {/* Marketing / AdSense */}
-              <div className="bg-slate-800/60 border border-slate-700/60 rounded-xl p-3.5 flex items-center justify-between">
-                <div className="space-y-0.5 pr-4">
-                  <span className="text-xs font-bold text-white">Advertising &amp; Google AdSense</span>
-                  <p className="text-[11px] text-slate-400">Enables relevant advertisements and supports free directory services on LocalePak.</p>
-                </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={prefs.marketing}
-                    onChange={(e) => setPrefs({ ...prefs, marketing: e.target.checked })}
-                    className="sr-only peer"
-                  />
-                  <div className="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-emerald-600"></div>
-                </label>
-              </div>
             </div>
 
             <div className="flex items-center justify-end gap-3 pt-2 border-t border-slate-800">

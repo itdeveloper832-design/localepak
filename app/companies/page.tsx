@@ -1,8 +1,25 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import { Factory, MapPin, Phone, ArrowRight } from 'lucide-react'
 import { getApprovedCompanyCards } from '@/lib/public-listings'
+
+export const metadata: Metadata = {
+  title: 'Companies in Pakistan – Find & Contact Firms | LocalePak',
+  description: 'Find approved companies across Pakistan — manufacturers, suppliers and service providers — compare profiles and contact firms directly for quotes and jobs.',
+  alternates: {
+    canonical: 'https://www.localepak.com/companies/',
+  },
+  openGraph: {
+    title: 'Companies in Pakistan – Find & Contact Firms | LocalePak',
+    description: 'Find approved companies across Pakistan — manufacturers, suppliers and service providers — compare profiles and contact firms directly for quotes and jobs.',
+    url: 'https://www.localepak.com/companies/',
+    siteName: 'LocalePak',
+    locale: 'en_PK',
+    type: 'website',
+  },
+}
 
 // SERVER component (Round 3 parity with /businesses): the approved
 // Firestore companies are fetched on the server, so the full grid is

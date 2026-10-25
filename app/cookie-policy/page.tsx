@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Cookie Policy | LocalePak - Pakistan Business Directory',
-  description: 'Understand how LocalePak uses cookies, web analytics, and Google AdSense advertising tracking technologies to provide a secure and customized experience.',
+  description: 'Understand how LocalePak uses cookies and web analytics to keep you signed in, remember your preferences, and provide a secure, customized experience.',
   alternates: {
     canonical: 'https://www.localepak.com/cookie-policy/',
   },
@@ -27,12 +27,12 @@ export default function CookiePolicyPage() {
 
           <div className="space-y-6 text-sm text-slate-600 leading-relaxed">
             <p>
-              This Cookie Policy explains how <strong>LocalePak</strong> (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) uses cookies, web beacons, and similar tracking technologies when you visit our website at <a href="https://www.localepak.com/" className="text-emerald-600 underline">https://www.localepak.com/</a>. It outlines the specific types of cookies used, why they are deployed, and how you can manage your preferences at any time.
+              This Cookie Policy explains how <strong>LocalePak</strong> (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) uses cookies and local browser storage when you visit our website at <a href="https://www.localepak.com/" className="text-emerald-600 underline">https://www.localepak.com/</a>. It outlines the specific types of cookies used, why they are deployed, and how you can manage your preferences at any time.
             </p>
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">1. What Are Cookies?</h2>
             <p>
-              Cookies are small data files stored on your browser, device, or computer by web servers when you browse a website. They serve critical functional purposes, such as keeping you authenticated, remembering your chosen city or language preferences, analyzing web traffic, and enabling advertising partners like <strong>Google AdSense</strong> to deliver relevant advertisements.
+              Cookies are small data files stored on your browser, device, or computer by web servers when you browse a website. They serve critical functional purposes, such as keeping you authenticated, remembering your cookie-consent choice and keeping you signed in, and analyzing web traffic.
             </p>
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">2. Categories of Cookies We Use</h2>
@@ -40,30 +40,24 @@ export default function CookiePolicyPage() {
               <div className="border border-slate-200 rounded-xl p-4 bg-slate-50">
                 <h3 className="font-bold text-slate-900 mb-1">A. Strictly Necessary / Essential Cookies</h3>
                 <p className="text-xs text-slate-600">
-                  Essential cookies are required for the basic operation and security of the website. These include session tokens, CSRF protection, and administrative authentication state. The platform cannot function properly without these cookies, and they cannot be deactivated in our systems.
+                  Essential cookies are required for the basic operation and security of the website. These cover the minimum needed for the site to work, such as keeping you signed in (via Firebase Authentication) and remembering your cookie-consent choice. Sign-in state is stored in your browser's local storage, not in a LocalePak cookie.
                 </p>
               </div>
 
               <div className="border border-slate-200 rounded-xl p-4 bg-slate-50">
                 <h3 className="font-bold text-slate-900 mb-1">B. Performance &amp; Analytics Cookies</h3>
                 <p className="text-xs text-slate-600">
-                  We may utilize performance and analytics tools to measure user engagement, monitor page speed, and detect technical errors. These cookies collect aggregated, anonymous diagnostic metrics without directly identifying individual visitors.
+                  We use Google Analytics, Microsoft Clarity, Vercel Analytics and Vercel Speed Insights to measure engagement, monitor page speed and detect technical errors. These tools may set their own cookies or use other identifiers; we do not publish a fixed list of their cookie names because they are set by the vendors' scripts, not by LocalePak code.
                 </p>
               </div>
 
               <div className="border border-slate-200 rounded-xl p-4 bg-slate-50">
                 <h3 className="font-bold text-slate-900 mb-1">C. Functionality &amp; Preference Cookies</h3>
                 <p className="text-xs text-slate-600">
-                  These cookies allow our website to remember choices you make during your visit, such as your selected Pakistani city filter, category search query, bookmarked businesses, and display preferences.
+                  These cookies allow our website to remember choices you make during your visit, such as your cookie-consent choice and, when you sign in, your session details.
                 </p>
               </div>
 
-              <div className="border border-slate-200 rounded-xl p-4 bg-slate-50">
-                <h3 className="font-bold text-slate-900 mb-1">D. Advertising &amp; Google AdSense Cookies</h3>
-                <p className="text-xs text-slate-600">
-                  LocalePak works with third-party vendors and ad networks, including <strong>Google AdSense</strong>, to display commercial advertisements. Third-party vendors, including Google, use cookies (such as DoubleClick cookies) to serve ads based on a user&apos;s prior visits to this website or other websites across the internet. Google&apos;s use of advertising cookies enables it and its partners to serve ads based on your visit to LocalePak and/or other websites.
-                </p>
-              </div>
             </div>
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">3. Managing and Opting Out of Cookies</h2>
@@ -72,25 +66,16 @@ export default function CookiePolicyPage() {
             </p>
             <ul className="list-disc pl-5 space-y-2">
               <li>
-                <strong>On-Site Consent Manager:</strong> You can manage or revoke cookie consent directly on LocalePak using our interactive cookie preferences banner.
-              </li>
-              <li>
-                <strong>Google Ads Settings:</strong> You can opt out of personalized advertising from Google by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-emerald-600 underline font-semibold">Google Ads Settings</a>.
-              </li>
-              <li>
-                <strong>Digital Advertising Alliance (DAA):</strong> You can opt out of targeted advertising from participating companies via <a href="https://www.aboutads.info/choices/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 underline font-semibold">www.aboutads.info</a>.
-              </li>
-              <li>
-                <strong>European Interactive Digital Advertising Alliance (EDAA):</strong> Visitors in Europe can manage ad cookies at <a href="https://www.youronlinechoices.com/" target="_blank" rel="noopener noreferrer" className="text-emerald-600 underline font-semibold">Your Online Choices</a>.
+                <strong>On-Site Consent Manager:</strong> Your choice is stored in this browser (local storage) when you use the cookie banner. Choosing 'Essential Only' records that you declined non-essential analytics, but it does not currently switch off Google Analytics, Microsoft Clarity, Vercel Analytics or Vercel Speed Insights, which load on every page. Until that control is implemented, you can block those tools with your browser's cookie and site-data controls.
               </li>
               <li>
                 <strong>Browser Settings:</strong> You can configure your browser (Google Chrome, Mozilla Firefox, Apple Safari, Microsoft Edge) to reject cookies, clear cache, or notify you when a cookie is placed.
               </li>
             </ul>
 
-            <h2 className="text-xl font-bold text-slate-900 pt-4">4. Compliance with Google Publisher Policies &amp; EU User Consent</h2>
+            <h2 className="text-xl font-bold text-slate-900 pt-4">4. EU User Consent &amp; Data Protection</h2>
             <p>
-              For users located in the European Economic Area (EEA), the United Kingdom, or Switzerland, LocalePak adheres to the Google EU User Consent Policy and applicable data protection regulations. Advertising and non-essential analytics cookies are governed by user consent in accordance with Google Consent Mode v2 standards.
+              For users located in the European Economic Area (EEA), the United Kingdom, or Switzerland, non-essential analytics are intended to be governed by user consent in accordance with applicable data protection regulations. Until that control is fully implemented, section 3 above describes what your recorded choice currently does.
             </p>
 
             <h2 className="text-xl font-bold text-slate-900 pt-4">5. Contact Our Data Desk</h2>

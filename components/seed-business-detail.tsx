@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import { MapPin, Phone, MessageCircle, ArrowLeft, ArrowRight, Info, UserCheck } from 'lucide-react'
+import { SEED_BUSINESSES } from '@/lib/seed-businesses'
 import type { SeedBusiness } from '@/lib/seed-businesses'
 
 // Fully static, server-rendered detail page for directory-created
@@ -26,6 +27,14 @@ function whatsappDigits(raw: string): string {
 export default function SeedBusinessDetail({ business }: { business: SeedBusiness }) {
   const url = `https://www.localepak.com/business/${business.slug}`
   const waNumber = business.phone ? whatsappDigits(business.phone) : ''
+  // Other real seed listings in the same city + category (self
+  // excluded). Rendered only when at least one sibling exists.
+  const siblings = SEED_BUSINESSES.filter(
+    (other) =>
+      other.slug !== business.slug &&
+      other.citySlug === business.citySlug &&
+      other.categorySlug === business.categorySlug
+  )
 
   const jsonLd: Record<string, unknown> = {
     '@context': 'https://schema.org',
@@ -79,6 +88,19 @@ export default function SeedBusinessDetail({ business }: { business: SeedBusines
               )}
             </div>
 
+            {!business.phone && (
+              <div className="bg-amber-50 border border-amber-200 rounded-2xl p-4 flex items-start gap-3">
+                <Info className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                <p className="text-sm text-slate-700 leading-relaxed">
+                  No contact details are available for this listing yet. The owner can{' '}
+                  <Link href="/register" className="text-emerald-600 font-semibold hover:underline">
+                    claim it free
+                  </Link>{' '}
+                  to add them.
+                </p>
+              </div>
+            )}
+
             <p className="text-sm text-slate-600 leading-relaxed">{business.description}</p>
 
             {business.phone && (
@@ -110,6 +132,31 @@ export default function SeedBusinessDetail({ business }: { business: SeedBusines
               .
             </p>
           </section>
+
+          {siblings.length > 0 && (
+            <section className="bg-white rounded-3xl border border-slate-200 p-8 space-y-4">
+              <h2 className="font-extrabold text-slate-900 text-lg">
+                More {business.category} in {business.city}
+              </h2>
+              <ul className="divide-y divide-slate-100">
+                {siblings.map((sibling) => (
+                  <li key={sibling.slug} className="py-3 first:pt-0 last:pb-0">
+                    <Link
+                      href={`/business/${sibling.slug}`}
+                      className="inline-flex items-center gap-2 text-sm font-bold text-emerald-600 hover:text-emerald-700 hover:underline"
+                    >
+                      {sibling.name} <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <p className="text-xs text-slate-400 pt-1">
+                <Link href={`/city/${business.citySlug}/${business.categorySlug}`} className="text-emerald-600 font-semibold hover:underline">
+                  See all {business.category} in {business.city}
+                </Link>
+              </p>
+            </section>
+          )}
 
           <section className="bg-emerald-50 rounded-3xl border border-emerald-100 p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <Info className="w-6 h-6 text-emerald-500 shrink-0" />

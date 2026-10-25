@@ -267,7 +267,7 @@ Knowing the districts pays off when you search. Business profiles show their are
 
 ### Add Your Business in ${city} — It's Free
 
-Own a business in ${city}? Listing on LocalePak costs nothing. Create a free account, then complete the eight-step Add Business form — contact details, category, location, opening hours, services and products. Our team reviews every submission, and once yours is approved your profile appears on this city page, on your category page and in search results, where customers can call or WhatsApp you directly.
+Own a business in ${city}? Listing on LocalePak costs nothing. Create a free account, then complete the eight-step Add Business form — contact details, category, location, opening hours, services and products. Our team reviews every submission, and once yours is approved, it goes public with the next weekly release, and then appears on this city page, on your category page and in search results, where customers can call or WhatsApp you directly.
 
 Want customers to trust your profile faster? Add the official identifiers you already hold: your FBR NTN if you are tax-registered with the Federal Board of Revenue, your Securities and Exchange Commission of Pakistan incorporation details if you run a registered company, or membership of a local chamber such as the Karachi Chamber of Commerce and Industry or the Lahore Chamber of Commerce and Industry.
 
@@ -295,7 +295,7 @@ Pick the category you need on this page — for example restaurants, healthcare 
 
 ### Is it free to list my business in ${city}?
 
-Yes. Creating an account and submitting a business is completely free, with no subscription and no card details. Our team reviews each submission, and once approved your profile appears on this city page, your category page and in search results.
+Yes — completely free, with no subscription and no card details. See "Add Your Business in ${city}" above for the steps and where your profile appears.
 
 ### What information does a LocalePak profile show?
 
@@ -303,11 +303,7 @@ An approved profile shows the business name, category, address and area, phone a
 
 ### Can I suggest a correction to a listing?
 
-Yes — if you spot an outdated phone number or a business that has moved or closed, tell us through the contact page. Accurate listings are the whole point of the directory, and corrections are checked and applied by our team.
-
-### Explore ${city} Businesses by Category
-
-Work through the category links on this page to see every type of business covered in ${city}. Open any category for its ${city} guide and the approved providers listed in that trade so far.`
+Yes — if you spot an outdated phone number or a business that has moved or closed, tell us through the contact page. Accurate listings are the whole point of the directory, and corrections are checked and applied by our team.`
 }
 
 export function generateCategoryContent(categorySlug: string): string {
@@ -363,7 +359,7 @@ Choose your city from the list below to open its dedicated ${info.label.toLowerC
 
 ### Is LocalePak free for customers and for businesses?
 
-Yes, both. Searching and contacting businesses costs nothing, and owners list their businesses free: create an account, complete the eight-step form, and after review the profile appears in this category, on the city page and in search.
+Yes, both. Searching and contacting businesses costs nothing, and owners list their businesses free: create an account, complete the eight-step form, and once approved, it goes public with the next weekly release, and then appears in this category, on the city page and in search.
 
 ### How are listings checked before they appear?
 
@@ -385,7 +381,7 @@ Providers cluster most densely in Karachi, Lahore and Islamabad, but strong opti
 
 ### List Your ${info.label} Business — Free
 
-Run a ${info.label.toLowerCase()} business anywhere in Pakistan? Listing it on LocalePak is free: create an account, complete the eight-step Add Business form, and after review your profile appears in this category, on your city page and in search. No charge, no card details, no subscription.
+Run a ${info.label.toLowerCase()} business anywhere in Pakistan? Listing it on LocalePak is free: create an account, complete the eight-step Add Business form, and once approved, it goes public with the next weekly release, and then appears in this category, on your city page and in search. No charge, no card details, no subscription.
 
 Choose your city below to start comparing ${info.label.toLowerCase()} providers near you.`
 }
@@ -441,7 +437,7 @@ Open its profile from the listings on this page and use the call or WhatsApp but
 
 ### How much does ${catInfo.label.toLowerCase()} cost in ${city}?
 
-It depends on the exact service, scale and materials. The reliable way to find out is to shortlist two or three providers from this page and ask each for a written quote for the same requirements, then compare what is included.
+It depends on the exact service, scale and materials — see "What to Expect When You Hire in ${city}" above for how to compare written quotes.
 
 ### Are the businesses on this page reviewed before listing?
 
@@ -449,11 +445,9 @@ Yes. Owners submit their own listings and our team reviews each one before it ap
 
 ### I run a ${catInfo.label.toLowerCase()} business in ${city}. How do I get listed here?
 
-Create a free account and complete the eight-step Add Business form. After review, your profile appears on this page, on the ${city} page and in search — free, with your call and WhatsApp buttons live.
+Create a free account and complete the eight-step Add Business form. Once approved, it goes public with the next weekly release, and then appears on this page, on the ${city} page and in search — free, with your call and WhatsApp buttons live.
 
 ### Own a ${catInfo.label} Business in ${city}? List It Free
 
-Run a ${catInfo.label.toLowerCase()} business in ${city}? A LocalePak listing is completely free. Create an account, complete the eight-step Add Business form with your contact details, address, hours, services and products, and once our team approves it, your profile appears on this page — where customers searching for ${catInfo.label.toLowerCase()} in ${city} can call or WhatsApp you directly.
-
-Approved ${catInfo.label} businesses in ${city} appear in the listings section of this page.`
+Run a ${catInfo.label.toLowerCase()} business in ${city}? A LocalePak listing is completely free — see "How do I get listed here?" above for the steps.`
 }

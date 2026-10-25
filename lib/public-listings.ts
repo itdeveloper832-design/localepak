@@ -259,3 +259,80 @@ export async function getCityCategoryCards(args: {
   }
   return mergeSeedAndFirestore(seeds, cards)
 }
+
+/**
+ * Approved + released businesses for one city, merged over that city's
+ * seed listings. City matching is identical to getCityCategoryCards:
+ * business documents store DISPLAY names for city, so a document
+ * matches when its slugified city equals the city slug or its display
+ * name equals the city name. The card mapping is exactly the
+ * /businesses mapping (toBusinessCard), so city grids show the same
+ * labels as /businesses. Used by the city template for its listing
+ * grid and for the data-driven noindex decision (zero merged cards =
+ * noindex until a real listing appears).
+ */
+export async function getCityCards(
+  city: string,
+  citySlug: string
+): Promise<PublicBusinessCard[]> {
+  const seeds = SEED_BUSINESSES.filter((s) => s.citySlug === citySlug).map((s) => ({
+    id: `seed-${s.slug}`,
+    name: s.name,
+    slug: s.slug,
+    category: s.category,
+    city: s.city,
+    phone: s.phone || '',
+    description: s.description,
+  }))
+
+  const rows = await fetchApprovedBusinesses()
+  const now = Date.now()
+  const cards: PublicBusinessCard[] = []
+  for (const r of rows) {
+    const data = r.data
+    if (!isReleased(data.approvedAt, now)) continue
+    const docCity = data.city || ''
+    if (slugify(docCity) !== citySlug && docCity !== city) continue
+    cards.push(toBusinessCard(r))
+  }
+  return mergeSeedAndFirestore(seeds, cards)
+}
+
+/**
+ * Approved + released businesses for one category, merged over that
+ * category's seed listings. Category matching is identical to
+ * getCityCategoryCards: a document matches by category id, display
+ * name, or slugified display name. The card mapping is exactly the
+ * /businesses mapping (toBusinessCard). Used by the category template
+ * for its listing grid and per-city counts.
+ */
+export async function getCategoryCards(
+  categoryId: string,
+  categoryName: string
+): Promise<PublicBusinessCard[]> {
+  const seeds = SEED_BUSINESSES.filter((s) => s.categorySlug === categoryId).map((s) => ({
+    id: `seed-${s.slug}`,
+    name: s.name,
+    slug: s.slug,
+    category: s.category,
+    city: s.city,
+    phone: s.phone || '',
+    description: s.description,
+  }))
+
+  const rows = await fetchApprovedBusinesses()
+  const now = Date.now()
+  const cards: PublicBusinessCard[] = []
+  for (const r of rows) {
+    const data = r.data
+    if (!isReleased(data.approvedAt, now)) continue
+    const docCategory = data.category || data.mainCategory || ''
+    const categoryMatches =
+      docCategory === categoryName ||
+      docCategory === categoryId ||
+      slugify(docCategory) === slugify(categoryName)
+    if (!categoryMatches) continue
+    cards.push(toBusinessCard(r))
+  }
+  return mergeSeedAndFirestore(seeds, cards)
+}

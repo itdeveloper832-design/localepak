@@ -6,8 +6,8 @@ import OwnerCtaBand from '@/components/owner-cta-band'
 import { LifeBuoy, UserPlus, ClipboardList, Building2, Briefcase, ShieldCheck, Star, Mail, ArrowRight } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Help Center | LocalePak Support Knowledgebase',
-  description: 'Step-by-step help for LocalePak: creating your account, adding a business in eight steps, adding a company, posting a job, how approval and verification work, and contacting support.',
+  title: 'LocalePak Help Center – Listings, Jobs & Account Help',
+  description: 'LocalePak help, step by step: create an account, add a business or company, post a job, learn how approval and verification work, and contact support.',
   alternates: {
     canonical: 'https://www.localepak.com/help-center/',
   },
