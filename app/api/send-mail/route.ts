@@ -11,14 +11,23 @@ import { NextRequest, NextResponse } from 'next/server'
  *
  * Authorization mirrors the old Firestore `mail` rules:
  * - Signed-in caller (verified ID token): may mail themselves or the admin
- *   inbox. The admin account may mail anyone (approval / rejection /
- *   deletion / payment emails go to listing owners).
+ *   inbox. The admin accounts (admin@, support@) may mail anyone (approval /
+ *   rejection / deletion / payment emails go to listing owners).
  * - Signed-out caller: may ONLY trigger a notification to the admin inbox
  *   (e.g. a visitor submitting a review). Nothing else can be sent.
  */
 
 const BREVO_URL = 'https://api.brevo.com/v3/smtp/email'
 const ADMIN_EMAIL = 'admin@localepak.com'
+// Admin senders: the site owner's two mailboxes. The admin panel itself is
+// role-gated (users doc role === 'admin'), but this route used to accept
+// ONLY admin@ as the admin identity — while the owner's actual admin
+// sign-in is support@ (proven 2026-10-27: admin@ was still free to register
+// while support@ was already registered). That mismatch made every
+// admin-to-owner email (reject / delete / approve / payment) fail with 403,
+// while self-addressed signup/submission emails kept working. Both of these
+// inboxes belong to the site owner, so both may mail listing owners.
+const ADMIN_SENDERS = new Set([ADMIN_EMAIL, 'support@localepak.com'])
 const SENDER = { name: 'LocalePak', email: 'noreply@localepak.com' }
 
 async function verifyToken(idToken: string): Promise<{ email: string } | null> {
@@ -76,7 +85,7 @@ export async function POST(req: NextRequest) {
   const target = to.toLowerCase()
 
   if (caller) {
-    const isAdmin = caller.email === ADMIN_EMAIL
+    const isAdmin = ADMIN_SENDERS.has(caller.email)
     if (!isAdmin && target !== caller.email && target !== ADMIN_EMAIL) {
       return NextResponse.json({ error: 'forbidden' }, { status: 403 })
     }
