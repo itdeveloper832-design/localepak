@@ -43,6 +43,44 @@ export default function AdminPaymentsPage() {
     const { id, data } = item
     setBusy(id)
     try {
+      // Tier payment (new paid-listing flow): verifying the proof ALSO
+      // approves the listing itself — that is the owner's "authenticate
+      // then approve" step. Businesses join the weekly release batch
+      // via approvedAt (lib/release.ts); everything else goes live
+      // at once. Legacy upgrade proofs (plan, no tier) keep the old
+      // behaviour: they only switch the Featured/Verified flag.
+      if (data.tier) {
+        const listingCol =
+          data.listingType === 'company'
+            ? 'companies'
+            : data.listingType === 'job'
+              ? 'jobs'
+              : data.listingType === 'professional'
+                ? 'professionals'
+                : 'businesses'
+        if (data.listingId) {
+          await updateDoc(doc(db, listingCol, data.listingId), {
+            tier: data.tier,
+            paymentStatus: 'paid',
+            status: 'approved',
+            approvedAt: serverTimestamp(),
+            rejectionReasons: [],
+            rejectionNote: '',
+          })
+        }
+        await updateDoc(doc(db, 'payment_proofs', id), {
+          status: 'approved',
+          reviewedAt: serverTimestamp(),
+        })
+        setItems((prev) => prev.map((it) => (it.id === id ? { ...it, data: { ...it.data, status: 'approved' } } : it)))
+        await queuePaymentApprovedEmail(item)
+        toast.success(
+          `Payment verified — ${data.listingName || 'listing'} approved (${data.tier}).${
+            data.listingType === 'business' ? ' It goes live at the next weekly release.' : ' It is now live.'
+          }`
+        )
+        return
+      }
       const listingCol = data.listingType === 'company' ? 'companies' : 'businesses'
       const flag = data.plan === 'verified' ? { verified: true } : { featured: true }
       if (data.listingId) {
@@ -64,16 +102,34 @@ export default function AdminPaymentsPage() {
   }
 
   const reject = async (item: Item) => {
-    const { id } = item
+    const { id, data } = item
     setBusy(id)
     try {
+      // Tier payment rejected: the listing stays pending and the
+      // owner can upload a fresh proof from their dashboard.
+      if (data.tier && data.listingId) {
+        const listingCol =
+          data.listingType === 'company'
+            ? 'companies'
+            : data.listingType === 'job'
+              ? 'jobs'
+              : data.listingType === 'professional'
+                ? 'professionals'
+                : 'businesses'
+        try {
+          await updateDoc(doc(db, listingCol, data.listingId), { paymentStatus: 'payment_rejected' })
+        } catch {
+          // Listing update is best effort — the proof rejection below
+          // is the record that matters.
+        }
+      }
       await updateDoc(doc(db, 'payment_proofs', id), {
         status: 'rejected',
         adminNote: notes[id]?.trim() || '',
         reviewedAt: serverTimestamp(),
       })
       setItems((prev) => prev.map((it) => (it.id === id ? { ...it, data: { ...it.data, status: 'rejected' } } : it)))
-      toast.success('Proof rejected.')
+      toast.success(data.tier ? 'Proof rejected — owner can upload a new proof from their dashboard.' : 'Proof rejected.')
     } catch {
       toast.error('Rejection failed — check permissions and try again.')
     } finally {
@@ -86,8 +142,9 @@ export default function AdminPaymentsPage() {
       <div>
         <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Payment Proofs</h1>
         <p className="text-sm text-slate-500">
-          Owners upload payment screenshots for Featured / Verified upgrades. Approving a proof
-          switches the upgrade ON for that listing automatically.
+          Owners upload payment screenshots — tier payments for new listings (Basic / Premium / Featured) and
+          Featured / Verified upgrades. Approving a tier proof also approves the listing; approving an upgrade
+          proof switches the upgrade ON for that listing automatically.
         </p>
       </div>
 
@@ -124,7 +181,9 @@ export default function AdminPaymentsPage() {
                     <h2 className="font-extrabold text-slate-900 text-sm">{data.listingName || 'Unnamed listing'}</h2>
                     <StatusBadge status={status} />
                     <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 text-[10px] font-bold capitalize">
-                      {data.plan || 'featured'} · {data.listingType || 'business'}
+                      {data.tier
+                        ? `${data.tier} tier · ${data.method === 'jazzcash' ? 'JazzCash' : data.method === 'mashreq' ? 'Mashreq Bank' : 'Easypaisa'}${data.amount ? ` · PKR ${data.amount}` : ''} · ${data.listingType || 'business'}`
+                        : `${data.plan || 'featured'} · ${data.listingType || 'business'}`}
                     </span>
                   </div>
                   <p className="text-xs text-slate-500">

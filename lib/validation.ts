@@ -44,3 +44,29 @@ export function isValidPrice(value: string): boolean {
   const n = Number(v)
   return n > 0 && n <= 999_999_999
 }
+
+// ============================================================
+// Profile / website links: optional, but when present they
+// must be a real http(s) URL. A bare "github.com/user" is
+// accepted and normalized to https://github.com/user.
+// ============================================================
+
+/** Normalize a typed link: trim + add https:// when no scheme is present. */
+export function normalizeUrl(value: string): string {
+  const v = value.trim()
+  if (v === '') return ''
+  if (/^https?:\/\//i.test(v)) return v
+  return `https://${v}`
+}
+
+/** True for an empty value or a parseable http(s) URL with a dotted host. */
+export function isValidUrl(value: string): boolean {
+  const v = value.trim()
+  if (v === '') return true
+  try {
+    const u = new URL(normalizeUrl(v))
+    return (u.protocol === 'http:' || u.protocol === 'https:') && u.hostname.includes('.')
+  } catch {
+    return false
+  }
+}

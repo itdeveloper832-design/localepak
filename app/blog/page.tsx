@@ -3,6 +3,9 @@ import Footer from '@/components/footer'
 import { Metadata } from 'next'
 import Link from 'next/link'
 import { BookOpen, Clock, ArrowRight, Sparkles, TrendingUp, ShieldCheck, Briefcase, FileText, CheckCircle2 } from 'lucide-react'
+import { getApprovedUserBlogPosts } from '@/lib/public-listings'
+
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: 'LocalePak Blog: Free Listing Tips & Pakistan Business Guides',
@@ -187,7 +190,8 @@ const CATEGORIES = [
   { name: 'Success Stories', count: 'Explore guides' },
 ]
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const communityPosts = await getApprovedUserBlogPosts()
   const blogSchema = {
     '@context': 'https://schema.org',
     '@type': 'Blog',
@@ -222,6 +226,41 @@ export default function BlogPage() {
             </p>
           </div>
         </section>
+
+        {/* COMMUNITY POSTS (Featured listing owners) */}
+        {communityPosts.length > 0 && (
+          <section className="py-16 sm:py-20 bg-white border-b border-[#E2E8F0]">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-3xl font-extrabold text-[#0F172A]">From Our Community</h2>
+                <p className="mt-3 text-slate-600 max-w-2xl mx-auto">Posts by Featured listing owners — tips and insights from professionals across Pakistan.</p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {communityPosts.map((post) => (
+                  <div key={post.id} className="bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+                    <div>
+                      <div className="flex items-center justify-between mb-3 text-xs">
+                        <span className="font-bold text-[#059669]">Community Post</span>
+                        {post.authorName && <span className="text-slate-400 font-medium">By {post.authorName}</span>}
+                      </div>
+                      <h3 className="font-bold text-[#0F172A] text-base mb-2 leading-snug">{post.title}</h3>
+                      <p className="text-xs text-slate-600 leading-relaxed mb-6 line-clamp-3">{post.excerpt}</p>
+                    </div>
+
+                    <Link
+                      href={`/blog/${post.slug}`}
+                      className="text-xs font-bold text-[#059669] hover:underline inline-flex items-center gap-1.5 pt-4 border-t border-slate-200"
+                    >
+                      <span>Read Post</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* FEATURED POSTS */}
         <section className="py-16 sm:py-20 bg-white border-b border-[#E2E8F0]">

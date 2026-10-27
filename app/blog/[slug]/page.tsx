@@ -10,6 +10,7 @@ import {
   HelpCircle, ArrowRight, ShieldCheck, MapPin, Globe, Briefcase, Search, Star
 } from 'lucide-react'
 import { BLOG_POSTS } from '@/lib/blog-data'
+import { fetchUserBlogPostBySlug } from '@/lib/public-listings'
 
 export const revalidate = 86400
 
@@ -55,6 +56,28 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const post = BLOG_POSTS[slug]
+  // User-submitted community posts (Featured listing owners) resolve
+  // here when the slug is not an editorial post.
+  if (!post) {
+    const userPost = await fetchUserBlogPostBySlug(slug)
+    if (userPost) {
+      const description = userPost.excerpt || userPost.content.replace(/\s+/g, ' ').trim().slice(0, 157)
+      return {
+        title: `${userPost.title} | LocalePak`,
+        description,
+        alternates: { canonical: `https://www.localepak.com/blog/${slug}/` },
+        authors: userPost.authorName ? [{ name: userPost.authorName }] : [],
+        openGraph: {
+          title: `${userPost.title} | LocalePak`,
+          description,
+          url: `https://www.localepak.com/blog/${slug}/`,
+          siteName: 'LocalePak',
+          locale: 'en_PK',
+          type: 'article',
+        },
+      }
+    }
+  }
   const cleanTitle = post ? post.metaTitle : slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
   const title = post ? fitMetaTitle(post.metaTitle) : `${cleanTitle} | LocalePak`
   const description = post ? fitMetaDescription(post.metaDescription) : `Read ${cleanTitle} on LocalePak Blog.`
@@ -92,7 +115,67 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const post = BLOG_POSTS[slug]
-  if (!post) notFound()
+  // Community posts (user-submitted, admin-approved) render a simple
+  // article here; editorial posts continue below unchanged.
+  if (!post) {
+    const userPost = await fetchUserBlogPostBySlug(slug)
+    if (!userPost) notFound()
+    const paragraphs = userPost.content.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean)
+    const dateLabel = userPost.createdAt
+      ? new Date(userPost.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+      : ''
+    return (
+      <>
+        <Navbar />
+        <BreadcrumbSchema pathname={`/blog/${slug}`} />
+        <main className="bg-[#F8FAFC] text-[#0F172A] font-sans pb-16">
+          <nav aria-label="Breadcrumb" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 text-xs text-slate-500">
+            <Link href="/" className="hover:text-emerald-700 underline">Home</Link>
+            <span className="mx-2">/</span>
+            <Link href="/blog" className="hover:text-emerald-700 underline">Blog</Link>
+            <span className="mx-2">/</span>
+            <span>Community Post</span>
+          </nav>
+          <section className="bg-white border-b border-[#E2E8F0] py-12 sm:py-16">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              <Link href="/blog" aria-label="Back to All Blog Posts" className="inline-flex items-center gap-2 text-xs font-bold text-[#059669] hover:underline mb-6">
+                <ArrowLeft className="w-4 h-4" />
+                <span>Back to All Blog Posts</span>
+              </Link>
+              <div className="flex items-center gap-3 text-xs font-semibold text-[#16A34A] bg-emerald-50 px-3 py-1 rounded-full w-fit mb-4">
+                <Sparkles className="w-3.5 h-3.5 text-[#16A34A]" />
+                <span>Community Post</span>
+              </div>
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#0F172A] leading-tight mb-6 tracking-tight">
+                {userPost.title}
+              </h1>
+              <div className="flex items-center gap-6 text-xs text-slate-500 font-medium pt-4 border-t border-slate-100 flex-wrap">
+                {userPost.authorName && (
+                  <span className="flex items-center gap-1.5"><User className="w-4 h-4 text-[#059669]" /> {userPost.authorName}</span>
+                )}
+                {dateLabel && (
+                  <span className="flex items-center gap-1.5"><Calendar className="w-4 h-4 text-slate-400" /> {dateLabel}</span>
+                )}
+                {userPost.listingName && (
+                  <span className="flex items-center gap-1.5"><Building2 className="w-4 h-4 text-slate-400" /> {userPost.listingName}</span>
+                )}
+              </div>
+            </div>
+          </section>
+          <section className="py-12">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              <article className="bg-white border border-[#E2E8F0] rounded-3xl p-6 sm:p-12 shadow-sm space-y-6 text-slate-700 leading-relaxed text-base sm:text-lg">
+                {paragraphs.map((p, i) => (
+                  <p key={i} className="whitespace-pre-line">{p}</p>
+                ))}
+              </article>
+            </div>
+          </section>
+        </main>
+        <Footer />
+      </>
+    )
+  }
 
   // A post with no real body (no structured content and no hardcoded article
   // below) must 404 — never render placeholder or fallback copy.

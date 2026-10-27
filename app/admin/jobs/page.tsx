@@ -45,6 +45,14 @@ export default function AdminJobsPage() {
   }, [])
 
   const approve = async (item: Item) => {
+    // Paid-listing guard: a listing whose payment is still unverified
+    // must be approved through Payment Proofs (where the admin
+    // authenticates the payment), not from here. Legacy listings
+    // (no paymentStatus field) are unaffected.
+    if (item.data.paymentStatus === 'awaiting_payment' || item.data.paymentStatus === 'payment_rejected') {
+      toast.error('Payment not verified yet — verify the proof in Payment Proofs first.')
+      return
+    }
     setBusy(item.id)
     try {
       const fields = { status: 'approved', rejectionReasons: [] as string[], rejectionNote: '', rejectedAt: null as null }

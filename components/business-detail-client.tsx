@@ -252,6 +252,9 @@ export default function BusinessDetailPage({
   const hasHours = business?.hours && DAY_ORDER.some(({ key }) => business.hours[key])
   const services: string[] = Array.isArray(business?.services) ? business.services : []
   const products: Array<{ name: string; price?: string }> = Array.isArray(business?.products) ? business.products : []
+  const projects: Array<{ title: string; description: string; link?: string }> = Array.isArray(business?.projects)
+    ? business.projects.filter((p: any) => p && typeof p.title === 'string' && p.title.trim() && typeof p.description === 'string' && p.description.trim())
+    : []
   const tags: string[] = Array.isArray(business?.tags) ? business.tags : []
 
   return (
@@ -430,6 +433,30 @@ export default function BusinessDetailPage({
                     <li key={`${product.name}-${i}`} className="py-3 flex items-center justify-between gap-3">
                       <span className="font-medium text-slate-700 text-sm">{product.name}</span>
                       {product.price && <span className="text-sm font-bold text-emerald-600">{product.price}</span>}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+
+            {projects.length > 0 && (
+              <section className="bg-white rounded-3xl border border-slate-200 p-8 space-y-4">
+                <h2 className="font-extrabold text-slate-900 text-lg">Projects</h2>
+                <ul className="space-y-3">
+                  {projects.map((project, i) => (
+                    <li key={`${project.title}-${i}`} className="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                      <p className="font-bold text-slate-900 text-sm">{project.title}</p>
+                      <p className="text-sm text-slate-600 leading-relaxed mt-1">{project.description}</p>
+                      {project.link && (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 hover:text-emerald-700 mt-2"
+                        >
+                          View project →
+                        </a>
+                      )}
                     </li>
                   ))}
                 </ul>

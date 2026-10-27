@@ -56,7 +56,7 @@ export async function queueWelcomeEmail(to: string, ownerName?: string): Promise
     'Welcome to LocalePak, and thank you for creating your account.',
     '',
     'From your dashboard you can now:',
-    '- Add a business listing (free) and get found by customers across Pakistan',
+    '- Add a business listing (plans from PKR 99) and get found by customers across Pakistan',
     '- Add a company profile',
     '- Post a job and reach candidates',
     '',
@@ -73,7 +73,7 @@ export async function queueWelcomeEmail(to: string, ownerName?: string): Promise
     <p>Welcome to <strong>LocalePak</strong>, and thank you for creating your account.</p>
     <p>From your dashboard you can now:</p>
     <ul>
-      <li>Add a <strong>business listing</strong> (free) and get found by customers across Pakistan</li>
+      <li>Add a <strong>business listing</strong> (plans from PKR 99) and get found by customers across Pakistan</li>
       <li>Add a <strong>company profile</strong></li>
       <li><strong>Post a job</strong> and reach candidates</li>
     </ul>
@@ -89,18 +89,20 @@ export async function queueWelcomeEmail(to: string, ownerName?: string): Promise
 // plus the admin notification for the same submission.
 // kind: 'business' | 'company' | 'job'
 // ------------------------------------------------------------
-export type SubmissionKind = 'business' | 'company' | 'job'
+export type SubmissionKind = 'business' | 'company' | 'job' | 'professional'
 
 const KIND_LABEL: Record<SubmissionKind, string> = {
   business: 'business listing',
   company: 'company profile',
   job: 'job post',
+  professional: 'professional profile',
 }
 
 const KIND_ADMIN_PATH: Record<SubmissionKind, string> = {
   business: '/admin/businesses',
   company: '/admin/companies',
   job: '/admin/jobs',
+  professional: '/admin/professionals',
 }
 
 export async function queueSubmissionEmails(args: {
@@ -204,7 +206,24 @@ export async function notifyAdminNewReview(args: {
 export async function notifyAdminNewPaymentProof(args: {
   listingName: string
   plan: string
+  tier?: string
+  method?: string
+  amount?: number
 }): Promise<boolean> {
+  if (args.tier) {
+    const tierLabel = args.tier === 'premium' ? 'Premium' : args.tier === 'featured' ? 'Featured' : 'Basic'
+    const methodLabel =
+      args.method === 'jazzcash' ? 'JazzCash' : args.method === 'mashreq' ? 'Mashreq Bank' : 'Easypaisa'
+    return notifyAdmin({
+      type: 'payment proof',
+      name: args.listingName,
+      adminPath: '/admin/payments',
+      lines: [
+        `Tier payment: ${tierLabel}${args.amount ? ` — PKR ${args.amount}` : ''} via ${methodLabel}`,
+        'Verify the screenshot, then approve: approval also approves the listing.',
+      ],
+    })
+  }
   return notifyAdmin({
     type: 'payment proof',
     name: args.listingName,
@@ -220,7 +239,7 @@ export async function notifyAdminNewPaymentProof(args: {
 // companies and jobs are live immediately.
 // ------------------------------------------------------------
 export async function queueListingApprovedEmail(
-  col: 'businesses' | 'companies' | 'jobs',
+  col: 'businesses' | 'companies' | 'jobs' | 'professionals',
   item: { id: string; data: any }
 ): Promise<boolean> {
   const data = item.data || {}
@@ -258,8 +277,8 @@ export async function queueListingApprovedEmail(
   }
 
   const isCompany = col === 'companies'
-  const label = isCompany ? 'company profile' : 'job post'
-  const publicUrl = isCompany && data.slug ? `${SITE}/company/${data.slug}` : ''
+  const label = isCompany ? 'company profile' : col === 'professionals' ? 'professional profile' : 'job post'
+  const publicUrl = isCompany && data.slug ? `${SITE}/company/${data.slug}` : col === 'professionals' && data.slug ? `${SITE}/professional/${data.slug}` : ''
   const subject = `Good news — your ${label} '${name}' is now live`
   const text = [
     greeting(ownerName),
@@ -292,11 +311,58 @@ export async function queueListingApprovedEmail(
 export async function queuePaymentApprovedEmail(item: { id: string; data: any }): Promise<boolean> {
   const data = item.data || {}
   const listingName = data.listingName || 'your listing'
-  const planLabel = data.plan === 'verified' ? 'Verified' : 'Featured'
-  const listingCol = data.listingType === 'company' ? 'companies' : 'businesses'
+  const listingCol =
+    data.listingType === 'company'
+      ? 'companies'
+      : data.listingType === 'job'
+        ? 'jobs'
+        : data.listingType === 'professional'
+          ? 'professionals'
+          : 'businesses'
   const ownerEmail =
     data.ownerEmail || (data.listingId ? await loadOwnerEmail(listingCol, data.listingId) : '')
   if (!ownerEmail) return false
+
+  // Tier payment approval (new paid-listing flow): verifying the
+  // proof also approves the listing itself. Businesses join the
+  // weekly release batch; everything else goes live at once.
+  if (data.tier) {
+    const tierLabel = data.tier === 'premium' ? 'Premium' : data.tier === 'featured' ? 'Featured' : 'Basic'
+    const isBusiness = data.listingType === 'business'
+    const dateLabel = releaseDateLabel(Date.now())
+    const subject = isBusiness
+      ? `Payment verified — '${listingName}' is approved and goes live on ${dateLabel}`
+      : `Payment verified — your ${tierLabel} listing '${listingName}' is now live`
+    const text = [
+      'Hello,',
+      '',
+      `We have verified your payment, and your ${tierLabel} listing '${listingName}' has been approved.`,
+      '',
+      isBusiness
+        ? `LocalePak publishes newly approved businesses in a weekly batch, so your listing will go live on ${dateLabel}. There is nothing else you need to do.`
+        : 'Your listing is now live on LocalePak.',
+      '',
+      `Manage your listing any time from your dashboard: ${SITE}/dashboard`,
+      '',
+      SUPPORT_LINE,
+      '',
+      '— The LocalePak Team',
+    ].join('\n')
+    const html = shell(`
+      <p>Hello,</p>
+      <p>We have verified your payment, and your <strong>${tierLabel}</strong> listing <strong>${esc(listingName)}</strong> has been approved.</p>
+      <p>${esc(
+        isBusiness
+          ? `LocalePak publishes newly approved businesses in a weekly batch, so your listing will go live on ${dateLabel}. There is nothing else you need to do.`
+          : 'Your listing is now live on LocalePak.'
+      )}</p>
+      <p>Manage your listing any time from <a href="${SITE}/dashboard">your dashboard</a>.</p>
+      <p>Questions? <a href="${SITE}/contact">Contact our team</a> and we will be happy to help.</p>
+    `)
+    return queueOwnerEmail(ownerEmail, subject, text, html)
+  }
+
+  const planLabel = data.plan === 'verified' ? 'Verified' : 'Featured'
 
   const benefit =
     planLabel === 'Verified'

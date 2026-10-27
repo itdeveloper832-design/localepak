@@ -4,8 +4,10 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
-import { MapPin, Phone, Globe, Mail, ArrowLeft } from 'lucide-react'
+import { MapPin, Phone, Globe, Mail, ArrowLeft, Briefcase } from 'lucide-react'
 import { fetchCompanyBySlug } from '@/lib/public-listings'
+import { applyPendingEdit } from '@/lib/edit-requests'
+import { isValidProject, type Project } from '@/lib/tiers'
 
 // Company detail route — SERVER component (Round 3 parity with
 // /business/[slug]): the company is fetched HERE, on the server, and
@@ -29,7 +31,8 @@ export const revalidate = 3600
 const loadCompany = cache(async (slug: string): Promise<any | null> => {
   const found = await fetchCompanyBySlug(slug)
   if (!found || found.data?.status !== 'approved') return null
-  return { id: found.id, ...found.data }
+  const raw = { id: found.id, ...found.data }
+  return applyPendingEdit(raw, Date.now())
 })
 
 function metaDescriptionFor(company: any): string {
@@ -142,6 +145,32 @@ export default async function CompanyDetailPage({
                 <strong className="text-slate-800">Address:</strong> {company.address}
                 {company.city ? `, ${company.city}` : ''}
               </p>
+            )}
+
+            {Array.isArray(company.projects) && company.projects.filter(isValidProject).length > 0 && (
+              <div className="space-y-3 pt-2">
+                <h2 className="font-extrabold text-slate-900 flex items-center gap-2">
+                  <Briefcase className="w-5 h-5 text-emerald-600" /> Projects
+                </h2>
+                <ul className="space-y-3">
+                  {(company.projects as Project[]).filter(isValidProject).map((project, i) => (
+                    <li key={i} className="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                      <p className="font-bold text-slate-900 text-sm">{project.title}</p>
+                      <p className="text-sm text-slate-600 leading-relaxed mt-1">{project.description}</p>
+                      {project.link && (
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600 hover:text-emerald-700 mt-2"
+                        >
+                          View project →
+                        </a>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
 
             <div className="flex flex-wrap gap-3 pt-2">

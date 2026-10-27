@@ -13,6 +13,9 @@ import { CITIES } from '@/lib/data'
 import { writeOwnerContact } from '@/lib/owner-contact'
 import { queueSubmissionEmails } from '@/lib/mail'
 import CityCombobox from '@/components/city-combobox'
+import TierSelect from '@/components/tier-select'
+import PaymentScreen from '@/components/payment-screen'
+import type { ListingTier } from '@/lib/tiers'
 
 function slugify(value: string): string {
   return value
@@ -40,6 +43,10 @@ export default function AddJobPage() {
   const [salaryRange, setSalaryRange] = useState('')
   const [contact, setContact] = useState('')
   const [description, setDescription] = useState('')
+  const [tier, setTier] = useState<ListingTier>('basic')
+  // Saved at the last step: the post waits here until the payment
+  // proof is uploaded on the payment screen below.
+  const [savedJob, setSavedJob] = useState<{ id: string; name: string } | null>(null)
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (u) => {
@@ -70,23 +77,18 @@ export default function AddJobPage() {
         ownerId: user.uid,
         ownerName: user.displayName || '',
         status: 'pending',
+        tier,
+        paymentStatus: 'awaiting_payment',
+        projects: [],
         createdAt: serverTimestamp(),
       })
       // Owner contact (login email) is private: it goes to the
       // owner/admin-only subcollection, never into the main document
       // (see lib/owner-contact.ts).
       await writeOwnerContact('jobs', ref.id, user.uid, user.email || '')
-      // Emails: owner gets "received, under review", admin gets a new-
-      // submission notification. Both only queue into `mail` and never throw.
-      await queueSubmissionEmails({
-        kind: 'job',
-        name: title.trim(),
-        city,
-        ownerEmail: user.email || '',
-        ownerName: user.displayName || '',
-      })
-      toast.success('Job submitted for review.')
-      router.push('/dashboard')
+      // Saved — the payment screen follows. The submission email
+      // goes out only after the payment proof is uploaded.
+      setSavedJob({ id: ref.id, name: title.trim() })
     } catch (err: any) {
       toast.error(`Could not submit your job post: ${err?.message || 'Unknown error'}`)
     } finally {
@@ -106,6 +108,40 @@ export default function AddJobPage() {
     )
   }
 
+  // Payment step: the post is saved; the buyer pays and uploads the
+  // proof here. Only then does the confirmation email go out.
+  if (savedJob && user) {
+    return (
+      <>
+        <Navbar />
+        <main className="bg-[#F8FAFC] text-slate-800 font-sans min-h-screen py-16 px-4 flex items-center justify-center">
+          <div className="max-w-lg w-full bg-white border border-slate-200 rounded-3xl p-8 shadow-xl">
+            <PaymentScreen
+              tier={tier}
+              listingType="job"
+              listingId={savedJob.id}
+              listingName={savedJob.name}
+              ownerId={user.uid}
+              ownerEmail={user.email || ''}
+              onSubmitted={async () => {
+                await queueSubmissionEmails({
+                  kind: 'job',
+                  name: savedJob.name,
+                  city,
+                  ownerEmail: user.email || '',
+                  ownerName: user.displayName || '',
+                })
+                toast.success('Job submitted for review.')
+                router.push('/dashboard')
+              }}
+            />
+          </div>
+        </main>
+        <Footer />
+      </>
+    )
+  }
+
   return (
     <>
       <Navbar />
@@ -116,7 +152,7 @@ export default function AddJobPage() {
               <Briefcase className="w-8 h-8" />
             </div>
             <h1 className="text-2xl font-bold text-slate-900">Post a Job</h1>
-            <p className="text-xs text-slate-500 mt-1">Free job post — reach candidates across Pakistan</p>
+            <p className="text-xs text-slate-500 mt-1">Job post — plans from PKR 99, verified before approval</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -161,9 +197,11 @@ export default function AddJobPage() {
               <textarea required value={description} onChange={(e) => setDescription(e.target.value)} rows={5} placeholder="Describe the role, responsibilities, required experience, and how to apply." className={inputClass} />
             </div>
 
+            <TierSelect value={tier} onChange={setTier} />
+
             <div className="flex gap-2.5 p-3.5 bg-emerald-50 border border-emerald-100 rounded-xl text-xs text-slate-600">
               <Info className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-              <span>Your job post goes through a quick review and appears publicly on LocalePak after approval.</span>
+              <span>Your job post goes through a quick review and appears publicly on LocalePak after approval. After saving, you will pay for your plan and upload a payment screenshot — approval follows payment verification.</span>
             </div>
 
             <button
@@ -171,7 +209,7 @@ export default function AddJobPage() {
               disabled={isSubmitting}
               className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
             >
-              <span>{isSubmitting ? 'Posting...' : 'Post Job'}</span>
+              <span>{isSubmitting ? 'Saving...' : 'Save & Continue to Payment'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>

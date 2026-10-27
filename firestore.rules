@@ -54,12 +54,19 @@ service cloud.firestore {
         && request.resource.data.phone is string
         && request.resource.data.phone.matches('^(\\+92|0)3[0-9]{9}$');
       // Owner status/featured/verified nahi badal sakta — yeh sirf admin karega.
+      // Tier/payment/pending-edit fields bhi owner nahi badal sakta:
+      // tier sirf payment approval se, pendingEdit sirf edit-request
+      // approval se badalta hai (donon admin actions hain).
       allow update: if isAdmin()
         || (isOwner(resource.data.ownerId)
             && request.resource.data.ownerId == resource.data.ownerId
             && request.resource.data.status == resource.data.status
             && request.resource.data.get('featured', false) == resource.data.get('featured', false)
-            && request.resource.data.get('verified', false) == resource.data.get('verified', false));
+            && request.resource.data.get('verified', false) == resource.data.get('verified', false)
+            && request.resource.data.get('tier', '') == resource.data.get('tier', '')
+            && request.resource.data.get('paymentStatus', '') == resource.data.get('paymentStatus', '')
+            && request.resource.data.get('pendingEdit', null) == resource.data.get('pendingEdit', null)
+            && request.resource.data.get('editEffectiveAt', null) == resource.data.get('editEffectiveAt', null));
       allow delete: if isOwner(resource.data.ownerId) || isAdmin();
 
       // Owner-private contact (Round 3): businesses/{id}/private/contact
@@ -88,7 +95,11 @@ service cloud.firestore {
             && request.resource.data.ownerId == resource.data.ownerId
             && request.resource.data.status == resource.data.status
             && request.resource.data.get('featured', false) == resource.data.get('featured', false)
-            && request.resource.data.get('verified', false) == resource.data.get('verified', false));
+            && request.resource.data.get('verified', false) == resource.data.get('verified', false)
+            && request.resource.data.get('tier', '') == resource.data.get('tier', '')
+            && request.resource.data.get('paymentStatus', '') == resource.data.get('paymentStatus', '')
+            && request.resource.data.get('pendingEdit', null) == resource.data.get('pendingEdit', null)
+            && request.resource.data.get('editEffectiveAt', null) == resource.data.get('editEffectiveAt', null));
       allow delete: if isOwner(resource.data.ownerId) || isAdmin();
 
       // Owner-private contact (Round 3): companies/{id}/private/contact —
@@ -111,7 +122,11 @@ service cloud.firestore {
       allow update: if isAdmin()
         || (isOwner(resource.data.ownerId)
             && request.resource.data.ownerId == resource.data.ownerId
-            && request.resource.data.status == resource.data.status);
+            && request.resource.data.status == resource.data.status
+            && request.resource.data.get('tier', '') == resource.data.get('tier', '')
+            && request.resource.data.get('paymentStatus', '') == resource.data.get('paymentStatus', '')
+            && request.resource.data.get('pendingEdit', null) == resource.data.get('pendingEdit', null)
+            && request.resource.data.get('editEffectiveAt', null) == resource.data.get('editEffectiveAt', null));
       allow delete: if isOwner(resource.data.ownerId) || isAdmin();
 
       // Owner-private contact (Round 3): jobs/{id}/private/contact —
@@ -121,6 +136,67 @@ service cloud.firestore {
           || (isSignedIn()
               && request.auth.uid == get(/databases/$(database)/documents/jobs/$(jobId)).data.ownerId);
       }
+    }
+
+    // ---------- Professional Profiles (paid tiers, 2026-10-27) ----------
+    // Companies jaisa pattern: public sirf APPROVED profiles dekh sakta
+    // hai; owner apni saari profiles dekh sakta hai; nayi profile
+    // hamesha status = 'pending' se banti hai; approve sirf admin karega.
+    match /professionals/{professionalId} {
+      allow read: if resource.data.status == 'approved'
+        || isOwner(resource.data.ownerId)
+        || isAdmin();
+      allow create: if isSignedIn()
+        && request.resource.data.ownerId == request.auth.uid
+        && request.resource.data.status == 'pending'
+        && request.resource.data.phone is string
+        && request.resource.data.phone.matches('^(\\\\+92|0)3[0-9]{9}$');
+      allow update: if isAdmin()
+        || (isOwner(resource.data.ownerId)
+            && request.resource.data.ownerId == resource.data.ownerId
+            && request.resource.data.status == resource.data.status
+            && request.resource.data.get('tier', '') == resource.data.get('tier', '')
+            && request.resource.data.get('paymentStatus', '') == resource.data.get('paymentStatus', '')
+            && request.resource.data.get('pendingEdit', null) == resource.data.get('pendingEdit', null)
+            && request.resource.data.get('editEffectiveAt', null) == resource.data.get('editEffectiveAt', null));
+      allow delete: if isOwner(resource.data.ownerId) || isAdmin();
+
+      // Owner-private contact: professionals/{id}/private/contact —
+      // sirf owner (parent doc ke ownerId se match) ya admin.
+      match /private/{docId} {
+        allow read, write: if isAdmin()
+          || (isSignedIn()
+              && request.auth.uid == get(/databases/$(database)/documents/professionals/$(professionalId)).data.ownerId);
+      }
+    }
+
+    // ---------- Edit Requests (Premium / Featured owners) ----------
+    // Owner apni listing ke liye edit request bana sakta hai — hamesha
+    // status = 'pending' se. Parhna: owner (apni) ya admin. Approve/
+    // reject sirf admin karega; owner kabhi khud approve nahi kar sakta.
+    match /edit_requests/{requestId} {
+      allow create: if isSignedIn()
+        && request.resource.data.ownerId == request.auth.uid
+        && request.resource.data.status == 'pending'
+        && request.resource.data.listingId is string
+        && request.resource.data.changes is map;
+      allow read: if isOwner(resource.data.ownerId) || isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    // ---------- User Blog Posts (Featured listings, max 2) ----------
+    // Owner apna post bana sakta hai — hamesha status = 'pending' se.
+    // Public sirf APPROVED posts parh sakta hai; approve/reject sirf admin.
+    match /blog_posts/{postId} {
+      allow create: if isSignedIn()
+        && request.resource.data.authorId == request.auth.uid
+        && request.resource.data.status == 'pending'
+        && request.resource.data.title is string
+        && request.resource.data.content is string;
+      allow read: if resource.data.status == 'approved'
+        || isOwner(resource.data.authorId)
+        || isAdmin();
+      allow update, delete: if isAdmin();
     }
 
     // ---------- Reviews (business reviews) ----------

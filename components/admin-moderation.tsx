@@ -15,6 +15,7 @@ export const REJECTION_REASONS = [
   'Business details do not match / could not be verified',
   'Prohibited or inappropriate content',
   'Low-quality or misleading description',
+  'Payment not received / not verified',
 ] as const
 
 export type ModItem = { id: string; data: any }

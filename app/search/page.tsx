@@ -1,13 +1,13 @@
 import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import SearchResults, { type Result } from '@/components/search-results'
-import { fetchApprovedBusinesses, fetchApprovedCompanies } from '@/lib/public-listings'
+import { fetchApprovedBusinesses, fetchApprovedCompanies, getApprovedProfessionalCards } from '@/lib/public-listings'
 import { isReleased } from '@/lib/release'
 
 // SERVER component (Round 3): the live part of the search index —
-// approved + released businesses and approved companies — is built
-// HERE, on the server, and passed to the client search UI as initial
-// data. The browser runs no Firestore list query for search, and the
+// approved + released businesses, approved companies and approved
+// professionals — is built HERE, on the server, and passed to the
+// client search UI as initial data. The browser runs no Firestore list query for search, and the
 // index/filter interactions keep working on this server-provided set.
 // ISR refreshes the live set hourly (well inside the 7-day cycle).
 export const revalidate = 3600
@@ -42,6 +42,18 @@ async function buildLiveItems(): Promise<Result[]> {
       title: data.name,
       snippet: `${label} company${data.city ? ` based in ${data.city}` : ''} — view the company profile and contact details.`,
       href: `/company/${data.slug}`,
+    })
+  }
+
+  // Professionals are public immediately on approval (no weekly
+  // release cycle, same as companies).
+  const proCards = await getApprovedProfessionalCards()
+  for (const pro of proCards) {
+    items.push({
+      type: 'Professional',
+      title: pro.name,
+      snippet: `${pro.profession}${pro.specialization ? ` — ${pro.specialization}` : ''}${pro.city ? ` in ${pro.city}` : ''} — view the professional profile and contact details.`,
+      href: `/professional/${pro.slug}`,
     })
   }
 

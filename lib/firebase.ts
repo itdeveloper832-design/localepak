@@ -15,6 +15,20 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig)
 
+/**
+ * True when no real Firebase project is configured: local builds
+ * without .env.local fall back to the "app-local" dummy project.
+ * Server-side listing reads short-circuit to empty in that case —
+ * the Firestore SDK otherwise retries its Listen stream against a
+ * project that will never answer, and a single static page can
+ * hang past Next's 60s generation timeout (proven 2026-10-27:
+ * the tiers build died on /city/mardan/finance after 3 attempts).
+ * Production (Vercel) always sets NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+ * so live behavior is unchanged — and the short-circuit returns
+ * exactly what the failing read's catch block returned anyway.
+ */
+export const isDummyFirebase = firebaseConfig.projectId === 'app-local'
+
 export const db = getFirestore(app)
 export const storage = getStorage(app)
 export const auth = getAuth(app)

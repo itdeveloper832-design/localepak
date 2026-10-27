@@ -7,6 +7,7 @@ import { SEED_BUSINESSES, getSeedBusiness } from '@/lib/seed-businesses'
 import type { SeedBusiness } from '@/lib/seed-businesses'
 import { fetchBusinessBySlug } from '@/lib/public-listings'
 import { isReleased, releaseDateLabel } from '@/lib/release'
+import { applyPendingEdit } from '@/lib/edit-requests'
 
 // Business detail route — two kinds of listings:
 // 1. SEED listings (lib/seed-businesses.ts): directory-created pages for
@@ -223,18 +224,22 @@ export default async function BusinessDetailPage({
   const business = await loadBusiness(slug)
   if (!business) notFound()
 
+  // Approved edits that passed their 7-day boundary are merged onto
+  // the stored listing before rendering (lib/edit-requests.ts).
+  const mergedBusiness = applyPendingEdit(business, Date.now())
+
   let initialBusiness: any = null
   let initialUnreleased: { name: string; releaseLabel: string } | null = null
   // Weekly batch release (lib/release.ts): an approved business
   // stays hidden until the next 7-day cycle boundary passes. This
   // state is intentional release-cycle UX, NOT a soft-404.
-  if (!isReleased(business.approvedAt, Date.now())) {
+  if (!isReleased(mergedBusiness.approvedAt, Date.now())) {
     initialUnreleased = {
-      name: business.name || 'This business',
+      name: mergedBusiness.name || 'This business',
       releaseLabel: releaseDateLabel(Date.now()),
     }
   } else {
-    initialBusiness = business
+    initialBusiness = mergedBusiness
   }
   return (
     <BusinessDetailClient

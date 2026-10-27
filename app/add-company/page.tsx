@@ -14,6 +14,9 @@ import CityCombobox from '@/components/city-combobox'
 import { isValidPakistaniPhone, normalizePakistaniPhone, sanitizePhoneInput } from '@/lib/validation'
 import { writeOwnerContact } from '@/lib/owner-contact'
 import { queueSubmissionEmails } from '@/lib/mail'
+import TierSelect from '@/components/tier-select'
+import PaymentScreen from '@/components/payment-screen'
+import type { ListingTier } from '@/lib/tiers'
 
 function slugify(value: string): string {
   return value
@@ -40,6 +43,10 @@ export default function AddCompanyPage() {
   const [website, setWebsite] = useState('')
   const [address, setAddress] = useState('')
   const [description, setDescription] = useState('')
+  const [tier, setTier] = useState<ListingTier>('basic')
+  // Saved at the last step: the listing waits here until the payment
+  // proof is uploaded on the payment screen below.
+  const [savedCompany, setSavedCompany] = useState<{ id: string; name: string } | null>(null)
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (u) => {
@@ -75,23 +82,19 @@ export default function AddCompanyPage() {
         ownerId: user.uid,
         ownerName: user.displayName || '',
         status: 'pending',
+        tier,
+        paymentStatus: 'awaiting_payment',
+        projects: [],
         createdAt: serverTimestamp(),
       })
       // Owner contact (login email) is private: it goes to the
       // owner/admin-only subcollection, never into the main document
       // (see lib/owner-contact.ts).
       await writeOwnerContact('companies', ref.id, user.uid, user.email || '')
-      // Emails: owner gets "received, under review", admin gets a new-
-      // submission notification. Both only queue into `mail` and never throw.
-      await queueSubmissionEmails({
-        kind: 'company',
-        name: name.trim(),
-        city,
-        ownerEmail: user.email || '',
-        ownerName: user.displayName || '',
-      })
-      toast.success('Company submitted for review.')
-      router.push('/dashboard')
+      // Saved — the payment screen follows. The submission email
+      // goes out only after the payment proof is uploaded, so the
+      // owner gets one confirmation for the whole submission.
+      setSavedCompany({ id: ref.id, name: name.trim() })
     } catch (err: any) {
       toast.error(`Could not submit your company: ${err?.message || 'Unknown error'}`)
     } finally {
@@ -111,6 +114,40 @@ export default function AddCompanyPage() {
     )
   }
 
+  // Payment step: the listing is saved; the buyer pays and uploads
+  // the proof here. Only then does the confirmation email go out.
+  if (savedCompany && user) {
+    return (
+      <>
+        <Navbar />
+        <main className="bg-[#F8FAFC] text-slate-800 font-sans min-h-screen py-16 px-4 flex items-center justify-center">
+          <div className="max-w-lg w-full bg-white border border-slate-200 rounded-3xl p-8 shadow-xl">
+            <PaymentScreen
+              tier={tier}
+              listingType="company"
+              listingId={savedCompany.id}
+              listingName={savedCompany.name}
+              ownerId={user.uid}
+              ownerEmail={user.email || ''}
+              onSubmitted={async () => {
+                await queueSubmissionEmails({
+                  kind: 'company',
+                  name: savedCompany.name,
+                  city,
+                  ownerEmail: user.email || '',
+                  ownerName: user.displayName || '',
+                })
+                toast.success('Company submitted for review.')
+                router.push('/dashboard')
+              }}
+            />
+          </div>
+        </main>
+        <Footer />
+      </>
+    )
+  }
+
   return (
     <>
       <Navbar />
@@ -121,7 +158,7 @@ export default function AddCompanyPage() {
               <Factory className="w-8 h-8" />
             </div>
             <h1 className="text-2xl font-bold text-slate-900">Add Your Company</h1>
-            <p className="text-xs text-slate-500 mt-1">Free company profile — build trust with buyers across Pakistan</p>
+            <p className="text-xs text-slate-500 mt-1">Company profile — plans from PKR 99, verified before approval</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -172,9 +209,11 @@ export default function AddCompanyPage() {
               <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={4} placeholder="Tell buyers what your company does, your products or services, and your track record." className={inputClass} />
             </div>
 
+            <TierSelect value={tier} onChange={setTier} />
+
             <div className="flex gap-2.5 p-3.5 bg-emerald-50 border border-emerald-100 rounded-xl text-xs text-slate-600">
               <Info className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-              <span>Your company profile goes through a quick review and appears publicly on LocalePak after approval.</span>
+              <span>Your company profile goes through a quick review and appears publicly on LocalePak after approval. After saving, you will pay for your plan and upload a payment screenshot — approval follows payment verification.</span>
             </div>
 
             <button
@@ -182,7 +221,7 @@ export default function AddCompanyPage() {
               disabled={isSubmitting}
               className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
             >
-              <span>{isSubmitting ? 'Submitting...' : 'Submit Company'}</span>
+              <span>{isSubmitting ? 'Saving...' : 'Save & Continue to Payment'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>

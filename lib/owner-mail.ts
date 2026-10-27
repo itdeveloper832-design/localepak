@@ -107,6 +107,8 @@ export function buildDeletionEmail(args: {
     `We are writing to let you know that your LocalePak listing '${listingName}' has been removed from the directory by our moderation team.`,
     ...(note ? ['', `Reason given: ${note}`] : []),
     '',
+    'If you would like to list again, please fill in all the details again from scratch — a removed listing cannot be restored.',
+    '',
     'If this business is still operating, you are welcome to create a new listing that follows our guidelines:',
     '- Listing guidelines: https://www.localepak.com/business-listing-guidelines',
     '- Add a business: https://www.localepak.com/add-business',
@@ -127,6 +129,7 @@ export function buildDeletionEmail(args: {
     <p>${esc(greeting)}</p>
     <p>We are writing to let you know that your LocalePak listing <strong>${esc(listingName)}</strong> has been removed from the directory by our moderation team.</p>
     ${note ? `<p><strong>Reason given:</strong> ${esc(note)}</p>` : ''}
+    <p>If you would like to list again, please fill in all the details again from scratch — a removed listing cannot be restored.</p>
     <p>If this business is still operating, you are welcome to create a new listing that follows our
     <a href="https://www.localepak.com/business-listing-guidelines">listing guidelines</a> — start at
     <a href="https://www.localepak.com/add-business">localepak.com/add-business</a>.</p>

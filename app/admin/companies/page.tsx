@@ -66,14 +66,23 @@ export default function AdminCompaniesPage() {
     }
   }
 
-  const approve = (item: Item) =>
-    patch(
+  const approve = (item: Item) => {
+    // Paid-listing guard: a listing whose payment is still unverified
+    // must be approved through Payment Proofs (where the admin
+    // authenticates the payment), not from here. Legacy listings
+    // (no paymentStatus field) are unaffected.
+    if (item.data.paymentStatus === 'awaiting_payment' || item.data.paymentStatus === 'payment_rejected') {
+      toast.error('Payment not verified yet — verify the proof in Payment Proofs first.')
+      return
+    }
+    return patch(
       item.id,
       { status: 'approved', rejectionReasons: [], rejectionNote: '', rejectedAt: null },
       'Company approved (any previous rejection cleared).',
       // Owner approval email ("live now") — queued only.
       () => queueListingApprovedEmail(COL, item)
     )
+  }
 
   const confirmReject = async (item: Item, reasons: string[], note: string) => {
     setBusy(item.id)

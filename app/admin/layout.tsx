@@ -9,7 +9,7 @@ import { doc, getDoc, collection, query, where, getCountFromServer } from 'fireb
 import {
   LayoutDashboard, Building2, Factory, Briefcase, Star, CreditCard,
   Mail, FileText, Users, Home, LayoutGrid, LogOut, ShieldAlert,
-  Lock, Eye, EyeOff, AlertCircle, ShieldCheck,
+  Lock, Eye, EyeOff, AlertCircle, ShieldCheck, Pencil, Newspaper, UserRound,
 } from 'lucide-react'
 import { toast } from 'sonner'
 
@@ -18,8 +18,11 @@ const NAV = [
   { href: '/admin/businesses', label: 'Businesses', Icon: Building2 },
   { href: '/admin/companies', label: 'Companies', Icon: Factory },
   { href: '/admin/jobs', label: 'Jobs', Icon: Briefcase },
+  { href: '/admin/professionals', label: 'Professionals', Icon: UserRound },
   { href: '/admin/reviews', label: 'Reviews', Icon: Star },
   { href: '/admin/payments', label: 'Payment Proofs', Icon: CreditCard },
+  { href: '/admin/edit-requests', label: 'Edit Requests', Icon: Pencil },
+  { href: '/admin/blog-posts', label: 'Blog Posts', Icon: Newspaper },
   { href: '/admin/messages', label: 'Messages', Icon: Mail },
   { href: '/admin/applications', label: 'Applications', Icon: FileText },
   { href: '/admin/users', label: 'Users', Icon: Users },
@@ -73,15 +76,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     return () => unsub()
   }, [])
 
-  // Total pending badge: businesses + companies + jobs + reviews + payment
-  // proofs waiting for review. Aggregation counts only (getCountFromServer)
-  // — no documents are read. Refreshed whenever the admin moves between
-  // pages, so working through a queue drops the number.
+  // Total pending badge: businesses + companies + jobs + professionals +
+  // reviews + payment proofs + edit requests + blog posts waiting for
+  // review. Aggregation counts only (getCountFromServer) — no documents
+  // are read. Refreshed whenever the admin moves between pages, so
+  // working through a queue drops the number.
   useEffect(() => {
     if (state !== 'ok') return
     let cancelled = false
     const load = async () => {
-      const cols = ['businesses', 'companies', 'jobs', 'reviews', 'payment_proofs']
+      const cols = ['businesses', 'companies', 'jobs', 'professionals', 'reviews', 'payment_proofs', 'edit_requests', 'blog_posts']
       const snaps = await Promise.all(
         cols.map((c) =>
           getCountFromServer(query(collection(db, c), where('status', '==', 'pending'))).catch(() => null)

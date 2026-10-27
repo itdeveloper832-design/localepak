@@ -5,22 +5,23 @@ import Link from 'next/link'
 import { CATEGORIES, CITIES, TOP_CITIES } from '@/lib/data'
 import { BLOG_POSTS } from '@/lib/blog-data'
 import { SEED_BUSINESSES } from '@/lib/seed-businesses'
-import { Search, MapPin, LayoutGrid, BookOpen, Building2, Briefcase, ArrowRight } from 'lucide-react'
+import { Search, MapPin, LayoutGrid, BookOpen, Building2, Briefcase, ArrowRight, UserRound } from 'lucide-react'
 
 export type Result = {
-  type: 'Business' | 'Company' | 'Category' | 'City' | 'Guide'
+  type: 'Business' | 'Company' | 'Professional' | 'Category' | 'City' | 'Guide'
   title: string
   snippet: string
   href: string
 }
 
-const TYPE_FILTERS = ['All', 'Businesses', 'Companies', 'Categories', 'Cities', 'Blog'] as const
+const TYPE_FILTERS = ['All', 'Businesses', 'Companies', 'Professionals', 'Categories', 'Cities', 'Blog'] as const
 type TypeFilter = (typeof TYPE_FILTERS)[number]
 
 function matchesFilter(type: Result['type'], filter: TypeFilter): boolean {
   if (filter === 'All') return true
   if (filter === 'Businesses') return type === 'Business'
   if (filter === 'Companies') return type === 'Company'
+  if (filter === 'Professionals') return type === 'Professional'
   if (filter === 'Categories') return type === 'Category'
   if (filter === 'Cities') return type === 'City'
   return type === 'Guide'
@@ -114,6 +115,7 @@ export default function SearchResults({ initialLiveItems }: { initialLiveItems: 
     type === 'City' ? <MapPin className="w-5 h-5 text-emerald-600" />
     : type === 'Guide' ? <BookOpen className="w-5 h-5 text-amber-600" />
     : type === 'Business' ? <Building2 className="w-5 h-5 text-emerald-600" />
+    : type === 'Professional' ? <UserRound className="w-5 h-5 text-teal-600" />
     : type === 'Company' ? <Briefcase className="w-5 h-5 text-indigo-600" />
     : <LayoutGrid className="w-5 h-5 text-emerald-600" />
 
@@ -125,14 +127,14 @@ export default function SearchResults({ initialLiveItems }: { initialLiveItems: 
           <form action="/search" method="GET" className="flex gap-3">
             <div className="flex-1 flex items-center gap-3 px-4 py-3 bg-white rounded-2xl text-left">
               <Search className="w-5 h-5 text-slate-400 shrink-0" />
-              <label htmlFor="search-page-q" className="sr-only">Search categories, cities and guides</label>
+              <label htmlFor="search-page-q" className="sr-only">Search businesses, professionals, categories, cities and guides</label>
               <input
                 ref={inputRef}
                 id="search-page-q"
                 type="text"
                 name="q"
                 defaultValue=""
-                placeholder="Search categories, cities and guides..."
+                placeholder="Search businesses, professionals, categories..."
                 className="w-full bg-transparent text-slate-900 placeholder:text-slate-400 text-sm focus:outline-none"
               />
             </div>
@@ -143,7 +145,7 @@ export default function SearchResults({ initialLiveItems }: { initialLiveItems: 
           <p className="text-xs text-slate-400" role="status">
             {q || city
               ? `${results.length} result${results.length === 1 ? '' : 's'}${q ? ` for "${q}"` : ''}${city ? ` in ${city}` : ''}`
-              : 'Search listed businesses and companies, all categories, city guides and blog articles.'}
+              : 'Search listed businesses, companies and professionals, all categories, city guides and blog articles.'}
           </p>
           <div className="flex flex-wrap gap-2" role="group" aria-label="Filter results by type">
             {TYPE_FILTERS.map((filter) => (

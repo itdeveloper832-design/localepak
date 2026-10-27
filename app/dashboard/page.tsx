@@ -7,21 +7,49 @@ import Navbar from '@/components/navbar'
 import Footer from '@/components/footer'
 import { auth, db, storage } from '@/lib/firebase'
 import { onAuthStateChanged, signOut, User } from 'firebase/auth'
-import { collection, query, where, getDocs, doc, getDoc, addDoc, serverTimestamp } from 'firebase/firestore'
+import { collection, query, where, getDocs, doc, getDoc, addDoc, updateDoc, serverTimestamp } from 'firebase/firestore'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
-import { User as UserIcon, Mail, ShieldCheck, LogOut, LayoutGrid, MapPin, HelpCircle, Building2, Factory, Briefcase, PlusCircle, ClipboardList, Crown, BadgeCheck, X, Upload, ShieldAlert } from 'lucide-react'
+import { User as UserIcon, Mail, ShieldCheck, LogOut, LayoutGrid, MapPin, HelpCircle, Building2, Factory, Briefcase, PlusCircle, ClipboardList, Crown, BadgeCheck, X, Upload, ShieldAlert, UserRound, Pencil, FolderKanban, Newspaper, Wallet } from 'lucide-react'
 import { toast } from 'sonner'
 import { isReleased, releaseDateLabel } from '@/lib/release'
-import { notifyAdminNewPaymentProof } from '@/lib/mail'
+import { notifyAdminNewPaymentProof, queueSubmissionEmails } from '@/lib/mail'
+import PaymentScreen from '@/components/payment-screen'
+import { tierLabel, tierPrice, formatPKR, canEditTier, projectLimitFor, blogLimitFor, LISTING_COLLECTION, isValidProject, type ListingTier, type Project } from '@/lib/tiers'
+import { EDITABLE_FIELDS, EDITABLE_FIELD_LABELS, sanitizeChanges } from '@/lib/edit-requests'
 
 type ListingItem = {
   id: string
-  type: 'Business' | 'Company' | 'Job'
+  type: 'Business' | 'Company' | 'Job' | 'Professional'
   name: string
   status: string
   approvedAt?: any
   rejectionReasons?: string[]
   rejectionNote?: string
+  tier?: string
+  paymentStatus?: string
+  projects?: Project[]
+  city?: string
+}
+
+function slugify(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+}
+
+/** Dashboard listing type → tier-system listing type. */
+function typeKey(t: ListingItem['type']): 'business' | 'company' | 'job' | 'professional' {
+  if (t === 'Company') return 'company'
+  if (t === 'Job') return 'job'
+  if (t === 'Professional') return 'professional'
+  return 'business'
+}
+
+function formatShortDate(value: any): string {
+  const ms = typeof value?.toMillis === 'function' ? value.toMillis() : typeof value === 'number' ? value : 0
+  if (!ms) return ''
+  return new Date(ms).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
 }
 
 export default function DashboardPage() {
@@ -31,11 +59,33 @@ export default function DashboardPage() {
   const [listings, setListings] = useState<ListingItem[]>([])
   const [listingsLoading, setListingsLoading] = useState(false)
   const [role, setRole] = useState<string>('member')
-  const [proofs, setProofs] = useState<Record<string, { status: string; plan: string }>>({})
+  const [proofs, setProofs] = useState<Record<string, { status: string; plan: string; tier?: string }>>({})
   const [upgradeFor, setUpgradeFor] = useState<string | null>(null)
   const [upgradePlan, setUpgradePlan] = useState<'featured' | 'verified'>('featured')
   const [upgradeFile, setUpgradeFile] = useState<File | null>(null)
   const [uploading, setUploading] = useState(false)
+  // Tier payment panel (unpaid / rejected-proof listings).
+  const [payFor, setPayFor] = useState<string | null>(null)
+  // Edit-request panel (Premium / Featured approved listings).
+  const [editFor, setEditFor] = useState<string | null>(null)
+  const [editDoc, setEditDoc] = useState<any>(null)
+  const [editFields, setEditFields] = useState<Record<string, string>>({})
+  const [editLoading, setEditLoading] = useState(false)
+  const [editSaving, setEditSaving] = useState(false)
+  const [editReqs, setEditReqs] = useState<Record<string, { status: string; effectiveAt?: any }>>({})
+  // Projects panel (Premium / Featured approved listings).
+  const [projectsFor, setProjectsFor] = useState<string | null>(null)
+  const [projectTitle, setProjectTitle] = useState('')
+  const [projectDesc, setProjectDesc] = useState('')
+  const [projectLink, setProjectLink] = useState('')
+  const [projectSaving, setProjectSaving] = useState(false)
+  // Blog posts (owners of a Featured listing, max 2).
+  const [blogPosts, setBlogPosts] = useState<Array<{ id: string; data: any }>>([])
+  const [blogFormOpen, setBlogFormOpen] = useState(false)
+  const [blogTitle, setBlogTitle] = useState('')
+  const [blogExcerpt, setBlogExcerpt] = useState('')
+  const [blogContent, setBlogContent] = useState('')
+  const [blogSaving, setBlogSaving] = useState(false)
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (u) => {
@@ -54,6 +104,7 @@ export default function DashboardPage() {
         { col: 'businesses', type: 'Business' },
         { col: 'companies', type: 'Company' },
         { col: 'jobs', type: 'Job' },
+        { col: 'professionals', type: 'Professional' },
       ]
       const results: ListingItem[] = []
       for (const source of sources) {
@@ -69,6 +120,10 @@ export default function DashboardPage() {
               approvedAt: data.approvedAt ?? null,
               rejectionReasons: Array.isArray(data.rejectionReasons) ? data.rejectionReasons : [],
               rejectionNote: data.rejectionNote || '',
+              tier: data.tier || undefined,
+              paymentStatus: data.paymentStatus || undefined,
+              projects: Array.isArray(data.projects) ? data.projects.filter(isValidProject) : [],
+              city: data.city || '',
             })
           })
         } catch {
@@ -99,18 +154,42 @@ export default function DashboardPage() {
       }
       try {
         const snap = await getDocs(query(collection(db, 'payment_proofs'), where('ownerId', '==', user.uid)))
-        const map: Record<string, { status: string; plan: string; ts: number }> = {}
+        const map: Record<string, { status: string; plan: string; tier?: string; ts: number }> = {}
         snap.forEach((d) => {
           const data = d.data() as any
           if (!data.listingId) return
           const ts = data.createdAt?.toMillis?.() || 0
           if (!map[data.listingId] || ts > map[data.listingId].ts) {
-            map[data.listingId] = { status: data.status || 'pending', plan: data.plan || 'featured', ts }
+            map[data.listingId] = { status: data.status || 'pending', plan: data.plan || 'featured', tier: data.tier || undefined, ts }
           }
         })
         if (!cancelled) setProofs(map)
       } catch {
         // No proofs yet, or Firebase not configured — badges stay hidden.
+      }
+      // Own edit requests (latest per listing) + own blog posts.
+      try {
+        const snap = await getDocs(query(collection(db, 'edit_requests'), where('ownerId', '==', user.uid)))
+        const map: Record<string, { status: string; effectiveAt?: any }> = {}
+        snap.forEach((d) => {
+          const data = d.data() as any
+          if (!data.listingId) return
+          const ts = data.createdAt?.toMillis?.() || 0
+          const prev = (map as any)[data.listingId] as any
+          if (!prev || ts > (prev.ts || 0)) map[data.listingId] = { status: data.status || 'pending', effectiveAt: data.effectiveAt ?? null, ts } as any
+        })
+        if (!cancelled) setEditReqs(map)
+      } catch {
+        // ignore — edit notes simply stay hidden
+      }
+      try {
+        const snap = await getDocs(query(collection(db, 'blog_posts'), where('authorId', '==', user.uid)))
+        const rows: Array<{ id: string; data: any }> = []
+        snap.forEach((d) => rows.push({ id: d.id, data: d.data() }))
+        rows.sort((a, b) => (b.data.createdAt?.toMillis?.() || 0) - (a.data.createdAt?.toMillis?.() || 0))
+        if (!cancelled) setBlogPosts(rows)
+      } catch {
+        // ignore — blog section simply stays empty
       }
     }
     load()
@@ -160,6 +239,175 @@ export default function DashboardPage() {
       toast.error(`Upload failed: ${err?.message || 'Unknown error'}`)
     } finally {
       setUploading(false)
+    }
+  }
+
+  // ---- Tier payment (dashboard re-pay / first pay for saved listings) ----
+  const openPayPanel = (item: ListingItem) => {
+    setPayFor(payFor === item.id ? null : item.id)
+  }
+
+  // ---- Edit requests (Premium / Featured approved listings) ----
+  const openEditPanel = async (item: ListingItem) => {
+    if (editFor === item.id) {
+      setEditFor(null)
+      return
+    }
+    setEditFor(item.id)
+    setEditLoading(true)
+    setEditDoc(null)
+    setEditFields({})
+    try {
+      const col = LISTING_COLLECTION[typeKey(item.type)]
+      const snap = await getDoc(doc(db, col, item.id))
+      if (snap.exists()) {
+        const data = snap.data() as any
+        setEditDoc(data)
+        const fields: Record<string, string> = {}
+        for (const key of EDITABLE_FIELDS[typeKey(item.type)]) fields[key] = data[key] ?? ''
+        setEditFields(fields)
+      }
+    } catch {
+      toast.error('Could not load listing details.')
+    } finally {
+      setEditLoading(false)
+    }
+  }
+
+  const handleEditSubmit = async (item: ListingItem) => {
+    if (!user) return
+    const type = typeKey(item.type)
+    // sanitizeChanges drops empty values: an edit sets fields, it
+    // cannot blank one out (v1 limitation, keeps requests clean).
+    const clean = sanitizeChanges(type, editFields)
+    if (Object.keys(clean).length === 0) {
+      toast.error('Change at least one field before submitting.')
+      return
+    }
+    setEditSaving(true)
+    try {
+      await addDoc(collection(db, 'edit_requests'), {
+        listingType: type,
+        listingId: item.id,
+        listingName: item.name,
+        ownerId: user.uid,
+        ownerEmail: user.email || '',
+        changes: clean,
+        status: 'pending',
+        createdAt: serverTimestamp(),
+      })
+      setEditReqs((prev) => ({ ...prev, [item.id]: { status: 'pending' } }))
+      setEditFor(null)
+      toast.success('Edit request submitted — our team reviews it, then it goes live at the next weekly release.')
+    } catch (err: any) {
+      toast.error(`Could not submit edit request: ${err?.message || 'Unknown error'}`)
+    } finally {
+      setEditSaving(false)
+    }
+  }
+
+  // ---- Projects (Premium / Featured approved listings) ----
+  const handleProjectAdd = async (item: ListingItem) => {
+    const limit = projectLimitFor(item.tier)
+    const current = item.projects || []
+    if (current.length >= limit) {
+      toast.error(`You already have ${limit} projects — the maximum for your plan.`)
+      return
+    }
+    if (!projectTitle.trim() || !projectDesc.trim()) {
+      toast.error('Project title and description are required.')
+      return
+    }
+    setProjectSaving(true)
+    try {
+      const col = LISTING_COLLECTION[typeKey(item.type)]
+      const next = [...current, { title: projectTitle.trim(), description: projectDesc.trim(), link: projectLink.trim() }]
+      // Firestore rejects undefined — drop an empty link entirely.
+      const cleaned = next.map((p) => (p.link ? p : { title: p.title, description: p.description }))
+      await updateDoc(doc(db, col, item.id), { projects: cleaned })
+      setListings((prev) =>
+        prev.map((l) => (l.id === item.id && l.type === item.type ? { ...l, projects: cleaned as Project[] } : l))
+      )
+      setProjectTitle('')
+      setProjectDesc('')
+      setProjectLink('')
+      toast.success('Project added to your listing.')
+    } catch (err: any) {
+      toast.error(`Could not add project: ${err?.message || 'Unknown error'}`)
+    } finally {
+      setProjectSaving(false)
+    }
+  }
+
+  const handleProjectRemove = async (item: ListingItem, index: number) => {
+    const next = (item.projects || []).filter((_, i) => i !== index)
+    setProjectSaving(true)
+    try {
+      const col = LISTING_COLLECTION[typeKey(item.type)]
+      await updateDoc(doc(db, col, item.id), { projects: next })
+      setListings((prev) =>
+        prev.map((l) => (l.id === item.id && l.type === item.type ? { ...l, projects: next } : l))
+      )
+      toast.success('Project removed.')
+    } catch (err: any) {
+      toast.error(`Could not remove project: ${err?.message || 'Unknown error'}`)
+    } finally {
+      setProjectSaving(false)
+    }
+  }
+
+  // ---- Blog posts (owners of a Featured listing, max 2) ----
+  const handleBlogSubmit = async () => {
+    if (!user) return
+    const featuredListing = listings.find((l) => l.tier === 'featured' && l.status === 'approved')
+    if (!featuredListing) {
+      toast.error('Blog posts are available on Featured listings.')
+      return
+    }
+    const used = blogPosts.filter((p) => p.data.status !== 'rejected').length
+    if (used >= blogLimitFor('featured')) {
+      toast.error('You have already used your 2 blog posts.')
+      return
+    }
+    if (!blogTitle.trim() || blogContent.trim().length < 100) {
+      toast.error('A title is required and the post needs at least 100 characters.')
+      return
+    }
+    setBlogSaving(true)
+    try {
+      const base = slugify(blogTitle)
+      let slug = base
+      let n = 2
+      while (n <= 6) {
+        const snap = await getDocs(query(collection(db, 'blog_posts'), where('slug', '==', slug)))
+        if (snap.empty) break
+        slug = `${base}-${n}`
+        n++
+      }
+      const ref = await addDoc(collection(db, 'blog_posts'), {
+        title: blogTitle.trim(),
+        slug,
+        excerpt: blogExcerpt.trim() || blogContent.trim().slice(0, 150),
+        content: blogContent.trim(),
+        authorId: user.uid,
+        authorName: user.displayName || '',
+        authorEmail: user.email || '',
+        listingId: featuredListing.id,
+        listingType: typeKey(featuredListing.type),
+        listingName: featuredListing.name,
+        status: 'pending',
+        createdAt: serverTimestamp(),
+      })
+      setBlogPosts((prev) => [{ id: ref.id, data: { title: blogTitle.trim(), slug, status: 'pending' } }, ...prev])
+      setBlogTitle('')
+      setBlogExcerpt('')
+      setBlogContent('')
+      setBlogFormOpen(false)
+      toast.success('Blog post submitted for review.')
+    } catch (err: any) {
+      toast.error(`Could not submit blog post: ${err?.message || 'Unknown error'}`)
+    } finally {
+      setBlogSaving(false)
     }
   }
 
@@ -273,13 +521,13 @@ export default function DashboardPage() {
                 </Link>
               </section>
 
-              <section className="grid grid-cols-1 sm:grid-cols-3 gap-4" aria-label="Add a listing">
+              <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" aria-label="Add a listing">
                 <Link href="/add-business" className="bg-white rounded-3xl border-2 border-emerald-100 p-6 hover:border-emerald-500 hover:shadow-lg transition-all space-y-3 group">
                   <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center group-hover:scale-105 transition-transform">
                     <Building2 className="w-6 h-6" />
                   </div>
                   <h3 className="font-extrabold text-slate-900">Add Business</h3>
-                  <p className="text-xs text-slate-500 leading-relaxed">Free listing — appear in search and get customer calls directly.</p>
+                  <p className="text-xs text-slate-500 leading-relaxed">Business listing — plans from PKR 99, verified before approval.</p>
                   <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600">
                     <PlusCircle className="w-4 h-4" /> Add now
                   </span>
@@ -289,7 +537,7 @@ export default function DashboardPage() {
                     <Factory className="w-6 h-6" />
                   </div>
                   <h3 className="font-extrabold text-slate-900">Add Company</h3>
-                  <p className="text-xs text-slate-500 leading-relaxed">Free company profile — appear in search and build trust with buyers.</p>
+                  <p className="text-xs text-slate-500 leading-relaxed">Company profile — plans from PKR 99, verified before approval.</p>
                   <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600">
                     <PlusCircle className="w-4 h-4" /> Add now
                   </span>
@@ -299,9 +547,19 @@ export default function DashboardPage() {
                     <Briefcase className="w-6 h-6" />
                   </div>
                   <h3 className="font-extrabold text-slate-900">Post a Job</h3>
-                  <p className="text-xs text-slate-500 leading-relaxed">Free job post — reach candidates and get applications on your phone.</p>
+                  <p className="text-xs text-slate-500 leading-relaxed">Job post — plans from PKR 99, verified before approval.</p>
                   <span className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-600">
                     <PlusCircle className="w-4 h-4" /> Post now
+                  </span>
+                </Link>
+                <Link href="/add-professional" className="bg-white rounded-3xl border-2 border-emerald-100 p-6 hover:border-emerald-500 hover:shadow-lg transition-all space-y-3 group">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center group-hover:scale-105 transition-transform">
+                    <UserRound className="w-6 h-6" />
+                  </div>
+                  <h3 className="font-extrabold text-slate-900">Add Professional Profile</h3>
+                  <p className="text-xs text-slate-500 leading-relaxed">Your professional profile — plans from PKR 99, verified before approval.</p>
+                  <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-600">
+                    <PlusCircle className="w-4 h-4" /> Add now
                   </span>
                 </Link>
               </section>
@@ -331,6 +589,20 @@ export default function DashboardPage() {
                       // gets a "goes live on" note instead of looking live.
                       const awaitingRelease =
                         item.type === 'Business' && item.status === 'approved' && !isReleased(item.approvedAt, Date.now())
+                      // Tier payment state: a pending tier proof means the
+                      // owner already paid and is waiting on verification —
+                      // no second upload panel. Otherwise an unpaid or
+                      // rejected-proof listing gets the Pay panel.
+                      const tierProofPending = !!proof?.tier && proof.status === 'pending'
+                      const needsPayment =
+                        (item.paymentStatus === 'awaiting_payment' || item.paymentStatus === 'payment_rejected') &&
+                        !tierProofPending
+                      const canEdit = item.status === 'approved' && canEditTier(item.tier)
+                      const projectLimit = projectLimitFor(item.tier)
+                      const showProjects = item.status === 'approved' && projectLimit > 0
+                      const editReq = editReqs[item.id]
+                      const editEffMs =
+                        editReq?.effectiveAt?.toMillis?.() || (typeof editReq?.effectiveAt === 'number' ? editReq.effectiveAt : 0)
                       return (
                         <li key={`${item.type}-${item.id}`} className="py-3.5 space-y-3">
                           <div className="flex items-center justify-between gap-3">
@@ -349,8 +621,14 @@ export default function DashboardPage() {
                                         : 'bg-slate-100 text-slate-600 border-slate-200'
                                   }`}
                                 >
-                                  {proof.plan === 'verified' ? 'Verified' : 'Featured'} proof:{' '}
-                                  {proof.status === 'approved' ? 'Approved' : proof.status === 'rejected' ? 'Rejected' : 'Pending review'}
+                                  {proof.tier
+                                    ? `${tierLabel(proof.tier)} payment: ${proof.status === 'approved' ? 'Verified' : proof.status === 'rejected' ? 'Rejected' : 'Under review'}`
+                                    : `${proof.plan === 'verified' ? 'Verified' : 'Featured'} proof: ${proof.status === 'approved' ? 'Approved' : proof.status === 'rejected' ? 'Rejected' : 'Pending review'}`}
+                                </span>
+                              )}
+                              {item.tier && (
+                                <span className="px-2.5 py-1 rounded-full text-[11px] font-bold border bg-slate-900 text-white border-slate-900">
+                                  {tierLabel(item.tier)} · {formatPKR(tierPrice(item.tier))}
                                 </span>
                               )}
                               <span
@@ -364,6 +642,36 @@ export default function DashboardPage() {
                               >
                                 {item.status === 'approved' ? 'Approved' : item.status === 'rejected' ? 'Rejected' : 'Pending review'}
                               </span>
+                              {needsPayment && (
+                                <button
+                                  type="button"
+                                  onClick={() => openPayPanel(item)}
+                                  aria-expanded={payFor === item.id}
+                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] rounded-full transition-colors cursor-pointer"
+                                >
+                                  <Wallet className="w-3.5 h-3.5" /> {item.paymentStatus === 'payment_rejected' ? 'Re-upload Proof' : 'Pay Now'}
+                                </button>
+                              )}
+                              {canEdit && (
+                                <button
+                                  type="button"
+                                  onClick={() => void openEditPanel(item)}
+                                  aria-expanded={editFor === item.id}
+                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-300 hover:border-emerald-500 text-slate-700 font-bold text-[11px] rounded-full transition-colors cursor-pointer"
+                                >
+                                  <Pencil className="w-3.5 h-3.5" /> Request Edit
+                                </button>
+                              )}
+                              {showProjects && (
+                                <button
+                                  type="button"
+                                  onClick={() => setProjectsFor(projectsFor === item.id ? null : item.id)}
+                                  aria-expanded={projectsFor === item.id}
+                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-300 hover:border-emerald-500 text-slate-700 font-bold text-[11px] rounded-full transition-colors cursor-pointer"
+                                >
+                                  <FolderKanban className="w-3.5 h-3.5" /> Projects ({(item.projects || []).length}/{projectLimit})
+                                </button>
+                              )}
                               {upgradeable && (
                                 <button
                                   type="button"
@@ -383,6 +691,40 @@ export default function DashboardPage() {
                           {awaitingRelease && (
                             <p className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2">
                               Approved — goes live on LocalePak on {releaseDateLabel(Date.now())}
+                            </p>
+                          )}
+
+                          {needsPayment && (
+                            <p className="text-[11px] font-semibold text-amber-700 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2">
+                              {item.paymentStatus === 'payment_rejected'
+                                ? 'Your payment proof was not verified — upload a new screenshot below.'
+                                : `Payment pending — your ${tierLabel(item.tier)} listing (${formatPKR(tierPrice(item.tier))}) waits for its payment proof below.`}
+                            </p>
+                          )}
+
+                          {tierProofPending && (
+                            <p className="text-[11px] font-semibold text-slate-600 bg-slate-100 border border-slate-200 rounded-xl px-3 py-2">
+                              Payment proof under review — our team verifies it, then approves your listing.
+                            </p>
+                          )}
+
+                          {editReq && editReq.status === 'pending' && (
+                            <p className="text-[11px] font-semibold text-slate-600 bg-slate-100 border border-slate-200 rounded-xl px-3 py-2">
+                              Edit request under review — approved edits go live at the next weekly release.
+                            </p>
+                          )}
+
+                          {editReq && editReq.status === 'approved' && (
+                            <p className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2">
+                              {editEffMs > Date.now()
+                                ? `Edit approved — goes live on ${formatShortDate(editEffMs)}.`
+                                : 'Your latest approved edit is live on this listing.'}
+                            </p>
+                          )}
+
+                          {editReq && editReq.status === 'rejected' && (
+                            <p className="text-[11px] font-semibold text-red-700 bg-red-50 border border-red-200 rounded-xl px-3 py-2">
+                              Your last edit request was not approved — your live listing is unchanged.
                             </p>
                           )}
 
@@ -410,6 +752,203 @@ export default function DashboardPage() {
                               >
                                 <PlusCircle className="w-3.5 h-3.5" /> Create a New Listing
                               </Link>
+                            </div>
+                          )}
+
+                          {needsPayment && payFor === item.id && user && (
+                            <div className="bg-white border border-slate-200 rounded-2xl p-5">
+                              <PaymentScreen
+                                tier={(item.tier as ListingTier) || 'basic'}
+                                listingType={typeKey(item.type)}
+                                listingId={item.id}
+                                listingName={item.name}
+                                ownerId={user.uid}
+                                ownerEmail={user.email || ''}
+                                onSubmitted={async () => {
+                                  const hadPriorTierProof = !!proofs[item.id]?.tier
+                                  setProofs((prev) => ({
+                                    ...prev,
+                                    [item.id]: { status: 'pending', plan: 'featured', tier: item.tier },
+                                  }))
+                                  setPayFor(null)
+                                  // First-ever tier proof: the submission
+                                  // confirmation email goes out now (the
+                                  // add-flow sends it at proof time, and a
+                                  // re-upload after rejection must not
+                                  // duplicate it).
+                                  if (!hadPriorTierProof) {
+                                    await queueSubmissionEmails({
+                                      kind: typeKey(item.type),
+                                      name: item.name,
+                                      city: item.city,
+                                      ownerEmail: user.email || '',
+                                      ownerName: user.displayName || '',
+                                    })
+                                    toast.success('Payment proof submitted — submission received.')
+                                  }
+                                }}
+                              />
+                            </div>
+                          )}
+
+                          {canEdit && editFor === item.id && (
+                            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4">
+                              <div className="flex items-start justify-between gap-3">
+                                <h3 className="font-extrabold text-slate-900 text-sm flex items-center gap-2">
+                                  <Pencil className="w-4 h-4 text-emerald-600" />
+                                  Request an edit for “{item.name}”
+                                </h3>
+                                <button
+                                  type="button"
+                                  onClick={() => setEditFor(null)}
+                                  className="text-slate-400 hover:text-slate-600 cursor-pointer"
+                                  aria-label="Close edit panel"
+                                >
+                                  <X className="w-4 h-4" />
+                                </button>
+                              </div>
+                              {editLoading ? (
+                                <p className="text-xs text-slate-500">Loading current details...</p>
+                              ) : (
+                                <>
+                                  <p className="text-xs text-slate-500 leading-relaxed">
+                                    Your requested changes go to our team for review. Approved edits go live at the
+                                    next weekly release — they never change your live listing instantly.
+                                  </p>
+                                  <div className="space-y-3">
+                                    {EDITABLE_FIELDS[typeKey(item.type)].map((key) => (
+                                      <div key={key}>
+                                        <label htmlFor={`edit-${item.id}-${key}`} className="block text-xs font-bold text-slate-700 mb-1">
+                                          {EDITABLE_FIELD_LABELS[key] || key}
+                                        </label>
+                                        {key === 'description' ? (
+                                          <textarea
+                                            id={`edit-${item.id}-${key}`}
+                                            rows={3}
+                                            value={editFields[key] || ''}
+                                            onChange={(e) => setEditFields((prev) => ({ ...prev, [key]: e.target.value }))}
+                                            className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600"
+                                          />
+                                        ) : (
+                                          <input
+                                            id={`edit-${item.id}-${key}`}
+                                            type={key === 'phone' || key === 'whatsapp' ? 'tel' : 'text'}
+                                            value={editFields[key] || ''}
+                                            onChange={(e) => setEditFields((prev) => ({ ...prev, [key]: e.target.value }))}
+                                            className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600"
+                                          />
+                                        )}
+                                      </div>
+                                    ))}
+                                  </div>
+                                  <button
+                                    type="button"
+                                    disabled={editSaving}
+                                    onClick={() => void handleEditSubmit(item)}
+                                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer disabled:opacity-50"
+                                  >
+                                    <Pencil className="w-4 h-4" />
+                                    {editSaving ? 'Submitting...' : 'Submit Edit Request'}
+                                  </button>
+                                </>
+                              )}
+                            </div>
+                          )}
+
+                          {showProjects && projectsFor === item.id && (
+                            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4">
+                              <div className="flex items-start justify-between gap-3">
+                                <h3 className="font-extrabold text-slate-900 text-sm flex items-center gap-2">
+                                  <FolderKanban className="w-4 h-4 text-emerald-600" />
+                                  Projects ({(item.projects || []).length}/{projectLimit})
+                                </h3>
+                                <button
+                                  type="button"
+                                  onClick={() => setProjectsFor(null)}
+                                  className="text-slate-400 hover:text-slate-600 cursor-pointer"
+                                  aria-label="Close projects panel"
+                                >
+                                  <X className="w-4 h-4" />
+                                </button>
+                              </div>
+                              {(item.projects || []).length > 0 ? (
+                                <ul className="space-y-2">
+                                  {(item.projects || []).map((project, i) => (
+                                    <li key={`${project.title}-${i}`} className="bg-white border border-slate-200 rounded-xl p-3.5 flex items-start justify-between gap-3">
+                                      <div className="min-w-0">
+                                        <p className="font-bold text-slate-900 text-xs">{project.title}</p>
+                                        <p className="text-xs text-slate-500 leading-relaxed mt-0.5">{project.description}</p>
+                                        {project.link && (
+                                          <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-[11px] font-bold text-emerald-600 hover:underline break-all">
+                                            {project.link}
+                                          </a>
+                                        )}
+                                      </div>
+                                      <button
+                                        type="button"
+                                        disabled={projectSaving}
+                                        onClick={() => void handleProjectRemove(item, i)}
+                                        className="text-red-500 hover:text-red-700 shrink-0 cursor-pointer disabled:opacity-50"
+                                        aria-label={`Remove project ${project.title}`}
+                                      >
+                                        <X className="w-4 h-4" />
+                                      </button>
+                                    </li>
+                                  ))}
+                                </ul>
+                              ) : (
+                                <p className="text-xs text-slate-500">No projects yet — showcase your best work below.</p>
+                              )}
+                              {(item.projects || []).length < projectLimit ? (
+                                <div className="space-y-3 pt-1">
+                                  <div>
+                                    <label htmlFor={`project-title-${item.id}`} className="block text-xs font-bold text-slate-700 mb-1">Project title *</label>
+                                    <input
+                                      id={`project-title-${item.id}`}
+                                      type="text"
+                                      value={projectTitle}
+                                      onChange={(e) => setProjectTitle(e.target.value)}
+                                      placeholder="E.g. DHA Phase 9 villa renovation"
+                                      className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600"
+                                    />
+                                  </div>
+                                  <div>
+                                    <label htmlFor={`project-desc-${item.id}`} className="block text-xs font-bold text-slate-700 mb-1">Description *</label>
+                                    <textarea
+                                      id={`project-desc-${item.id}`}
+                                      rows={2}
+                                      value={projectDesc}
+                                      onChange={(e) => setProjectDesc(e.target.value)}
+                                      placeholder="What did you build, for whom, and what was the outcome?"
+                                      className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600"
+                                    />
+                                  </div>
+                                  <div>
+                                    <label htmlFor={`project-link-${item.id}`} className="block text-xs font-bold text-slate-700 mb-1">Link (optional)</label>
+                                    <input
+                                      id={`project-link-${item.id}`}
+                                      type="url"
+                                      value={projectLink}
+                                      onChange={(e) => setProjectLink(e.target.value)}
+                                      placeholder="https://example.com/project"
+                                      className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600"
+                                    />
+                                  </div>
+                                  <button
+                                    type="button"
+                                    disabled={projectSaving}
+                                    onClick={() => void handleProjectAdd(item)}
+                                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer disabled:opacity-50"
+                                  >
+                                    <PlusCircle className="w-4 h-4" />
+                                    {projectSaving ? 'Adding...' : 'Add Project'}
+                                  </button>
+                                </div>
+                              ) : (
+                                <p className="text-xs text-slate-500">
+                                  You have reached the {projectLimit}-project limit for your {tierLabel(item.tier)} plan.
+                                </p>
+                              )}
                             </div>
                           )}
 
@@ -480,6 +1019,117 @@ export default function DashboardPage() {
                   </ul>
                 )}
               </section>
+
+              {(() => {
+                const featuredListing = listings.find((l) => l.tier === 'featured' && l.status === 'approved')
+                const used = blogPosts.filter((p) => p.data.status !== 'rejected').length
+                const remaining = Math.max(0, blogLimitFor('featured') - used)
+                if (!featuredListing) return null
+                return (
+                  <section className="bg-white rounded-3xl border border-slate-200 p-8 space-y-5" aria-label="My blog posts">
+                    <h2 className="font-extrabold text-slate-900 text-lg flex items-center gap-2">
+                      <Newspaper className="w-5 h-5 text-emerald-600" />
+                      My Blog Posts
+                    </h2>
+                    <p className="text-xs text-slate-500 leading-relaxed">
+                      Your Featured listing “{featuredListing.name}” includes up to 2 blog posts. You have used {used} of 2
+                      {remaining > 0 ? ` — ${remaining} left.` : '.'} Approved posts appear on the public LocalePak blog.
+                    </p>
+                    {blogPosts.length > 0 && (
+                      <ul className="divide-y divide-slate-100">
+                        {blogPosts.map((post) => (
+                          <li key={post.id} className="py-3 flex items-center justify-between gap-3">
+                            <div className="min-w-0">
+                              <p className="font-bold text-slate-900 text-sm truncate">{post.data.title || 'Untitled post'}</p>
+                              <p className="text-[11px] text-slate-400">/{post.data.slug || post.id}</p>
+                            </div>
+                            <span
+                              className={`px-2.5 py-1 rounded-full text-[11px] font-bold border shrink-0 ${
+                                post.data.status === 'approved'
+                                  ? 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                                  : post.data.status === 'rejected'
+                                    ? 'bg-red-50 text-red-700 border-red-200'
+                                    : 'bg-amber-50 text-amber-700 border-amber-200'
+                              }`}
+                            >
+                              {post.data.status === 'approved' ? 'Live' : post.data.status === 'rejected' ? 'Rejected' : 'Pending review'}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {remaining > 0 && !blogFormOpen && (
+                      <button
+                        type="button"
+                        onClick={() => setBlogFormOpen(true)}
+                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer"
+                      >
+                        <PlusCircle className="w-4 h-4" /> Write a Blog Post
+                      </button>
+                    )}
+                    {remaining > 0 && blogFormOpen && (
+                      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-5 space-y-4">
+                        <div className="flex items-start justify-between gap-3">
+                          <h3 className="font-extrabold text-slate-900 text-sm">New blog post</h3>
+                          <button
+                            type="button"
+                            onClick={() => setBlogFormOpen(false)}
+                            className="text-slate-400 hover:text-slate-600 cursor-pointer"
+                            aria-label="Close blog form"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                        <div>
+                          <label htmlFor="blog-title" className="block text-xs font-bold text-slate-700 mb-1">Title *</label>
+                          <input
+                            id="blog-title"
+                            type="text"
+                            value={blogTitle}
+                            onChange={(e) => setBlogTitle(e.target.value)}
+                            placeholder="E.g. How to choose the right solar installer in Lahore"
+                            className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="blog-excerpt" className="block text-xs font-bold text-slate-700 mb-1">Short summary (optional)</label>
+                          <input
+                            id="blog-excerpt"
+                            type="text"
+                            value={blogExcerpt}
+                            onChange={(e) => setBlogExcerpt(e.target.value)}
+                            placeholder="One line that makes readers click"
+                            className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="blog-content" className="block text-xs font-bold text-slate-700 mb-1">Post content * (min 100 characters)</label>
+                          <textarea
+                            id="blog-content"
+                            rows={6}
+                            value={blogContent}
+                            onChange={(e) => setBlogContent(e.target.value)}
+                            placeholder="Write genuinely useful content — tips, guides, or insights from your work. No invented statistics or claims."
+                            className="w-full px-3.5 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600"
+                          />
+                          <p className={`text-[11px] mt-1 font-medium ${blogContent.trim().length >= 100 ? 'text-emerald-600' : 'text-slate-400'}`}>
+                            {blogContent.trim().length}/100 characters minimum
+                          </p>
+                        </div>
+                        <button
+                          type="button"
+                          disabled={blogSaving}
+                          onClick={() => void handleBlogSubmit()}
+                          className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl transition-colors cursor-pointer disabled:opacity-50"
+                        >
+                          <Newspaper className="w-4 h-4" />
+                          {blogSaving ? 'Submitting...' : 'Submit Post for Review'}
+                        </button>
+                      </div>
+                    )}
+                  </section>
+                )
+              })()}
             </>
           )}
         </div>

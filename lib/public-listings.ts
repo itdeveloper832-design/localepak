@@ -16,10 +16,11 @@
 // the old client-side fetch had.
 // ============================================================
 
-import { db } from '@/lib/firebase'
+import { db, isDummyFirebase } from '@/lib/firebase'
 import { collection, query, where, limit, getDocs } from 'firebase/firestore'
 import { SEED_BUSINESSES } from '@/lib/seed-businesses'
 import { isReleased } from '@/lib/release'
+import { applyPendingEdit } from '@/lib/edit-requests'
 
 export type PublicBusinessCard = {
   id: string
@@ -66,6 +67,9 @@ export type ListingDoc = { id: string; data: any }
 
 /** All approved business documents (serialized). Release-cycle filtering stays with the caller. */
 export async function fetchApprovedBusinesses(): Promise<ListingDoc[]> {
+  // Dummy-config short-circuit (lib/firebase.ts): never let the SDK
+  // retry against a project that cannot answer during static gen.
+  if (isDummyFirebase) return []
   try {
     const snap = await getDocs(query(collection(db, 'businesses'), where('status', '==', 'approved')))
     const rows: ListingDoc[] = []
@@ -78,6 +82,7 @@ export async function fetchApprovedBusinesses(): Promise<ListingDoc[]> {
 
 /** All approved company documents (serialized). */
 export async function fetchApprovedCompanies(): Promise<ListingDoc[]> {
+  if (isDummyFirebase) return []
   try {
     const snap = await getDocs(query(collection(db, 'companies'), where('status', '==', 'approved')))
     const rows: ListingDoc[] = []
@@ -90,6 +95,7 @@ export async function fetchApprovedCompanies(): Promise<ListingDoc[]> {
 
 /** One business document by slug (public single-document read), or null. */
 export async function fetchBusinessBySlug(slug: string): Promise<ListingDoc | null> {
+  if (isDummyFirebase) return null
   try {
     const snap = await getDocs(query(collection(db, 'businesses'), where('slug', '==', slug), limit(1)))
     if (snap.empty) return null
@@ -102,6 +108,7 @@ export async function fetchBusinessBySlug(slug: string): Promise<ListingDoc | nu
 
 /** One company document by slug (public single-document read), or null. */
 export async function fetchCompanyBySlug(slug: string): Promise<ListingDoc | null> {
+  if (isDummyFirebase) return null
   try {
     const snap = await getDocs(query(collection(db, 'companies'), where('slug', '==', slug), limit(1)))
     if (snap.empty) return null
@@ -124,7 +131,9 @@ export type PublicCompanyCard = {
 
 /** Map a company document to the public listing-card shape (same mapping the old client page used). */
 export function toCompanyCard(doc: ListingDoc): PublicCompanyCard {
-  const data = doc.data
+  // Approved edits past their 7-day boundary show on cards too, not
+  // just on the detail page (lib/edit-requests.ts).
+  const data = applyPendingEdit(doc.data, Date.now())
   return {
     id: doc.id,
     name: data.name || 'Unnamed Company',
@@ -147,9 +156,129 @@ export async function getApprovedCompanyCards(): Promise<PublicCompanyCard[]> {
   return rows.map(toCompanyCard)
 }
 
+/** One professional document by slug (public single-document read), or null. */
+export async function fetchProfessionalBySlug(slug: string): Promise<ListingDoc | null> {
+  if (isDummyFirebase) return null
+  try {
+    const snap = await getDocs(query(collection(db, 'professionals'), where('slug', '==', slug), limit(1)))
+    if (snap.empty) return null
+    const d = snap.docs[0]
+    return { id: d.id, data: serializeValue(d.data()) }
+  } catch {
+    return null
+  }
+}
+
+export type PublicProfessionalCard = {
+  id: string
+  name: string
+  slug: string
+  profession: string
+  specialization: string
+  city: string
+  phone: string
+  whatsapp: string
+  experience: string
+  description: string
+}
+
+/** Map a professional document to the public listing-card shape. */
+export function toProfessionalCard(doc: ListingDoc): PublicProfessionalCard {
+  // Approved edits past their 7-day boundary show on cards too.
+  const data = applyPendingEdit(doc.data, Date.now())
+  return {
+    id: doc.id,
+    name: data.name || 'Unnamed Professional',
+    slug: data.slug || doc.id,
+    profession: data.profession || 'General',
+    specialization: data.specialization || '',
+    city: data.city || '',
+    phone: data.phone || '',
+    whatsapp: data.whatsapp || '',
+    experience: data.experience || '',
+    description: data.description || '',
+  }
+}
+
+/** All approved professional documents, mapped to public cards. */
+export async function getApprovedProfessionalCards(): Promise<PublicProfessionalCard[]> {
+  if (isDummyFirebase) return []
+  try {
+    const snap = await getDocs(query(collection(db, 'professionals'), where('status', '==', 'approved')))
+    const rows: ListingDoc[] = []
+    snap.forEach((d) => rows.push({ id: d.id, data: serializeValue(d.data()) }))
+    return rows.map(toProfessionalCard)
+  } catch {
+    return []
+  }
+}
+
+export type UserBlogPost = {
+  id: string
+  title: string
+  slug: string
+  excerpt: string
+  content: string
+  authorName: string
+  listingName: string
+  createdAt: number | null
+}
+
+/** One approved user-submitted blog post by slug (public read), or null. */
+export async function fetchUserBlogPostBySlug(slug: string): Promise<UserBlogPost | null> {
+  if (isDummyFirebase) return null
+  try {
+    const snap = await getDocs(
+      query(collection(db, 'blog_posts'), where('slug', '==', slug), where('status', '==', 'approved'), limit(1))
+    )
+    if (snap.empty) return null
+    const d = snap.docs[0]
+    const data = serializeValue(d.data())
+    return {
+      id: d.id,
+      title: data.title || 'Untitled post',
+      slug: data.slug || d.id,
+      excerpt: data.excerpt || '',
+      content: data.content || '',
+      authorName: data.authorName || '',
+      listingName: data.listingName || '',
+      createdAt: typeof data.createdAt === 'number' ? data.createdAt : null,
+    }
+  } catch {
+    return null
+  }
+}
+
+/** All approved user-submitted blog posts, newest first. */
+export async function getApprovedUserBlogPosts(): Promise<UserBlogPost[]> {
+  if (isDummyFirebase) return []
+  try {
+    const snap = await getDocs(query(collection(db, 'blog_posts'), where('status', '==', 'approved')))
+    const rows: UserBlogPost[] = []
+    snap.forEach((d) => {
+      const data = serializeValue(d.data())
+      rows.push({
+        id: d.id,
+        title: data.title || 'Untitled post',
+        slug: data.slug || d.id,
+        excerpt: data.excerpt || '',
+        content: data.content || '',
+        authorName: data.authorName || '',
+        listingName: data.listingName || '',
+        createdAt: typeof data.createdAt === 'number' ? data.createdAt : null,
+      })
+    })
+    rows.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0))
+    return rows
+  } catch {
+    return []
+  }
+}
+
 /** Map a business document to the public listing-card shape. */
 export function toBusinessCard(doc: ListingDoc): PublicBusinessCard {
-  const data = doc.data
+  // Approved edits past their 7-day boundary show on cards too.
+  const data = applyPendingEdit(doc.data, Date.now())
   return {
     id: doc.id,
     name: data.name || 'Unnamed Business',
