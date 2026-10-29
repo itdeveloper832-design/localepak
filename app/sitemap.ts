@@ -25,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/cities',
     '/businesses',
     '/companies',
+    '/professionals',
     '/blog',
     '/faqs',
     '/help-center',

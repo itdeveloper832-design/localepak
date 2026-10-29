@@ -209,7 +209,7 @@ export default function PaymentScreen({
           <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
           <span>
             Send exactly {formatPKR(def.price)} via {selected.label}, then upload the screenshot. Our team verifies
-            every payment by hand — once approved, your listing goes live (businesses join the weekly release batch).
+            every payment by hand — once approved, your listing goes live immediately.
             If a payment cannot be verified, the listing is rejected and the reason is shown in your dashboard.
           </span>
         </div>
