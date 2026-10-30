@@ -177,19 +177,19 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
               <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                <span className="text-3xl font-extrabold text-slate-900">100% free</span>
+                <span className="text-2xl sm:text-3xl font-extrabold text-slate-900">100% free</span>
                 <p className="text-xs font-semibold text-slate-500 mt-1">Browse & search at no cost</p>
               </div>
               <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                <span className="text-3xl font-extrabold text-emerald-600">Every major city</span>
+                <span className="text-2xl sm:text-3xl font-extrabold text-emerald-600">Every major city</span>
                 <p className="text-xs font-semibold text-slate-500 mt-1">Karachi · Lahore · Islamabad & more</p>
               </div>
               <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                <span className="text-3xl font-extrabold text-emerald-600">24 categories</span>
+                <span className="text-2xl sm:text-3xl font-extrabold text-emerald-600">24 categories</span>
                 <p className="text-xs font-semibold text-slate-500 mt-1">From food to technology</p>
               </div>
               <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100">
-                <span className="text-3xl font-extrabold text-amber-500">Local guides</span>
+                <span className="text-2xl sm:text-3xl font-extrabold text-amber-500">Local guides</span>
                 <p className="text-xs font-semibold text-slate-500 mt-1">Choose providers with confidence</p>
               </div>
             </div>
