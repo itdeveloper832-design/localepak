@@ -148,6 +148,11 @@ export default function Footer({ hideSitePhone = false }: { hideSitePhone?: bool
 
         </div>
 
+        {/* Yellow-pages synonym line (Gap 8): honest positioning copy only. */}
+        <p className="pt-8 text-xs text-slate-400 text-center md:text-left">
+          LocalePak — Pakistan&apos;s modern online yellow pages: a list of companies, suppliers and local services across Pakistan, organised by city and category.
+        </p>
+
         {/* Footer Bottom */}
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
           <p className="text-center md:text-left">

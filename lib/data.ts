@@ -63,7 +63,7 @@ export const CATEGORIES = [
   { id: 'travel', name: 'Travel & Tourism', icon: 'travel', color: '#0ea5e9', desc: 'Travel agencies, Umrah tour operators, and visa consultants' },
   { id: 'beauty', name: 'Beauty & Wellness', icon: 'beauty', color: '#d946ef', desc: 'Beauty salons, spas, fitness gyms, and skincare clinics' },
   { id: 'logistics', name: 'Logistics & Courier', icon: 'logistics', color: '#84cc16', desc: 'Goods transport, freight forwarders, and logistics services' },
-  { id: 'home-services', name: 'Home Services & Repairs', icon: 'home-services', color: '#0284c7', desc: 'Plumbers, electricians, AC technicians, painters, and handymen' },
+  { id: 'home-services', name: 'Home Services & Repairs', icon: 'home-services', color: '#0284c7', desc: 'Plumbers, electricians, AC technicians, painters, handymen, and home-visit tailors and beauticians' },
   { id: 'legal', name: 'Legal & Law Consultants', icon: 'legal', color: '#4f46e5', desc: 'Advocates, corporate lawyers, tax attorneys, and legal firms' },
   { id: 'solar-energy', name: 'Solar & Renewable Energy', icon: 'solar-energy', color: '#eab308', desc: 'Solar panel installers, inverter suppliers, and green energy firms' },
   { id: 'events', name: 'Event Management & Wedding', icon: 'events', color: '#f43f5e', desc: 'Marquees, wedding planners, catering, photography, and sound' },
