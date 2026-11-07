@@ -153,6 +153,15 @@ export default function Footer({ hideSitePhone = false }: { hideSitePhone?: bool
           LocalePak — Pakistan&apos;s modern online yellow pages: a list of companies, suppliers and local services across Pakistan, organised by city and category.
         </p>
 
+        {/* Listed-on badges (user-approved 2026-11-07, "Lagao lagao"): IndieTools — Classic · Light.
+            Other approved badges (SaaS.fyi, SaaSCity, Startup Fame, Fazier, PeekLaunch, OpenHunts) join here as their codes arrive. */}
+        <div className="pt-8 flex flex-col md:flex-row items-center gap-4">
+          <span className="text-xs text-slate-400 uppercase tracking-wider">Listed on</span>
+          <a href="https://www.indietools.app/products/localepak" target="_blank" rel="noopener">
+            <img src="https://www.indietools.app/badges/listed-on-indietools-light.png" alt="Listed on IndieTools" width="176" height="56" />
+          </a>
+        </div>
+
         {/* Footer Bottom */}
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-400">
           <p className="text-center md:text-left">

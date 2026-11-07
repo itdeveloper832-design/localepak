@@ -48,6 +48,9 @@ export default async function CompaniesPage() {
           <p className="text-slate-400 text-sm">
             Browse approved companies across Pakistan — manufacturers, suppliers, exporters and service providers you can contact directly for products, quotes and jobs.
           </p>
+          <Link href="/add-company" prefetch={false} className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors shadow-md">
+            Add Your Company <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
 
